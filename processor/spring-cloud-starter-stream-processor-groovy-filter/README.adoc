@@ -1,0 +1,25 @@
+//tag::ref-doc[]
+= Groovy Filter Processor
+
+A Processor module that retains or discards messages according to a predicate, expressed as a Groovy script.
+
+== Options
+
+The **$$groovy-filter$$** $$processor$$ has the following options:
+
+$$script$$:: $$The script resource location$$ *($$String$$, default: ``)*
+$$variables$$:: $$Variable bindings as a comma delimited string of name-value pairs, e.g. 'foo=bar,baz=car'$$ *($$String$$, default: ``)*
+$$variablesLocation$$:: $$The location of a properties file containing custom script variable bindings$$ *($$String$$, default: ``)*
+
+//end::ref-doc[]
+== Building with Maven
+
+```
+$> mvn package
+```
+
+== Running the Application
+
+```
+$> java -jar target/groovy-filter-processor-${version}-exec.jar
+```

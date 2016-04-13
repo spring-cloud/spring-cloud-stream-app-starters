@@ -1,0 +1,25 @@
+//tag::ref-doc[]
+= Groovy Transform Processor
+
+A Processor module that transforms messages using a Groovy script.
+
+== Options
+
+The **$$groovy-transform$$** $$processor$$ has the following options:
+
+$$script$$:: $$The script resource location$$ *($$String$$, default: ``)*
+$$variables$$:: $$Variable bindings as a comma delimited string of name-value pairs, e.g. 'foo=bar,baz=car'$$ *($$String$$, default: ``)*
+$$variablesLocation$$:: $$The location of a properties file containing custom script variable bindings$$ *($$String$$, default: ``)*
+
+//end::ref-doc[]
+== Building with Maven
+
+```
+$> mvn package
+```
+
+== Running the Application
+
+```
+$> java -jar target/groovy-transform-processor-${version}-exec.jar
+```

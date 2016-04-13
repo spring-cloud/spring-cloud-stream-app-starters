@@ -1,0 +1,22 @@
+//tag::ref-doc[]
+= Filter Processor
+Use the filter module in a stream to determine whether a Message should be passed to the output channel.
+
+== Options
+
+The **$$filter$$** $$processor$$ has the following options:
+
+$$expression$$:: $$a SpEL expression used to transform messages$$ *($$String$$, default: `payload.toString()`)*
+
+//end::ref-doc[]
+== Building with Maven
+
+```
+$> mvn package
+```
+
+== Running the Application
+
+```
+$> java -jar target/filter-processor-${version}-exec.jar
+```

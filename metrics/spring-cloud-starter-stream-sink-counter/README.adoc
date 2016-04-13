@@ -1,0 +1,27 @@
+//tag::ref-doc[]
+= Counter Sink 
+
+The counter sink simply counts the number of messages it receives,
+optionally storing counts in a separate store such as redis.
+
+== Options
+
+The **$$counter$$** $$sink$$ has the following options:
+
+$$name$$:: $$The name of the counter to increment.$$ *($$String$$, default: `counts`)*
+$$nameExpression$$:: $$A SpEL expression (against the incoming Message) to derive the name of the counter to increment.$$ *($$String$$, default: ``)*
+$$store$$:: $$The name of a store used to store the counter.$$ *($$String$$, default: `redis`, possible values: `memory`, `redis`)*
+
+//end::ref-doc[]
+
+== Build
+
+```
+$ mvn clean package
+```
+
+== Run
+
+```
+$ java -jar target/counter-sink-${version}-exec.jar
+```

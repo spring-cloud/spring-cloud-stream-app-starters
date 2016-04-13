@@ -15,6 +15,7 @@
   <modules>
     <module>spring-cloud-stream-app-dependencies</module>
     <module>spring-cloud-stream-app-generator</module>
+    <module>spring-cloud-stream-app-starters-docs</module>
     <module>app-starters-common</module>
     <module>app-starters-common-analytics</module>
     <module>app-starters-test-support</module>

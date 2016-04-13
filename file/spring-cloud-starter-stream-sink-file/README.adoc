@@ -1,0 +1,31 @@
+//tag::ref-doc[]
+= File Sink
+
+This module writes each message it receives to a file.
+
+== Options
+
+The **$$file$$** $$sink$$ has the following options:
+
+$$binary$$:: $$if false, will append a newline character at the end of each line$$ *($$boolean$$, default: `false`)*
+$$charset$$:: $$the charset to use when writing a String payload$$ *($$String$$, default: `UTF-8`)*
+$$dir$$:: $$the directory in which files will be created$$ *($$String$$, default: `/tmp/xd/output/`)*
+$$dirExpression$$:: $$spring expression used to define directory name$$ *($$String$$, no default)*
+$$mode$$:: $$what to do if the file already exists$$ *($$Mode$$, default: `APPEND`, possible values: `APPEND,REPLACE,FAIL,IGNORE`)*
+$$name$$:: $$filename pattern to use$$ *($$String$$, default: `<stream name>`)*
+$$nameExpression$$:: $$spring expression used to define filename$$ *($$String$$, no default)*
+$$suffix$$:: $$filename extension to use$$ *($$String$$, no default)*
+
+//end::ref-doc[]
+
+== Build
+
+```
+$ mvn clean package
+```
+
+== Run
+
+```
+$ java -jar target/file-sink-${version}-exec.jar
+```

@@ -1,0 +1,96 @@
+//tag::ref-doc[]
+= Websocket Sink
+
+A simple Websocket Sink implementation.
+
+== Options
+The following commmand line arguments are supported:
+
+$$websocketPort$$:: $$controls the port onto which the Netty server binds$$ *($$String$$, default: `9292`)*
+$$websocketPath$$:: $$controls the path where the WebsocketServer expects Websocket connections$$ *($$String$$, default: `/websocket`)*
+$$ssl$$:: $$controls whether the Websocket server should accept SSL connections (i.e. `wss://host:9292/websocket`)$$ *($$Boolean$$, default: `false`)*
+$$websocketLoglevel$$:: $$controls the loglevel of the underlying Netty loghandler$$ *($$String$$, default: `WARN`)*
+$$threads$$:: $$controls the number of worker threads used for the Netty event loop$$ *($$String$$, default: `1`)*
+
+== Example
+To verify that the websocket-sink receives messages from other spring-cloud-stream modules, you can use the
+following simple end-to-end setup.
+
+
+=== Step 1: Start Redis
+The default broker that is used is Redis. Normally can start Redis via `redis-server`.
+
+=== Step 2: Deploy a `time-source`
+Deploy a https://github.com/spring-cloud/spring-cloud-stream-modules/tree/master/time-source[time-source]:
+
+```
+java -jar target/time-source***-exec.jar --spring.cloud.stream.bindings.output=ticktock --server.port=9191
+```
+
+=== Step 3: Deploy a `websocket-sink`
+
+Finally start a websocket-sink in `trace` mode so that you see the messages produced by the `time-source` in the log:
+
+```
+java -jar target/websocket-sink-***-exec.jar --spring.cloud.stream.bindings.input=ticktock --server.port=9393 \
+	--logging.level.org.springframework.cloud.stream.module.websocket=TRACE
+```
+
+You should start seeing log messages in the console where you started the WebsocketSink like this:
+
+```
+Handling message: GenericMessage [payload=2015-10-21 12:52:53, headers={id=09ae31e0-a04e-b811-d211-b4d4e75b6f29, timestamp=1445424778065}]
+Handling message: GenericMessage [payload=2015-10-21 12:52:54, headers={id=75eaaf30-e5c6-494f-b007-9d5b5b920001, timestamp=1445424778065}]
+Handling message: GenericMessage [payload=2015-10-21 12:52:55, headers={id=18b887db-81fc-c634-7a9a-16b1c72de291, timestamp=1445424778066}]
+```
+
+== Actuators
+There is an `Endpoint` that you can use to access the last `n` messages sent and received. You have to
+ enable it by providing `--endpoints.websocketsinktrace.enabled=true`. By default it shows the last 100 messages via the
+`http://host:port/websocketsinktrace`. Here is a sample output:
+
+```
+ [
+   {
+    "timestamp": 1445453703508,
+    "info": {
+      "type": "text",
+      "direction": "out",
+      "id": "2ff9be50-c9b2-724b-5404-1a6305c033e4",
+      "payload": "2015-10-21 20:54:33"
+    }
+  },
+  ...
+  {
+    "timestamp": 1445453703506,
+    "info": {
+      "type": "text",
+      "direction": "out",
+      "id": "2b9dbcaf-c808-084d-a51b-50f617ae6a75",
+      "payload": "2015-10-21 20:54:32"
+    }
+  }
+]
+```
+
+There is also a simple HTML page where you see forwarded messages in a text area. You can access
+it directly via  `http://host:port` in your browser
+
+
+NOTE: For SSL mode (`--ssl=true`) a self signed certificate is used that might cause troubles with some
+Websocket clients. In a future release, there will be a `--certificate=mycert.cer` switch to pass a valid (not
+self-signed) certificate.
+
+//end::ref-doc[]
+
+== Build
+
+```
+$ mvn clean package
+```
+
+== Run
+
+```
+$ java -jar target/websocket-sink-*-exec.jar --spring.cloud.stream.bindings.input=ticktock
+```

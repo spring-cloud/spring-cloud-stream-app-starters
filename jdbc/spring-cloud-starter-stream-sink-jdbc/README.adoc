@@ -1,0 +1,30 @@
+//tag::ref-doc[]
+= Jdbc Sink
+
+A module that writes its incoming payload to an RDBMS using JDBC.
+
+== Options 
+
+The **$$jdbc$$** $$sink$$ has the following options:
+
+$$expression$$:: $$a SpEL expression used to transform messages$$ *($$String$$, default: ``)*
+$$tableName$$:: $$String$$ *($$String$$, default: `<stream name`)*
+$$columns$$:: $$the names of the columns that shall receive data, as a set of column[:SpEL] mappings, also used at initialization time to issue the DDL$$ *($$String$$, default: `payload`)*
+$$initialize$$:: $$String$$ *($$Boolean$$, default: `false`)*
+$$batchSize$$:: $$String$$ *($$long$$, default: `10000`)*
+
+NOTE: The module also uses Spring Boot's http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-sql.html#boot-features-configure-datasource[DataSource support] for configuring the database connection, so properties like `spring.datasource.url` _etc._ apply.
+
+//end::ref-doc[]
+
+== Build
+
+```
+$ mvn clean package
+```
+
+== Run
+
+```
+$ java -jar target/jdbc-sink-${version}-exec.jar
+```

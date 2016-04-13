@@ -1,0 +1,41 @@
+//tag::ref-doc[]
+= HDFS Sink
+
+This module writes each message it receives to HDFS.
+
+== Options
+
+The **$$hdfs$$** $$sink$$ has the following options:
+
+$$closeTimeout$$:: $$timeout in ms, regardless of activity, after which file will be automatically closed$$ *($$long$$, default: `0`)*
+$$codec$$:: $$compression codec alias name (gzip, snappy, bzip2, lzo, or slzo)$$ *($$String$$, default: ``)*
+$$directory$$:: $$where to output the files in the Hadoop FileSystem$$ *($$String$$, default: ``)*
+$$enableSync$$:: $$whether writer will sync to datanode when flush is called, setting this to 'true' could impact throughput$$ *($$boolean$$, default: `false`)*
+$$fileExtension$$:: $$the base filename extension to use for the created files$$ *($$String$$, default: `txt`)*
+$$fileName$$:: $$the base filename to use for the created files$$ *($$String$$, default: `<stream name>`)*
+$$fileOpenAttempts$$:: $$maximum number of file open attempts to find a path$$ *($$int$$, default: `10`)*
+$$fileUuid$$:: $$whether file name should contain uuid$$ *($$boolean$$, default: `false`)*
+$$flushTimeout$$:: $$timeout in ms, regardless of activity, after which data written to file will be flushed$$ *($$long$$, default: `0`)*
+$$fsUri$$:: $$the URI to use to access the Hadoop FileSystem$$ *($$String$$, default: `${spring.hadoop.fsUri}`)*
+$$idleTimeout$$:: $$inactivity timeout in ms after which file will be automatically closed$$ *($$long$$, default: `0`)*
+$$inUsePrefix$$:: $$prefix for files currently being written$$ *($$String$$, default: ``)*
+$$inUseSuffix$$:: $$suffix for files currently being written$$ *($$String$$, default: `.tmp`)*
+$$overwrite$$:: $$whether writer is allowed to overwrite files in Hadoop FileSystem$$ *($$boolean$$, default: `false`)*
+$$partitionPath$$:: $$a SpEL expression defining the partition path$$ *($$String$$, default: ``)*
+$$rollover$$:: $$threshold in bytes when file will be automatically rolled over$$ *($$String$$, default: `1G`)*
+
+NOTE: This module can have it's runtime dependencies provided during startup if you would like to use a Hadoop distribution other than the default one.
+
+//end::ref-doc[]
+
+== Build
+
+```
+$ mvn clean package
+```
+
+== Run
+
+```
+$ java -jar target/hdfs-sink-1.0.0.BUILD-SNAPSHOT-exec.jar --server.port=8081 --spring.hadoop.fsUri=hdfs://<hdfs-host>:8020 --spring.cloud.stream.bindings.input=<name-to-bind-to>
+```

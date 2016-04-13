@@ -1,0 +1,26 @@
+//tag::ref-doc[]
+= Time Source
+The time source will simply emit a String with the current time every so often.
+
+== Options
+
+The **$$time$$** $$source$$ has the following options:
+
+$$fixedDelay$$:: $$time delay between messages, expressed in TimeUnits (seconds by default)$$ *($$int$$, default: `1`)*
+$$dateFormat$$:: $$how to render the current time, using SimpleDateFormat$$ *($$String$$, default: `yyyy-MM-dd HH:mm:ss`)*
+$$initialDelay$$:: $$an initial delay when using a fixed delay trigger, expressed in TimeUnits (seconds by default)$$ *($$int$$, default: `0`)*
+$$timeUnit$$:: $$the time unit for the fixed and initial delays$$ *($$String$$, default: `SECONDS`)*
+
+
+//end::ref-doc[]
+== Build
+
+```
+$ mvn clean package
+```
+
+== Run
+
+```
+$ java -jar target/time-source-1.0.0.BUILD-SNAPSHOT-exec.jar
+```

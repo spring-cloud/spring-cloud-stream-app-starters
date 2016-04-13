@@ -1,0 +1,38 @@
+//tag::ref-doc[]
+= RabbitMQ Sink
+
+This module sends messages to RabbitMQ.
+
+== Options
+
+The **$$rabbit$$** $$sink$$ has the following options:
+
+(See the Spring Boot documentation for RabbitMQ connection properties)
+
+$$converterBeanName$$:: $$the bean name of the message converter$$ *($$String$$, default: none)*
+$$persistentDeliveryMode$$:: $$the default delivery mode, true for persistent$$ *($$boolean$$, default: `false`)*
+$$exchange$$:: $$the Exchange on the RabbitMQ broker to which messages should be sent$$ *($$String$$, default: `""`)*
+$$exchangeExpression$$:: $$a SpEL expression that evaluates to the Exchange on the RabbitMQ broker to which messages
+should be sent; overrides `exchange`$$ *($$String$$, default: ``)*
+$$mappedRequestHeaders$$:: $$request message header names to be propagated to RabbitMQ, to limit to the set of standard headers plus `bar`, use `STANDARD_REQUEST_HEADERS,bar`$$ *($$String$$, default: `+*+`)*
+$$routingKey$$:: $$the routing key to be passed with the message, as a SpEL expression$$ *($$String$$, default: none)*
+$$routingKeyExpression$$:: $$an expression that evaluates to the routing key to be passed with the message, as a SpEL expression; overrides `routingKey`$$ *($$String$$, default: none)*
+
+NOTE: By default, the message converter is a `SimpleMessageConverter` which handles `byte[]`, `String` and
+`java.io.Serializable`.
+A well-known bean name `jsonConverter` will configure a `Jackson2JsonMessageConverter` instead.
+In addition, a custom converter bean can be added to the context and referenced by the $$converterBeanName$$ property.
+
+//end::ref-doc[]
+
+== Build
+
+```
+$ mvn clean package
+```
+
+== Run
+
+```
+$ java -jar target/rabbit-sink-${version}-exec.jar
+```

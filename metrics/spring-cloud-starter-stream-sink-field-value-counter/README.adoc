@@ -1,0 +1,62 @@
+//tag::ref-doc[]
+= Field Value Counter Sink 
+
+A field value counter is a Metric used for counting occurrences of unique values for a named field in a message payload. This sinks supports the following payload types out of the box:
+
+* POJO (Java bean)
+* Tuple
+* JSON String
+
+For example suppose a message source produces a payload with a field named _user_ :
+
+[source,java]
+class Foo {
+   String user;
+   public Foo(String user) {
+       this.user = user;
+   }
+}
+
+If the stream source produces messages with the following objects:
+
+[source, java]
+   new Foo("fred")
+   new Foo("sue")
+   new Foo("dave")
+   new Foo("sue")
+
+The field value counter on the field _user_ will contain:
+
+    fred:1, sue:2, dave:1
+
+Multi-value fields are also supported. For example, if a field contains a list, each value will be counted once:
+
+     users:["dave","fred","sue"]
+     users:["sue","jon"]
+
+The field value counter on the field _users_ will contain:
+
+    dave:1, fred:1, sue:2, jon:1
+
+== Options
+
+The **$$field-value-counter$$** $$sink$$ has the following options:
+
+$$fieldName$$:: $$the name of the field for which values are counted$$ *($$String$$, no default)*
+$$name$$:: $$the name of the metric to contribute to (will be created if necessary)$$ *($$String$$, default: `<stream name>`)*
+$$nameExpression$$:: $$a SpEL expression to compute the name of the metric to contribute to$$ *($$String$$, no default)*
+$$store$$:: $$The name of a store used to store the counter.$$ *($$String$$, default: `redis`, possible values: `memory`, `redis`)*
+
+//end::ref-doc[]
+
+== Build
+
+```
+$ mvn clean package
+```
+
+== Run
+
+```
+$ java -jar target/field-value-counter-sink-${version}-exec.jar
+```

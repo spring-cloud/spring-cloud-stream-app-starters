@@ -1,0 +1,28 @@
+//tag::ref-doc[]
+= Gemfire Sink
+
+The Gemfire sink allows one to write message payloads to a Gemfire server.
+
+== Options
+
+The **$$gemfire$$** $$sink$$ has the following options:
+
+$$hostAddresses$$:: $$a comma separated list of [host]:[port] specifying either locator or server addresses for the client connection pool$$ *($$String$$, `localhost:10334`)*
+$$keyExpression$$:: $$a SpEL expression which is evaluated to create a cache key$$ *($$String$$, default: `the value is currently the message payload'`)*
+$$port$$:: $$port of the cache server or locator (if useLocator=true). May be a comma delimited list$$ *($$String$$, no default)*
+$$regionName$$:: $$name of the region to use when storing data$$ *($$String$$, default: `${spring.application.name}`)*
+$$connectType$$:: $$'server' or 'locator'$$ *($$String$$, default: `locator`)*
+
+//end::ref-doc[]
+
+== Build
+
+```
+$ mvn clean package
+```
+
+== Run
+
+```
+$ java -DregionName=${regionName} -DkeyExpression=${keyExpression} -jar target/gemfire-sink-${version}-exec.jar
+```

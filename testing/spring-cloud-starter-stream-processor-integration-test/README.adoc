@@ -1,0 +1,31 @@
+= Spring Cloud Stream Integration Test Processor
+
+This module is not for general use. It is used in integration tests for ModuleDeployers, and allows
+one to simulate deployment latency and crashes.
+
+== Requirements
+
+* Java 7 or Above
+
+== Classes
+
+IntegrationTestProcessorApplication:: the Spring Boot Main Application
+IntegrationTestProcessor:: The processor module
+
+== Build
+
+```
+$> mvn package
+```
+
+== Run
+
+```
+$> java -jar target/http-source-${version}-exec.jar
+```
+
+The following properties can be used to interact with the module:
+
+initDelay:: how much time (ms) to stall the deployment of the module
+killDelay:: if positive, how much time to wait before the module is forcefully killed
+matchInstances:: a set of module instance indices which if set, will behave according to configuration above

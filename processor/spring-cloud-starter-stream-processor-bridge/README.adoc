@@ -1,0 +1,17 @@
+//tag::ref-doc[]
+= Bridge Processor
+
+A Processor module that returns messages that is passed by connecting just the input and output channels.
+
+//end::ref-doc[]
+== Building with Maven
+
+```
+$> mvn package
+```
+
+== Running the Application
+
+```
+$> java -jar target/bridge-processor-${version}-exec.jar
+```

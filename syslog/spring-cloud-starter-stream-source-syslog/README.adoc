@@ -1,0 +1,31 @@
+//tag::ref-doc[]
+= SYSLOG Source
+
+The syslog source receives SYSLOG packets over UDP, TCP, or both.
+RFC3164 (BSD) and RFC5424 formats are supported.
+
+== Options
+
+The **$$syslog$$** $$source$$ has the following options:
+
+$$protocol$$:: $$`udp`, `tcp`, or `both`$$ *($$String$$, default `tcp`)*
+$$rfc$$:: $$`3164` or `5424`$$ *($$String$$, default `3164`)*
+$$port$$:: $$the port on which to listen$$  *($$String$$, default `1514`)*
+$$bufferSize$$:: $$the maximum size allowed (TCP)$$ *($$int$$, default `2048`)*
+$$nio$$:: $$`true` to use NIO - only recommended when supporting many connections$$ *($$Boolean$$, default `false`)*
+$$reverseLookup$$:: $$`true` to perform a reverse lookup on the remote IP address$$ *($$Boolean$$, default `false`)*
+$$socketTimeout$$:: $$the socket timeout$$ *($$long$$, default `none`)*
+
+//end::ref-doc[]
+== Build
+
+```
+$> mvn package
+```
+
+== Run
+
+```
+$> java -jar target/syslog-source-${version}-exec.jar
+```
+

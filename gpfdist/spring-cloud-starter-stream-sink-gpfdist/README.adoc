@@ -1,0 +1,353 @@
+//tag::ref-doc[]
+= Gpfdist Sink
+
+A sink module that route messages into `GPDB/HAWQ` segments via
+_gpfdist_ protocol.  Internally, this sink creates a custom http listener that supports
+the `gpfdist` protcol and schedules a task that orchestrates a `gploadd` session in the
+same way it is done natively in Greenplum.
+
+No data is written into temporary files and all data is kept in stream buffers waiting
+to get inserted into Greenplum DB or HAWQ.  If there are no existing load sessions from Greenplum,
+the sink will block until such sessions are established.
+
+== Options
+
+The **$$gpfdist$$** $$sink$$ has the following options:
+
+$$batchCount$$:: $$Number of windowed batch each segment takest$$ *($$int$$, default: `100`)*
+$$batchPeriod$$:: $$Time in seconds for each load operation to sleep in between operations$$ *($$int$$, default: `10`)*
+$$batchTimeout$$:: $$Timeout in seconds for segment inactivity.$$ *($$Integer$$, default: `4`)*
+$$columnDelimiter$$:: $$Data record column delimiter.$$ *($$Character$$, default: no default)
+$$controlFile$$:: $$path to yaml control file$$ *($$String$$, no default)*
+$$dbHost$$:: $$database host$$ *($$String$$, default: `localhost`)*
+$$dbName$$:: $$database name$$ *($$String$$, default: `gpadmin`)*
+$$dbPassword$$:: $$database password$$ *($$String$$, default: `gpadmin`)*
+$$dbPort$$:: $$database port$$ *($$int$$, default: `5432`)*
+$$dbUser$$:: $$database user$$ *($$String$$, default: `gpadmin`)*
+$$delimiter$$:: $$data line delimiter$$ *($$String$$, default: `newline character`)*
+$$errorTable$$:: $$Tablename to log errors.$$ *($$String$$, default: ``)*
+$$flushCount$$:: $$flush item count$$ *($$int$$, default: `100`)*
+$$flushTime$$:: $$flush item time$$ *($$int$$, default: `2`)*
+$$gpfdistPort$$::$$Port of gpfdist server. Default port `0` indicates that a random port is chosen.$$ *($$Integer$$, default: `0`)*
+$$matchColumns$$:: $$match columns with update$$ *($$String$$, no default)*
+$$mode$$:: $$mode, either insert or update$$ *($$String$$, no default)*
+$$nullString$$:: $$Null string definition.$$ *($$String$$, default: ``)*
+$$port$$:: $$gpfdist listen port$$ *($$int$$, default: `0`)*
+$$rateInterval$$:: $$enable transfer rate interval$$ *($$int$$, default: `0`)*
+$$segmentRejectLimit$$:: $$Error reject limit.$$ *($$String$$, default: ``)*
+$$segmentRejectType$$:: $$Error reject type, either `rows` or `percent`.$$ *($$String$$, default: ``)*
+$$sqlAfter$$:: $$sql to run after load$$ *($$String$$, no default)*
+$$sqlBefore$$:: $$sql to run before load$$ *($$String$$, no default)*
+$$table$$:: $$target database table$$ *($$String$$, no default)*
+$$updateColumns$$:: $$update columns with update$$ *($$String$$, no default)*
+
+== Implementation Notes
+
+Within a `gpfdist` sink we have a Reactor based stream where data is published from the incoming SI channel.
+This channel receives data from the Message Bus.  The Reactor stream is then connected to `Netty` based
+http channel adapters so that when a new http connection is established, the Reactor stream is flushed and balanced among
+existing http clients.  When `Greenplum` does a load from an external table, each segment will initiate
+a http connection and start loading data.  The net effect is that incoming data is automatically spread
+among the Greenplum segments.
+
+
+== Detailed Option Descriptions
+
+The **$$gpfdist$$** $$sink$$ supports the following configuration properties:
+
+$$table$$::
+$$Database table to work with.$$ *($$String$$, default: ``, required)*
++
+This option denotes a table where data will be inserted or updated.
+Also external table structure will be derived from structure of this
+table.
++
+Currently `table` is only way to define a structure of an external
+table. Effectively it will replace `other_table` in below clause
+segment.
++
+```
+CREATE READABLE EXTERNAL TABLE table_name LIKE other_table
+```
+$$mode$$::
+$$Gpfdist mode, either `insert` or `update`.$$ *($$String$$, default: `insert`)*
++
+Currently only `insert` and `update` gpfdist mode is supported. Mode
+`merge` familiar from a native gpfdist loader is not yet supported.
++
+For mode `update` options `matchColumns` and `updateColumns` are
+required.
+$$columnDelimiter$$:: $$Data record column delimiter.$$ *($$Character$$, default: ``)*
++
+Defines used `delimiter` character in below clause segment which would
+be part of a `FORMAT 'TEXT'` or `FORMAT 'CSV'` sections.
++
+```
+[DELIMITER AS 'delimiter']
+```
+$$segmentRejectLimit$$::
+$$Error reject limit.$$ *($$String$$, default: ``)*
++
+Defines a `count` value in a below clause segment.
++
+```
+[ [LOG ERRORS INTO error_table] SEGMENT REJECT LIMIT count
+  [ROWS | PERCENT] ]
+```
++
+As a conveniance this reject limit also recognizes a percentage format
+`2%` and if used, `segmentRejectType` is automatically set to
+`percent`.
+$$segmentRejectType$$::
+$$Error reject type, either `rows` or `percent`.$$ *($$String$$, default: ``)*
++
+Defines `ROWS` or `PERCENT` in below clause segment.
++
+```
+[ [LOG ERRORS INTO error_table] SEGMENT REJECT LIMIT count
+  [ROWS | PERCENT] ]
+```
+$$errorTable$$::
+$$Tablename to log errors.$$ *($$String$$, default: ``)*
++
+As error table is optional with `SEGMENT REJECT LIMIT`, it's only used
+if both `segmentRejectLimit` and `segmentRejectType` are set. Sets
+`error_table` in below clause segment.
++
+```
+[ [LOG ERRORS INTO error_table] SEGMENT REJECT LIMIT count
+  [ROWS | PERCENT] ]
+```
+$$nullString$$::
+$$Null string definition.$$ *($$String$$, default: ``)*
++
+Defines used `null string` in below clause segment which would
+be part of a `FORMAT 'TEXT'` or `FORMAT 'CSV'` sections.
++
+```
+[NULL AS 'null string']
+```
+$$delimiter$$::
+$$Data record delimiter for incoming messages.$$ *($$String$$, default: `\n`)*
++
+On default a delimiter in this option will be added as a postfix to
+every message sent into this sink. Currently _NEWLINE_ is not a
+supported config option and line termination for data is coming from a
+default functionality.
++
+[quote, External Table Docs]
+____________________________________________________________________
+If not specified, a Greenplum Database segment will detect the
+newline type by looking at the first row of data it receives and
+using the first newline type encountered.
+____________________________________________________________________
+$$matchColumns$$::
+$$Comma delimited list of columns to match.$$ *($$String$$, default: ``)*
++
+[NOTE]
+=====
+See more from examples below.
+=====
+$$updateColumns$$::
+$$Comma delimited list of columns to update.$$ *($$String$$, default: ``)*
++
+[NOTE]
+=====
+See more from examples below.
+=====
+$$sqlBefore$$::
+$$Sql clause to run before each load operation.$$ *($$String$$, default: ``)*
+$$sqlAfter$$::
+$$Sql clause to run after each load operation.$$ *($$String$$, default: ``)*
+$$rateInterval$$::
+$$Debug rate of data transfer.$$ *($$Integer$$, default: `0`)*
++
+If set to non zero, sink will log a rate of messages passing throught
+a sink after number of messages denoted by this setting has been
+processed. Value `0` means that this rate calculation and logging is
+disabled.
+$$flushCount$$::
+$$Max collected size per windowed data.$$ *($$Integer$$, default: `100`)*
++
+[NOTE]
+=====
+For more info on flush and batch settings, see above.
+=====
+
+== How Data Is Sent Into Segments
+There are few important concepts involving how data passes into a
+sink, through it and finally lands into a database.
+
+* Sink has its normal message handler for incoming data from a source
+  module, gpfdist protocol listener based on netty where segments
+  connect to and in between those two a reactor based streams
+  controlling load balancing into different segment connections.
+* Incoming data is first sent into a reactor which first constructs a
+  windows. This window is then released into a downstream when it gets
+  full(`flushTime`) or timeouts(`flushTime`) if window doesn't get full.
+  One window is then ready to get send into a segment.
+* Segments which connects to this stream are now able to see a stream
+  of window data, not stream of individual messages. We can also call
+  this as a stream of batches.
+* When segment makes a connection to a protocol listener it subscribes
+  itself into this stream and takes count of batches denoted by
+  `batchCount` and completes a stream if it got enough batches or if
+  `batchTimeout` occurred due to inactivity.
+* It doesn't matter how many simultaneous connections there are from
+  a database cluster at any given time as reactor will load balance
+  batches with all subscribers.
+* Database cluster will initiate this loading session when select is
+  done from an external table which will point to this sink. These
+  loading operations are run in a background in a loop one after
+  another. Option `batchPeriod` is then used as a sleep time in
+  between these load sessions.
+
+Lets take a closer look how options `flushCount`, `flushTime`,
+`batchCount`, `batchTimeout` and `batchPeriod` work.
+
+As in a highest level where incoming data into a sink is windowed,
+`flushCount` and `flushTime` controls when a batch of messages are
+sent into a downstream. If there are a lot of simultaneous segment
+connections, flushing less will keep more segments inactive as there
+is more demand for batches than what flushing will produce.
+
+When existing segment connection is active and it has subscribed
+itself with a stream of batches, data will keep flowing until either
+`batchCount` is met or `batchTimeout` occurs due to inactivity of data
+from an upstream. Higher a `batchCount` is more data each segment
+will read. Higher a `batchTimeout` is more time segment will wait in
+case there is more data to come.
+
+As gpfdist load operations are done in a loop, `batchPeriod` simply
+controls not to run things in a buzy loop. Buzy loop would be ok if
+there is a constant stream of data coming in but if incoming data is
+more like bursts then buzy loop would be unnecessary.
+
+[NOTE]
+=====
+Data loaded via gpfdist will not become visible in a database until
+whole distributed loading session have finished successfully.
+=====
+
+Reactor is also handling backpressure meaning if existing load
+operations will not produce enought demand for data, eventually
+message passing into a sink will block. This happens when Reactor's
+internal ring buffer(size of 32 items) gets full. Flow of data through
+sink really happens when data is pulled from it by segments.
+
+== Example Usage
+
+In this first example we're just creating a simple stream which
+inserts data from a `time` source. Let's create a table with two
+_text_ columns.
+```
+gpadmin=# create table ticktock (date text, time text);
+```
+
+Create a simple stream `gpstream`.
+```
+dataflow:>stream create --name gpstream1 --definition "time | gpfdist
+--dbHost=mdw --table=ticktock --batchTime=1 --batchPeriod=1
+--flushCount=2 --flushTime=2 --columnDelimiter=' '" --deploy
+```
+
+Let it run and see results from a database.
+```
+gpadmin=# select count(*) from ticktock;
+ count
+-------
+    14
+(1 row)
+```
+
+In previous example we did a simple inserts into a table. Let’s see
+how we can update data in a table. Create a simple table _httpdata_ with
+three text columns and insert some data.
+```
+gpadmin=# create table httpdata (col1 text, col2 text, col3 text);
+gpadmin=# insert into httpdata values ('DATA1', 'DATA', 'DATA');
+gpadmin=# insert into httpdata values ('DATA2', 'DATA', 'DATA');
+gpadmin=# insert into httpdata values ('DATA3', 'DATA', 'DATA');
+```
+
+Now table looks like this.
+```
+gpadmin=# select * from httpdata;
+ col1  | col2 | col3 
+-------+------+------
+ DATA3 | DATA | DATA
+ DATA2 | DATA | DATA
+ DATA1 | DATA | DATA
+(3 rows)
+```
+
+Let’s create a stream which will update table _httpdata_ by matching a
+column _col1_ and updates columns _col2_ and _col3_.
+```
+dataflow:>stream create --name gpfdiststream2 --definition "http
+--server.port=8081|gpfdist --mode=update --table=httpdata
+--dbHost=mdw --columnDelimiter=',' --matchColumns=col1
+--updateColumns=col2,col3" --deploy
+```
+
+Post some data into a stream which will be passed into a _gpfdist_ sink
+via _http_ source.
+```
+curl --data "DATA1,DATA1,DATA1" -H "Content-Type:text/plain" http://localhost:8081/
+```
+
+If you query table again, you’ll see that row for _DATA1_ has been
+updated.
+```
+gpadmin=# select * from httpdata;
+ col1  | col2  | col3  
+-------+-------+-------
+ DATA3 | DATA  | DATA
+ DATA2 | DATA  | DATA
+ DATA1 | DATA1 | DATA1
+(3 rows)
+```
+
+
+== Tuning Transfer Rate
+Default values for options `flushCount`, `flushTime`, `batchCount`,
+`batchTimeout` and `batchPeriod` are relatively conservative and needs
+to be _tuned_ for every use case for optimal performance. Order to make
+a decision on how to tune sink behaviour to suit your needs few things
+needs to be considered.
+
+* What is an average size of messages ingested by a sink.
+* How fast you want data to become visible in a database.
+* Is incoming data a constant flow or a bursts of data.
+
+Everything what flows throught a sink is kept in-memory and because
+sink is handling backpressure, memory consumption is relatively low.
+However because sink cannot predict what is an average size of
+an incoming data and this data is anyway windowed later in a
+downstream you should not allow window size to become too large if
+average data size is large as every batch of data is kept in memory.
+
+Generally speaking if you have a lot of segments in a load operation,
+it's adviced to keep flushed window size relatively small which allows
+more segments to stay active. This however also depends on how much
+data is flowing in into a sink itself.
+
+Longer a load session for each segment is active higher the overall
+transfer rate is going to be. Option `batchCount` naturally controls
+this. However option `batchTimeout` then really controls how fast each
+segment will complete a stream due to inactivity from upstream and to
+step away from a loading session to allow distributes session to
+finish and data become visible in a database.
+
+//end::ref-doc[]
+== Build
+
+```
+$ mvn clean package
+```
+
+== Run
+
+```
+$ java -jar target/gpfdist-sink-${version}-exec.jar --server.port=8081 --spring.cloud.stream.bindings.input=<name-to-bind-to>
+```

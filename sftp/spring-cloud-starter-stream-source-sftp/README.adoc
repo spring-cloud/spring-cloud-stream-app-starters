@@ -1,0 +1,55 @@
+//tag::ref-doc[]
+= SFTP Source
+
+This source app supports transfer of files using the SFTP protocol.
+Files are transferred from the `remote` directory to the `local` directory where the application is deployed.
+
+Messages emitted by the source are provided as a byte array by default. However, this can be
+customized using the `--mode` option:
+
+- *ref* Provides a `java.io.File` reference
+- *lines* Will split files line-by-line and emit a new message for each line
+- *contents* The default. Provides the contents of a file as a byte array
+
+When using `--mode=lines`, you can also provide the additional option `--withMarkers=true`.
+If set to `true`, the underlying `FileSplitter` will emit additional _start-of-file_ and _end-of-file_ marker messages before and after the actual data.
+The payload of these 2 additional marker messages is of type `FileSplitter.FileMarker`. The option `withMarkers` defaults to `false` if not explicitly set.
+
+== Options
+
+The **$$sftp$$** $$source$$ has the following options:
+
+$$allowUnknownKeys$$:: $$true to allow connecting to a host with an unknown or changed key$$ *($$boolean$$, default: `false`)*
+$$autoCreateLocalDir$$:: $$if local directory must be auto created if it does not exist$$ *($$boolean$$, default: `true`)*
+$$deleteRemoteFiles$$:: $$delete remote files after transfer$$ *($$boolean$$, default: `false`)*
+$$fixedDelay$$:: $$fixed delay in SECONDS to poll the remote directory$$ *($$int$$, default: `1`)*
+$$host$$:: $$the remote host to connect to$$ *($$String$$, default: `localhost`)*
+$$initialDelay$$:: $$an initial delay when using a fixed delay trigger, expressed in TimeUnits (seconds by default)$$ *($$int$$, default: `0`)*
+$$knownHostsExpression$$:: $$a SpEL expression location of known hosts file; required if 'allowUnknownKeys' is false; examples: systemProperties["user.home"]+"/.ssh/known_hosts", "/foo/bar/known_hosts"$$ *($$String$$, no default)*
+$$localDir$$:: $$set the local directory the remote files are transferred to$$ *($$String$$, default: ``)*
+$$maxMessages$$:: $$the maximum messages per poll; -1 for unlimited$$ *($$long$$, default: `-1`)*
+$$mode$$:: $$specifies how the file is being read. By default the content of a file is provided as byte array$$ *($$FileReadingMode$$, default: `contents`, possible values: `ref,lines,contents`)*
+$$passPhrase$$:: $$the passphrase to use$$ *($$String$$, default: ``)*
+$$password$$:: $$the password for the provided user$$ *($$String$$, default: ``)*
+$$pattern$$:: $$simple filename pattern to apply to the filter$$ *($$String$$, no default)*
+$$port$$:: $$the remote port to connect to$$ *($$int$$, default: `22`)*
+$$privateKey$$:: $$the private key location (a valid Spring Resource URL)$$ *($$String$$, default: ``)*
+$$regexPattern$$:: $$filename regex pattern to apply to the filter$$ *($$String$$, no default)*
+$$remoteDir$$:: $$the remote directory to transfer the files from$$ *($$String$$, no default)*
+$$timeUnit$$:: $$the time unit for the fixed and initial delays$$ *($$String$$, default: `SECONDS`)*
+$$tmpFileSuffix$$:: $$extension to use when downloading files$$ *($$String$$, default: `.tmp`)*
+$$user$$:: $$the username to use$$ *($$String$$, no default)*
+$$withMarkers$$:: $$if true emits start of file/end of file marker messages before/after the data. Only valid with FileReadingMode 'lines'$$ *($$Boolean$$, no default)*
+
+//end::ref-doc[]
+== Build
+
+```
+$> mvn package
+```
+
+== Run
+
+```
+$> java -jar target/sftp-source-${version}-exec.jar
+```

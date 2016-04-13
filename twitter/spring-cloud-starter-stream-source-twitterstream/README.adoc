@@ -1,0 +1,32 @@
+//tag::ref-doc[]
+= Twitter Stream Source
+
+This source ingests data from Twitter's https://dev.twitter.com/docs/streaming-apis/streams/public[streaming API v1.1]. It uses the https://dev.twitter.com/docs/streaming-apis/streams/public[sample and filter] stream endpoints rather than the full "firehose" which needs special access. The endpoint used will depend on the parameters you supply in the stream definition (some are specific to the filter endpoint).
+
+You need to supply all keys and secrets (both consumer and accessToken) to authenticate for this source, so it is easiest if you just add these as the following environment variables: CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN and ACCESS_TOKEN_SECRET.
+
+== Options
+
+The **$$twitterstream$$** $$source$$ has the following options:
+
+$$accessToken$$:: $$a valid OAuth access token$$ *($$String$$, no default)*
+$$accessTokenSecret$$:: $$an OAuth secret corresponding to the access token$$ *($$String$$, no default)*
+$$consumerKey$$:: $$a consumer key issued by twitter$$ *($$String$$, no default)*
+$$consumerSecret$$:: $$consumer secret corresponding to the consumer key$$ *($$String$$, no default)*
+$$language$$:: $$language code e.g. 'en'$$ *($$String$$, default: ``)*
+
+NOTE: `twitterstream` emit JSON in the https://dev.twitter.com/docs/platform-objects/tweets[native Twitter format].
+
+//end::ref-doc[]
+== Build
+
+```
+$ mvn clean package
+```
+
+== Run
+
+```
+$ java -jar target/twitterstream-source-${version}-exec.jar
+```
+

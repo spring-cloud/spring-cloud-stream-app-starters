@@ -1,0 +1,26 @@
+//tag::ref-doc[]
+= Load Generator Source
+
+A source that sends generated data and dispatches it to the stream. This is to provide a method for users to identify the performance of Spring Cloud Data Flow in different environments and deployment types.
+
+== Options
+
+The **$$load-generator$$** $$source$$ has the following options:
+
+$$messageCount$$:: $$the number of messages to send$$ *($$Integer$$, default: `100`)*
+$$messageSize$$:: $$the size of message to send$$ *($$Integer$$, `1000`)*
+$$producers$$:: $$the number of producers$$ *($$Integer$$, `1`)*
+$$outputType$$:: $$how this module should emit messages it produces$$ *($$MimeType$$, default: no default)*
+
+//end::ref-doc[]
+== Build
+
+```
+$> mvn -s .settings.xml package
+```
+
+== Run
+
+```
+$> java -jar target/load-generator-source-${version}-exec.jar --spring.cloud.stream.bindings.output=<where to bind> --messageSize=<sizeOfMessage> --messageCount=<number of messages to send>
+```

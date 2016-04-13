@@ -1,0 +1,25 @@
+//tag::ref-doc[]
+= Http Source
+
+A source module that listens for HTTP requests and emits the body as a message payload.
+If the Content-Type matches `text/*` or `application/json`, the payload will be a String,
+otherwise the payload will be a byte array.
+
+== Options
+
+The **$$http$$** $$source$$ supports the following configuration properties:
+
+$$pathPattern$$:: $$An Ant-Style pattern to determine which http requests will be captured$$ *($$String$$, default: `/`)*
+
+//end::ref-doc[]
+== Build
+
+```
+$> mvn package
+```
+
+== Run
+
+```
+$> java -jar target/http-source-${version}-exec.jar
+```

@@ -1,0 +1,33 @@
+//tag::ref-doc[]
+= JDBC Source
+
+This source polls data from an RDBMS.
+This source is fully based on the `DataSourceAutoConfiguration`, so refer to the
+http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-sql.html[Spring Boot JDBC Support] for more
+information.
+
+== Options
+
+The **$$jdbc$$** $$source$$ has the following options:
+
+$$query$$:: $$the query to use to select data$$ *($$String$$, no default, required)*
+$$update$$:: $$an SQL update statement to execute for marking polled messages as 'seen'$$ *($$String$$, no default)*
+$$split$$:: $$whether to split the SQL result as individual messages$$ *($$boolean$$, default: `true`)*
+$maxRowsPerPoll$$:: $$max numbers of rows to process for each poll$$ *($$int$$, default: `0`)*
+
+Also see the http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html[Spring Boot Documentation]
+for addition `DataSource` properties and `TriggerProperties` and `MaxMessagesProperties` for polling options.
+
+//end::ref-doc[]
+== Build
+
+```
+$> mvn package
+```
+
+== Run
+
+To start the app execute the following:
+```
+$> java -jar target/jdbc-source-${version}-exec.jar --query='select foo from bar'
+```
