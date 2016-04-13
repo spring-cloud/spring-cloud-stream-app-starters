@@ -17,6 +17,8 @@
 package org.springframework.cloud.stream.app.metrics.redis;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -228,6 +230,16 @@ public class RedisAggregateCounterRepository implements AggregateCounterReposito
 			throw new IllegalStateException("Shouldn't happen. Unhandled resolution: " + resolution);
 		}
 		return new AggregateCounter(name, interval, counts, resolution);
+	}
+
+	@Override
+	public Collection<String> list() {
+		Set<String> keys = redisTemplate.keys(getMetricKey("*"));
+		Set<String> names = new HashSet<>(keys.size());
+		for (String key : keys) {
+			names.add(getMetricKey(key));
+		}
+		return names;
 	}
 
 	private Map<String, Long> getYearCounts(String name) {
