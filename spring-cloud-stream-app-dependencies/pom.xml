@@ -21,7 +21,7 @@
 		<java.version>1.7</java.version>
 		<spring-cloud-stream.version>1.0.0.BUILD-SNAPSHOT</spring-cloud-stream.version>
 		<spring-integration.version>4.2.5.RELEASE</spring-integration.version>
-		<spring-data-hadoop.version>2.3.0.RC2</spring-data-hadoop.version>
+		<spring-data-hadoop.version>2.4.0.M1</spring-data-hadoop.version>
 		<cloudfoundry-client-lib.version>1.1.3</cloudfoundry-client-lib.version>
 
 		<reactor.version>2.0.5.RELEASE</reactor.version>
@@ -423,6 +423,18 @@
 				<artifactId>spring-data-hadoop-store</artifactId>
 				<version>${spring-data-hadoop.version}</version>
 				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-hadoop-util</artifactId>
+				<version>${spring-data-hadoop.version}</version>
+				<scope>provided</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>org.apache.hadoop</groupId>
+						<artifactId>*</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 
 			<dependency>
