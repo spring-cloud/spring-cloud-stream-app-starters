@@ -13,7 +13,8 @@ Sabby Anandan, Artem Bilan, Marius Bogoevici, Eric Bottard, Mark Fisher, Ilayape
 = Reference Guide
 include::overview.adoc[]
 
-= Modules
+[[starters]]
+= Starters
 include::sources.adoc[]
 
 include::processors.adoc[]
