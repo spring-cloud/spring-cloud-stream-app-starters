@@ -7,7 +7,7 @@ Sabby Anandan, Artem Bilan, Marius Bogoevici, Eric Bottard, Mark Fisher, Ilayape
 :numbered:
 :icons: font
 :hide-uri-scheme:
-:repo-root: ../../../../
+
 // ======================================================================================
 
 = Reference Guide

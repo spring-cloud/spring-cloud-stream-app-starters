@@ -2,45 +2,46 @@
 == Sources
 
 :leveloffset: +2
+:app-starters-root:  https://raw.githubusercontent.com/spring-cloud/spring-cloud-stream-app-starters/master
 
 [[spring-cloud-stream-modules-file-source]]
-include::{repo-root}/file/spring-cloud-starter-stream-source-file/README.adoc[tags=ref-doc]
+include::{app-starters-root}/file/spring-cloud-starter-stream-source-file/README.adoc[tags=ref-doc]
 
 [[spring-cloud-stream-modules-ftp-source]]
-include::{repo-root}/ftp/spring-cloud-starter-stream-source-ftp/README.adoc[tags=ref-doc]
+include::{app-starters-root}/ftp/spring-cloud-starter-stream-source-ftp/README.adoc[tags=ref-doc]
 
 [[spring-cloud-stream-modules-http-source]]
-include::{repo-root}/http/spring-cloud-starter-stream-source-http/README.adoc[tags=ref-doc]
+include::{app-starters-root}/http/spring-cloud-starter-stream-source-http/README.adoc[tags=ref-doc]
 
 [[spring-cloud-stream-modules-jdbc-source]]
-include::{repo-root}/jdbc/spring-cloud-starter-stream-source-jdbc/README.adoc[tags=ref-doc]
+include::{app-starters-root}/jdbc/spring-cloud-starter-stream-source-jdbc/README.adoc[tags=ref-doc]
 
 [[spring-cloud-stream-modules-jms-source]]
-include::{repo-root}/jms/spring-cloud-starter-stream-source-jms/README.adoc[tags=ref-doc]
+include::{app-starters-root}/jms/spring-cloud-starter-stream-source-jms/README.adoc[tags=ref-doc]
 
 [[spring-cloud-stream-modules-load-generator-source]]
-include::{repo-root}/testing/spring-cloud-starter-stream-source-load-generator/README.adoc[tags=ref-doc]
+include::{app-starters-root}/testing/spring-cloud-starter-stream-source-load-generator/README.adoc[tags=ref-doc]
 
 [[spring-cloud-stream-modules-rabbit-source]]
-include::{repo-root}/rabbit/spring-cloud-starter-stream-source-rabbit/README.adoc[tags=ref-doc]
+include::{app-starters-root}/rabbit/spring-cloud-starter-stream-source-rabbit/README.adoc[tags=ref-doc]
 
 [[spring-cloud-stream-modules-sftp-source]]
-include::{repo-root}/sftp/spring-cloud-starter-stream-source-sftp/README.adoc[tags=ref-doc]
+include::{app-starters-root}/sftp/spring-cloud-starter-stream-source-sftp/README.adoc[tags=ref-doc]
 
 [[spring-clound-stream-modules-syslog-source]]
-include::{repo-root}/syslog/spring-cloud-starter-stream-source-syslog/README.adoc[tags=ref-doc]
+include::{app-starters-root}/syslog/spring-cloud-starter-stream-source-syslog/README.adoc[tags=ref-doc]
 
 [[spring-clound-stream-modules-tcp-source]]
-include::{repo-root}/tcp/spring-cloud-starter-stream-source-tcp/README.adoc[tags=ref-doc]
+include::{app-starters-root}/tcp/spring-cloud-starter-stream-source-tcp/README.adoc[tags=ref-doc]
 
 [[spring-cloud-stream-modules-time-source]]
-include::{repo-root}/time/spring-cloud-starter-stream-source-time/README.adoc[tags=ref-doc]
+include::{app-starters-root}/time/spring-cloud-starter-stream-source-time/README.adoc[tags=ref-doc]
 
 [[spring-cloud-stream-modules-trigger-source]]
-include::{repo-root}/trigger/spring-cloud-starter-stream-source-trigger/README.adoc[tags=ref-doc]
+include::{app-starters-root}/trigger/spring-cloud-starter-stream-source-trigger/README.adoc[tags=ref-doc]
 
 [[spring-cloud-stream-modules-twitterstream-source]]
-include::{repo-root}/twitter/spring-cloud-starter-stream-source-twitterstream/README.adoc[tags=ref-doc]
+include::{app-starters-root}/twitter/spring-cloud-starter-stream-source-twitterstream/README.adoc[tags=ref-doc]
 
 :leveloffset: -2
 
