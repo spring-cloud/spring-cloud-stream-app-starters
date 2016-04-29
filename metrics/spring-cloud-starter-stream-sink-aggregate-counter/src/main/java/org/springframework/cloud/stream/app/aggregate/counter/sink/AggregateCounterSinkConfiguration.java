@@ -17,6 +17,7 @@
 package org.springframework.cloud.stream.app.aggregate.counter.sink;
 
 import org.joda.time.DateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
@@ -34,7 +35,7 @@ import org.springframework.messaging.Message;
  */
 @EnableBinding(Sink.class)
 @EnableConfigurationProperties(AggregateCounterSinkProperties.class)
-@Import(SpelExpressionConverterConfiguration.class)
+@Import({SpelExpressionConverterConfiguration.class, AggregateCounterSinkStoreConfiguration.class})
 public class AggregateCounterSinkConfiguration {
 
 	@Autowired
