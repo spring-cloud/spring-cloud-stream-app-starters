@@ -22,7 +22,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import io.netty.handler.logging.LogLevel;
 
 /**
- * Command line arguments available for {@link WebsocketSink}.
+ * Command line arguments available for {@link WebsocketSinkConfiguration}.
  *
  * @author Oliver Moser
  * @author Gary Russell

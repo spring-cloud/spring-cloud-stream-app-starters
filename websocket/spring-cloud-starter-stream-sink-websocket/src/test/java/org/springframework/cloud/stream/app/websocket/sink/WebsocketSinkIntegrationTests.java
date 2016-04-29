@@ -67,7 +67,7 @@ public class WebsocketSinkIntegrationTests {
 	public static final int CLIENT_COUNT = 10;
 
 	@Autowired
-	@Bindings(WebsocketSink.class)
+	@Bindings(WebsocketSinkConfiguration.class)
 	private Sink sink;
 
 	@Autowired
