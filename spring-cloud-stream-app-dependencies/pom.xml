@@ -707,6 +707,18 @@
 				<version>${spring-social-twitter.version}</version>
 			</dependency>
 
+			<dependency>
+				<groupId>com.jayway.jsonpath</groupId>
+				<artifactId>json-path</artifactId>
+				<version>2.2.0</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.integration</groupId>
+				<artifactId>spring-integration-xml</artifactId>
+				<version>${spring-integration.version}</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
