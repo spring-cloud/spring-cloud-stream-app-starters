@@ -38,6 +38,5 @@
 			<groupId>org.springframework.cloud.stream.app</groupId>
 			<artifactId>app-starters-script-common</artifactId>
 		</dependency>
-
 	</dependencies>
 </project>
