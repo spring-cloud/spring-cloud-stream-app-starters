@@ -46,14 +46,13 @@ public abstract class MailSourceConfigurationTests {
 	@Autowired
 	protected MailSourceProperties properties;
 
-	private final static ImapServer imapServer = PoorMansMailServer.imap(50000);
-	private final static Pop3Server pop3Server = PoorMansMailServer.pop3(50001);
-
+	
 	@IntegrationTest({ "protocol=imap", "port=50000", "username=user", "password=pw",
 			"host=localhost", "folder=INBOX", "mark-as-read=true", "delete=false",
 			"java-mail-properties=mail.imap.socketFactory.fallback=true,mail.store.protocol=imap,mail.debug=true" })
 	public static class ImapPassTests extends MailSourceConfigurationTests {
-
+		private final static ImapServer imapServer = PoorMansMailServer.imap(50000);
+		
 		@BeforeClass
 		public static void startImapServer() throws Throwable {
 			int n = 0;
@@ -83,7 +82,8 @@ public abstract class MailSourceConfigurationTests {
 			"host=localhost", "folder=INBOX", "mark-as-read=true", "delete=false",
 			"java-mail-properties=mail.imap.socketFactory.fallback=true,mail.store.protocol=imap,mail.debug=true" })
 	public static class ImapFailTests extends MailSourceConfigurationTests {
-
+		private final static ImapServer imapServer = PoorMansMailServer.imap(50000);
+		
 		@BeforeClass
 		public static void startImapServer() throws Throwable {
 			int n = 0;
@@ -113,6 +113,7 @@ public abstract class MailSourceConfigurationTests {
 			"host=localhost", "folder=INBOX", "mark-as-read=true", "delete=false",
 			"java-mail-properties=mail.imap.socketFactory.fallback=true,mail.store.protocol=imap,mail.debug=true" })
 	public static class Pop3PassTests extends MailSourceConfigurationTests {
+		private final static Pop3Server pop3Server = PoorMansMailServer.pop3(50001);
 
 		@BeforeClass
 		public static void startImapServer() throws Throwable {
@@ -143,6 +144,7 @@ public abstract class MailSourceConfigurationTests {
 			"host=localhost", "folder=INBOX", "mark-as-read=true", "delete=false",
 			"java-mail-properties=mail.imap.socketFactory.fallback=true,mail.store.protocol=imap,mail.debug=true" })
 	public static class Pop3FailTests extends MailSourceConfigurationTests {
+		private final static Pop3Server pop3Server = PoorMansMailServer.pop3(50001);
 
 		@BeforeClass
 		public static void startImapServer() throws Throwable {
