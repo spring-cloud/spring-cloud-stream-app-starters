@@ -92,7 +92,7 @@ public abstract class MailSourceConfigurationTests {
 		@Test
 		public void testSimpleTest() throws Exception {
 
-			Message<?> received = messageCollector.forChannel(source.output()).poll(100,
+			Message<?> received = messageCollector.forChannel(source.output()).poll(10,
 					TimeUnit.SECONDS);
 			assertNotNull(received);
 			assertThat(received.getPayload(), Matchers.instanceOf(String.class));
@@ -176,7 +176,7 @@ public abstract class MailSourceConfigurationTests {
 		@Test
 		public void testSimpleTest() throws Exception {
 
-			Message<?> received = messageCollector.forChannel(source.output()).poll(100,
+			Message<?> received = messageCollector.forChannel(source.output()).poll(10,
 					TimeUnit.SECONDS);
 			assertNotNull(received);
 			assertThat(received.getPayload(), Matchers.instanceOf(String.class));
@@ -197,7 +197,7 @@ public abstract class MailSourceConfigurationTests {
 		@Test
 		public void testSimpleTest() throws Exception {
 
-			Message<?> received = messageCollector.forChannel(source.output()).poll(100,
+			Message<?> received = messageCollector.forChannel(source.output()).poll(10,
 					TimeUnit.SECONDS);
 			assertNotNull(received);
 			assertThat(received.getPayload(), Matchers.instanceOf(String.class));
