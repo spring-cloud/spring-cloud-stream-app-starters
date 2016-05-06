@@ -10,19 +10,4 @@
 	<artifactId>app-starters-annotation-common</artifactId>
 	<name>app-starters-annotation-common</name>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-stream</artifactId>
-			<version>${spring-cloud-stream.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.integration</groupId>
-			<artifactId>spring-integration-java-dsl</artifactId>
-			<version>${spring-integration-java-dsl.version}</version>
-		</dependency>
-
-	</dependencies>
-
 </project>
