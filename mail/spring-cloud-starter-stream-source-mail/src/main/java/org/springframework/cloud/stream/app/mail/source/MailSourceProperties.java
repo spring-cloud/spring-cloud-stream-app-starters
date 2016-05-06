@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 the original author or authors.
+ * Copyright 2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ import org.springframework.util.StringUtils;
 public class MailSourceProperties {
 
 	/**
-	 * Protocol to be used for recieving mail.
+	 * Protocol to be used for receiving mail.
 	 */
 	private String protocol;
 
@@ -46,7 +46,7 @@ public class MailSourceProperties {
 	private String password;
 
 	/**
-	 * Host URL for email access
+	 * Host for email access
 	 */
 	private String host;
 
@@ -69,9 +69,14 @@ public class MailSourceProperties {
 	 * Set to true to delete email after download.
 	 */
 	private boolean delete = false;
+	
+	/**
+	 * Set to true to use IdleImap Configuration.
+	 */
+	private boolean idleImap = false;
 
 	/**
-	 * Comma seperated list of javaMail properties to be used.
+	 * Comma separated list of javaMail properties to be used.
 	 */
 	private String javaMailProperties;
 
@@ -215,6 +220,20 @@ public class MailSourceProperties {
 			}
 		}
 		return variableMap;
+	}
+
+	/**
+	 * @return the idleImap
+	 */
+	public boolean isIdleImap() {
+		return idleImap;
+	}
+
+	/**
+	 * @param idleImap the idleImap to set
+	 */
+	public void setIdleImap(boolean idleImap) {
+		this.idleImap = idleImap;
 	}
 
 }

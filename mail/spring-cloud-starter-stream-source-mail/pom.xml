@@ -29,7 +29,19 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-stream</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.cloud.stream.app</groupId>
+			<artifactId>app-starters-trigger-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+		</dependency>
+		<!-- Section for Test Dependencies -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-stream-test-support</artifactId>
@@ -43,23 +55,5 @@
 			<groupId>org.springframework.cloud.stream.app</groupId>
 			<artifactId>app-starters-test-support</artifactId>
 		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.integration</groupId>
-			<artifactId>spring-integration-test</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud.stream.app</groupId>
-			<artifactId>app-starters-trigger-common</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>javax.mail-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-		</dependency>
-
 	</dependencies>
 </project>
