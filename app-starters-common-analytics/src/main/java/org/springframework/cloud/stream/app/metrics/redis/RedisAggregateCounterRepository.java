@@ -233,7 +233,7 @@ public class RedisAggregateCounterRepository implements AggregateCounterReposito
 	}
 
 	@Override
-	public Collection<String> list() {
+	public Iterable<String> list() {
 		Set<String> keys = redisTemplate.keys(getMetricKey("*"));
 		Set<String> names = new HashSet<>(keys.size());
 		for (String key : keys) {

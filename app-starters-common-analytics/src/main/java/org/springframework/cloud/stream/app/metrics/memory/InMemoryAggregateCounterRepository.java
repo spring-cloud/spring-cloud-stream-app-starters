@@ -71,7 +71,7 @@ public class InMemoryAggregateCounterRepository implements AggregateCounterRepos
 	}
 
 	@Override
-	public Collection<String> list() {
+	public Iterable<String> list() {
 		return aggregates.keySet();
 	}
 

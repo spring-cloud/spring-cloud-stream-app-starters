@@ -15,8 +15,6 @@
  */
 package org.springframework.cloud.stream.app.metrics;
 
-import java.util.Collection;
-
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
 
@@ -65,5 +63,5 @@ public interface AggregateCounterReader {
 	/**
 	 * List the names of all available aggregate counters.
 	 */
-	Collection<String> list();
+	Iterable<String> list();
 }
