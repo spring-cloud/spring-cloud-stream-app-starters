@@ -57,14 +57,13 @@ public class MailSourceConfiguration {
 
 	@Autowired
 	MailSourceProperties properties;
-	
+
 	@Bean
 	public IntegrationFlow mailInboundFlow() {
 
 		IntegrationFlowBuilder flowBuilder;
 
 		flowBuilder = getFlowBuilder();
-		
 
 		return flowBuilder.transform(new MailToStringTransformer())
 				.channel(source.output()).get();
@@ -81,15 +80,15 @@ public class MailSourceConfiguration {
 		String mailURL = properties.getProtocol() + "://" + properties.getUsername() + ":"
 				+ properties.getPassword() + "@" + properties.getHost() + ":"
 				+ properties.getPort() + "/" + properties.getFolder();
-		//scriptVariableGenerator.generateScriptVariables(properties.getJavaMailProperties());
+
 		javaMailProperties.putAll(properties.parsePropertiesString());
 
 		IntegrationFlowBuilder flowBuilder;
 		if (properties.isIdleImap()) {
-
 			flowBuilder = getIdleImapflow(mailURL);
 		}
 		else {
+
 			MailInboundChannelAdapterSpec adapterSpec;
 			switch (properties.getProtocol().toUpperCase()) {
 			case "IMAP":
@@ -103,6 +102,7 @@ public class MailSourceConfiguration {
 				adapterSpec = null;
 				break;
 			}
+
 			flowBuilder = IntegrationFlows.from(
 					adapterSpec.javaMailProperties(javaMailProperties)
 							.shouldDeleteMessages(properties.isDelete()),
@@ -126,8 +126,8 @@ public class MailSourceConfiguration {
 	 */
 	private IntegrationFlowBuilder getIdleImapflow(String mailURL) {
 		IntegrationFlowBuilder flowBuilder = null;
-		if("imap".equalsIgnoreCase(properties.getProtocol())
-						|| "imaps".equalsIgnoreCase(properties.getProtocol())){
+		if ("imap".equalsIgnoreCase(properties.getProtocol())
+				|| "imaps".equalsIgnoreCase(properties.getProtocol())) {
 			flowBuilder = IntegrationFlows
 					.from(Mail.imapIdleAdapter(mailURL).shouldReconnectAutomatically(true)
 							.shouldDeleteMessages(properties.isDelete())
