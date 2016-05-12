@@ -37,6 +37,7 @@ import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.cloud.stream.test.binder.MessageCollector;
 import org.springframework.messaging.Message;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
@@ -48,6 +49,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringApplicationConfiguration(classes = MailSourceConfigurationTests.MailSourceApplication.class)
 @DirtiesContext
 @WebIntegrationTest(randomPort = true)
+@TestPropertySource(properties = { "port=${test.mail.server.port}", "username=user",
+		"password=pw", "host=localhost", "folder=INBOX", "mark-as-read=true",
+		"delete=false",
+		"java-mail-properties=mail.imap.socketFactory.fallback=true\\n mail.store.protocol=imap\\n mail.debug=true" })
 public abstract class MailSourceConfigurationTests {
 
 	@Autowired
@@ -78,10 +83,7 @@ public abstract class MailSourceConfigurationTests {
 		MAIL_SERVER.stop();
 	}
 
-	@IntegrationTest({ "protocol=imap", "port=${test.mail.server.port}", "username=user",
-			"password=pw", "host=localhost", "folder=INBOX", "mark-as-read=true",
-			"delete=false",
-			"java-mail-properties=mail.imap.socketFactory.fallback=true,mail.store.protocol=imap,mail.debug=true" })
+	@IntegrationTest({ "protocol=imap" })
 	public static class ImapPassTests extends MailSourceConfigurationTests {
 
 		@BeforeClass
@@ -99,18 +101,16 @@ public abstract class MailSourceConfigurationTests {
 			assertEquals("foo\r\n", received.getPayload());
 		}
 
-		
 	}
 
-	@IntegrationTest({ "protocol=imap", "port=${test.mail.server.port}", "username=user", "password=pw",
-			"host=localhost", "folder=INBOX", "mark-as-read=true", "delete=false",
-			"java-mail-properties=mail.imap.socketFactory.fallback=true,mail.store.protocol=imap,mail.debug=true" })
+	@IntegrationTest({ "protocol=imap" })
 	public static class ImapFailTests extends MailSourceConfigurationTests {
 
 		@BeforeClass
 		public static void startImapServer() throws Throwable {
 			startMailServer(PoorMansMailServer.imap(0));
 		}
+
 		@Test
 		public void testSimpleTest() throws Exception {
 
@@ -123,14 +123,13 @@ public abstract class MailSourceConfigurationTests {
 
 	}
 
-	@IntegrationTest({ "protocol=pop3", "port=${test.mail.server.port}", "username=user", "password=pw",
-			"host=localhost", "folder=INBOX", "mark-as-read=true", "delete=false",
-			"java-mail-properties=mail.imap.socketFactory.fallback=true,mail.store.protocol=imap,mail.debug=true" })
+	@IntegrationTest({ "protocol=pop3" })
 	public static class Pop3PassTests extends MailSourceConfigurationTests {
 		@BeforeClass
 		public static void startImapServer() throws Throwable {
 			startMailServer(PoorMansMailServer.pop3(0));
 		}
+
 		@Test
 		public void testSimpleTest() throws Exception {
 
@@ -141,17 +140,16 @@ public abstract class MailSourceConfigurationTests {
 			assertEquals("foo\r\n", received.getPayload());
 		}
 
-}
+	}
 
-	@IntegrationTest({ "protocol=pop3", "port=${test.mail.server.port}", "username=user", "password=pw",
-			"host=localhost", "folder=INBOX", "mark-as-read=true", "delete=false",
-			"java-mail-properties=mail.imap.socketFactory.fallback=true,mail.store.protocol=imap,mail.debug=true" })
+	@IntegrationTest({ "protocol=pop3" })
 	public static class Pop3FailTests extends MailSourceConfigurationTests {
 
 		@BeforeClass
 		public static void startImapServer() throws Throwable {
 			startMailServer(PoorMansMailServer.pop3(0));
 		}
+
 		@Test
 		public void testSimpleTest() throws Exception {
 
@@ -164,15 +162,13 @@ public abstract class MailSourceConfigurationTests {
 
 	}
 
-	@IntegrationTest({ "protocol=imap", "port=${test.mail.server.port}", "username=user", "password=pw",
-			"host=localhost", "folder=INBOX", "mark-as-read=true", "delete=false",
-			"idleImap=true",
-			"java-mail-properties=mail.imap.socketFactory.fallback=true,mail.store.protocol=imap,mail.debug=true" })
+	@IntegrationTest({ "protocol=imap", "idleImap=true" })
 	public static class ImapIdlePassTests extends MailSourceConfigurationTests {
 		@BeforeClass
 		public static void startImapServer() throws Throwable {
 			startMailServer(PoorMansMailServer.imap(0));
 		}
+
 		@Test
 		public void testSimpleTest() throws Exception {
 
@@ -185,15 +181,13 @@ public abstract class MailSourceConfigurationTests {
 
 	}
 
-	@IntegrationTest({ "protocol=imap", "port=${test.mail.server.port}", "username=user", "password=pw",
-			"host=localhost", "folder=INBOX", "mark-as-read=true", "delete=false",
-			"idleImap=true",
-			"java-mail-properties=mail.imap.socketFactory.fallback=true,mail.store.protocol=imap,mail.debug=true" })
+	@IntegrationTest({ "protocol=imap", "idleImap=true" })
 	public static class ImapIdleFailTests extends MailSourceConfigurationTests {
 		@BeforeClass
 		public static void startImapServer() throws Throwable {
 			startMailServer(PoorMansMailServer.imap(0));
 		}
+
 		@Test
 		public void testSimpleTest() throws Exception {
 

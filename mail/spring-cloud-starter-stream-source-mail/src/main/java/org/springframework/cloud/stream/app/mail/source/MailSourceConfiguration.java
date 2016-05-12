@@ -34,7 +34,7 @@ import org.springframework.integration.dsl.SourcePollingChannelAdapterSpec;
 import org.springframework.integration.dsl.mail.Mail;
 import org.springframework.integration.dsl.mail.MailInboundChannelAdapterSpec;
 import org.springframework.integration.dsl.support.Consumer;
-import org.springframework.integration.mail.transformer.MailToStringTransformer;
+import org.springframework.integration.dsl.support.Transformers;
 import org.springframework.integration.scheduling.PollerMetadata;
 
 /**
@@ -65,8 +65,8 @@ public class MailSourceConfiguration {
 
 		flowBuilder = getFlowBuilder();
 
-		return flowBuilder.transform(new MailToStringTransformer())
-				.channel(source.output()).get();
+		return flowBuilder.transform(Transformers.fromMail()).channel(source.output())
+				.get();
 	}
 
 	/**
@@ -76,21 +76,20 @@ public class MailSourceConfiguration {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private IntegrationFlowBuilder getFlowBuilder() {
-		Properties javaMailProperties = new Properties();
-		String mailURL = properties.getProtocol() + "://" + properties.getUsername() + ":"
-				+ properties.getPassword() + "@" + properties.getHost() + ":"
-				+ properties.getPort() + "/" + properties.getFolder();
-
-		javaMailProperties.putAll(properties.parsePropertiesString());
+		Properties javaMailProperties = this.properties.getJavaMailProperties();
+		String mailURL = this.properties.getProtocol() + "://"
+				+ this.properties.getUsername() + ":" + this.properties.getPassword()
+				+ "@" + this.properties.getHost() + ":" + this.properties.getPort() + "/"
+				+ this.properties.getFolder();
 
 		IntegrationFlowBuilder flowBuilder;
-		if (properties.isIdleImap()) {
+		if (this.properties.isIdleImap()) {
 			flowBuilder = getIdleImapflow(mailURL);
 		}
 		else {
 
 			MailInboundChannelAdapterSpec adapterSpec;
-			switch (properties.getProtocol().toUpperCase()) {
+			switch (this.properties.getProtocol().toUpperCase()) {
 			case "IMAP":
 			case "IMAPS":
 				adapterSpec = getImapFlowBuilder(mailURL);
@@ -99,13 +98,13 @@ public class MailSourceConfiguration {
 				adapterSpec = getPop3FlowBuilder(mailURL);
 				break;
 			default:
-				adapterSpec = null;
-				break;
+				throw new IllegalArgumentException(
+						"Unsupported mail protocol: " + this.properties.getProtocol());
 			}
 
 			flowBuilder = IntegrationFlows.from(
 					adapterSpec.javaMailProperties(javaMailProperties)
-							.shouldDeleteMessages(properties.isDelete()),
+							.shouldDeleteMessages(this.properties.isDelete()),
 					new Consumer<SourcePollingChannelAdapterSpec>() {
 
 						@Override
@@ -126,13 +125,11 @@ public class MailSourceConfiguration {
 	 */
 	private IntegrationFlowBuilder getIdleImapflow(String mailURL) {
 		IntegrationFlowBuilder flowBuilder = null;
-		if ("imap".equalsIgnoreCase(properties.getProtocol())
-				|| "imaps".equalsIgnoreCase(properties.getProtocol())) {
-			flowBuilder = IntegrationFlows
-					.from(Mail.imapIdleAdapter(mailURL).shouldReconnectAutomatically(true)
-							.shouldDeleteMessages(properties.isDelete())
-							.shouldMarkMessagesAsRead(properties.isMarkAsRead()));
-		}
+
+		flowBuilder = IntegrationFlows.from(Mail.imapIdleAdapter(mailURL)
+				.shouldDeleteMessages(this.properties.isDelete())
+				.javaMailProperties(this.properties.getJavaMailProperties())
+				.shouldMarkMessagesAsRead(this.properties.isMarkAsRead()));
 		return flowBuilder;
 	}
 
@@ -154,7 +151,7 @@ public class MailSourceConfiguration {
 	@SuppressWarnings("rawtypes")
 	private MailInboundChannelAdapterSpec getImapFlowBuilder(String mailURL) {
 		return Mail.imapInboundAdapter(mailURL)
-				.shouldMarkMessagesAsRead(properties.isMarkAsRead());
+				.shouldMarkMessagesAsRead(this.properties.isMarkAsRead());
 	}
 
 }

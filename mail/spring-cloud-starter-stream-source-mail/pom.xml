@@ -43,15 +43,6 @@
 		</dependency>
 		<!-- Section for Test Dependencies -->
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-stream-test-support</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-stream-test-support-internal</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>org.springframework.cloud.stream.app</groupId>
 			<artifactId>app-starters-test-support</artifactId>
 		</dependency>
