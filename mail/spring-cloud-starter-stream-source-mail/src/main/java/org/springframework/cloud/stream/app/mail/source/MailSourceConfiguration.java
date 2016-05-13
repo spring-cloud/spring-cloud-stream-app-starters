@@ -77,14 +77,9 @@ public class MailSourceConfiguration {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private IntegrationFlowBuilder getFlowBuilder() {
 		Properties javaMailProperties = this.properties.getJavaMailProperties();
-		String mailURL = this.properties.getProtocol() + "://"
-				+ this.properties.getUsername() + ":" + this.properties.getPassword()
-				+ "@" + this.properties.getHost() + ":" + this.properties.getPort() + "/"
-				+ this.properties.getFolder();
-
 		IntegrationFlowBuilder flowBuilder;
 		if (this.properties.isIdleImap()) {
-			flowBuilder = getIdleImapflow(mailURL);
+			flowBuilder = getIdleImapflow(this.properties.getMailUrl());
 		}
 		else {
 
@@ -92,10 +87,10 @@ public class MailSourceConfiguration {
 			switch (this.properties.getProtocol().toUpperCase()) {
 			case "IMAP":
 			case "IMAPS":
-				adapterSpec = getImapFlowBuilder(mailURL);
+				adapterSpec = getImapFlowBuilder(this.properties.getMailUrl());
 				break;
 			case "POP3":
-				adapterSpec = getPop3FlowBuilder(mailURL);
+				adapterSpec = getPop3FlowBuilder(this.properties.getMailUrl());
 				break;
 			default:
 				throw new IllegalArgumentException(
@@ -129,6 +124,7 @@ public class MailSourceConfiguration {
 		flowBuilder = IntegrationFlows.from(Mail.imapIdleAdapter(mailURL)
 				.shouldDeleteMessages(this.properties.isDelete())
 				.javaMailProperties(this.properties.getJavaMailProperties())
+				.selectorExpression(this.properties.getExpression())
 				.shouldMarkMessagesAsRead(this.properties.isMarkAsRead()));
 		return flowBuilder;
 	}

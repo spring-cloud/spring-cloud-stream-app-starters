@@ -17,6 +17,8 @@ package org.springframework.cloud.stream.app.mail.source;
 
 import java.util.Properties;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -28,34 +30,15 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class MailSourceProperties {
 
 	/**
-	 * Protocol to be used for receiving mail.
+	 * Mail connection URL for connection to Mail server e.g.
+	 * 'imaps://username:password@imap.server.com:993/Inbox'
+	 */
+	private String mailUrl;
+	
+	/**
+	 * Protocol to be used for receiving mail e.g. 'imaps' or 'pop3'
 	 */
 	private String protocol;
-
-	/**
-	 * Username for email account. Usually is email id
-	 */
-	private String username;
-
-	/**
-	 * Password for email account.
-	 */
-	private String password;
-
-	/**
-	 * Host for email access
-	 */
-	private String host;
-
-	/**
-	 * Port to be used for email e.g. 993 for imaps
-	 */
-	private String port;
-
-	/**
-	 * Email folder to be scanned for email
-	 */
-	private String folder;
 
 	/**
 	 * Set to true to mark email as read.
@@ -73,94 +56,16 @@ public class MailSourceProperties {
 	private boolean idleImap = false;
 
 	/**
-	 * JavaMail properties as a new line delimited string of name-value pairs, e.g. 'foo=bar\n baz=car'.
+	 * JavaMail properties as a new line delimited string of name-value pairs, e.g.
+	 * 'foo=bar\n baz=car'.
 	 */
 	private Properties javaMailProperties = new Properties();
 
 	/**
-	 * @return the protocol
+	 * Configure a SpEL expression to select messages
 	 */
-	public String getProtocol() {
-		return this.protocol;
-	}
-
-	/**
-	 * @param protocol the protocol to set
-	 */
-	public void setProtocol(String protocol) {
-		this.protocol = protocol;
-	}
-
-	/**
-	 * @return the username
-	 */
-	public String getUsername() {
-		return this.username;
-	}
-
-	/**
-	 * @param username the username to set
-	 */
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	/**
-	 * @return the password
-	 */
-	public String getPassword() {
-		return this.password;
-	}
-
-	/**
-	 * @param password the password to set
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	/**
-	 * @return the host
-	 */
-	public String getHost() {
-		return this.host;
-	}
-
-	/**
-	 * @param host the host to set
-	 */
-	public void setHost(String host) {
-		this.host = host;
-	}
-
-	/**
-	 * @return the port
-	 */
-	public String getPort() {
-		return this.port;
-	}
-
-	/**
-	 * @param port the port to set
-	 */
-	public void setPort(String port) {
-		this.port = port;
-	}
-
-	/**
-	 * @return the folder
-	 */
-	public String getFolder() {
-		return this.folder;
-	}
-
-	/**
-	 * @param folder the folder to set
-	 */
-	public void setFolder(String folder) {
-		this.folder = folder;
-	}
-
+	private String expression = "true";
+	
 	/**
 	 * @return the markAsRead
 	 */
@@ -206,6 +111,7 @@ public class MailSourceProperties {
 	/**
 	 * @return the javaMailProperties
 	 */
+	@NotNull
 	public Properties getJavaMailProperties() {
 		return this.javaMailProperties;
 	}
@@ -215,6 +121,49 @@ public class MailSourceProperties {
 	 */
 	public void setJavaMailProperties(Properties javaMailProperties) {
 		this.javaMailProperties = javaMailProperties;
+	}
+
+	/**
+	 * @return the mailUrl
+	 */
+	@NotNull
+	public String getMailUrl() {
+		return mailUrl;
+	}
+
+	/**
+	 * @param mailUrl the mailUrl to set
+	 */
+	public void setMailUrl(String mailUrl) {
+		this.mailUrl = mailUrl;
+	}
+
+	/**
+	 * @return the protocol
+	 */
+	public String getProtocol() {
+		return protocol;
+	}
+
+	/**
+	 * @param protocol the protocol to set
+	 */
+	public void setProtocol(String protocol) {
+		this.protocol = protocol;
+	}
+
+	/**
+	 * @return the expression
+	 */
+	public String getExpression() {
+		return expression;
+	}
+
+	/**
+	 * @param expression the expression to set
+	 */
+	public void setExpression(String expression) {
+		this.expression = expression;
 	}
 
 }
