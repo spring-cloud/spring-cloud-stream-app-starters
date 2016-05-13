@@ -1,0 +1,27 @@
+//tag::ref-doc[]
+= Mail Source
+
+A source module that listens for Emails  and emits the message body as a message payload.
+
+
+== Options
+
+The **$$mail$$** $$source$$ supports the following configuration properties:
+
+$$protocol$$:: $$Protocol to be used for recieving mail.$$
+$$username$$:: $$Username for email account. Usually is email id$$
+$$password$$:: $$Password for email account$$
+$$host$$:: $$Host for email access$$
+$$port$$:: $$Port to be used for email e.g. 993 for imaps$$
+$$folder$$:: $$Email folder to be scanned for email$$
+$$markAsRead$$:: $$Set to true to mark email as read$$
+$$delete$$:: $$Set to true to delete email after download$$
+$$idleImap$$:: $$Set to true to use IdleImap Configuration$$
+$$javaMailProperties$$:: $$JavaMail properties as a new line delimited string of name-value pairs, e.g. 'foo=bar\n baz=car'$$
+
+
+//end::ref-doc[]
+== Build
+
+```
+$> mvn package

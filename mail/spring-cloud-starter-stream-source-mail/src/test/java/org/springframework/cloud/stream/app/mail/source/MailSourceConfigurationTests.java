@@ -200,6 +200,27 @@ public abstract class MailSourceConfigurationTests {
 
 	}
 
+	@IntegrationTest({ "protocol=imap", "java-mail-properties=" })
+	public static class BlankJavaMailPropertiesImapTests
+			extends MailSourceConfigurationTests {
+
+		@BeforeClass
+		public static void startImapServer() throws Throwable {
+			startMailServer(PoorMansMailServer.imap(0));
+		}
+
+		@Test
+		public void testSimpleTest() throws Exception {
+
+			Message<?> received = messageCollector.forChannel(source.output()).poll(10,
+					TimeUnit.SECONDS);
+			assertNotNull(received);
+			assertThat(received.getPayload(), Matchers.instanceOf(String.class));
+			assertEquals("foo\r\n", received.getPayload());
+		}
+
+	}
+
 	@SpringBootApplication
 	public static class MailSourceApplication {
 

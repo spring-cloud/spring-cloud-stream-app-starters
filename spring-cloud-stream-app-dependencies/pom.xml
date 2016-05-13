@@ -568,11 +568,6 @@
 				<version>${pmml.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>javax.mail</groupId>
-				<artifactId>mail</artifactId>
-				<version>1.5.0-b01</version>
-			</dependency>
-			<dependency>
 				<groupId>org.jruby</groupId>
 				<artifactId>jruby-complete</artifactId>
 				<version>9.0.5.0</version>

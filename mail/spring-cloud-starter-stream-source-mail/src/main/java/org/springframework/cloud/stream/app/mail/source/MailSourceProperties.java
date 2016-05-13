@@ -75,7 +75,7 @@ public class MailSourceProperties {
 	/**
 	 * JavaMail properties as a new line delimited string of name-value pairs, e.g. 'foo=bar\n baz=car'.
 	 */
-	private Properties javaMailProperties;
+	private Properties javaMailProperties = new Properties();
 
 	/**
 	 * @return the protocol
