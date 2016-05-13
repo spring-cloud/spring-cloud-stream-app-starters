@@ -16,16 +16,16 @@
 
 package org.springframework.cloud.stream.app.metrics.memory;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
-
 import org.springframework.cloud.stream.app.metrics.AggregateCounter;
 import org.springframework.cloud.stream.app.metrics.AggregateCounterRepository;
 import org.springframework.cloud.stream.app.metrics.AggregateCounterResolution;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * In-memory aggregate counter with minute resolution.
@@ -38,7 +38,9 @@ import org.springframework.cloud.stream.app.metrics.AggregateCounterResolution;
  */
 public class InMemoryAggregateCounterRepository implements AggregateCounterRepository {
 
-	private Map<String, InMemoryAggregateCounter> aggregates = new HashMap<String, InMemoryAggregateCounter>();
+	private Map<String, InMemoryAggregateCounter> aggregates = new ConcurrentHashMap<String, InMemoryAggregateCounter>();
+
+	private Map<String, AggregateCounter> counters = new ConcurrentHashMap<String, AggregateCounter>();
 
 
 	public long increment(String name) {
@@ -52,6 +54,7 @@ public class InMemoryAggregateCounterRepository implements AggregateCounterRepos
 	@Override
 	public void reset(String name) {
 		aggregates.remove(name);
+		counters.remove(name);
 	}
 
 	@Override
@@ -71,7 +74,12 @@ public class InMemoryAggregateCounterRepository implements AggregateCounterRepos
 	}
 
 	@Override
-	public Iterable<String> list() {
+	public AggregateCounter findOne(String name) {
+		return counters.get(name);
+	}
+
+	@Override
+	public Collection<String> list() {
 		return aggregates.keySet();
 	}
 
@@ -91,6 +99,7 @@ public class InMemoryAggregateCounterRepository implements AggregateCounterRepos
 
 	public AggregateCounter save(AggregateCounter counter) {
 		aggregates.remove(counter.getName());
+		counters.put(counter.getName(), counter);
 		increment(counter.getName(), counter.getTotal(), DateTime.now());
 		return counter;
 	}

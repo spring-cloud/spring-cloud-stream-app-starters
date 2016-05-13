@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 the original author or authors.
+ * Copyright 2014-2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,30 +16,28 @@
 
 package org.springframework.cloud.stream.app.aggregate.counter.sink;
 
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItems;
+import static org.junit.Assert.assertThat;
+
+import java.util.Collections;
+
 import org.joda.time.DateTime;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.cloud.stream.annotation.Bindings;
-import org.springframework.cloud.stream.app.metrics.AggregateCounter;
-import org.springframework.cloud.stream.app.metrics.AggregateCounterRepository;
-import org.springframework.cloud.stream.app.metrics.AggregateCounterResolution;
 import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.cloud.stream.test.junit.redis.RedisTestSupport;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.util.Collections;
-
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.assertThat;
 
 
 /**
@@ -49,17 +47,19 @@ import static org.junit.Assert.assertThat;
  * @author Ilayaperumal Gopinathan
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = AggregateCounterTests.AggregateCounterSinkApplication.class)
+@SpringApplicationConfiguration(classes = AggregateCounterSinkApplication.class)
 @IntegrationTest({"store=redis", "server.port=-1"})
 public abstract class AggregateCounterTests {
 
 	@Rule
 	public RedisTestSupport redisTestSupport = new RedisTestSupport();
 
-	private static final String AGGREGATE_COUNTER_NAME = "aggregate-counter-test.foo";
+	private static final String AGGREGATE_COUNTER_NAME = "foo";
+
+	private static final String AGGREGATE_COUNTER_NAME_2 = "bar";
 
 	@Autowired
-	@Bindings(AggregateCounterSinkConfiguration.class)
+	@Bindings(AggregateCounterSink.class)
 	protected Sink sink;
 
 	@Autowired
@@ -69,7 +69,9 @@ public abstract class AggregateCounterTests {
 	@After
 	public void clear() {
 		aggregateCounterRepository.reset(AGGREGATE_COUNTER_NAME);
+		aggregateCounterRepository.reset(AGGREGATE_COUNTER_NAME_2);
 	}
+
 
 	@WebIntegrationTest("name="+ AGGREGATE_COUNTER_NAME)
 	public static class NullTimefieldAggregateCounterTests extends AggregateCounterTests {
@@ -122,8 +124,16 @@ public abstract class AggregateCounterTests {
 		}
 	}
 
-	@SpringBootApplication
-	public static class AggregateCounterSinkApplication {
+	@WebIntegrationTest({"nameExpression=payload.counterName"})
+	public static class CounterListTest extends AggregateCounterTests {
 
+		@Test
+		public void testCountWithNameExpression() {
+			this.sink.input().send(new GenericMessage<Object>(
+					Collections.singletonMap("counterName", AGGREGATE_COUNTER_NAME)));
+			this.sink.input().send(new GenericMessage<Object>(
+					Collections.singletonMap("counterName", AGGREGATE_COUNTER_NAME_2)));
+			assertThat(this.aggregateCounterRepository.list(), hasItems(AGGREGATE_COUNTER_NAME, AGGREGATE_COUNTER_NAME_2));
+		}
 	}
 }

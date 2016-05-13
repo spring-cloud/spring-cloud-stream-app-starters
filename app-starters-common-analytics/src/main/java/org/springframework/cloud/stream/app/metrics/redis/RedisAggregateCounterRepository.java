@@ -55,7 +55,7 @@ import org.springframework.util.Assert;
  */
 public class RedisAggregateCounterRepository implements AggregateCounterRepository {
 
-	private static final String REPO_PREFIX = "aggregate-counters";
+	private static final String AGGREGATE_COUNTER_KEY_PREFIX = "aggregate-counters";
 
 	private final RedisRetryTemplate redisTemplate;
 
@@ -82,10 +82,14 @@ public class RedisAggregateCounterRepository implements AggregateCounterReposito
 
 	@Override
 	public long increment(String name, long amount, DateTime dateTime) {
-		final AggregateKeyGenerator akg = new AggregateKeyGenerator(REPO_PREFIX, name, dateTime);
+		final AggregateKeyGenerator akg = new AggregateKeyGenerator(
+				AGGREGATE_COUNTER_KEY_PREFIX, name, dateTime);
 
 		String bookkeepingKey = bookkeepingKeyFor(name);
 
+		if (!this.setOperations.isMember(AGGREGATE_COUNTER_KEY_PREFIX, name)) {
+			this.setOperations.add(AGGREGATE_COUNTER_KEY_PREFIX, name);
+		}
 		doIncrementHash(akg.getYearsKey(), akg.getYear(), amount, bookkeepingKey);
 		doIncrementHash(akg.getYearKey(), akg.getMonth(), amount, bookkeepingKey);
 		doIncrementHash(akg.getMonthKey(), akg.getDay(), amount, bookkeepingKey);
@@ -102,7 +106,7 @@ public class RedisAggregateCounterRepository implements AggregateCounterReposito
 	 * @return the redis key under which the metric is stored
 	 */
 	protected String getMetricKey(String metricName) {
-		return REPO_PREFIX + AggregateKeyGenerator.SEPARATOR + metricName;
+		return AGGREGATE_COUNTER_KEY_PREFIX + AggregateKeyGenerator.SEPARATOR + metricName;
 	}
 
 	/**
@@ -233,32 +237,36 @@ public class RedisAggregateCounterRepository implements AggregateCounterReposito
 	}
 
 	@Override
-	public Iterable<String> list() {
-		Set<String> keys = redisTemplate.keys(getMetricKey("*"));
-		Set<String> names = new HashSet<>(keys.size());
-		for (String key : keys) {
-			names.add(getMetricKey(key));
-		}
-		return names;
+	public Collection<String> list() {
+		return this.setOperations.members(AGGREGATE_COUNTER_KEY_PREFIX);
+	}
+
+	@Override
+	public AggregateCounter findOne(String name) {
+		return getCounts(name, 1000, new DateTime(), AggregateCounterResolution.minute);
 	}
 
 	private Map<String, Long> getYearCounts(String name) {
-		AggregateKeyGenerator akg = new AggregateKeyGenerator(REPO_PREFIX, name, new DateTime());
+		AggregateKeyGenerator akg = new AggregateKeyGenerator(
+				AGGREGATE_COUNTER_KEY_PREFIX, name, new DateTime());
 		return getEntries(akg.getYearsKey());
 	}
 
 	private long[] getMonthCountsForYear(String name, DateTime year) {
-		AggregateKeyGenerator akg = new AggregateKeyGenerator(REPO_PREFIX, name, year);
+		AggregateKeyGenerator akg = new AggregateKeyGenerator(
+				AGGREGATE_COUNTER_KEY_PREFIX, name, year);
 		return convertToArray(getEntries(akg.getYearKey()), year.monthOfYear().getMaximumValue(), true); // Months in this year
 	}
 
 	private long[] getDayCountsForMonth(String name, DateTime month) {
-		AggregateKeyGenerator akg = new AggregateKeyGenerator(REPO_PREFIX, name, month.withTimeAtStartOfDay());
+		AggregateKeyGenerator akg = new AggregateKeyGenerator(
+				AGGREGATE_COUNTER_KEY_PREFIX, name, month.withTimeAtStartOfDay());
 		return convertToArray(getEntries(akg.getMonthKey()), month.dayOfMonth().getMaximumValue(), true); // Days in this month
 	}
 
 	private long[] getHourCountsForDay(String name, DateTime day) {
-		AggregateKeyGenerator akg = new AggregateKeyGenerator(REPO_PREFIX, name, day.withTimeAtStartOfDay());
+		AggregateKeyGenerator akg = new AggregateKeyGenerator(
+				AGGREGATE_COUNTER_KEY_PREFIX, name, day.withTimeAtStartOfDay());
 		return convertToArray(getEntries(akg.getDayKey()), 24, false);
 	}
 
@@ -269,7 +277,8 @@ public class RedisAggregateCounterRepository implements AggregateCounterReposito
 
 	private long[] getMinCountsForHour(String name, int year, int month, int day, int hour) {
 		DateTime dt = new DateTime().withYear(year).withMonthOfYear(month).withDayOfMonth(day).withHourOfDay(hour);
-		AggregateKeyGenerator akg = new AggregateKeyGenerator(REPO_PREFIX, name, dt);
+		AggregateKeyGenerator akg = new AggregateKeyGenerator(
+				AGGREGATE_COUNTER_KEY_PREFIX, name, dt);
 		return convertToArray(getEntries(akg.getHourKey()), 60, false);
 	}
 
@@ -295,9 +304,10 @@ public class RedisAggregateCounterRepository implements AggregateCounterReposito
 	public void reset(String id) {
 		redisTemplate.delete(getMetricKey(id));
 		String metricMetaKey = bookkeepingKeyFor(id);
-		Set<String> otherKeys = setOperations.members(metricMetaKey);
-		// Add metric-meta SET's key
-		otherKeys.add(metricMetaKey);
-		redisTemplate.delete(otherKeys);
+		Set<String> members = this.setOperations.members(AGGREGATE_COUNTER_KEY_PREFIX);
+		if (members.contains(id)) {
+			this.setOperations.remove(AGGREGATE_COUNTER_KEY_PREFIX, id);
+		}
+		redisTemplate.delete(metricMetaKey);
 	}
 }
