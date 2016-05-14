@@ -22,6 +22,9 @@ include::{app-starters-root}/jms/spring-cloud-starter-stream-source-jms/README.a
 [[spring-cloud-stream-modules-load-generator-source]]
 include::{app-starters-root}/testing/spring-cloud-starter-stream-source-load-generator/README.adoc[tags=ref-doc]
 
+[[spring-cloud-stream-modules-mail-source]]
+include::{app-starters-root}/testing/spring-cloud-starter-stream-source-mail/README.adoc[tags=ref-doc]
+
 [[spring-cloud-stream-modules-rabbit-source]]
 include::{app-starters-root}/rabbit/spring-cloud-starter-stream-source-rabbit/README.adoc[tags=ref-doc]
 

@@ -110,6 +110,7 @@
 						<loggregator-source>
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.loggregator.LoggregatorSourceTestConfiguration.class</extraTestConfigClass>
 						</loggregator-source>
+						<mail-source />
 						<pmml-processor>
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.pmml.PmmlProcessorTestConfiguration.class</extraTestConfigClass>
 						</pmml-processor>
