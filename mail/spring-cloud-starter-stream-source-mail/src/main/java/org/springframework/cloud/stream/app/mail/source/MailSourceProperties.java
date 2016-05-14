@@ -34,11 +34,6 @@ public class MailSourceProperties {
 	 * 'imaps://username:password@imap.server.com:993/Inbox'
 	 */
 	private String mailUrl;
-	
-	/**
-	 * Protocol to be used for receiving mail e.g. 'imaps' or 'pop3'
-	 */
-	private String protocol;
 
 	/**
 	 * Set to true to mark email as read.
@@ -65,7 +60,7 @@ public class MailSourceProperties {
 	 * Configure a SpEL expression to select messages
 	 */
 	private String expression = "true";
-	
+
 	/**
 	 * @return the markAsRead
 	 */
@@ -136,20 +131,6 @@ public class MailSourceProperties {
 	 */
 	public void setMailUrl(String mailUrl) {
 		this.mailUrl = mailUrl;
-	}
-
-	/**
-	 * @return the protocol
-	 */
-	public String getProtocol() {
-		return protocol;
-	}
-
-	/**
-	 * @param protocol the protocol to set
-	 */
-	public void setProtocol(String protocol) {
-		this.protocol = protocol;
 	}
 
 	/**

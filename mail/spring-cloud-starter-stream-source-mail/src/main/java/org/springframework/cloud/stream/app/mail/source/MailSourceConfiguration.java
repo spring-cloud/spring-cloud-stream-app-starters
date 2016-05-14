@@ -18,6 +18,8 @@ package org.springframework.cloud.stream.app.mail.source;
 
 import java.util.Properties;
 
+import javax.mail.URLName;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -76,29 +78,36 @@ public class MailSourceConfiguration {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private IntegrationFlowBuilder getFlowBuilder() {
-		Properties javaMailProperties = this.properties.getJavaMailProperties();
+
 		IntegrationFlowBuilder flowBuilder;
+		URLName urlName;
+		if (null != this.properties.getMailUrl()) {
+			urlName = new URLName(this.properties.getMailUrl());
+		}
+		else {
+			urlName = null;
+		}
 		if (this.properties.isIdleImap()) {
-			flowBuilder = getIdleImapflow(this.properties.getMailUrl());
+			flowBuilder = getIdleImapflow(urlName);
 		}
 		else {
 
 			MailInboundChannelAdapterSpec adapterSpec;
-			switch (this.properties.getProtocol().toUpperCase()) {
+			switch (urlName.getProtocol().toUpperCase()) {
 			case "IMAP":
 			case "IMAPS":
-				adapterSpec = getImapFlowBuilder(this.properties.getMailUrl());
+				adapterSpec = getImapFlowBuilder(urlName);
 				break;
 			case "POP3":
-				adapterSpec = getPop3FlowBuilder(this.properties.getMailUrl());
+				adapterSpec = getPop3FlowBuilder(urlName);
 				break;
 			default:
 				throw new IllegalArgumentException(
-						"Unsupported mail protocol: " + this.properties.getProtocol());
+						"Unsupported mail protocol: " + urlName.getProtocol());
 			}
-
 			flowBuilder = IntegrationFlows.from(
-					adapterSpec.javaMailProperties(javaMailProperties)
+					adapterSpec.javaMailProperties(getJavaMailProperties(urlName))
+							.selectorExpression(this.properties.getExpression())
 							.shouldDeleteMessages(this.properties.isDelete()),
 					new Consumer<SourcePollingChannelAdapterSpec>() {
 
@@ -115,15 +124,15 @@ public class MailSourceConfiguration {
 
 	/**
 	 * Method to build Integration flow for IMAP Idle configuration.
-	 * @param mailURL Mail source URL.
+	 * @param urlName Mail source URL.
 	 * @return Integration Flow object IMAP IDLE.
 	 */
-	private IntegrationFlowBuilder getIdleImapflow(String mailURL) {
+	private IntegrationFlowBuilder getIdleImapflow(URLName urlName) {
 		IntegrationFlowBuilder flowBuilder = null;
 
-		flowBuilder = IntegrationFlows.from(Mail.imapIdleAdapter(mailURL)
+		flowBuilder = IntegrationFlows.from(Mail.imapIdleAdapter(urlName.toString())
 				.shouldDeleteMessages(this.properties.isDelete())
-				.javaMailProperties(this.properties.getJavaMailProperties())
+				.javaMailProperties(getJavaMailProperties(urlName))
 				.selectorExpression(this.properties.getExpression())
 				.shouldMarkMessagesAsRead(this.properties.isMarkAsRead()));
 		return flowBuilder;
@@ -131,23 +140,62 @@ public class MailSourceConfiguration {
 
 	/**
 	 * Method to build Mail Channel Adapter for POP3.
-	 * @param mailURL Mail source URL.
+	 * @param urlName Mail source URL.
 	 * @return Mail Channel for POP3
 	 */
 	@SuppressWarnings("rawtypes")
-	private MailInboundChannelAdapterSpec getPop3FlowBuilder(String mailURL) {
-		return Mail.pop3InboundAdapter(mailURL);
+	private MailInboundChannelAdapterSpec getPop3FlowBuilder(URLName urlName) {
+		return Mail.pop3InboundAdapter(urlName.toString());
 	}
 
 	/**
 	 * Method to build Mail Channel Adapter for IMAP.
-	 * @param mailURL Mail source URL.
+	 * @param urlName Mail source URL.
 	 * @return Mail Channel for IMAP
 	 */
 	@SuppressWarnings("rawtypes")
-	private MailInboundChannelAdapterSpec getImapFlowBuilder(String mailURL) {
-		return Mail.imapInboundAdapter(mailURL)
+	private MailInboundChannelAdapterSpec getImapFlowBuilder(URLName urlName) {
+		return Mail.imapInboundAdapter(urlName.toString())
 				.shouldMarkMessagesAsRead(this.properties.isMarkAsRead());
+	}
+
+	/**
+	 * Method to set default Javamail Properties for POP3 and IMAP
+	 * @param urlName
+	 * @return
+	 */
+	private Properties getJavaMailProperties(URLName urlName) {
+		Properties javaMailProperties = new Properties();
+
+		switch (urlName.getProtocol().toUpperCase()) {
+		case "IMAP":
+			javaMailProperties.setProperty("mail.imap.socketFactory.class",
+					"javax.net.SocketFactory");
+			javaMailProperties.setProperty("mail.imap.socketFactory.fallback", "false");
+			javaMailProperties.setProperty("mail.store.protocol", "imap");
+
+			break;
+		case "IMAPS":
+			javaMailProperties.setProperty("mail.imap.socketFactory.class",
+					"javax.net.ssl.SSLSocketFactory");
+			javaMailProperties.setProperty("mail.imap.socketFactory.fallback", "false");
+			javaMailProperties.setProperty("mail.store.protocol", "imaps");
+			break;
+		case "POP3":
+			javaMailProperties.setProperty("mail.pop3.socketFactory.class",
+					"javax.net.SocketFactory");
+			javaMailProperties.setProperty("mail.pop3.socketFactory.fallback", "false");
+			javaMailProperties.setProperty("mail.store.protocol", "pop3");
+			break;
+		case "POP3S":
+			javaMailProperties.setProperty("mail.pop3.socketFactory.class",
+					"javax.net.ssl.SSLSocketFactory");
+			javaMailProperties.setProperty("mail.pop3.socketFactory.fallback", "false");
+			javaMailProperties.setProperty("mail.store.protocol", "pop3s");
+			break;
+		}
+		javaMailProperties.putAll(this.properties.getJavaMailProperties());
+		return javaMailProperties;
 	}
 
 }
