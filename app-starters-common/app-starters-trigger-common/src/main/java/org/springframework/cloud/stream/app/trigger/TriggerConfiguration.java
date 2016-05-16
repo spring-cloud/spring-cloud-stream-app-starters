@@ -32,9 +32,10 @@ import org.springframework.scheduling.support.PeriodicTrigger;
 /**
  * @author David Turanski
  * @author Ilayaperumal Gopinathan
+ * @author Artem Bilan
  */
 @Configuration
-@EnableConfigurationProperties({TriggerProperties.class, MaxMessagesProperties.class})
+@EnableConfigurationProperties({ TriggerProperties.class, MaxMessagesProperties.class })
 @Import(SpelExpressionConverterConfiguration.class)
 public class TriggerConfiguration {
 
@@ -44,7 +45,7 @@ public class TriggerConfiguration {
 	@Autowired
 	private MaxMessagesProperties maxMessagesProperties;
 
-	@Bean
+	@Bean(name = { "defaultPoller", PollerMetadata.DEFAULT_POLLER })
 	public PollerMetadata defaultPoller(Trigger trigger) {
 		PollerMetadata pollerMetadata = new PollerMetadata();
 		pollerMetadata.setTrigger(trigger);
@@ -85,10 +86,12 @@ public class TriggerConfiguration {
 
 		@ConditionalOnProperty(TriggerConstants.CRON_TRIGGER_OPTION)
 		static class cronTrigger {
+
 		}
 
 		@ConditionalOnProperty(TriggerConstants.DATE_TRIGGER_OPTION)
 		static class dateTrigger {
+
 		}
 
 	}

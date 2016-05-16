@@ -48,6 +48,7 @@
 		<module>rabbit</module>
 		<module>redis</module>
 		<module>router</module>
+		<module>s3</module>
 		<module>sftp</module>
 		<module>syslog</module>
 		<module>tcp</module>

@@ -81,7 +81,7 @@ public abstract class AbstractRemoteFileSourceProperties extends AbstractRemoteF
 		return localDir;
 	}
 
-	public void setLocalDir(File localDir) {
+	public final void setLocalDir(File localDir) {
 		this.localDir = localDir;
 	}
 

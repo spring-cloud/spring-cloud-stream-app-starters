@@ -125,6 +125,7 @@
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.redis.RedisSinkTestConfiguration.class</extraTestConfigClass>
 						</redis-sink>
 						<router-sink />
+						<s3-source />
 						<scriptable-transform-processor>
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.script.ScriptableTestConfiguration.class</extraTestConfigClass>
 						</scriptable-transform-processor>
