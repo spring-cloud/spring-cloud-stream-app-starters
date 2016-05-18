@@ -23,7 +23,9 @@ import org.springframework.cloud.stream.app.metrics.AggregateCounterRepository;
 import org.springframework.cloud.stream.app.metrics.AggregateCounterResolution;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -79,8 +81,11 @@ public class InMemoryAggregateCounterRepository implements AggregateCounterRepos
 	}
 
 	@Override
-	public Collection<String> list() {
-		return aggregates.keySet();
+	public List<String> list() {
+		List<String> list = new ArrayList<>();
+		list.addAll(aggregates.keySet());
+		Collections.sort(list);
+		return list;
 	}
 
 	@Override

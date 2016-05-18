@@ -19,6 +19,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Interval;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Contains operations to find AggreageCounters.
@@ -70,5 +71,5 @@ public interface AggregateCounterReader {
 	/**
 	 * List the names of all available aggregate counters.
 	 */
-	Collection<String> list();
+	List<String> list();
 }

@@ -18,6 +18,7 @@ package org.springframework.cloud.stream.app.metrics.redis;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -237,8 +238,12 @@ public class RedisAggregateCounterRepository implements AggregateCounterReposito
 	}
 
 	@Override
-	public Collection<String> list() {
-		return this.setOperations.members(AGGREGATE_COUNTER_KEY_PREFIX);
+	public List<String> list() {
+		Set<String> aggregateCounters = this.setOperations.members(AGGREGATE_COUNTER_KEY_PREFIX);
+		List<String> list = new ArrayList<String>();
+		list.addAll(aggregateCounters);
+		Collections.sort(list);
+		return list;
 	}
 
 	@Override
