@@ -21,11 +21,27 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-aws</artifactId>
-		</dependency>
+			<exclusions>
+				 <!--TODO https://github.com/spring-cloud/spring-cloud-aws/issues/151-->
+				<!--<exclusion>
+					<groupId>com.amazonaws</groupId>
+					<artifactId>aws-java-sdk-ses</artifactId>
+				</exclusion>
 
-		<dependency>
-			<groupId>com.amazonaws</groupId>
-			<artifactId>aws-java-sdk-core</artifactId>
+				<exclusion>
+					<groupId>javax.mail</groupId>
+					<artifactId>javax.mail-api</artifactId>
+				</exclusion>-->
+
+				<exclusion>
+					<groupId>com.amazonaws</groupId>
+					<artifactId>aws-java-sdk-elasticache</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.amazonaws</groupId>
+					<artifactId>elasticache-java-cluster-client</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>

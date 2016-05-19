@@ -18,6 +18,8 @@ package org.springframework.cloud.stream.app.s3.source;
 
 import java.io.File;
 
+import org.hibernate.validator.constraints.Length;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.stream.app.file.remote.AbstractRemoteFileSourceProperties;
 
@@ -28,6 +30,14 @@ import org.springframework.cloud.stream.app.file.remote.AbstractRemoteFileSource
 public class AmazonS3SourceProperties extends AbstractRemoteFileSourceProperties {
 
 	public AmazonS3SourceProperties() {
+		setRemoteDir("bucket");
 		setLocalDir(new File(System.getProperty("java.io.tmpdir") + "/s3/source"));
 	}
+
+	@Override
+	@Length(min = 3)
+	public String getRemoteDir() {
+		return super.getRemoteDir();
+	}
+
 }

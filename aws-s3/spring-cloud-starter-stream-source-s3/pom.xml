@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>spring-cloud-starter-stream-source-s3</artifactId>
-	<name>spring-cloud-starter-stream-sink-s3</name>
+	<name>spring-cloud-starter-stream-source-s3</name>
 	<description>Spring Cloud Stream Amazon S3 Source</description>
 
 	<parent>

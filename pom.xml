@@ -31,6 +31,7 @@
 		<module>app-starters-common</module>
 		<module>app-starters-common-analytics</module>
 		<module>app-starters-test-support</module>
+		<module>aws-s3</module>
 		<module>cassandra</module>
 		<module>cloudfoundry</module>
 		<module>file</module>
@@ -48,7 +49,6 @@
 		<module>rabbit</module>
 		<module>redis</module>
 		<module>router</module>
-		<module>s3</module>
 		<module>sftp</module>
 		<module>syslog</module>
 		<module>tcp</module>
