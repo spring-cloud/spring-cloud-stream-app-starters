@@ -1,0 +1,61 @@
+//tag::ref-doc[]
+= Amazon S3 Source
+
+This source app supports transfer of files using the Amazon S3 protocol.
+Files are transferred from the `remote` directory (S3 bucket) to the `local` directory where the application is deployed.
+
+Messages emitted by the source are provided as a byte array by default. However, this can be
+customized using the `--mode` option:
+
+- *ref* Provides a `java.io.File` reference
+- *lines* Will split files line-by-line and emit a new message for each line
+- *contents* The default. Provides the contents of a file as a byte array
+
+When using `--mode=lines`, you can also provide the additional option `--withMarkers=true`.
+If set to `true`, the underlying `FileSplitter` will emit additional _start-of-file_ and _end-of-file_ marker messages before and after the actual data.
+The payload of these 2 additional marker messages is of type `FileSplitter.FileMarker`. The option `withMarkers` defaults to `false` if not explicitly set.
+
+== Options
+
+The **$$s3$$** $$source$$ has the following options:
+
+$$autoCreateLocalDir$$:: $$if local directory must be auto created if it does not exist$$ *($$boolean$$, default: `true`)*
+$$deleteRemoteFiles$$:: $$delete remote files (S3 objects) after transfer$$ *($$boolean$$, default: `false`)*
+$$fixedDelay$$:: $$fixed delay in SECONDS to poll the remote directory (S3 bucket)$$ *($$int$$, default: `1`)*
+$$initialDelay$$:: $$an initial delay when using a fixed delay trigger, expressed in TimeUnits (seconds by default)$$ *($$int$$, default: `0`)*
+$$localDir$$:: $$set the local directory the remote files are transferred to$$ *($$File$$, default: `System.getProperty("java.io.tmpdir") + "/s3/source")`)*
+$$maxMessages$$:: $$the maximum messages per poll; -1 for unlimited$$ *($$long$$, default: `-1`)*
+$$mode$$:: $$specifies how the file is being read. By default the content of a file is provided as byte array$$ *($$FileReadingMode$$, default: `contents`, possible values: `ref,lines,contents`)*
+$$pattern$$:: $$simple filename pattern to apply to the filter$$ *($$String$$, no default)*
+$$regexPattern$$:: $$filename regex pattern to apply to the filter$$ *($$String$$, no default)*
+$$remoteDir$$:: $$the remote directory to transfer the files from$$ *($$String$$, default: `bucket`)*
+$$timeUnit$$:: $$the time unit for the fixed and initial delays$$ *($$String$$, default: `SECONDS`)*
+$$tmpFileSuffix$$:: $$extension to use when downloading files$$ *($$String$$, default: `.tmp`)*
+$$withMarkers$$:: $$if true emits start of file/end of file marker messages before/after the data. Only valid with FileReadingMode 'lines'$$ *($$Boolean$$, no default)*
+
+== Amazon AWS common options
+
+The Amazon S3 Source (as all other Amazon AWS applications) is based on the
+https://github.com/spring-cloud/spring-cloud-aws[Spring Cloud AWS] project as a foundation, and its auto-configuration
+classes are used automatically by Spring Boot.
+Consult their documentation regarding required and useful auto-configuration properties.
+
+Some of them are about AWS credentials:
+
+- cloud.aws.credentials.accessKey
+- cloud.aws.credentials.secretKey
+- cloud.aws.credentials.instanceProfile
+- cloud.aws.credentials.profileName
+- cloud.aws.credentials.profilePath
+
+Other are for AWS `Region` definition:
+
+- cloud.aws.region.auto
+- cloud.aws.region.static
+
+//end::ref-doc[]
+== Build
+
+```
+$> mvn package
+```

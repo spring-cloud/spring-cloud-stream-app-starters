@@ -1,6 +1,6 @@
 echo off
 
-REM Changing Diretory to project DIR
+REM Changing Directory to project DIR
 cd /d %~dp0
 
 REM execute mvn plugin with app generation

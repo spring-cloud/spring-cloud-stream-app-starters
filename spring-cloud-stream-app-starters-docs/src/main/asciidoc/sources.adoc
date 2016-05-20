@@ -28,13 +28,16 @@ include::{app-starters-root}/testing/spring-cloud-starter-stream-source-mail/REA
 [[spring-cloud-stream-modules-rabbit-source]]
 include::{app-starters-root}/rabbit/spring-cloud-starter-stream-source-rabbit/README.adoc[tags=ref-doc]
 
+[[spring-cloud-stream-modules-s3-source]]
+include::{app-starters-root}/s3/spring-cloud-starter-stream-source-s3/README.adoc[tags=ref-doc]
+
 [[spring-cloud-stream-modules-sftp-source]]
 include::{app-starters-root}/sftp/spring-cloud-starter-stream-source-sftp/README.adoc[tags=ref-doc]
 
-[[spring-clound-stream-modules-syslog-source]]
+[[spring-cloud-stream-modules-syslog-source]]
 include::{app-starters-root}/syslog/spring-cloud-starter-stream-source-syslog/README.adoc[tags=ref-doc]
 
-[[spring-clound-stream-modules-tcp-source]]
+[[spring-cloud-stream-modules-tcp-source]]
 include::{app-starters-root}/tcp/spring-cloud-starter-stream-source-tcp/README.adoc[tags=ref-doc]
 
 [[spring-cloud-stream-modules-time-source]]

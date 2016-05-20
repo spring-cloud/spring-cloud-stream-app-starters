@@ -43,7 +43,7 @@ public abstract class AbstractRemoteFileProperties {
 		return remoteDir;
 	}
 
-	public void setRemoteDir(String remoteDir) {
+	public final void setRemoteDir(String remoteDir) {
 		this.remoteDir = remoteDir;
 	}
 

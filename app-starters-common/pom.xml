@@ -16,6 +16,7 @@
 		<module>app-starters-file-common</module>
 		<module>app-starters-ftp-common</module>
 		<module>app-starters-metrics-common</module>
+		<module>app-starters-s3-common</module>
 		<module>app-starters-script-common</module>
 		<module>app-starters-sftp-common</module>
 		<module>app-starters-tcp-common</module>

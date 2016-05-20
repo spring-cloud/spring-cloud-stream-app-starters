@@ -31,6 +31,6 @@ public class PropertiesInitializer implements ApplicationContextInitializer<Conf
 	@Override
 	public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
 		configurableApplicationContext.getEnvironment().getPropertySources().addLast(new
-				PropertiesPropertySource("moduleOptions", PROPERTIES));
+				PropertiesPropertySource("applicationOptions", PROPERTIES));
 	}
 }
