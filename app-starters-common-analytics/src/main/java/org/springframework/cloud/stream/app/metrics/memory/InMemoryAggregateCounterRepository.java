@@ -16,18 +16,18 @@
 
 package org.springframework.cloud.stream.app.metrics.memory;
 
-import org.joda.time.DateTime;
-import org.joda.time.Interval;
-import org.springframework.cloud.stream.app.metrics.AggregateCounter;
-import org.springframework.cloud.stream.app.metrics.AggregateCounterRepository;
-import org.springframework.cloud.stream.app.metrics.AggregateCounterResolution;
-
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import org.joda.time.DateTime;
+import org.joda.time.Interval;
+
+import org.springframework.cloud.stream.app.metrics.AggregateCounter;
+import org.springframework.cloud.stream.app.metrics.AggregateCounterRepository;
+import org.springframework.cloud.stream.app.metrics.AggregateCounterResolution;
 
 /**
  * In-memory aggregate counter with minute resolution.

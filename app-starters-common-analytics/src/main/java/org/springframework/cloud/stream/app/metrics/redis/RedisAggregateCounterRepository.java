@@ -309,10 +309,12 @@ public class RedisAggregateCounterRepository implements AggregateCounterReposito
 	public void reset(String id) {
 		redisTemplate.delete(getMetricKey(id));
 		String metricMetaKey = bookkeepingKeyFor(id);
+		Set<String> otherKeys = setOperations.members(metricMetaKey);
+		otherKeys.add(metricMetaKey);
+		redisTemplate.delete(otherKeys);
 		Set<String> members = this.setOperations.members(AGGREGATE_COUNTER_KEY_PREFIX);
 		if (members.contains(id)) {
 			this.setOperations.remove(AGGREGATE_COUNTER_KEY_PREFIX, id);
 		}
-		redisTemplate.delete(metricMetaKey);
 	}
 }

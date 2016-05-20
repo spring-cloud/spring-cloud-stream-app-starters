@@ -34,6 +34,9 @@ import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.cloud.stream.annotation.Bindings;
+import org.springframework.cloud.stream.app.metrics.AggregateCounter;
+import org.springframework.cloud.stream.app.metrics.AggregateCounterRepository;
+import org.springframework.cloud.stream.app.metrics.AggregateCounterResolution;
 import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.cloud.stream.test.junit.redis.RedisTestSupport;
 import org.springframework.messaging.support.GenericMessage;
@@ -47,7 +50,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author Ilayaperumal Gopinathan
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = AggregateCounterSinkApplication.class)
+@SpringApplicationConfiguration(classes = TestAggregateCounterSinkApplication.class)
 @IntegrationTest({"store=redis", "server.port=-1"})
 public abstract class AggregateCounterTests {
 
@@ -59,7 +62,7 @@ public abstract class AggregateCounterTests {
 	private static final String AGGREGATE_COUNTER_NAME_2 = "bar";
 
 	@Autowired
-	@Bindings(AggregateCounterSink.class)
+	@Bindings(AggregateCounterSinkConfiguration.class)
 	protected Sink sink;
 
 	@Autowired
