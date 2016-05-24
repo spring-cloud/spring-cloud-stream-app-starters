@@ -1,0 +1,24 @@
+//tag::ref-doc[]
+= TriggerTask Source
+
+The TriggerTask app sends a TaskLaunchRequest based on a fixed delay, date or cron expression.
+
+== Options
+The **$$triggertask$$** $$source$$ has the following options:
+
+$$commandLineArgs$$:: $$space separated key=value pairs to be used as commandline arguments for the task.$$ *($$String$$, default: ``)*
+$$properties$$:: $$comma separated key=value pairs to be used as properties for the task.$$ *($$String$$, default: ``)*
+$$uri$$:: $$the uri to the task artifact.$$ *($$String$$, no default)*
+$$fixedDelay$$:: $$fixed delay for the Periodic trigger$$ *($$String$$, default: `yyyy-MM-dd HH:mm:ss`)*
+$$initialDelay$$:: $$initial delay for the Periodic trigger$$ *($$int$$, default: `0`)*
+$$timeUnit$$:: $$time unit to apply for delay$$ *($$String$$, default: `SECONDS`)*
+$$date$$:: $$the date value for the trigger$$ *($$String$$)*
+$$dateFormat$$:: $$format for the date value$$ *($$String$$)*
+$$cron$$:: $$the Cron expression for the Cron Trigger$$ *($$String$$, default: `SECONDS`)*
+
+//end::ref-doc[]
+== Build
+
+```
+$ mvn clean package
+```
