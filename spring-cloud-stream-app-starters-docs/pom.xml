@@ -196,7 +196,7 @@
 								</goals>
 								<configuration>
 									<target>
-										<zip destfile="${project.build.directory}/spring-cloud-stream-modules-${project.version}.zip">
+										<zip destfile="${project.build.directory}/spring-cloud-stream-app-starters-docs-${project.version}.jar">
 											<fileset dir="${project.build.directory}/contents" />
 										</zip>
 									</target>
@@ -240,7 +240,7 @@
 								<configuration>
 									<artifacts>
 										<artifact>
-											<file>${project.build.directory}/spring-cloud-stream-modules-${project.version}.zip</file>
+											<file>${project.build.directory}/spring-cloud-stream-app-starters-docs-${project.version}.jar</file>
 											<type>zip;zip.type=docs;zip.deployed=false</type>
 										</artifact>
 									</artifacts>
