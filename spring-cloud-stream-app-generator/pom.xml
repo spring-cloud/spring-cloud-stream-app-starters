@@ -143,6 +143,7 @@
 						<syslog-source>
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.ip.IpSourceTestConfiguration.class</extraTestConfigClass>
 						</syslog-source>
+						<task-launcher-local-sink/>
 						<tcp-sink>
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.ip.IpSinkTestConfiguration.class</extraTestConfigClass>
 						</tcp-sink>

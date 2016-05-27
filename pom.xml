@@ -54,6 +54,7 @@
 		<module>tcp</module>
 		<module>testing</module>
 		<module>time</module>
+		<module>tasklauncher</module>
 		<module>trigger</module>
 		<module>twitter</module>
 		<module>websocket</module>

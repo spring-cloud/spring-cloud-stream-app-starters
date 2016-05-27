@@ -1,0 +1,16 @@
+//tag::ref-doc[]
+= TaskLauncher Local Sink
+
+This application launches the task application specified in the uri attribute of the TaskLaunchRequest contained
+in the message that is received.
+
+Any message that does not contain a TaskLaunchRequest will log an error.
+
+
+//end::ref-doc[]
+
+== Build
+
+```
+$ mvn clean package
+```
