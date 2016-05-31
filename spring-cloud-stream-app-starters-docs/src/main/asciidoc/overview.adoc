@@ -199,3 +199,40 @@ As a reminder, this involves:
 * adding the main class and importing the starter configuration.
 
 After doing so, you can simply add the additional configuration for the extra features of your application.
+
+=== Patching pre-built applications
+
+If you're looking to patch the pre-built applications to accommodate addition of new dependencies, you can use the following example as the reference. Let's review the steps to add `mysql` driver to `jdbc-sink` application.  
+
+* Go to: http://start-scs.cfapps.io/
+* Select the appliation and binder dependencies [_`JDBC sink` and `Rabbit binder starter`_]
+* Generate and load the project in an IDE
+* Add `mysql` java-driver dependency
+
+[source,xml]
+----
+<dependencies>
+  <dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>5.1.37</version>
+  </dependency>
+  <dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-stream-binder-rabbit</artifactId>
+  </dependency>
+  <dependency>
+    <groupId>org.springframework.cloud.stream.app</groupId>
+    <artifactId>spring-cloud-starter-stream-sink-jdbc</artifactId>
+  </dependency>
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-test</artifactId>
+    <scope>test</scope>
+  </dependency>
+</dependencies>
+----
+
+* Build and install the application to desired maven repository
+* The patched copy of `jdbc-sink` application now includes `mysql` driver in it
+* This application can be run as standalone _uberjars_
