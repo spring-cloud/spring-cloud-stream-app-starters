@@ -233,6 +233,20 @@ If you're looking to patch the pre-built applications to accommodate addition of
 </dependencies>
 ----
 
+* Import the respective configuration _class_ to the generated Spring Boot application. In the case of `jdbc` sink, it is: `@Import(org.springframework.cloud.stream.app.jdbc.sink.JdbcSinkConfiguration.class)`. You can find the configuration _class_ for other applications in their respective https://github.com/spring-cloud/spring-cloud-stream-app-starters[packages].
+
+[source,java]
+----
+@SpringBootApplication
+@Import(org.springframework.cloud.stream.app.jdbc.sink.JdbcSinkConfiguration.class)
+public class DemoApplication {
+
+  public static void main(String[] args) {
+    SpringApplication.run(DemoApplication.class, args);
+  }
+}
+----
+
 * Build and install the application to desired maven repository
 * The patched copy of `jdbc-sink` application now includes `mysql` driver in it
 * This application can be run as standalone _uberjars_
