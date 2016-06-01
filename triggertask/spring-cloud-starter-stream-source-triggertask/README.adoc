@@ -1,15 +1,19 @@
 //tag::ref-doc[]
 = TriggerTask Source
 
-The TriggerTask app sends a TaskLaunchRequest based on a fixed delay, date or cron expression.
+The TriggerTask app sends a TaskLaunchRequest based on a fixed delay, date or cron expression.  The user is allowed
+to set the command line arguments as well as the
+http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html[Spring Boot properties]
+that are used by the task.
 
 == Options
 The **$$triggertask$$** $$source$$ has the following options:
 
-$$commandLineArgs$$:: $$space separated key=value pairs to be used as commandline arguments for the task.$$ *($$String$$, default: ``)*
-$$properties$$:: $$comma separated key=value pairs to be used as properties for the task.$$ *($$String$$, default: ``)*
+$$commandLineArgs$$:: $$space separated --key=value pairs to be used as commandline arguments for the task.$$ *($$String$$, default: ``)*
+$$properties$$:: $$comma separated key=value pairs to be used as the Spring Boot properties for the task.  These are
+used to configure your Task.$$ *($$String$$, default: ``)*
 $$uri$$:: $$the uri to the task artifact.$$ *($$String$$, no default)*
-$$fixedDelay$$:: $$fixed delay for the Periodic trigger$$ *($$String$$, default: `yyyy-MM-dd HH:mm:ss`)*
+$$fixedDelay$$:: $$fixed delay for the periodic trigger in seconds$$ *($$int$$, default: `1`)*
 $$initialDelay$$:: $$initial delay for the Periodic trigger$$ *($$int$$, default: `0`)*
 $$timeUnit$$:: $$time unit to apply for delay$$ *($$String$$, default: `SECONDS`)*
 $$date$$:: $$the date value for the trigger$$ *($$String$$)*
