@@ -46,6 +46,7 @@
 		<module>log</module>
 		<module>mail</module>
 		<module>metrics</module>
+		<module>mongodb</module>
 		<module>processor</module>
 		<module>rabbit</module>
 		<module>redis</module>
