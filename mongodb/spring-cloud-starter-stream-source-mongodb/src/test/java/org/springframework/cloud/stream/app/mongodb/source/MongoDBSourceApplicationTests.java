@@ -38,6 +38,7 @@ import org.springframework.messaging.Message;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
@@ -102,6 +103,18 @@ public abstract class MongoDBSourceApplicationTests {
 		public void test() throws InterruptedException {
 			Message<?> received = messageCollector.forChannel(source.output()).poll(2, TimeUnit.SECONDS);
 			assertThat(received, CoreMatchers.nullValue());
+		}
+	}
+
+	@IntegrationTest(value = {"collection=testing", "fixedDelay=1", "maxRowsPerPoll=2", "split=false"})
+	public static class NoSplitTests extends MongoDBSourceApplicationTests {
+		@Test
+		public void test() throws InterruptedException {
+			Message<?> received = messageCollector.forChannel(source.output()).poll(2, TimeUnit.SECONDS);
+			assertThat(received, CoreMatchers.notNullValue());
+			assertThat(received.getPayload(), Matchers.instanceOf(List.class));
+			assertThat(received.getPayload().toString(), CoreMatchers.containsString("hola"));
+			assertThat(received.getPayload().toString(), CoreMatchers.containsString("hello"));
 		}
 	}
 
