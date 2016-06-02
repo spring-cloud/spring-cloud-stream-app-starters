@@ -24,43 +24,44 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *
  */
 @ConfigurationProperties
-public class MongoDBProperties {
+public class MongoDBSourceProperties {
 
-    private String _uri, _collection, _exp;
-    private long _pollingRate = 10000;
+    /**
+     * The MongoDB collection to query
+     */
+    private String collection;
+    /**
+     * The MongoDB query
+     */
+    private String query = "{ }";
+    /**
+     * Whether to split the query result as individual messages.
+     */
+    private boolean split = true;
 
     @NotEmpty(message = "Query is required")
     public String getQuery() {
-        return _exp;
+        return query;
     }
 
     public void setQuery(String query) {
-        _exp = query;
-    }
-
-    @NotEmpty(message = "MongoDB URI is required")
-    public String getUri() {
-        return _uri;
-    }
-
-    public void setUri(String uri) {
-        _uri = uri;
+        this.query = query;
     }
 
     public void setCollection(String collection) {
-        _collection = collection;
+        this.collection = collection;
     }
 
     @NotBlank(message = "Collection name is required")
     public String getCollection() {
-        return _collection;
+        return collection;
     }
 
-    public long getPollingRate() {
-        return _pollingRate;
+    public boolean isSplit() {
+        return split;
     }
 
-    public void setPollingRate(long pollingRate) {
-        _pollingRate = pollingRate;
+    public void setSplit(boolean split) {
+        this.split = split;
     }
 }

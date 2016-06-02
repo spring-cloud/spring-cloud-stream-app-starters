@@ -19,20 +19,15 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
-import de.flapdoodle.embed.mongo.MongodExecutable;
-import de.flapdoodle.embed.mongo.MongodProcess;
-import de.flapdoodle.embed.mongo.MongodStarter;
-import de.flapdoodle.embed.mongo.config.MongodConfigBuilder;
-import de.flapdoodle.embed.mongo.config.Net;
-import de.flapdoodle.embed.mongo.distribution.Version;
-import de.flapdoodle.embed.process.runtime.Network;
 import org.hamcrest.CoreMatchers;
+import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
@@ -43,7 +38,6 @@ import org.springframework.messaging.Message;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
@@ -54,15 +48,13 @@ import static org.junit.Assert.assertThat;
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = MongoDBSourceApplicationTests.MongoSourceApplication.class)
+@SpringApplicationConfiguration(classes = { MongoDBSourceApplicationTests.MongoSourceApplication.class, EmbeddedMongoAutoConfiguration.class})
 @WebIntegrationTest(randomPort = true)
 @DirtiesContext
 public abstract class MongoDBSourceApplicationTests {
 
-	private static final MongodStarter starter = MongodStarter.getDefaultInstance();
-	private MongodExecutable _mongodExe;
-	private MongodProcess _mongod;
-	private MongoClient _mongo;
+	@Autowired
+	private MongoClient mongo;
 
 	@Autowired
 	@Bindings(MongoDBSourceConfiguration.class)
@@ -72,40 +64,43 @@ public abstract class MongoDBSourceApplicationTests {
 	protected MessageCollector messageCollector;
 
 	@Before
-	public void setUp() throws Exception {
-		_mongodExe = starter.prepare(new MongodConfigBuilder()
-				.version(Version.Main.PRODUCTION)
-				.net(new Net(12345, Network.localhostIsIPv6()))
-				.build());
-		_mongod = _mongodExe.start();
-		_mongo = new MongoClient("localhost", 12345);
-
-		DB db = _mongo.getDB("test");
+	public void setUp() {
+		DB db = mongo.getDB("test");
 		DBCollection col = db.createCollection("testing", new BasicDBObject());
-		col.save(new BasicDBObject("testDoc1", new Date()));
-		col.save(new BasicDBObject("testDoc2", new Date()));
+		col.save(new BasicDBObject("greeting", "hello"));
+		col.save(new BasicDBObject("greeting", "hola"));
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		_mongod.stop();
-		_mongodExe.stop();
+
 	}
 
-	public static class DefaultPropertiesTests extends MongoDBSourceApplicationTests {
+	@IntegrationTest(value = {"collection=testing", "fixedDelay=1", "maxRowsPerPoll=2"})
+	public static class DefaultTests extends MongoDBSourceApplicationTests {
 		@Test
 		public void test() throws InterruptedException {
-			Message<?> received = messageCollector.forChannel(source.output()).poll(10, TimeUnit.SECONDS);
+			Message<?> received = messageCollector.forChannel(source.output()).poll(2, TimeUnit.SECONDS);
 			assertThat(received, CoreMatchers.notNullValue());
-			assertEquals(1, messageCollector.forChannel(source.output()).size());
+			assertThat(received.getPayload(), Matchers.instanceOf(String.class));
 		}
 	}
 
-	@IntegrationTest( { "query= { key: invalid }"} )
+	@IntegrationTest(value = {"collection=testing", "fixedDelay=1", "query={ 'greeting': 'hola' }", "maxRowsPerPoll=2"})
+	public static class ValidQueryTests extends MongoDBSourceApplicationTests {
+		@Test
+		public void test() throws InterruptedException {
+			Message<?> received = messageCollector.forChannel(source.output()).poll(2, TimeUnit.SECONDS);
+			assertThat(received, CoreMatchers.notNullValue());
+			assertThat((String)received.getPayload(), CoreMatchers.containsString("hola"));
+		}
+	}
+
+	@IntegrationTest(value = {"collection=testing", "fixedDelay=1", "query={ 'greeting': 'bogus' }", "maxRowsPerPoll=2"})
 	public static class InvalidQueryTests extends MongoDBSourceApplicationTests {
 		@Test
 		public void test() throws InterruptedException {
-			Message<?> received = messageCollector.forChannel(source.output()).poll(10, TimeUnit.SECONDS);
+			Message<?> received = messageCollector.forChannel(source.output()).poll(2, TimeUnit.SECONDS);
 			assertThat(received, CoreMatchers.nullValue());
 		}
 	}

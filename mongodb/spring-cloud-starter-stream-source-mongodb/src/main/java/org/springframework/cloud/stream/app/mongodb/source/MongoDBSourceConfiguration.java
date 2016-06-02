@@ -15,23 +15,26 @@
 
 package org.springframework.cloud.stream.app.mongodb.source;
 
-import com.mongodb.MongoClientURI;
-import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
+import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.app.trigger.TriggerConfiguration;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 import org.springframework.expression.common.LiteralExpression;
 import org.springframework.integration.core.MessageSource;
 import org.springframework.integration.dsl.IntegrationFlow;
+import org.springframework.integration.dsl.IntegrationFlowBuilder;
 import org.springframework.integration.dsl.IntegrationFlows;
-import org.springframework.integration.dsl.core.Pollers;
-import org.springframework.integration.dsl.support.Transformers;
+import org.springframework.integration.dsl.SourcePollingChannelAdapterSpec;
+import org.springframework.integration.dsl.support.Consumer;
 import org.springframework.integration.mongodb.inbound.MongoDbMessageSource;
+import org.springframework.integration.scheduling.PollerMetadata;
 import org.springframework.messaging.MessageChannel;
 
 /**
@@ -39,39 +42,46 @@ import org.springframework.messaging.MessageChannel;
  *
  */
 @EnableBinding(Source.class)
-@EnableConfigurationProperties(MongoDBProperties.class)
+@EnableConfigurationProperties(MongoDBSourceProperties.class)
+@Import({ TriggerConfiguration.class, MongoAutoConfiguration.class, MongoDataAutoConfiguration.class})
 public class MongoDBSourceConfiguration {
 
-    @Autowired private MongoDBProperties _config;
+    @Autowired
+    private MongoDBSourceProperties config;
+
+    @Autowired
+    @Qualifier("defaultPoller")
+    private PollerMetadata poller;
 
     @Autowired
     @Qualifier(Source.OUTPUT)
     private MessageChannel output;
 
-    @Bean
-    protected MongoTemplate mongoTemplate() {
-        try {
-            return new MongoTemplate(new SimpleMongoDbFactory(new MongoClientURI(_config.getUri())));
-        } catch (Exception ex) {
-            throw new BeanCreationException(ex.getMessage(), ex);
-        }
-    }
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     @Bean
     protected MessageSource<Object> mongoSource() {
-        MongoDbMessageSource ms = new MongoDbMessageSource(mongoTemplate(), new LiteralExpression(_config.getQuery()));
-        ms.setCollectionNameExpression(new LiteralExpression(_config.getCollection()));
+        MongoDbMessageSource ms = new MongoDbMessageSource(mongoTemplate, new LiteralExpression(config.getQuery()));
+        ms.setCollectionNameExpression(new LiteralExpression(config.getCollection()));
+        ms.setEntityClass(String.class);
         return ms;
     }
 
     @Bean
     public IntegrationFlow startFlow() throws Exception {
-        return IntegrationFlows.from(mongoSource(),
-                c -> c.poller(Pollers.fixedRate(_config.getPollingRate())))
-                .split()
-                .transform(Transformers.toJson())
-                .channel(output)
-                .get();
+        IntegrationFlowBuilder flow =  IntegrationFlows.from(mongoSource(),
+                    new Consumer<SourcePollingChannelAdapterSpec>() {
+                        @Override
+                        public void accept(SourcePollingChannelAdapterSpec sourcePollingChannelAdapterSpec) {
+                            sourcePollingChannelAdapterSpec.poller(poller);
+                        }
+                    });
+        if (config.isSplit()) {
+            flow.split();
+        }
+        flow.channel(output);
+        return flow.get();
     }
 
 }
