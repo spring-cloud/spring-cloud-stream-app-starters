@@ -1,7 +1,7 @@
 [[overview]]
 
 This section will provide you with a detailed overview of Spring Cloud Stream Application Starters, their purpose, and how to use them.
-It assumes familiarity with general Spring Cloud Stream concepts, which can be found in the Spring Cloud Stream http://docs.spring.io/spring-cloud-stream/docs/current-SNAPSHOT/reference/htmlsingle/[reference documentation]].
+It assumes familiarity with general Spring Cloud Stream concepts, which can be found in the Spring Cloud Stream http://docs.spring.io/spring-cloud-stream/docs/current-SNAPSHOT/reference/htmlsingle/[reference documentation].
 
 == Introduction
 
@@ -146,7 +146,7 @@ For example, in the same case of the Cassandra sink it can look like the followi
 
 [source,java]
 ----
-package org.springframework.cloud.stream.app.cassandra.sink.rabbit;
+package org.springframework.cloud.stream.app.cassandra.sink.gemfire;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
