@@ -137,6 +137,7 @@
 						<time-source />
 						<transform-processor />
 						<trigger-source />
+						<triggertask-source/>
 						<twitterstream-source>
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.twitter.TwitterTestConfiguration.class</extraTestConfigClass>
 						</twitterstream-source>

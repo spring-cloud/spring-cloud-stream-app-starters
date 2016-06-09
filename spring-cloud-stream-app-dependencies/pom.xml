@@ -28,6 +28,7 @@
 		<netty.version>4.0.27.Final</netty.version>
 		<postgresql.version>9.4-1201-jdbc41</postgresql.version>
 		<pmml.version>1.2.6</pmml.version>
+		<spring.cloud.task.version>1.0.0.BUILD-SNAPSHOT</spring.cloud.task.version>
 	</properties>
 
 	<dependencyManagement>
@@ -240,6 +241,11 @@
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.cloud.stream.app</groupId>
+				<artifactId>spring-cloud-starter-stream-source-triggertask</artifactId>
+				<version>1.0.0.BUILD-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud.stream.app</groupId>
 				<artifactId>spring-cloud-starter-stream-source-twitterstream</artifactId>
 				<version>1.0.0.BUILD-SNAPSHOT</version>
 			</dependency>
@@ -390,6 +396,11 @@
 				<groupId>org.springframework.integration</groupId>
 				<artifactId>spring-integration-jdbc</artifactId>
 				<version>${spring-integration.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-task-stream</artifactId>
+				<version>${spring.cloud.task.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.hsqldb</groupId>
