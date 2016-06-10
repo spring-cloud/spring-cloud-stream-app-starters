@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 the original author or authors.
+ * Copyright 2015-2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,12 +27,13 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.cloud.stream.test.binder.MessageCollector;
 import org.springframework.integration.file.splitter.FileSplitter;
+import org.springframework.integration.json.JsonPathUtils;
+import org.springframework.integration.support.json.JsonObjectMapperProvider;
 import org.springframework.messaging.Message;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -41,6 +42,7 @@ import static org.junit.Assert.*;
 
 /**
  * @author Gary Russell
+ * @author Artem Bilan
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = FileSourceTests.FileSourceApplication.class)
@@ -58,7 +60,7 @@ public abstract class FileSourceTests {
 	@Autowired
 	protected MessageCollector messageCollector;
 
-	protected File atomicFileCreate(String filename) throws FileNotFoundException, IOException {
+	protected File atomicFileCreate(String filename) throws IOException {
 		File file = new File(ROOT_DIR, filename + ".tmp");
 		File fileFinal = new File(ROOT_DIR, filename);
 		file.delete();
@@ -152,8 +154,45 @@ public abstract class FileSourceTests {
 
 	}
 
-	@IntegrationTest({"file.directory = ${java.io.tmpdir}${file.separator}dataflow-tests${file.separator}input",
-			"trigger.fixedDelay = 100", "trigger.timeUnit = MILLISECONDS", "file.consumer.mode = ref", "file.filenamePattern = *.txt"})
+	@IntegrationTest({"directory = ${java.io.tmpdir}${file.separator}dataflow-tests${file.separator}input",
+			"fixedDelay = 100", "timeUnit = MILLISECONDS", "mode = lines", "withMarkers = true",
+			"markersJson = true"})
+	public static class LinesAndMarkersAsJsonPayloadTests extends FileSourceTests {
+
+		@Test
+		public void testSimpleFile() throws Exception {
+			File file = atomicFileCreate("test.txt");
+			Message<?> received = messageCollector.forChannel(source.output()).poll(10, TimeUnit.SECONDS);
+			assertNotNull(received);
+			assertThat(received.getPayload(), Matchers.instanceOf(String.class));
+			assertEquals(FileSplitter.FileMarker.Mark.START.name(),
+					JsonPathUtils.evaluate(received.getPayload(), "$.mark"));
+			received = messageCollector.forChannel(source.output()).poll(10, TimeUnit.SECONDS);
+			assertNotNull(received);
+			assertThat(received.getPayload(), Matchers.instanceOf(String.class));
+			assertEquals("this is a test", received.getPayload());
+			received = messageCollector.forChannel(source.output()).poll(10, TimeUnit.SECONDS);
+			assertNotNull(received);
+			assertThat(received.getPayload(), Matchers.instanceOf(String.class));
+			assertEquals("line2", received.getPayload());
+			received = messageCollector.forChannel(source.output()).poll(10, TimeUnit.SECONDS);
+			assertNotNull(received);
+			Object fileMarker = received.getPayload();
+			assertThat(fileMarker, Matchers.instanceOf(String.class));
+			assertEquals(FileSplitter.FileMarker.Mark.END.name(), JsonPathUtils.evaluate(fileMarker, "$.mark"));
+			FileSplitter.FileMarker fileMarker1 = JsonObjectMapperProvider.newInstance()
+					.fromJson(fileMarker, FileSplitter.FileMarker.class);
+			assertEquals(FileSplitter.FileMarker.Mark.END, fileMarker1.getMark());
+			assertEquals(file.getAbsolutePath(), fileMarker1.getFilePath());
+			assertEquals(2, fileMarker1.getLineCount());
+			file.delete();
+		}
+
+	}
+
+
+	@IntegrationTest({"directory = ${java.io.tmpdir}${file.separator}dataflow-tests${file.separator}input",
+			"fixedDelay = 100", "timeUnit = MILLISECONDS", "mode = ref", "filenamePattern = *.txt"})
 	public static class FilePayloadWithPatternTests extends FileSourceTests {
 
 		@Test

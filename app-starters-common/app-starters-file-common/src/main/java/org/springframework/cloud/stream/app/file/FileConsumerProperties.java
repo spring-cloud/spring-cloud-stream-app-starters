@@ -15,10 +15,10 @@
 
 package org.springframework.cloud.stream.app.file;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * @author David Turanski
@@ -33,49 +33,49 @@ public class FileConsumerProperties {
 	 * 'contents' - the contents as bytes.
 	 * Default is 'contents'
 	 */
-	private FileReadingMode fileReadingmode = FileReadingMode.contents;
+	private FileReadingMode fileReadingMode = FileReadingMode.contents;
 
 	/**
-	 * 	Set to true to emit start of file/end of file marker messages before/after the data. 
+	 * 	Set to true to emit start of file/end of file marker messages before/after the data.
 	 * 	Only valid with FileReadingMode 'lines'.
 	 */
 	private Boolean withMarkers = null;
 
+	/**
+	 * When {@code fileMarkers == true}, specify if they should be produced
+	 * as {@link org.springframework.integration.file.splitter.FileSplitter.FileMarker}
+	 * objects or JSON.
+	 */
+	private boolean markersJson = false;
+
 	@NotNull
 	public FileReadingMode getMode() {
-		return fileReadingmode;
+		return this.fileReadingMode;
 	}
 
 	public void setMode(FileReadingMode mode) {
-		this.fileReadingmode = mode;
+		this.fileReadingMode = mode;
 	}
 
 	public Boolean getWithMarkers() {
-		return withMarkers;
+		return this.withMarkers;
 	}
 
 	public void setWithMarkers(Boolean withMarkers) {
 		this.withMarkers = withMarkers;
 	}
 
-	@AssertTrue(message = "withMarkers can only be supplied when FileReadingMode is 'lines'")
-	public boolean isWithMarkersValid() {
-		if (this.withMarkers != null && FileReadingMode.lines != this.fileReadingmode) {
-			return false;
-		}
-		else {
-			return true;
-		}
+	public boolean getMarkersJson() {
+		return this.markersJson;
 	}
 
-	@AssertTrue(message = "withMarkers must be set when FileReadingMode is 'lines'")
-	public boolean isWithMarkersMustBeSet() {
-		if (this.withMarkers == null && FileReadingMode.lines == this.fileReadingmode) {
-			return false;
-		}
-		else {
-			return true;
-		}
+	public void setMarkersJson(boolean markersJson) {
+		this.markersJson = markersJson;
+	}
+
+	@AssertTrue(message = "withMarkers can only be supplied when FileReadingMode is 'lines'")
+	public boolean isWithMarkersValid() {
+		return !(this.withMarkers != null && FileReadingMode.lines != this.fileReadingMode);
 	}
 
 }

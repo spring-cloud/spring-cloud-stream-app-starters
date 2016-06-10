@@ -16,15 +16,16 @@
 
 package org.springframework.cloud.stream.app.splitter.processor;
 
+import javax.validation.constraints.AssertTrue;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.expression.Expression;
-
-import javax.validation.constraints.AssertTrue;
 
 /**
  * Configuration properties for the Splitter Processor app.
  *
  * @author Gary Russell
+ * @author Artem Bilan
  */
 @ConfigurationProperties("splitter")
 public class SplitterProcessorProperties {
@@ -48,6 +49,13 @@ public class SplitterProcessorProperties {
 	private Boolean fileMarkers;
 
 	/**
+	 * When {@code fileMarkers == true}, specify if they should be produced
+	 * as {@link org.springframework.integration.file.splitter.FileSplitter.FileMarker}
+	 * objects or JSON.
+	 */
+	private boolean markersJson = false;
+
+	/**
 	 * The charset to use when converting bytes in text-based files
 	 * to String.
 	 */
@@ -64,11 +72,11 @@ public class SplitterProcessorProperties {
 	}
 
 	public Expression getExpression() {
-		return expression;
+		return this.expression;
 	}
 
 	public String getDelimiters() {
-		return delimiters;
+		return this.delimiters;
 	}
 
 	public void setDelimiters(String delimiters) {
@@ -76,15 +84,23 @@ public class SplitterProcessorProperties {
 	}
 
 	public Boolean getFileMarkers() {
-		return fileMarkers;
+		return this.fileMarkers;
 	}
 
 	public void setFileMarkers(Boolean fileMarkers) {
 		this.fileMarkers = fileMarkers;
 	}
 
+	public boolean getMarkersJson() {
+		return this.markersJson;
+	}
+
+	public void setMarkersJson(boolean markersJson) {
+		this.markersJson = markersJson;
+	}
+
 	public String getCharset() {
-		return charset;
+		return this.charset;
 	}
 
 	public void setCharset(String charset) {
@@ -92,7 +108,7 @@ public class SplitterProcessorProperties {
 	}
 
 	public boolean isApplySequence() {
-		return applySequence;
+		return this.applySequence;
 	}
 
 	public void setApplySequence(boolean applySequence) {
