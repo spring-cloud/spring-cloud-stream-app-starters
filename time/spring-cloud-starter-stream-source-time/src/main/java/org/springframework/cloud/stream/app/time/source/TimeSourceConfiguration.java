@@ -21,7 +21,9 @@ import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.app.annotation.PollableSource;
 import org.springframework.cloud.stream.app.trigger.TriggerConfiguration;
 import org.springframework.cloud.stream.app.trigger.TriggerProperties;
+import org.springframework.cloud.stream.app.trigger.TriggerPropertiesMaxMessagesDefaultOne;
 import org.springframework.cloud.stream.messaging.Source;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
 import java.util.Date;
@@ -36,11 +38,16 @@ import java.util.Date;
 public class TimeSourceConfiguration {
 
 	@Autowired
-	private TriggerProperties properties;
+	private TriggerProperties triggerProperties;
+
+	@Bean
+	public TriggerProperties triggerProperties() {
+		return new TriggerPropertiesMaxMessagesDefaultOne();
+	}
 
 	@PollableSource
 	public String publishTime() {
-		return this.properties.getDateFormat().format(new Date());
+		return this.triggerProperties.getDateFormat().format(new Date());
 	}
 
 }

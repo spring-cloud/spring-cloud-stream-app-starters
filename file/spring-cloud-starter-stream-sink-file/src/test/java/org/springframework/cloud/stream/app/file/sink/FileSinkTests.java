@@ -50,7 +50,7 @@ public abstract class FileSinkTests {
 	@Autowired
 	protected Sink sink;
 
-	@IntegrationTest({"name = test", "directory = ${java.io.tmpdir}${file.separator}dataflow-tests", "suffix=txt"})
+	@IntegrationTest({"file.name = test", "file.directory = ${java.io.tmpdir}${file.separator}dataflow-tests", "file.suffix=txt"})
 	public static class TextTests extends FileSinkTests {
 
 		@Test
@@ -64,7 +64,7 @@ public abstract class FileSinkTests {
 
 	}
 
-	@IntegrationTest({"binary = true", "directory = ${java.io.tmpdir}${file.separator}dataflow-tests"})
+	@IntegrationTest({"file.binary = true", "file.directory = ${java.io.tmpdir}${file.separator}dataflow-tests"})
 	public static class BinaryTests extends FileSinkTests {
 
 		@Test
@@ -80,9 +80,9 @@ public abstract class FileSinkTests {
 
 	}
 
-	@IntegrationTest({"nameExpression = payload.substring(0, 4)",
-			"directoryExpression = '${java.io.tmpdir}${file.separator}dataflow-tests${file.separator}'+headers.dir",
-			"suffix=out"})
+	@IntegrationTest({"file.nameExpression = payload.substring(0, 4)",
+			"file.directoryExpression = '${java.io.tmpdir}${file.separator}dataflow-tests${file.separator}'+headers.dir",
+			"file.suffix=out"})
 	public static class ExpressionTests extends FileSinkTests {
 
 		@Test

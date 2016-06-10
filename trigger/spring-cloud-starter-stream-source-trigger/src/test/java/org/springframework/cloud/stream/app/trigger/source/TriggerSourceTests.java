@@ -50,7 +50,7 @@ public abstract class TriggerSourceTests {
 	@Autowired
 	protected MessageCollector messageCollector;
 
-	@IntegrationTest({"fixedDelay=2", "initialDelay=1", "payload='test'"})
+	@IntegrationTest({"trigger.fixedDelay=2", "trigger.initialDelay=1", "payload='test'"})
 	public static class FixedDelayTest extends TriggerSourceTests {
 
 		@Test
@@ -59,7 +59,7 @@ public abstract class TriggerSourceTests {
 		}
 	}
 
-	@IntegrationTest({"fixedDelay=2", "initialDelay=1"})
+	@IntegrationTest({"trigger.fixedDelay=2", "trigger.initialDelay=1"})
 	public static class FixedDelayEmptyPayloadTest extends TriggerSourceTests {
 
 		@Test
@@ -68,7 +68,7 @@ public abstract class TriggerSourceTests {
 		}
 	}
 
-	@IntegrationTest({"cron=0/2 * * * * *", "payload='cronTest'"})
+	@IntegrationTest({"trigger.cron=0/2 * * * * *", "payload='cronTest'"})
 	public static class CronTriggerTest extends TriggerSourceTests {
 
 		@Test

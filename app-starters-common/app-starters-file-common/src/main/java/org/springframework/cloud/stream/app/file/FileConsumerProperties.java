@@ -23,12 +23,15 @@ import javax.validation.constraints.NotNull;
 /**
  * @author David Turanski
  */
-@ConfigurationProperties
+@ConfigurationProperties("file.consumer")
 public class FileConsumerProperties {
 
 	/**
-	 * The FileReadingMode to use for file reading sources. Values are 'ref' - The File object,'lines' - a message per line
-	 *  ,or 'contents' - the contents as bytes. Default is 'contents'
+	 * The FileReadingMode to use for file reading sources.
+	 * Values are 'ref' - The File object,
+	 * 'lines' - a message per line, or
+	 * 'contents' - the contents as bytes.
+	 * Default is 'contents'
 	 */
 	private FileReadingMode fileReadingmode = FileReadingMode.contents;
 

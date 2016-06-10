@@ -95,7 +95,7 @@ public abstract class JdbcSourceIntegrationTests {
 
 	}
 
-	@IntegrationTest(value = {"query=select id, name from test order by id", "fixedDelay=600"})
+	@IntegrationTest(value = {"query=select id, name from test order by id", "trigger.fixedDelay=600"})
 	public static class SelectAllWithDelayTests extends JdbcSourceIntegrationTests {
 
 		@Test
@@ -122,7 +122,7 @@ public abstract class JdbcSourceIntegrationTests {
 
 	}
 
-	@IntegrationTest(value = {"query=select id, name from test order by id", "fixedDelay=1"})
+	@IntegrationTest(value = {"query=select id, name from test order by id", "trigger.fixedDelay=1"})
 	public static class SelectAllWithMinDelayTests extends JdbcSourceIntegrationTests {
 
 		@Test

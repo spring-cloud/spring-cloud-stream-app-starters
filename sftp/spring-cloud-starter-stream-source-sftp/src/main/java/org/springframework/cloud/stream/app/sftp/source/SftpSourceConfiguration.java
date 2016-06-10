@@ -15,6 +15,7 @@
 
 package org.springframework.cloud.stream.app.sftp.source;
 
+import com.jcraft.jsch.ChannelSftp.LsEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -23,6 +24,8 @@ import org.springframework.cloud.stream.app.file.FileConsumerProperties;
 import org.springframework.cloud.stream.app.file.FileUtils;
 import org.springframework.cloud.stream.app.sftp.SftpSessionFactoryConfiguration;
 import org.springframework.cloud.stream.app.trigger.TriggerConfiguration;
+import org.springframework.cloud.stream.app.trigger.TriggerProperties;
+import org.springframework.cloud.stream.app.trigger.TriggerPropertiesMaxMessagesDefaultUnlimited;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -39,8 +42,6 @@ import org.springframework.integration.sftp.filters.SftpRegexPatternFileListFilt
 import org.springframework.integration.sftp.filters.SftpSimplePatternFileListFilter;
 import org.springframework.util.StringUtils;
 
-import com.jcraft.jsch.ChannelSftp.LsEntry;
-
 /**
  * @author Gary Russell
  */
@@ -55,6 +56,11 @@ public class SftpSourceConfiguration {
 
 	@Autowired
 	Source source;
+
+	@Bean
+	public TriggerProperties triggerProperties() {
+		return new TriggerPropertiesMaxMessagesDefaultUnlimited();
+	}
 
 	@Bean
 	public IntegrationFlow sftpInboundFlow(SessionFactory<LsEntry> sftpSessionFactory, SftpSourceProperties properties,

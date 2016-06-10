@@ -74,7 +74,7 @@ public class SftpSourceIntegrationTests extends SftpTestSupport {
 		properties.put("username", "foo");
 		properties.put("password", "foo");
 		properties.put("port", port);
-		properties.put("mode", "ref");
+		properties.put("file.consumer.mode", "ref");
 		properties.put("allowUnknownKeys", "true");
 		properties.put("filenameRegex", ".*");
 		PropertiesInitializer.PROPERTIES = properties;

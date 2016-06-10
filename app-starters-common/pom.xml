@@ -22,6 +22,8 @@
 		<module>app-starters-tcp-common</module>
 		<module>app-starters-time-common</module>
 		<module>app-starters-trigger-common</module>
+		<module>app-starters-trigger-one-common</module>
+		<module>app-starters-trigger-unlimited-common</module>
 		<module>app-starters-twitter-common</module>
 	</modules>
 

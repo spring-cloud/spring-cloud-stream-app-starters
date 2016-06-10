@@ -25,6 +25,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.app.trigger.TriggerConfiguration;
+import org.springframework.cloud.stream.app.trigger.TriggerProperties;
+import org.springframework.cloud.stream.app.trigger.TriggerPropertiesMaxMessagesDefaultOne;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -55,6 +57,11 @@ public class MailSourceConfiguration {
 
 	@Autowired
 	private MailSourceProperties properties;
+
+	@Bean
+	public TriggerProperties triggerProperties() {
+		return new TriggerPropertiesMaxMessagesDefaultOne();
+	}
 
 	@Bean
 	public IntegrationFlow mailInboundFlow() {

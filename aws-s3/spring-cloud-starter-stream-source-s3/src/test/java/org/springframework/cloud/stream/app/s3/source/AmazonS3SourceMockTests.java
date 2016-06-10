@@ -193,7 +193,7 @@ public abstract class AmazonS3SourceMockTests {
 
 	public abstract void test() throws Exception;
 
-	@IntegrationTest({ "mode=ref", "filenameRegex=.*\\\\.test$" })
+	@IntegrationTest({ "file.consumer.mode=ref", "filenameRegex=.*\\\\.test$" })
 	public static class AmazonS3FilesTransferredTests extends AmazonS3SourceMockTests {
 
 
@@ -223,7 +223,7 @@ public abstract class AmazonS3SourceMockTests {
 
 	}
 
-	@IntegrationTest({ "mode=lines", "filenamePattern=otherFile", "with-markers=false" })
+	@IntegrationTest({ "file.consumer.mode=lines", "filenamePattern=otherFile", "file.consumer.with-markers=false" })
 	public static class AmazonS3LinesTransferredTests extends AmazonS3SourceMockTests {
 
 

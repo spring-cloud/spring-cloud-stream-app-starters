@@ -83,7 +83,7 @@ public class FtpSourceIntegrationTests extends FtpTestSupport {
 		properties.put("password", "foo");
 		properties.put("filenamePattern", "*");
 		properties.put("port", port);
-		properties.put("mode", "ref");
+		properties.put("file.consumer.mode", "ref");
 		properties.put("cacheSessions", true);
 		return properties;
 	}

@@ -24,6 +24,8 @@ import org.springframework.cloud.stream.app.file.FileConsumerProperties;
 import org.springframework.cloud.stream.app.file.FileUtils;
 import org.springframework.cloud.stream.app.s3.AmazonS3Configuration;
 import org.springframework.cloud.stream.app.trigger.TriggerConfiguration;
+import org.springframework.cloud.stream.app.trigger.TriggerProperties;
+import org.springframework.cloud.stream.app.trigger.TriggerPropertiesMaxMessagesDefaultUnlimited;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -53,6 +55,11 @@ public class AmazonS3SourceConfiguration {
 
 	@Autowired
 	private ResourceIdResolver resourceIdResolver;
+
+	@Bean
+	public TriggerProperties triggerProperties() {
+		return new TriggerPropertiesMaxMessagesDefaultUnlimited();
+	}
 
 	@Bean
 	public S3InboundFileSynchronizer s3InboundFileSynchronizer() {
