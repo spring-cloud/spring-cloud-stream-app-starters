@@ -26,7 +26,7 @@ import org.springframework.cloud.stream.app.tcp.AbstractTcpConnectionFactoryProp
  * @author Gary Russell
  *
  */
-@ConfigurationProperties
+@ConfigurationProperties("tcp")
 public class TcpSourceProperties extends AbstractTcpConnectionFactoryProperties {
 
 	/**
