@@ -41,7 +41,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = TestFieldValueCounterSinkApplication.class)
-@WebIntegrationTest({"server.port:-1", "store:redis", "fieldName:test"})
+@WebIntegrationTest({"server.port:-1", "field-value-counter.fieldName:test"})
 @DirtiesContext
 public class FieldValueCounterSinkWithDefaultsTests {
 

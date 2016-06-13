@@ -44,7 +44,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = AbstractCounterSinkTests.CounterSinkApplication.class)
-@IntegrationTest({ "server.port:0", "store:redis", "spring.metrics.export.delayMillis:10" })
+@IntegrationTest({ "server.port:0", "spring.metrics.export.delayMillis:10" })
 @DirtiesContext
 public abstract class AbstractCounterSinkTests {
 

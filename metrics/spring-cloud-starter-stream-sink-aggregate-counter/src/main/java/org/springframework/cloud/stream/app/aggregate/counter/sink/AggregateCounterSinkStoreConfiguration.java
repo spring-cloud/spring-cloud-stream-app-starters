@@ -19,8 +19,6 @@ package org.springframework.cloud.stream.app.aggregate.counter.sink;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.app.metrics.AggregateCounterRepository;
-import org.springframework.cloud.stream.app.metrics.MetricProperties;
-import org.springframework.cloud.stream.app.metrics.memory.InMemoryAggregateCounterRepository;
 import org.springframework.cloud.stream.app.metrics.redis.RedisAggregateCounterRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -50,12 +48,7 @@ public class AggregateCounterSinkStoreConfiguration {
 
 	@Bean
 	public AggregateCounterRepository aggregateCounterRepository() {
-		if (config.getStore().equals(MetricProperties.REDIS_STORE_VALUE)) {
-			return new RedisAggregateCounterRepository(redisConnectionFactory, retryOperations());
-		}
-		else {
-			return new InMemoryAggregateCounterRepository();
-		}
+		return new RedisAggregateCounterRepository(redisConnectionFactory, retryOperations());
 	}
 
 	@Bean

@@ -21,7 +21,6 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.cloud.stream.app.metrics.MetricProperties;
 import org.springframework.cloud.stream.app.time.DateFormat;
 import org.springframework.expression.Expression;
 import org.springframework.expression.common.LiteralExpression;
@@ -33,8 +32,8 @@ import javax.validation.constraints.NotNull;
 /**
  * @author Ilayaperumal Gopinathan
  */
-@ConfigurationProperties
-public class AggregateCounterSinkProperties extends MetricProperties {
+@ConfigurationProperties("aggregate-counter")
+public class AggregateCounterSinkProperties {
 
 	/**
 	 * The default name of the aggregate counter

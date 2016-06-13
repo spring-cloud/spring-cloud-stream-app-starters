@@ -48,7 +48,7 @@ import org.springframework.tuple.TupleBuilder;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = TestFieldValueCounterSinkApplication.class)
-@WebIntegrationTest({"server.port:-1", "name:FVCounter", "store:redis", "fieldName:test"})
+@WebIntegrationTest({"server.port:-1", "field-value-counter.name:FVCounter", "field-value-counter.fieldName:test"})
 @DirtiesContext
 public class FieldValueCounterSinkTests {
 

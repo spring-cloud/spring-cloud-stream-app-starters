@@ -18,8 +18,6 @@ package org.springframework.cloud.stream.app.field.value.counter.sink;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.app.metrics.FieldValueCounterRepository;
-import org.springframework.cloud.stream.app.metrics.MetricProperties;
-import org.springframework.cloud.stream.app.metrics.memory.InMemoryFieldValueCounterRepository;
 import org.springframework.cloud.stream.app.metrics.redis.RedisFieldValueCounterRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -50,12 +48,7 @@ public class FieldValueCounterSinkStoreConfiguration {
 
 	@Bean
 	public FieldValueCounterRepository redisMetricRepository() {
-		if (this.config.getStore().equals(MetricProperties.REDIS_STORE_VALUE)) {
-			return new RedisFieldValueCounterRepository(redisConnectionFactory, retryOperations());
-		}
-		else {
-			return new InMemoryFieldValueCounterRepository();
-		}
+		return new RedisFieldValueCounterRepository(redisConnectionFactory, retryOperations());
 	}
 
 	@Bean

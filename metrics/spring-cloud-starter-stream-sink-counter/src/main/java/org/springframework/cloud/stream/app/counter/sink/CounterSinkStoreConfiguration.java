@@ -18,23 +18,19 @@ package org.springframework.cloud.stream.app.counter.sink;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.ExportMetricWriter;
-import org.springframework.boot.actuate.metrics.repository.InMemoryMetricRepository;
 import org.springframework.boot.actuate.metrics.repository.MetricRepository;
 import org.springframework.boot.actuate.metrics.repository.redis.RedisMetricRepository;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.cloud.stream.app.metrics.MetricProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 
 /**
- * Used to configure the connection and offloading of counters to redis in case it is used as
- * a store.
+ * Used to configure the connection and offloading of counters to redis
  *
  * @author Eric Bottard
  * @author Ilayaperumal Gopinathan
  * @author Gary Russell
- * @see MetricProperties#getStore()
  */
 @Configuration
 @EnableConfigurationProperties(CounterProperties.class)
@@ -49,10 +45,7 @@ public class CounterSinkStoreConfiguration {
 	@Bean
 	@ExportMetricWriter
 	public MetricRepository metricRepository() {
-		if (this.metricProperties.getStore().equals(MetricProperties.REDIS_STORE_VALUE)) {
-			return new RedisMetricRepository(redisConnectionFactory);
-		}
-		return new InMemoryMetricRepository();
+		return new RedisMetricRepository(redisConnectionFactory);
 	}
 
 }
