@@ -23,7 +23,7 @@ import org.springframework.cloud.stream.app.file.remote.AbstractRemoteServerProp
 /**
  * @author Gary Russell
  */
-@ConfigurationProperties
+@ConfigurationProperties("sftp.factory")
 public class SftpSessionFactoryProperties extends AbstractRemoteServerProperties {
 
 	/**

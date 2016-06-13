@@ -24,8 +24,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author Ilayaperumal Gopinathan
  * @author Gary Russell
  */
-@ConfigurationProperties
-//TODO: support more stream properties such as locations, track etc.,
+@ConfigurationProperties("twitter.stream")
 public class TwitterStreamProperties {
 
 	/**

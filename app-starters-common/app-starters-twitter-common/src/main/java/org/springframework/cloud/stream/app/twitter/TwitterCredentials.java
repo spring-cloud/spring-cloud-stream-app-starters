@@ -22,7 +22,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author Ilayaperumal Gopinathan
  * @author Gary Russell
  */
-@ConfigurationProperties
+@ConfigurationProperties("twitter.credentials")
 //TODO: Move these properties into spring-boot's TwitterProperties prefixed with: `spring.social.twitter`
 public class TwitterCredentials {
 

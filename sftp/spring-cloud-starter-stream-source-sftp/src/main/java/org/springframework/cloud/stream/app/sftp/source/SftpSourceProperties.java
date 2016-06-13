@@ -21,7 +21,7 @@ import org.springframework.cloud.stream.app.file.remote.AbstractRemoteFileSource
 /**
  * @author Gary Russell
  */
-@ConfigurationProperties
+@ConfigurationProperties("sftp")
 public class SftpSourceProperties extends AbstractRemoteFileSourceProperties {
 
 
