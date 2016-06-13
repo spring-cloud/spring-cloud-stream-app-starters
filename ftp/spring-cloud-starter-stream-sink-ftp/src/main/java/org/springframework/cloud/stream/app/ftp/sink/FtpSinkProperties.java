@@ -21,7 +21,7 @@ import org.springframework.cloud.stream.app.file.remote.AbstractRemoteFileSinkPr
 /**
  * @author Gary Russell
  */
-@ConfigurationProperties
+@ConfigurationProperties("ftp")
 public class FtpSinkProperties extends AbstractRemoteFileSinkProperties {
 
 }

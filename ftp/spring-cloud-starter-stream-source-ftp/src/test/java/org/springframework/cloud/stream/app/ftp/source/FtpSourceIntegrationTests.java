@@ -77,14 +77,14 @@ public class FtpSourceIntegrationTests extends FtpTestSupport {
 
 	protected static Properties buildProperties() {
 		Properties properties = new Properties();
-		properties.put("remoteDir", "ftpSource");
-		properties.put("localDir", localTemporaryFolder.getRoot().getAbsolutePath() + File.separator + "localTarget");
-		properties.put("username", "foo");
-		properties.put("password", "foo");
-		properties.put("filenamePattern", "*");
-		properties.put("port", port);
+		properties.put("ftp.remoteDir", "ftpSource");
+		properties.put("ftp.localDir", localTemporaryFolder.getRoot().getAbsolutePath() + File.separator + "localTarget");
+		properties.put("ftp.factory.username", "foo");
+		properties.put("ftp.factory.password", "foo");
+		properties.put("ftp.filenamePattern", "*");
+		properties.put("ftp.factory.port", port);
 		properties.put("file.consumer.mode", "ref");
-		properties.put("cacheSessions", true);
+		properties.put("ftp.factory.cacheSessions", true);
 		return properties;
 	}
 

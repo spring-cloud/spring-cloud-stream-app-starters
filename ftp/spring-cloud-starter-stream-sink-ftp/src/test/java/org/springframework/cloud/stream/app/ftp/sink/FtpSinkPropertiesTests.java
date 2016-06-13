@@ -37,7 +37,7 @@ public class FtpSinkPropertiesTests {
 	@Test
 	public void remoteDirCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "remoteDir:/remote");
+		EnvironmentTestUtils.addEnvironment(context, "ftp.remoteDir:/remote");
 		context.register(Conf.class);
 		context.refresh();
 		FtpSinkProperties properties = context.getBean(FtpSinkProperties.class);
@@ -47,7 +47,7 @@ public class FtpSinkPropertiesTests {
 	@Test
 	public void autoCreateDirCanBeDisabled() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "autoCreateDir:false");
+		EnvironmentTestUtils.addEnvironment(context, "ftp.autoCreateDir:false");
 		context.register(Conf.class);
 		context.refresh();
 		FtpSinkProperties properties = context.getBean(FtpSinkProperties.class);
@@ -57,7 +57,7 @@ public class FtpSinkPropertiesTests {
 	@Test
 	public void tmpFileSuffixCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "tmpFileSuffix:.foo");
+		EnvironmentTestUtils.addEnvironment(context, "ftp.tmpFileSuffix:.foo");
 		context.register(Conf.class);
 		context.refresh();
 		FtpSinkProperties properties = context.getBean(FtpSinkProperties.class);
@@ -67,7 +67,7 @@ public class FtpSinkPropertiesTests {
 	@Test
 	public void tmpFileRemoteDirCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "temporaryRemoteDir:/foo");
+		EnvironmentTestUtils.addEnvironment(context, "ftp.temporaryRemoteDir:/foo");
 		context.register(Conf.class);
 		context.refresh();
 		FtpSinkProperties properties = context.getBean(FtpSinkProperties.class);
@@ -77,7 +77,7 @@ public class FtpSinkPropertiesTests {
 	@Test
 	public void remoteFileSeparatorCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "remoteFileSeparator:\\");
+		EnvironmentTestUtils.addEnvironment(context, "ftp.remoteFileSeparator:\\");
 		context.register(Conf.class);
 		context.refresh();
 		FtpSinkProperties properties = context.getBean(FtpSinkProperties.class);
@@ -87,7 +87,7 @@ public class FtpSinkPropertiesTests {
 	@Test
 	public void useTemporaryFileNameCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "useTemporaryFilename:false");
+		EnvironmentTestUtils.addEnvironment(context, "ftp.useTemporaryFilename:false");
 		context.register(Conf.class);
 		context.refresh();
 		FtpSinkProperties properties = context.getBean(FtpSinkProperties.class);
@@ -97,7 +97,7 @@ public class FtpSinkPropertiesTests {
 	@Test
 	public void fileExistsModeCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "mode:FAIL");
+		EnvironmentTestUtils.addEnvironment(context, "ftp.mode:FAIL");
 		context.register(Conf.class);
 		context.refresh();
 		FtpSinkProperties properties = context.getBean(FtpSinkProperties.class);
