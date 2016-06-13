@@ -26,7 +26,7 @@ import org.springframework.cloud.stream.app.file.remote.AbstractRemoteFileSource
 /**
  * @author Artem Bilan
  */
-@ConfigurationProperties
+@ConfigurationProperties("s3")
 public class AmazonS3SourceProperties extends AbstractRemoteFileSourceProperties {
 
 	public AmazonS3SourceProperties() {
