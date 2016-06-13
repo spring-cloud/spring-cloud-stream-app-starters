@@ -35,7 +35,7 @@ import org.springframework.messaging.Message;
  * @author Gary Russell
  *
  */
-@ConfigurationProperties
+@ConfigurationProperties("router")
 public class RouterSinkProperties {
 
 	public static final Expression DEFAULT_EXPRESSION = new FunctionExpression<>(new Function<Message<?>, Object>() {
@@ -46,6 +46,16 @@ public class RouterSinkProperties {
 		}
 
 	});
+
+	/**
+	 * Variable bindings as a new line delimited string of name-value pairs, e.g. 'foo=bar\n baz=car'.
+	 */
+	private Properties variables;
+
+	/**
+	 * The location of a properties file containing custom script variable bindings.
+	 */
+	private Resource variablesLocation;
 
 	/**
 	 * The expression to be applied to the message to determine the channel(s)
@@ -79,6 +89,22 @@ public class RouterSinkProperties {
 	 * Destination mappings as a new line delimited string of name-value pairs, e.g. 'foo=bar\n baz=car'.
 	 */
 	private Properties destinationMappings;
+
+	public Properties getVariables() {
+		return variables;
+	}
+
+	public void setVariables(Properties variables) {
+		this.variables = variables;
+	}
+
+	public Resource getVariablesLocation() {
+		return variablesLocation;
+	}
+
+	public void setVariablesLocation(Resource variablesLocation) {
+		this.variablesLocation = variablesLocation;
+	}
 
 	public Expression getExpression() {
 		return this.expression;

@@ -64,7 +64,7 @@ public abstract class RouterSinkTests {
 	@Autowired
 	protected AbstractMappingMessageRouter router;
 
-	@IntegrationTest({ "resolutionRequired = true" })
+	@IntegrationTest({ "router.resolutionRequired = true" })
 	public static class DefaultRouterTests extends RouterSinkTests {
 
 		@Test
@@ -85,7 +85,7 @@ public abstract class RouterSinkTests {
 
 	}
 
-	@IntegrationTest({ "expression = headers['route']", "resolutionRequired = true" })
+	@IntegrationTest({ "router.expression = headers['route']", "router.resolutionRequired = true" })
 	public static class DefaultRouterWithExpressionTests extends RouterSinkTests {
 
 		@Test
@@ -106,8 +106,8 @@ public abstract class RouterSinkTests {
 
 	}
 
-	@IntegrationTest({ "expression = headers['route']", "destinationMappings = foo=baz \\n bar=qux",
-			"resolutionRequired = true" })
+	@IntegrationTest({ "router.expression = headers['route']", "router.destinationMappings = foo=baz \\n bar=qux",
+			"router.resolutionRequired = true" })
 	public static class WithChannelMappingsTests extends RouterSinkTests {
 
 		@Test
@@ -128,7 +128,7 @@ public abstract class RouterSinkTests {
 
 	}
 
-	@IntegrationTest({ "expression = headers['route']", "defaultOutputChannel = discards",
+	@IntegrationTest({ "router.expression = headers['route']", "router.defaultOutputChannel = discards",
 		"spring.cloud.stream.dynamicDestinations = foo,bar,discards" })
 	public static class WithDiscardChannelTests extends RouterSinkTests {
 
@@ -156,8 +156,8 @@ public abstract class RouterSinkTests {
 
 	}
 
-	@IntegrationTest({ "script = classpath:/routertest.groovy", "variables = foo=baz",
-		"variablesLocation = classpath:/routertest.properties" })
+	@IntegrationTest({ "router.script = classpath:/routertest.groovy", "router.variables = foo=baz",
+		"router.variablesLocation = classpath:/routertest.properties" })
 	public static class WithGroovyTests extends RouterSinkTests {
 
 		@Test

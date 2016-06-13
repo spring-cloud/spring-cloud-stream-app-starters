@@ -19,10 +19,8 @@ package org.springframework.cloud.stream.app.groovy.transform.processor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.app.script.ScriptVariableGeneratorConfiguration;
 import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 import org.springframework.integration.annotation.Transformer;
 import org.springframework.integration.groovy.GroovyScriptExecutingMessageProcessor;
 import org.springframework.integration.handler.MessageProcessor;
@@ -38,7 +36,6 @@ import org.springframework.scripting.support.ResourceScriptSource;
  * @author Gary Russell
  */
 @EnableBinding(Processor.class)
-@Import(ScriptVariableGeneratorConfiguration.class)
 @EnableConfigurationProperties(GroovyTransformProcessorProperties.class)
 public class GroovyTransformProcessorConfiguration {
 

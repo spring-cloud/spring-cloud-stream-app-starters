@@ -56,7 +56,7 @@ public abstract class GroovyTransformProcessorIntegrationTests {
 	@Autowired
 	protected MessageCollector collector;
 
-	@IntegrationTest({"script=script.groovy", "variables=limit=5\\n foo=\\\\\40WORLD"})
+	@IntegrationTest({"groovy-transformer.script=script.groovy", "groovy-transformer.variables=limit=5\\n foo=\\\\\40WORLD"})
 	public static class UsingScriptIntegrationTests extends GroovyTransformProcessorIntegrationTests {
 
 		@Test

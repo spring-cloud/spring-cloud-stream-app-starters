@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package org.springframework.cloud.stream.app.script;
+package org.springframework.cloud.stream.app.groovy.filter.processor;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
@@ -37,11 +36,10 @@ import java.util.Map;
  * @author Mark Fisher
  */
 @Configuration
-@EnableConfigurationProperties(ScriptVariableProperties.class)
 public class ScriptVariableGeneratorConfiguration {
 
 	@Autowired
-	private ScriptVariableProperties properties;
+	private GroovyFilterProcessorProperties properties;
 
 	@Bean(name = "variableGenerator")
 	public ScriptVariableGenerator scriptVariableGenerator() throws IOException {

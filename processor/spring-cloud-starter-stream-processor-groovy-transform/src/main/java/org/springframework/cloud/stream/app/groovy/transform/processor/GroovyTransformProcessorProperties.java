@@ -20,19 +20,30 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.io.Resource;
 
 import javax.validation.constraints.NotNull;
+import java.util.Properties;
 
 /**
  * Configuration properties for the Groovy Transform Processor module.
  *
  * @author Eric Bottard
  */
-@ConfigurationProperties
+@ConfigurationProperties("groovy-transformer")
 public class GroovyTransformProcessorProperties {
 
 	/**
 	 * Reference to a script used to process messages.
 	 */
 	private Resource script;
+
+	/**
+	 * Variable bindings as a new line delimited string of name-value pairs, e.g. 'foo=bar\n baz=car'.
+	 */
+	private Properties variables;
+
+	/**
+	 * The location of a properties file containing custom script variable bindings.
+	 */
+	private Resource variablesLocation;
 
 	@NotNull
 	public Resource getScript() {
@@ -41,6 +52,23 @@ public class GroovyTransformProcessorProperties {
 
 	public void setScript(Resource script) {
 		this.script = script;
+	}
+
+
+	public Properties getVariables() {
+		return variables;
+	}
+
+	public void setVariables(Properties variables) {
+		this.variables = variables;
+	}
+
+	public Resource getVariablesLocation() {
+		return variablesLocation;
+	}
+
+	public void setVariablesLocation(Resource variablesLocation) {
+		this.variablesLocation = variablesLocation;
 	}
 
 }

@@ -58,7 +58,7 @@ public abstract class GroovyFilterProcessorApplicationIntegrationTests {
 	@Autowired
 	protected MessageCollector collector;
 
-	@IntegrationTest({"script=script.groovy", "variables=threshold=5"})
+	@IntegrationTest({"groovy-filter.script=script.groovy", "groovy-filter.variables=threshold=5"})
 	public static class UsingScriptIntegrationTests extends GroovyFilterProcessorApplicationIntegrationTests {
 
 		@Test

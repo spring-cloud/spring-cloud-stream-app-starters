@@ -16,15 +16,17 @@
 package org.springframework.cloud.stream.app.scriptable.transform.processor;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.core.io.Resource;
 
 import javax.validation.constraints.NotNull;
+import java.util.Properties;
 
 /**
  * Configuration properties for the Scriptable Transform Processor module.
  *
  * @author Andy Clement
  */
-@ConfigurationProperties
+@ConfigurationProperties("scriptable-transformer")
 public class ScriptableTransformProcessorProperties {
 
 	/**
@@ -53,6 +55,17 @@ public class ScriptableTransformProcessorProperties {
 	@NotNull
 	private String script;
 
+	/**
+	 * Variable bindings as a new line delimited string of name-value pairs, e.g. 'foo=bar\n baz=car'.
+	 */
+	private Properties variables;
+
+	/**
+	 * The location of a properties file containing custom script variable bindings.
+	 */
+	private Resource variablesLocation;
+
+
 	public String getLanguage() {
 		return this.language;
 	}
@@ -67,6 +80,22 @@ public class ScriptableTransformProcessorProperties {
 
 	public void setScript(String script) {
 		this.script = script;
+	}
+
+	public Properties getVariables() {
+		return variables;
+	}
+
+	public void setVariables(Properties variables) {
+		this.variables = variables;
+	}
+
+	public Resource getVariablesLocation() {
+		return variablesLocation;
+	}
+
+	public void setVariablesLocation(Resource variablesLocation) {
+		this.variablesLocation = variablesLocation;
 	}
 
 }

@@ -19,15 +19,20 @@ package org.springframework.cloud.stream.app.groovy.filter.processor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.app.script.ScriptVariableGeneratorConfiguration;
 import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.integration.annotation.Filter;
 import org.springframework.integration.groovy.GroovyScriptExecutingMessageProcessor;
 import org.springframework.integration.handler.MessageProcessor;
+import org.springframework.integration.scripting.DefaultScriptVariableGenerator;
 import org.springframework.integration.scripting.ScriptVariableGenerator;
 import org.springframework.scripting.support.ResourceScriptSource;
+import org.springframework.util.CollectionUtils;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A Processor module that retains or discards messages according to a predicate,
@@ -39,7 +44,6 @@ import org.springframework.scripting.support.ResourceScriptSource;
  * @author Gary Russell
  */
 @EnableBinding(Processor.class)
-@Import(ScriptVariableGeneratorConfiguration.class)
 @EnableConfigurationProperties(GroovyFilterProcessorProperties.class)
 public class GroovyFilterProcessorConfiguration {
 
