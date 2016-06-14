@@ -121,6 +121,10 @@ public class FileSinkProperties {
 		this.name = name;
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	public String getNameExpression() {
 		return (nameExpression != null)
 				? nameExpression + " + '" + getSuffix() + "'"
