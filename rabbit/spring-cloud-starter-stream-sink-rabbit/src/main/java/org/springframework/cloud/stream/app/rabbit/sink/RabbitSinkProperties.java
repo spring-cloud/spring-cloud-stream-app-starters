@@ -26,7 +26,7 @@ import org.springframework.expression.Expression;
  * @author Gary Russell
  *
  */
-@ConfigurationProperties
+@ConfigurationProperties("rabbit")
 public class RabbitSinkProperties {
 
 	public static final String JSON_CONVERTER = "jsonConverter";

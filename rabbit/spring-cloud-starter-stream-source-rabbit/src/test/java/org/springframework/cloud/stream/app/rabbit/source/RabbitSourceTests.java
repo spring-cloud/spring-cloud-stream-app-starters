@@ -78,10 +78,10 @@ public abstract class RabbitSourceTests {
 	@Autowired
 	protected RabbitTemplate rabbitTemplate;
 
-	@IntegrationTest({ "queues = scsapp-testq", "enableRetry = true",
-		"initialRetryInterval = 123", "maxRetryInterval = 345", "retryMultiplier = 1.5", "maxAttempts = 5",
-		"requeue = false",
-		"mappedRequestHeaders = STANDARD_REQUEST_HEADERS,bar",
+	@IntegrationTest({ "rabbit.queues = scsapp-testq", "rabbit.enableRetry = true",
+		"rabbit.initialRetryInterval = 123", "rabbit.maxRetryInterval = 345", "rabbit.retryMultiplier = 1.5", "rabbit.maxAttempts = 5",
+		"rabbit.requeue = false",
+		"rabbit.mappedRequestHeaders = STANDARD_REQUEST_HEADERS,bar",
 		"spring.rabbitmq.listener.concurrency = 2", "spring.rabbitmq.listener.maxConcurrency = 3 ",
 		"spring.rabbitmq.listener.acknowledgeMode = NONE", "spring.rabbitmq.listener.prefetch = 10",
 		"spring.rabbitmq.listener.transactionSize = 5" })
@@ -124,8 +124,8 @@ public abstract class RabbitSourceTests {
 
 	}
 
-	@IntegrationTest({ "queues = scsapp-testq,scsapp-testq2", "enableRetry = false",
-		"transacted = true",
+	@IntegrationTest({ "rabbit.queues = scsapp-testq,scsapp-testq2", "rabbit.enableRetry = false",
+		"rabbit.transacted = true",
 		"spring.rabbitmq.listener.acknowledgeMode = AUTO" })
 	public static class NoRetryAndTxTests extends RabbitSourceTests {
 

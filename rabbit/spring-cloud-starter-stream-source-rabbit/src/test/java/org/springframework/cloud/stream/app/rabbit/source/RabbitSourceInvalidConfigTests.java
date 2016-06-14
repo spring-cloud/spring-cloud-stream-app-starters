@@ -26,7 +26,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.EnvironmentTestUtils;
-import org.springframework.cloud.stream.app.rabbit.source.RabbitSourceProperties;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Configuration;
 
@@ -41,7 +40,7 @@ public class RabbitSourceInvalidConfigTests {
 	public void testNoQueues() throws Exception {
 		try {
 			AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-			EnvironmentTestUtils.addEnvironment(context, "enableRetry:false");
+			EnvironmentTestUtils.addEnvironment(context, "rabbit.enableRetry:false");
 			context.register(Config.class);
 			context.refresh();
 			fail("BeanCreationException expected");
@@ -56,7 +55,7 @@ public class RabbitSourceInvalidConfigTests {
 	public void testEmptyQueues() throws Exception {
 		try {
 			AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-			EnvironmentTestUtils.addEnvironment(context, "enableRetry:false", "queues:");
+			EnvironmentTestUtils.addEnvironment(context, "rabbit.enableRetry:false", "rabbit.queues:");
 			context.register(Config.class);
 			context.refresh();
 			fail("BeanCreationException expected");

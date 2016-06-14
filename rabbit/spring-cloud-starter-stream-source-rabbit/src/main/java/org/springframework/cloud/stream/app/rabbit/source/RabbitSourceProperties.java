@@ -26,7 +26,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author Gary Russell
  *
  */
-@ConfigurationProperties
+@ConfigurationProperties("rabbit")
 public class RabbitSourceProperties {
 
 	/**
