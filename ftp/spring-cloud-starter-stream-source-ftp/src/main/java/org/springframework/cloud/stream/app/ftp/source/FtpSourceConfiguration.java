@@ -60,7 +60,7 @@ public class FtpSourceConfiguration {
 	Source source;
 
 	@Bean
-	public TriggerProperties triggerProperties() {
+	public static TriggerProperties triggerProperties() {
 		return new TriggerPropertiesMaxMessagesDefaultUnlimited();
 	}
 

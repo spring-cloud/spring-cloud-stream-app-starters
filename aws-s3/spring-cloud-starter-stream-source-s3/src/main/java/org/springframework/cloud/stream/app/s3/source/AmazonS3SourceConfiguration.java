@@ -57,7 +57,7 @@ public class AmazonS3SourceConfiguration {
 	private ResourceIdResolver resourceIdResolver;
 
 	@Bean
-	public TriggerProperties triggerProperties() {
+	public static TriggerProperties triggerProperties() {
 		return new TriggerPropertiesMaxMessagesDefaultUnlimited();
 	}
 

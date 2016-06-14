@@ -44,7 +44,7 @@ public class TriggerSourceConfiguration {
 	private SourcePayloadProperties payloadProperties;
 
 	@Bean
-	public TriggerProperties triggerProperties() {
+	public static TriggerProperties triggerProperties() {
 		return new TriggerPropertiesMaxMessagesDefaultOne();
 	}
 

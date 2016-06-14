@@ -15,7 +15,6 @@
 
 package org.springframework.cloud.stream.app.sftp.source;
 
-import com.jcraft.jsch.ChannelSftp.LsEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -42,6 +41,8 @@ import org.springframework.integration.sftp.filters.SftpRegexPatternFileListFilt
 import org.springframework.integration.sftp.filters.SftpSimplePatternFileListFilter;
 import org.springframework.util.StringUtils;
 
+import com.jcraft.jsch.ChannelSftp.LsEntry;
+
 /**
  * @author Gary Russell
  */
@@ -58,7 +59,7 @@ public class SftpSourceConfiguration {
 	Source source;
 
 	@Bean
-	public TriggerProperties triggerProperties() {
+	public static TriggerProperties triggerProperties() {
 		return new TriggerPropertiesMaxMessagesDefaultUnlimited();
 	}
 

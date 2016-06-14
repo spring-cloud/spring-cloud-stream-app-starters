@@ -16,6 +16,8 @@
 
 package org.springframework.cloud.stream.app.file.source;
 
+import java.io.File;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -38,8 +40,6 @@ import org.springframework.integration.dsl.support.Consumer;
 import org.springframework.integration.file.FileReadingMessageSource;
 import org.springframework.integration.scheduling.PollerMetadata;
 import org.springframework.util.StringUtils;
-
-import java.io.File;
 
 /**
  * Creates a {@link FileReadingMessageSource} bean and registers it as a
@@ -66,7 +66,7 @@ public class FileSourceConfiguration {
 	Source source;
 
 	@Bean
-	public TriggerProperties triggerProperties() {
+	public static TriggerProperties triggerProperties() {
 		return new TriggerPropertiesMaxMessagesDefaultUnlimited();
 	}
 
