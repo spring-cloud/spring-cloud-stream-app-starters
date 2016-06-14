@@ -40,8 +40,8 @@ import static org.mockito.Mockito.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = LogSinkApplicationTests.LogSinkApplication.class)
 @DirtiesContext
-@IntegrationTest({"server.port=-1", "name=foo", "level=warn",
-		"expression=payload.toUpperCase()"})
+@IntegrationTest({"server.port=-1", "log.name=foo", "log.level=warn",
+		"log.expression=payload.toUpperCase()"})
 public class LogSinkApplicationTests {
 
 	@Autowired

@@ -30,7 +30,7 @@ import static org.springframework.integration.handler.LoggingHandler.Level.INFO;
  * @author Gary Russell
  * @author Eric Bottard
  */
-@ConfigurationProperties
+@ConfigurationProperties("log")
 public class LogSinkProperties {
 
 	/**
