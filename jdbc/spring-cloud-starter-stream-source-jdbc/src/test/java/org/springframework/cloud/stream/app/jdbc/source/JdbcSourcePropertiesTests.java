@@ -16,19 +16,20 @@
 
 package org.springframework.cloud.stream.app.jdbc.source;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.EnvironmentTestUtils;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Configuration;
-
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * @author Thomas Risberg
@@ -53,7 +54,7 @@ public class JdbcSourcePropertiesTests {
 	@Test
 	public void queryIsRequired() {
 		this.thrown.expect(BeanCreationException.class);
-		this.thrown.expectMessage("Field error in object 'target' on field 'query': rejected value [null]");
+		this.thrown.expectMessage("Field error in object 'jdbc' on field 'query': rejected value [null]");
 		this.context.register(Conf.class);
 		this.context.refresh();
 	}
@@ -61,7 +62,7 @@ public class JdbcSourcePropertiesTests {
 	@Test
 	public void queryCanBeCustomized() {
 		String query = "select foo from bar";
-		EnvironmentTestUtils.addEnvironment(this.context, "query:" + query);
+		EnvironmentTestUtils.addEnvironment(this.context, "jdbc.query:" + query);
 		this.context.register(Conf.class);
 		this.context.refresh();
 		JdbcSourceProperties properties = this.context.getBean(JdbcSourceProperties.class);
@@ -70,9 +71,9 @@ public class JdbcSourcePropertiesTests {
 
 	@Test
 	public void updateCanBeCustomized() {
-		EnvironmentTestUtils.addEnvironment(this.context, "query:select foo from bar where baz < 1");
+		EnvironmentTestUtils.addEnvironment(this.context, "jdbc.query:select foo from bar where baz < 1");
 		String update = "update bar set baz=1 where foo in (:foo)";
-		EnvironmentTestUtils.addEnvironment(this.context, "update:" + update);
+		EnvironmentTestUtils.addEnvironment(this.context, "jdbc.update:" + update);
 		this.context.register(Conf.class);
 		this.context.refresh();
 		JdbcSourceProperties properties = this.context.getBean(JdbcSourceProperties.class);
@@ -81,7 +82,7 @@ public class JdbcSourcePropertiesTests {
 
 	@Test
 	public void splitDefaultsToTrue() {
-		EnvironmentTestUtils.addEnvironment(this.context, "query:select foo from bar");
+		EnvironmentTestUtils.addEnvironment(this.context, "jdbc.query:select foo from bar");
 		this.context.register(Conf.class);
 		this.context.refresh();
 		JdbcSourceProperties properties = this.context.getBean(JdbcSourceProperties.class);
@@ -90,8 +91,8 @@ public class JdbcSourcePropertiesTests {
 
 	@Test
 	public void splitCanBeCustomized() {
-		EnvironmentTestUtils.addEnvironment(this.context, "query:select foo from bar");
-		EnvironmentTestUtils.addEnvironment(this.context, "split:false");
+		EnvironmentTestUtils.addEnvironment(this.context, "jdbc.query:select foo from bar");
+		EnvironmentTestUtils.addEnvironment(this.context, "jdbc.split:false");
 		this.context.register(Conf.class);
 		this.context.refresh();
 		JdbcSourceProperties properties = this.context.getBean(JdbcSourceProperties.class);
@@ -100,8 +101,8 @@ public class JdbcSourcePropertiesTests {
 
 	@Test
 	public void maxRowsPerPollCanBeCustomized() {
-		EnvironmentTestUtils.addEnvironment(this.context, "query:select foo from bar");
-		EnvironmentTestUtils.addEnvironment(this.context, "maxRowsPerPoll:15");
+		EnvironmentTestUtils.addEnvironment(this.context, "jdbc.query:select foo from bar");
+		EnvironmentTestUtils.addEnvironment(this.context, "jdbc.maxRowsPerPoll:15");
 		this.context.register(Conf.class);
 		this.context.refresh();
 		JdbcSourceProperties properties = this.context.getBean(JdbcSourceProperties.class);

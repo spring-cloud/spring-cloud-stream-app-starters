@@ -145,7 +145,7 @@ public class JdbcSinkConfiguration {
 		return jdbcMessageHandler;
 	}
 
-	@ConditionalOnProperty("initialize")
+	@ConditionalOnProperty("jdbc.initialize")
 	@Bean
 	public DataSourceInitializer nonBootDataSourceInitializer(DataSource dataSource, ResourceLoader resourceLoader) {
 		DataSourceInitializer dataSourceInitializer = new DataSourceInitializer();

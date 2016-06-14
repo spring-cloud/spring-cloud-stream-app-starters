@@ -59,7 +59,7 @@ public class MailSourceConfiguration {
 	private MailSourceProperties properties;
 
 	@Bean
-	public TriggerProperties triggerProperties() {
+	public static TriggerProperties triggerProperties() {
 		return new TriggerPropertiesMaxMessagesDefaultOne();
 	}
 

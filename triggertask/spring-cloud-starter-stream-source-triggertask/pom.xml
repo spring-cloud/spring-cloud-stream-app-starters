@@ -28,7 +28,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud.stream.app</groupId>
-			<artifactId>app-starters-trigger-unlimited-common</artifactId>
+			<artifactId>app-starters-trigger-one-common</artifactId>
 		</dependency>
 	</dependencies>
 </project>

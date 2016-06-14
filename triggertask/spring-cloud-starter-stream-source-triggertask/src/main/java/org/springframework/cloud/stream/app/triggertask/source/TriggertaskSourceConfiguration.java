@@ -29,7 +29,7 @@ import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.app.annotation.PollableSource;
 import org.springframework.cloud.stream.app.trigger.TriggerConfiguration;
 import org.springframework.cloud.stream.app.trigger.TriggerProperties;
-import org.springframework.cloud.stream.app.trigger.TriggerPropertiesMaxMessagesDefaultUnlimited;
+import org.springframework.cloud.stream.app.trigger.TriggerPropertiesMaxMessagesDefaultOne;
 import org.springframework.cloud.stream.app.triggertask.source.arguments.CommandLineArgumentTransformer;
 import org.springframework.cloud.stream.app.triggertask.source.arguments.PassThroughCommandLineArgumentTransformer;
 import org.springframework.cloud.stream.messaging.Source;
@@ -76,8 +76,8 @@ public class TriggertaskSourceConfiguration {
 	}
 
 	@Bean
-	public TriggerProperties triggerProperties() {
-		return new TriggerPropertiesMaxMessagesDefaultUnlimited();
+	public static TriggerProperties triggerProperties() {
+		return new TriggerPropertiesMaxMessagesDefaultOne();
 	}
 
 	/**
