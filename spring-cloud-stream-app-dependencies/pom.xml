@@ -674,7 +674,7 @@
 			<dependency>
 				<groupId>org.springframework.integration</groupId>
 				<artifactId>spring-integration-aws</artifactId>
-				<version>1.0.0.BUILD-SNAPSHOT</version>
+				<version>1.0.0.M2</version>
 			</dependency>
 
 			<dependency>
