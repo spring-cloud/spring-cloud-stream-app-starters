@@ -107,7 +107,7 @@ public abstract class FileSourceTests {
 	}
 
 	@IntegrationTest({"file.directory = ${java.io.tmpdir}${file.separator}dataflow-tests${file.separator}input",
-			"trigger.fixedDelay = 100", "trigger.timeUnit = MILLISECONDS", "file.consumer.mode = lines", "file.consumer.withMarkers = false"})
+			"trigger.fixedDelay = 100", "trigger.timeUnit = MILLISECONDS", "file.consumer.mode = lines"})
 	public static class LinesPayloadTests extends FileSourceTests {
 
 		@Test
@@ -127,7 +127,8 @@ public abstract class FileSourceTests {
 	}
 
 	@IntegrationTest({"file.directory = ${java.io.tmpdir}${file.separator}dataflow-tests${file.separator}input",
-			"trigger.fixedDelay = 100", "trigger.timeUnit = MILLISECONDS", "file.consumer.mode = lines", "file.consumer.withMarkers = true"})
+			"trigger.fixedDelay = 100", "trigger.timeUnit = MILLISECONDS", "file.consumer.mode = lines",
+			"file.consumer.withMarkers = true"})
 	public static class LinesAndMarkersPayloadTests extends FileSourceTests {
 
 		@Test
@@ -154,9 +155,9 @@ public abstract class FileSourceTests {
 
 	}
 
-	@IntegrationTest({"directory = ${java.io.tmpdir}${file.separator}dataflow-tests${file.separator}input",
-			"fixedDelay = 100", "timeUnit = MILLISECONDS", "mode = lines", "withMarkers = true",
-			"markersJson = true"})
+	@IntegrationTest({"file.directory = ${java.io.tmpdir}${file.separator}dataflow-tests${file.separator}input",
+			"trigger.fixedDelay = 100", "trigger.timeUnit = MILLISECONDS", "file.consumer.mode = lines",
+			"file.consumer.withMarkers = true", "file.consumer.markersJson = true"})
 	public static class LinesAndMarkersAsJsonPayloadTests extends FileSourceTests {
 
 		@Test
@@ -191,8 +192,9 @@ public abstract class FileSourceTests {
 	}
 
 
-	@IntegrationTest({"directory = ${java.io.tmpdir}${file.separator}dataflow-tests${file.separator}input",
-			"fixedDelay = 100", "timeUnit = MILLISECONDS", "mode = ref", "filenamePattern = *.txt"})
+	@IntegrationTest({"file.directory = ${java.io.tmpdir}${file.separator}dataflow-tests${file.separator}input",
+			"trigger.fixedDelay = 100", "trigger.timeUnit = MILLISECONDS", "file.consumer.mode = ref",
+			"file.filenamePattern = *.txt"})
 	public static class FilePayloadWithPatternTests extends FileSourceTests {
 
 		@Test
@@ -212,7 +214,8 @@ public abstract class FileSourceTests {
 	}
 
 	@IntegrationTest({"file.directory = ${java.io.tmpdir}${file.separator}dataflow-tests${file.separator}input",
-			"trigger.fixedDelay = 100", "trigger.timeUnit = MILLISECONDS", "file.consumer.mode = ref", "file.filenameRegex = .*.txt"})
+			"trigger.fixedDelay = 100", "trigger.timeUnit = MILLISECONDS", "file.consumer.mode = ref",
+			"file.filenameRegex = .*.txt"})
 	public static class FilePayloadWithRegexTests extends FileSourceTests {
 
 		@Test
