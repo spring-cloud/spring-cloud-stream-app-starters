@@ -94,7 +94,7 @@ public abstract class SplitterProcessorIntegrationTests {
 		}
 	}
 
-	@IntegrationTest("delimiters = ,")
+	@IntegrationTest("splitter.delimiters = ,")
 	public static class withDelimitersTests extends SplitterProcessorIntegrationTests {
 
 		@Test
@@ -107,7 +107,7 @@ public abstract class SplitterProcessorIntegrationTests {
 		}
 	}
 
-	@IntegrationTest({ "fileMarkers = false", "charset = UTF-8", "applySequence = false" })
+	@IntegrationTest({ "splitter.fileMarkers = false", "splitter.charset = UTF-8", "splitter.applySequence = false" })
 	public static class fromFileTests extends SplitterProcessorIntegrationTests {
 
 		@Test
@@ -128,7 +128,7 @@ public abstract class SplitterProcessorIntegrationTests {
 		}
 	}
 
-	@IntegrationTest({ "fileMarkers = true", "charset = UTF-8" })
+	@IntegrationTest({ "splitter.fileMarkers = true", "splitter.charset = UTF-8" })
 	public static class fromFileWithMarkersTests extends SplitterProcessorIntegrationTests {
 
 		@Test
@@ -155,7 +155,7 @@ public abstract class SplitterProcessorIntegrationTests {
 		}
 	}
 
-	@IntegrationTest("expression=payload.split(',')")
+	@IntegrationTest("splitter.expression=payload.split(',')")
 	public static class UsingExpressionIntegrationTests extends SplitterProcessorIntegrationTests {
 
 		@Test

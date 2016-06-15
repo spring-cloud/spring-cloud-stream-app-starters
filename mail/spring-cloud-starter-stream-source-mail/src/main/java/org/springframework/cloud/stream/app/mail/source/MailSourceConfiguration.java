@@ -25,7 +25,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.app.trigger.TriggerConfiguration;
-import org.springframework.cloud.stream.app.trigger.TriggerProperties;
 import org.springframework.cloud.stream.app.trigger.TriggerPropertiesMaxMessagesDefaultOne;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.context.annotation.Bean;
@@ -75,7 +74,7 @@ public class MailSourceConfiguration {
 	private IntegrationFlowBuilder getFlowBuilder() {
 
 		IntegrationFlowBuilder flowBuilder;
-		URLName urlName = this.properties.getMailUrl();
+		URLName urlName = this.properties.getUrl();
 
 		if (this.properties.isIdleImap()) {
 			flowBuilder = getIdleImapFlow(urlName);

@@ -27,7 +27,7 @@ import javax.validation.constraints.Pattern;
  * @author Thomas Risberg
  */
 @SuppressWarnings("unused")
-@ConfigurationProperties
+@ConfigurationProperties("hdfs")
 public class HdfsSinkProperties {
 
 	/**

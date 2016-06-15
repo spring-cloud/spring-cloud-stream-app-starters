@@ -27,7 +27,7 @@ import io.netty.handler.logging.LogLevel;
  * @author Oliver Moser
  * @author Gary Russell
  */
-@ConfigurationProperties
+@ConfigurationProperties("websocket")
 public class WebsocketSinkProperties {
 
 	public static final String DEFAULT_LOGLEVEL = LogLevel.WARN.toString();
@@ -44,9 +44,9 @@ public class WebsocketSinkProperties {
 	boolean ssl;
 
 	/**
-	 * the websocketPort on which the Netty server listens. Default is <tt>9292</tt>
+	 * the port on which the Netty server listens. Default is <tt>9292</tt>
 	 */
-	int websocketPort = DEFAULT_PORT;
+	int port = DEFAULT_PORT;
 
 	/**
 	 * the number of threads for the Netty {@link io.netty.channel.EventLoopGroup}. Default is <tt>1</tt>
@@ -54,14 +54,14 @@ public class WebsocketSinkProperties {
 	int threads = DEFAULT_THREADS;
 
 	/**
-	 * the websocketLoglevel for netty channels. Default is <tt>WARN</tt>
+	 * the logLevel for netty channels. Default is <tt>WARN</tt>
 	 */
-	String websocketLoglevel = DEFAULT_LOGLEVEL;
+	String logLevel = DEFAULT_LOGLEVEL;
 
 	/**
-	 * the websocketPath on which a WebsocketSink consumer needs to connect. Default is <tt>/websocket</tt>
+	 * the path on which a WebsocketSink consumer needs to connect. Default is <tt>/websocket</tt>
 	 */
-	String websocketPath = DEFAULT_PATH;
+	String path = DEFAULT_PATH;
 
 	public boolean isSsl() {
 		return ssl;
@@ -71,12 +71,12 @@ public class WebsocketSinkProperties {
 		this.ssl = ssl;
 	}
 
-	public int getWebsocketPort() {
-		return websocketPort;
+	public int getPort() {
+		return port;
 	}
 
-	public void setWebsocketPort(int websocketPort) {
-		this.websocketPort = websocketPort;
+	public void setPort(int port) {
+		this.port = port;
 	}
 
 	public int getThreads() {
@@ -87,20 +87,20 @@ public class WebsocketSinkProperties {
 		this.threads = threads;
 	}
 
-	public String getWebsocketLoglevel() {
-		return websocketLoglevel;
+	public String getLogLevel() {
+		return logLevel;
 	}
 
-	public void setWebsocketLoglevel(String websocketLoglevel) {
-		this.websocketLoglevel = websocketLoglevel;
+	public void setLogLevel(String logLevel) {
+		this.logLevel = logLevel;
 	}
 
-	public String getWebsocketPath() {
-		return websocketPath;
+	public String getPath() {
+		return path;
 	}
 
-	public void setWebsocketPath(String websocketPath) {
-		this.websocketPath = websocketPath;
+	public void setPath(String path) {
+		this.path = path;
 	}
 
 }

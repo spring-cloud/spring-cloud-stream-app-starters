@@ -32,7 +32,7 @@ import org.springframework.expression.Expression;
  * @author Eric Bottard
  * @author Gary Russell
  */
-@ConfigurationProperties
+@ConfigurationProperties("pmml")
 public class PmmlProcessorProperties {
 
 	/**

@@ -39,8 +39,8 @@ import io.netty.handler.logging.LoggingHandler;
 
 /**
  * Bootstraps a Netty server using the {@link WebsocketSinkServerInitializer}. Also adds
- * a {@link LoggingHandler} and uses the <tt>websocketLoglevel</tt>
- * from {@link WebsocketSinkProperties#websocketLoglevel}.
+ * a {@link LoggingHandler} and uses the <tt>logLevel</tt>
+ * from {@link WebsocketSinkProperties#logLevel}.
  *
  * @author Oliver Moser
  * @author Gary Russell
@@ -84,7 +84,7 @@ public class WebsocketSinkServer {
 			.channel(NioServerSocketChannel.class)
 			.handler(new LoggingHandler(nettyLogLevel()))
 			.childHandler(initializer)
-			.bind(properties.getWebsocketPort())
+			.bind(properties.getPort())
 			.sync()
 			.channel();
 		this.port = channel.localAddress().getPort();
@@ -95,10 +95,10 @@ public class WebsocketSinkServer {
 		logger.info("███████████████████████████████████████████████████████████");
 		logger.info("                >> websocket-sink config <<                ");
 		logger.info("");
-		logger.info(String.format("websocketPort:     %s", this.port));
+		logger.info(String.format("port:     %s", this.port));
 		logger.info(String.format("ssl:               %s", this.properties.isSsl()));
-		logger.info(String.format("websocketPath:     %s", this.properties.getWebsocketPath()));
-		logger.info(String.format("websocketLoglevel: %s", this.properties.getWebsocketLoglevel()));
+		logger.info(String.format("path:     %s", this.properties.getPath()));
+		logger.info(String.format("logLevel: %s", this.properties.getLogLevel()));
 		logger.info(String.format("threads:           %s", this.properties.getThreads()));
 		logger.info("");
 		logger.info("████████████████████████████████████████████████████████████");
@@ -108,7 +108,7 @@ public class WebsocketSinkServer {
 	// HELPERS
 	//
 	private LogLevel nettyLogLevel() {
-		return LogLevel.valueOf(properties.getWebsocketLoglevel().toUpperCase());
+		return LogLevel.valueOf(properties.getLogLevel().toUpperCase());
 	}
 
 

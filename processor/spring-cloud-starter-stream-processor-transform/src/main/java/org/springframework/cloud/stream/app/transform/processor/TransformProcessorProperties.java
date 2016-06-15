@@ -25,7 +25,7 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
  *
  * @author Eric Bottard
  */
-@ConfigurationProperties
+@ConfigurationProperties("transformer")
 public class TransformProcessorProperties {
 
 	private static final Expression DEFAULT_EXPRESSION = new SpelExpressionParser().parseExpression("payload");

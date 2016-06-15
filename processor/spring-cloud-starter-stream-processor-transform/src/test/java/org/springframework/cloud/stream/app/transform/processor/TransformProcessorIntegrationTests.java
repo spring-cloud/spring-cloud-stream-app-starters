@@ -70,7 +70,7 @@ public abstract class TransformProcessorIntegrationTests {
 		}
 	}
 
-	@IntegrationTest("expression=payload.toUpperCase()")
+	@IntegrationTest("transformer.expression=payload.toUpperCase()")
 	public static class UsingExpressionIntegrationTests extends TransformProcessorIntegrationTests {
 
 		@Autowired

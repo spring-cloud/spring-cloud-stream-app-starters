@@ -31,7 +31,7 @@ import javax.validation.constraints.NotNull;
  * @author Waldemar Hummer
  * @author Mark Fisher
  */
-@ConfigurationProperties
+@ConfigurationProperties("httpclient")
 public class HttpclientProcessorProperties {
 
 	private static final HttpMethod DEFAULT_HTTP_METHOD = HttpMethod.GET;

@@ -26,7 +26,7 @@ import javax.validation.constraints.AssertTrue;
  *
  * @author Gary Russell
  */
-@ConfigurationProperties
+@ConfigurationProperties("splitter")
 public class SplitterProcessorProperties {
 
 	/**

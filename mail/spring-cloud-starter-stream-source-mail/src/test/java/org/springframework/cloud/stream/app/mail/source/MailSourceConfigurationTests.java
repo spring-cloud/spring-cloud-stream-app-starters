@@ -53,8 +53,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = MailSourceConfigurationTests.MailSourceApplication.class)
 @DirtiesContext
-@TestPropertySource(properties = { "mark-as-read=true", "delete=false",
-		"java-mail-properties=mail.imap.socketFactory.fallback=true\\n mail.store.protocol=imap\\n mail.debug=true" })
+@TestPropertySource(properties = { "mail.mark-as-read=true", "mail.delete=false",
+		"mail.java-mail-properties=mail.imap.socketFactory.fallback=true\\n mail.store.protocol=imap\\n mail.debug=true" })
 public abstract class MailSourceConfigurationTests {
 
 	@Autowired
@@ -88,7 +88,7 @@ public abstract class MailSourceConfigurationTests {
 		MAIL_SERVER.stop();
 	}
 
-	@IntegrationTest({ "mail-url=imap://user:pw@localhost:${test.mail.server.port}/INBOX" })
+	@IntegrationTest({ "mail.url=imap://user:pw@localhost:${test.mail.server.port}/INBOX" })
 	public static class ImapPassTests extends MailSourceConfigurationTests {
 
 		@BeforeClass
@@ -107,7 +107,7 @@ public abstract class MailSourceConfigurationTests {
 
 	}
 
-	@IntegrationTest({ "mail-url=imap://user:pw@localhost:${test.mail.server.port}/INBOX", "charset=cp1251"})
+	@IntegrationTest({ "mail.url=imap://user:pw@localhost:${test.mail.server.port}/INBOX", "mail.charset=cp1251"})
 	public static class ImapFailTests extends MailSourceConfigurationTests {
 
 		@BeforeClass
@@ -129,7 +129,7 @@ public abstract class MailSourceConfigurationTests {
 
 	}
 
-	@IntegrationTest({ "mail-url=pop3://user:pw@localhost:${test.mail.server.port}/INBOX" })
+	@IntegrationTest({ "mail.url=pop3://user:pw@localhost:${test.mail.server.port}/INBOX" })
 	public static class Pop3PassTests extends MailSourceConfigurationTests {
 
 		@BeforeClass
@@ -148,7 +148,7 @@ public abstract class MailSourceConfigurationTests {
 
 	}
 
-	@IntegrationTest({ "mail-url=pop3://user:pw@localhost:${test.mail.server.port}/INBOX" })
+	@IntegrationTest({ "mail.url=pop3://user:pw@localhost:${test.mail.server.port}/INBOX" })
 	public static class Pop3FailTests extends MailSourceConfigurationTests {
 
 		@BeforeClass
@@ -167,7 +167,7 @@ public abstract class MailSourceConfigurationTests {
 
 	}
 
-	@IntegrationTest({ "idle-imap=true", "mail-url=imap://user:pw@localhost:${test.mail.server.port}/INBOX" })
+	@IntegrationTest({ "mail.idle-imap=true", "mail.url=imap://user:pw@localhost:${test.mail.server.port}/INBOX" })
 	public static class ImapIdlePassTests extends MailSourceConfigurationTests {
 
 		@BeforeClass
@@ -186,7 +186,7 @@ public abstract class MailSourceConfigurationTests {
 
 	}
 
-	@IntegrationTest({ "idle-imap=true", "mail-url=imap://user:pw@localhost:${test.mail.server.port}/INBOX" })
+	@IntegrationTest({ "mail.idle-imap=true", "mail.url=imap://user:pw@localhost:${test.mail.server.port}/INBOX" })
 	public static class ImapIdleFailTests extends MailSourceConfigurationTests {
 
 		@BeforeClass
