@@ -27,7 +27,6 @@ import org.springframework.cloud.task.launcher.annotation.EnableTaskLauncher;
  * @author Glenn Renfro
  */
 @EnableBinding(Sink.class)
-@EnableConfigurationProperties(TaskLauncherLocalSinkProperties.class)
 @EnableTaskLauncher
 public class TaskLauncherLocalSinkConfiguration {
 }
