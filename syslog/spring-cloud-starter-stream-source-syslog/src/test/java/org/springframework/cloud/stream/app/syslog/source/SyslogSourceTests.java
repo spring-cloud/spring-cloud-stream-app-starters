@@ -67,7 +67,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringApplicationConfiguration(classes = SyslogSourceTests.SyslogSourceApplication.class,
 								initializers = PropertiesInitializer.class)
 @DirtiesContext
-@IntegrationTest("port = 0")
+@IntegrationTest("syslog.port = 0")
 public abstract class SyslogSourceTests {
 
 	protected static final String RFC3164_PACKET = "<157>JUL 26 22:08:35 WEBERN TESTING[70729]: TEST SYSLOG MESSAGE";
@@ -97,7 +97,7 @@ public abstract class SyslogSourceTests {
 	@Autowired
 	protected ApplicationContext context;
 
-	@Value("${port}")
+	@Value("${syslog.port}")
 	private int port;
 
 	@BeforeClass
@@ -107,12 +107,12 @@ public abstract class SyslogSourceTests {
 		int port = socket.getLocalPort();
 		socket.close();
 		Properties properties = new Properties();
-		properties.put("port", Integer.toString(port));
+		properties.put("syslog.port", Integer.toString(port));
 		PropertiesInitializer.PROPERTIES = properties;
 	}
 
-	@IntegrationTest({ "port = 0", "nio = true", "reverseLookup = true",
-					"socketTimeout = 123", "bufferSize = 5" })
+	@IntegrationTest({ "syslog.port = 0", "syslog.nio = true", "syslog.reverseLookup = true",
+					"syslog.socketTimeout = 123", "syslog.bufferSize = 5" })
 	public static class PropertiesPopulatedTests extends SyslogSourceTests {
 
 		@Test
@@ -150,7 +150,7 @@ public abstract class SyslogSourceTests {
 
 	}
 
-	@IntegrationTest({ "port = 0", "rfc = 5424" })
+	@IntegrationTest({ "syslog.port = 0", "syslog.rfc = 5424" })
 	public static class Tcp5424Tests extends SyslogSourceTests {
 
 		@Test
@@ -164,7 +164,7 @@ public abstract class SyslogSourceTests {
 
 	}
 
-	@IntegrationTest("protocol = udp")
+	@IntegrationTest("syslog.protocol = udp")
 	public static class Udp3164Tests extends SyslogSourceTests {
 
 		@Test
@@ -178,7 +178,7 @@ public abstract class SyslogSourceTests {
 
 	}
 
-	@IntegrationTest({ "protocol = udp", "rfc = 5424" })
+	@IntegrationTest({ "syslog.protocol = udp", "syslog.rfc = 5424" })
 	public static class Udp5424Tests extends SyslogSourceTests {
 
 		@Test
@@ -192,7 +192,7 @@ public abstract class SyslogSourceTests {
 
 	}
 
-	@IntegrationTest("protocol = both")
+	@IntegrationTest("syslog.protocol = both")
 	public static class TcpAndUdp3164Tests extends SyslogSourceTests {
 
 		@Test
@@ -212,7 +212,7 @@ public abstract class SyslogSourceTests {
 
 	}
 
-	@IntegrationTest({ "protocol = both", "rfc = 5424" })
+	@IntegrationTest({ "syslog.protocol = both", "syslog.rfc = 5424" })
 	public static class TcpAndUdp5424Tests extends SyslogSourceTests {
 
 		@Test
