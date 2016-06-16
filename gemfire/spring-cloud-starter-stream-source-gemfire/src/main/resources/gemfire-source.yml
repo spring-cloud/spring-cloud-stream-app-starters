@@ -1,4 +1,6 @@
 #
 # Gemfire client pool must be configured with subscriptions enabled
 #
-subscriptionEnabled:true
+gemfire:
+    pool:
+        subscriptionEnabled:true

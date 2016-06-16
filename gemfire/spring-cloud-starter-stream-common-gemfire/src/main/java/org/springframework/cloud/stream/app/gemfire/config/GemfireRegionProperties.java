@@ -21,7 +21,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * @author David Turanski
  */
-@ConfigurationProperties
+@ConfigurationProperties("gemfire.region")
 public class GemfireRegionProperties {
 	/**
 	 * The region name.

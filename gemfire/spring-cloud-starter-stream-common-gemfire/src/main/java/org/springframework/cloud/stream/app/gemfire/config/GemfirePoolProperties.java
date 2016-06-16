@@ -15,17 +15,18 @@
 
 package org.springframework.cloud.stream.app.gemfire.config;
 
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import java.net.InetSocketAddress;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * Gemfire client pool configuration properties
  *
  * @author David Turanski
  */
-@ConfigurationProperties
+@ConfigurationProperties("gemfire.pool")
 public class GemfirePoolProperties {
 	static enum ConnectType {locator, server}
 
