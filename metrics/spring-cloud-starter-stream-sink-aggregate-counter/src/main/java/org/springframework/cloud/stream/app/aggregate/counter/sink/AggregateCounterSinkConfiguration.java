@@ -18,10 +18,10 @@ package org.springframework.cloud.stream.app.aggregate.counter.sink;
 
 import org.joda.time.DateTime;
 
+import org.springframework.analytics.metrics.AggregateCounterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.app.metrics.AggregateCounterRepository;
 import org.springframework.cloud.stream.config.SpelExpressionConverterConfiguration;
 import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.context.annotation.Import;

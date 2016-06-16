@@ -21,11 +21,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.analytics.metrics.FieldValueCounterWriter;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.app.metrics.FieldValueCounterWriter;
 import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.context.annotation.Import;
 import org.springframework.integration.annotation.ServiceActivator;

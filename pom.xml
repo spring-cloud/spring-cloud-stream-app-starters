@@ -29,7 +29,6 @@
 		<module>spring-cloud-stream-app-starters-docs</module>
 		<module>spring-cloud-stream-app-descriptor</module>
 		<module>app-starters-common</module>
-		<module>app-starters-common-analytics</module>
 		<module>app-starters-test-support</module>
 		<module>aws-integration-tests</module>
 		<module>aws-s3</module>
