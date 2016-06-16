@@ -16,8 +16,13 @@
 
 package org.springframework.cloud.stream.app.trigger.source;
 
+import static org.junit.Assert.assertTrue;
+
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.IntegrationTest;
@@ -28,10 +33,6 @@ import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.cloud.stream.test.binder.MessageCollector;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.util.concurrent.TimeUnit;
-
-import static org.junit.Assert.assertTrue;
 
 /**
  * Trigger source tests.
@@ -50,7 +51,7 @@ public abstract class TriggerSourceTests {
 	@Autowired
 	protected MessageCollector messageCollector;
 
-	@IntegrationTest({"trigger.fixedDelay=2", "trigger.initialDelay=1", "payload='test'"})
+	@IntegrationTest({"trigger.fixedDelay=2", "trigger.initialDelay=1", "trigger.source.payload='test'"})
 	public static class FixedDelayTest extends TriggerSourceTests {
 
 		@Test
@@ -68,7 +69,7 @@ public abstract class TriggerSourceTests {
 		}
 	}
 
-	@IntegrationTest({"trigger.cron=0/2 * * * * *", "payload='cronTest'"})
+	@IntegrationTest({"trigger.cron=0/2 * * * * *", "trigger.source.payload='cronTest'"})
 	public static class CronTriggerTest extends TriggerSourceTests {
 
 		@Test

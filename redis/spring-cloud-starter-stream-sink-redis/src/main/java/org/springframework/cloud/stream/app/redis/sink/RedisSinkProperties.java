@@ -32,7 +32,7 @@ import org.springframework.util.StringUtils;
  * @author Eric Bottard
  * @author Mark Pollack
  */
-@ConfigurationProperties
+@ConfigurationProperties("redis")
 public class RedisSinkProperties {
 
 	private final SpelExpressionParser parser = new SpelExpressionParser();

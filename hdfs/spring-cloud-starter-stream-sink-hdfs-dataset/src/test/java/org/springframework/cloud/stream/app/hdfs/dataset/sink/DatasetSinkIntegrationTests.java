@@ -16,6 +16,13 @@
 
 package org.springframework.cloud.stream.app.hdfs.dataset.sink;
 
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.junit.Assume;
@@ -23,6 +30,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -40,13 +48,6 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-
-import static org.junit.Assert.assertTrue;
-
 /**
  * @author Thomas Risberg
  */
@@ -58,7 +59,7 @@ public abstract class DatasetSinkIntegrationTests {
 	@Autowired
 	ConfigurableApplicationContext applicationContext;
 
-	@Value("${directory}#{T(java.io.File).separator}${namespace}")
+	@Value("${hdfs.dataset.directory}#{T(java.io.File).separator}${hdfs.dataset.namespace}")
 	protected String testDir;
 
 	@Autowired
@@ -87,10 +88,10 @@ public abstract class DatasetSinkIntegrationTests {
 
 	@WebIntegrationTest({"server.port:0",
 			"spring.hadoop.fsUri=file:///",
-			"directory=${java.io.tmpdir}/dataset",
-			"namespace=test",
-			"batchSize=2",
-			"idleTimeout=2000"})
+			"hdfs.dataset.directory=${java.io.tmpdir}/dataset",
+			"hdfs.dataset.namespace=test",
+			"hdfs.dataset.batchSize=2",
+			"hdfs.dataset.idleTimeout=2000"})
 	public static class WritingDatasetTests extends DatasetSinkIntegrationTests {
 
 		@Test
@@ -124,13 +125,13 @@ public abstract class DatasetSinkIntegrationTests {
 
 	@WebIntegrationTest({"server.port:0",
 			"spring.hadoop.fsUri=file:///",
-			"directory=${java.io.tmpdir}/dataset",
-			"namespace=pojo",
-			"allowNullValues=false",
-			"format=avro",
-			"partitionPath=year('timestamp')",
-			"batchSize=2",
-			"idleTimeout=2000"})
+			"hdfs.dataset.directory=${java.io.tmpdir}/dataset",
+			"hdfs.dataset.namespace=pojo",
+			"hdfs.dataset.allowNullValues=false",
+			"hdfs.dataset.format=avro",
+			"hdfs.dataset.partitionPath=year('timestamp')",
+			"hdfs.dataset.batchSize=2",
+			"hdfs.dataset.idleTimeout=2000"})
 	public static class PartitionedDatasetTests extends DatasetSinkIntegrationTests {
 
 		Long systemTime = 1446570266690L; // Date is 2015/11/03
@@ -177,12 +178,12 @@ public abstract class DatasetSinkIntegrationTests {
 
 	@WebIntegrationTest({"server.port:0",
 			"spring.hadoop.fsUri=file:///",
-			"directory=${java.io.tmpdir}/dataset",
-			"namespace=parquet",
-			"allowNullValues=false",
-			"format=parquet",
-			"batchSize=2",
-			"idleTimeout=2000"})
+			"hdfs.dataset.directory=${java.io.tmpdir}/dataset",
+			"hdfs.dataset.namespace=parquet",
+			"hdfs.dataset.allowNullValues=false",
+			"hdfs.dataset.format=parquet",
+			"hdfs.dataset.batchSize=2",
+			"hdfs.dataset.idleTimeout=2000"})
 	public static class ParquetDatasetTests extends DatasetSinkIntegrationTests {
 
 		@Test

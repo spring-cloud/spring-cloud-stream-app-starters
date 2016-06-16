@@ -22,7 +22,7 @@ import org.springframework.expression.common.LiteralExpression;
 /**
  * @author Artem Bilan
  */
-@ConfigurationProperties
+@ConfigurationProperties("trigger.source")
 public class SourcePayloadProperties {
 
 	/**
