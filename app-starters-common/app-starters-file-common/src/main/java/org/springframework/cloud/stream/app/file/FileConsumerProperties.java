@@ -33,7 +33,7 @@ public class FileConsumerProperties {
 	 * 'contents' - the contents as bytes.
 	 * Default is 'contents'
 	 */
-	private FileReadingMode fileReadingMode = FileReadingMode.contents;
+	private FileReadingMode mode = FileReadingMode.contents;
 
 	/**
 	 * 	Set to true to emit start of file/end of file marker messages before/after the data.
@@ -50,11 +50,11 @@ public class FileConsumerProperties {
 
 	@NotNull
 	public FileReadingMode getMode() {
-		return this.fileReadingMode;
+		return this.mode;
 	}
 
 	public void setMode(FileReadingMode mode) {
-		this.fileReadingMode = mode;
+		this.mode = mode;
 	}
 
 	public Boolean getWithMarkers() {
@@ -75,7 +75,7 @@ public class FileConsumerProperties {
 
 	@AssertTrue(message = "withMarkers can only be supplied when FileReadingMode is 'lines'")
 	public boolean isWithMarkersValid() {
-		return !(this.withMarkers != null && FileReadingMode.lines != this.fileReadingMode);
+		return !(this.withMarkers != null && FileReadingMode.lines != this.mode);
 	}
 
 }
