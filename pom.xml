@@ -60,6 +60,8 @@
 		<module>triggertask</module>
 		<module>twitter</module>
 		<module>websocket</module>
+		<module>starter-parent</module>
+		<module>spring-cloud-stream-app-documentation-maven-plugin</module>
 	</modules>
 
 	<dependencyManagement>

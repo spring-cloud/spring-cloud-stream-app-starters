@@ -6,8 +6,9 @@
 
     <parent>
         <groupId>org.springframework.cloud.stream.app</groupId>
-        <artifactId>spring-cloud-stream-app-starters</artifactId>
+        <artifactId>starter-parent</artifactId>
         <version>1.0.0.BUILD-SNAPSHOT</version>
+        <relativePath>../starter-parent</relativePath>
     </parent>
 
     <modules>
