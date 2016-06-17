@@ -40,6 +40,7 @@ $$timeUnit$$:: $$the time unit for the fixed and initial delays$$ *($$String$$, 
 $$tmpFileSuffix$$:: $$extension to use when downloading files$$ *($$String$$, default: `.tmp`)*
 $$user$$:: $$the username to use$$ *($$String$$, no default)*
 $$withMarkers$$:: $$if true emits start of file/end of file marker messages before/after the data. Only valid with FileReadingMode 'lines'$$ *($$Boolean$$, no default)*
+$$markersJson$$:: $$if `true` emits file markers as JSON String. Only applied when FileReadingMode is 'lines'$$ *($$boolean$$, default: `true`)*
 
 //end::ref-doc[]
 == Build

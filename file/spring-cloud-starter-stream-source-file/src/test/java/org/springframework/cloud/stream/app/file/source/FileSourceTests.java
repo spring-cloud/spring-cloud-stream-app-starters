@@ -128,7 +128,7 @@ public abstract class FileSourceTests {
 
 	@IntegrationTest({"file.directory = ${java.io.tmpdir}${file.separator}dataflow-tests${file.separator}input",
 			"trigger.fixedDelay = 100", "trigger.timeUnit = MILLISECONDS", "file.consumer.mode = lines",
-			"file.consumer.withMarkers = true"})
+			"file.consumer.withMarkers = true", "file.consumer.markersJson = false"})
 	public static class LinesAndMarkersPayloadTests extends FileSourceTests {
 
 		@Test
@@ -157,7 +157,7 @@ public abstract class FileSourceTests {
 
 	@IntegrationTest({"file.directory = ${java.io.tmpdir}${file.separator}dataflow-tests${file.separator}input",
 			"trigger.fixedDelay = 100", "trigger.timeUnit = MILLISECONDS", "file.consumer.mode = lines",
-			"file.consumer.withMarkers = true", "file.consumer.markersJson = true"})
+			"file.consumer.withMarkers = true"})
 	public static class LinesAndMarkersAsJsonPayloadTests extends FileSourceTests {
 
 		@Test

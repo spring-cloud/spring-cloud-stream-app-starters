@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 the original author or authors.
+ * Copyright 2015-2016 the original author or authors.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -22,6 +22,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * @author David Turanski
+ * @author Artem Bilan
  */
 @ConfigurationProperties("file.consumer")
 public class FileConsumerProperties {
@@ -31,7 +32,6 @@ public class FileConsumerProperties {
 	 * Values are 'ref' - The File object,
 	 * 'lines' - a message per line, or
 	 * 'contents' - the contents as bytes.
-	 * Default is 'contents'
 	 */
 	private FileReadingMode mode = FileReadingMode.contents;
 
@@ -42,11 +42,10 @@ public class FileConsumerProperties {
 	private Boolean withMarkers = null;
 
 	/**
-	 * When {@code fileMarkers == true}, specify if they should be produced
-	 * as {@link org.springframework.integration.file.splitter.FileSplitter.FileMarker}
-	 * objects or JSON.
+	 * When 'fileMarkers == true', specify if they should be produced
+	 * as FileSplitter.FileMarker objects or JSON.
 	 */
-	private boolean markersJson = false;
+	private boolean markersJson = true;
 
 	@NotNull
 	public FileReadingMode getMode() {
@@ -75,7 +74,7 @@ public class FileConsumerProperties {
 
 	@AssertTrue(message = "withMarkers can only be supplied when FileReadingMode is 'lines'")
 	public boolean isWithMarkersValid() {
-		return !(this.withMarkers != null && FileReadingMode.lines != this.mode);
+		return this.withMarkers == null || FileReadingMode.lines == this.mode;
 	}
 
 }

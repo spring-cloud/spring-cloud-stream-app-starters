@@ -49,11 +49,10 @@ public class SplitterProcessorProperties {
 	private Boolean fileMarkers;
 
 	/**
-	 * When {@code fileMarkers == true}, specify if they should be produced
-	 * as {@link org.springframework.integration.file.splitter.FileSplitter.FileMarker}
-	 * objects or JSON.
+	 * When 'fileMarkers == true', specify if they should be produced
+	 * as FileSplitter.FileMarker objects or JSON.
 	 */
-	private boolean markersJson = false;
+	private boolean markersJson = true;
 
 	/**
 	 * The charset to use when converting bytes in text-based files
