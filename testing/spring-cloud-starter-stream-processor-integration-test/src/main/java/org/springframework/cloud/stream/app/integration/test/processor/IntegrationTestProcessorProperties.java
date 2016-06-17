@@ -16,10 +16,10 @@
 
 package org.springframework.cloud.stream.app.integration.test.processor;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import java.util.HashSet;
 import java.util.Set;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * Configuration properties for the IntegrationTestProcessor module.
@@ -27,7 +27,7 @@ import java.util.Set;
  * @author Eric Bottard
  * @author Gary Russell
  */
-@ConfigurationProperties
+@ConfigurationProperties("integration-test")
 public class IntegrationTestProcessorProperties {
 
 	public static final String FUNNY_CHARACTERS = "&'\"|< é\\(";

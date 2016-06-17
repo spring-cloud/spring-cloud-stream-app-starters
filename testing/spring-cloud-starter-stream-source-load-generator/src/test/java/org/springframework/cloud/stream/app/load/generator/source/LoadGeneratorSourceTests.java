@@ -16,9 +16,16 @@
 
 package org.springframework.cloud.stream.app.load.generator.source;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -28,12 +35,6 @@ import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.cloud.stream.test.binder.MessageCollector;
 import org.springframework.messaging.Message;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Tests for LoadGeneratorSource.
@@ -58,10 +59,10 @@ public class LoadGeneratorSourceTests {
 	public static void configureProperties() throws Throwable {
 
 		Properties properties = new Properties();
-		properties.put("producers", 1);
-		properties.put("messageSize", 1000);
-		properties.put("messageCount", 1);
-		properties.put("generateTimestamp", false);
+		properties.put("load-generator.producers", 1);
+		properties.put("load-generator.messageSize", 1000);
+		properties.put("load-generator.messageCount", 1);
+		properties.put("load-generator.generateTimestamp", false);
 		PropertiesInitializer.PROPERTIES = properties;
 	}
 

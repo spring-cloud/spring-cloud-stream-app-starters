@@ -23,7 +23,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *
  * @author Glenn Renfro
  */
-@ConfigurationProperties
+@ConfigurationProperties("load-generator")
 public class LoadGeneratorSourceProperties {
 
 	private int producers = 1;
