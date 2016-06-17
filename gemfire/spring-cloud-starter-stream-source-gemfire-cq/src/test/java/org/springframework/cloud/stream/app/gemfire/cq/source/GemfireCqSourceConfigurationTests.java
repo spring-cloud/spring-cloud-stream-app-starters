@@ -40,7 +40,7 @@ import com.gemstone.gemfire.cache.client.Pool;
 		GemfireCqSourceConfiguration.class,
 		PropertyPlaceholderAutoConfiguration.class,
 		TestSupportBinderAutoConfiguration.class })
-@IntegrationTest( { "gemfire.cq.query= Select * from /Stocks"} )
+@IntegrationTest( { "gemfire.query= Select * from /Stocks"} )
 @EnableConfigurationProperties(GemfireCqSourceProperties.class)
 public class GemfireCqSourceConfigurationTests {
 
