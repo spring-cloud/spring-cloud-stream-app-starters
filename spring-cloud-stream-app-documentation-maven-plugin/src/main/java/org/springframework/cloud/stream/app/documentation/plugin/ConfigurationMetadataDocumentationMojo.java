@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -30,7 +32,6 @@ import org.springframework.boot.loader.archive.Archive;
 import org.springframework.boot.loader.archive.ExplodedArchive;
 import org.springframework.boot.loader.archive.JarFileArchive;
 import org.springframework.cloud.dataflow.configuration.metadata.ApplicationConfigurationMetadataResolver;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 
@@ -72,9 +73,12 @@ public class ConfigurationMetadataDocumentationMojo extends AbstractMojo {
 				return;
 			}
 
-			ClassLoader classLoader = metadataResolver.appClassLoader(mavenProject);
+			ScatteredArchive archive = new ScatteredArchive(mavenProject);
+			ClassLoader classLoader = metadataResolver.createClassLoader(archive);
+			debug(classLoader);
 
-			List<ConfigurationMetadataProperty> properties = metadataResolver.listProperties(new FileSystemResource(artifact.getFile()));
+
+			List<ConfigurationMetadataProperty> properties = metadataResolver.listProperties(archive, false);
 			Collections.sort(properties, new Comparator<ConfigurationMetadataProperty>() {
 
 				@Override
@@ -105,12 +109,19 @@ public class ConfigurationMetadataDocumentationMojo extends AbstractMojo {
 			getLog().info(String.format("Documented %d configuration properties", properties.size()));
 			tmp.renameTo(readme);
 		}
-		catch (IOException e) {
+		catch (Exception e) {
 			throw new MojoExecutionException("Error generating documentation", e);
 		} finally {
 			tmp.delete();
 		}
 
+	}
+
+	private void debug(ClassLoader classLoader) {
+		if (classLoader instanceof URLClassLoader) {
+			List<URL> urls = Arrays.asList(((URLClassLoader) classLoader).getURLs());
+			getLog().debug("Classloader has the following URLs:\n" + urls.toString().replace(',', '\n'));
+		}
 	}
 
 	private String asciidocFor(ConfigurationMetadataProperty property, ClassLoader classLoader) {
@@ -131,7 +142,7 @@ public class ConfigurationMetadataDocumentationMojo extends AbstractMojo {
 		if (ClassUtils.isPresent(type, classLoader)) {
 			Class<?> clazz = ClassUtils.resolveClassName(type, classLoader);
 			if (clazz.isEnum()) {
-				return " possible values: `" + StringUtils.arrayToDelimitedString(clazz.getEnumConstants(), "`,`") + "`";
+				return ", possible values: `" + StringUtils.arrayToDelimitedString(clazz.getEnumConstants(), "`,`") + "`";
 			}
 		}
 		return "";
@@ -158,14 +169,14 @@ public class ConfigurationMetadataDocumentationMojo extends AbstractMojo {
 
 	private static class ClassLoaderExposingMetadataResolver extends ApplicationConfigurationMetadataResolver {
 
-		public ClassLoader appClassLoader(MavenProject mavenProject) throws MojoExecutionException {
-			try {
-				return createClassLoader(new ScatteredArchive(mavenProject));
-			}
-			catch (Exception e) {
-				throw new MojoExecutionException("Error creating classloader for app", e);
-			}
+		/*
+		 * widens visibility
+		 */
+		@Override
+		public ClassLoader createClassLoader(Archive archive) throws Exception {
+			return super.createClassLoader(archive);
 		}
+
 	}
 
 	/**
