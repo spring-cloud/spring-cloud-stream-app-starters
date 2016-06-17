@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "trigger.time-unit",
+      "defaultValue": "SECONDS"
+    }
+  ]
+}
