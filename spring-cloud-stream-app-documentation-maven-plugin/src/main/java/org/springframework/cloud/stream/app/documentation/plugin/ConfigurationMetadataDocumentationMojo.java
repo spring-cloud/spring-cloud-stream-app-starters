@@ -131,7 +131,7 @@ public class ConfigurationMetadataDocumentationMojo extends AbstractMojo {
 		if (ClassUtils.isPresent(type, classLoader)) {
 			Class<?> clazz = ClassUtils.resolveClassName(type, classLoader);
 			if (clazz.isEnum()) {
-				return " possible values: " + StringUtils.arrayToCommaDelimitedString(clazz.getEnumConstants());
+				return " possible values: `" + StringUtils.arrayToDelimitedString(clazz.getEnumConstants(), "`,`") + "`";
 			}
 		}
 		return "";
@@ -140,6 +140,8 @@ public class ConfigurationMetadataDocumentationMojo extends AbstractMojo {
 	private String niceDefault(ConfigurationMetadataProperty property) {
 		if (property.getDefaultValue() == null) {
 			return "<none>";
+		} else if ("".equals(property.getDefaultValue())) {
+			return "<empty string>";
 		}
 		return String.valueOf(property.getDefaultValue());
 	}

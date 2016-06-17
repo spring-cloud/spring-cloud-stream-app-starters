@@ -8,13 +8,17 @@ A source module that listens for Emails  and emits the message body as a message
 
 The **$$mail$$** $$source$$ supports the following configuration properties:
 
-$$mail-url$$:: $$Mail connection URL for connection to Mail server e.g.'imaps://username:password@imap.server.com:993/Inbox'$$ *($$URLName$$, default: `null`, required)*
-$$markAsRead$$:: $$Set to true to mark email as read$$ *($$boolean$$, default: `false`)*
-$$delete$$:: $$Set to true to delete email after download$$ *($$boolean$$, default: `false`)*
-$$idleImap$$:: $$Set to true to use IdleImap Configuration$$ *($$boolean$$, default: `false`)*
-$$javaMailProperties$$:: $$JavaMail properties as a new line delimited string of name-value pairs, e.g. 'foo=bar\n baz=car'$$ *($$Properties$$, default: `new Properties()`)*
-$$expression$$:: $$Configure a SpEL expression to select messages$$
-$$charset$$:: $$Configure a charset to convert non-String mails to String$$ *($$String$$, default: `UTF-8`)*
+//tag::configuration-properties[]
+$$mail.charset$$:: $$The charset for byte[] mail-to-string transformation.$$ *($$String$$, default: `UTF-8`)*
+$$mail.delete$$:: $$Set to true to delete email after download.$$ *($$Boolean$$, default: `false`)*
+$$mail.expression$$:: $$Configure a SpEL expression to select messages.$$ *($$String$$, default: `true`)*
+$$mail.idle-imap$$:: $$Set to true to use IdleImap Configuration.$$ *($$Boolean$$, default: `false`)*
+$$mail.java-mail-properties$$:: $$JavaMail properties as a new line delimited string of name-value pairs, e.g.
+ 'foo=bar\n baz=car'.$$ *($$Properties$$, default: `<none>`)*
+$$mail.mark-as-read$$:: $$Set to true to mark email as read.$$ *($$Boolean$$, default: `false`)*
+$$mail.url$$:: $$Mail connection URL for connection to Mail server e.g.
+ 'imaps://username:password@imap.server.com:993/Inbox'.$$ *($$URLName$$, default: `<none>`)*
+//end::configuration-properties[]
 
 //end::ref-doc[]
 == Build

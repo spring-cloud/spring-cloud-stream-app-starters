@@ -7,10 +7,8 @@ A source that sends generated data and dispatches it to the stream. This is to p
 
 The **$$load-generator$$** $$source$$ has the following options:
 
-$$messageCount$$:: $$the number of messages to send$$ *($$Integer$$, default: `100`)*
-$$messageSize$$:: $$the size of message to send$$ *($$Integer$$, `1000`)*
-$$producers$$:: $$the number of producers$$ *($$Integer$$, `1`)*
-$$outputType$$:: $$how this module should emit messages it produces$$ *($$MimeType$$, default: no default)*
+//tag::configuration-properties[]
+//end::configuration-properties[]
 
 //end::ref-doc[]
 == Build

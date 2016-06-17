@@ -7,22 +7,25 @@ This module writes the content of each message it receives to Cassandra.
 
 The **$$cassandra$$** $$sink$$ has the following options:
 
-$$compressionType$$:: $$the compression to use for the transport$$ *($$CompressionType$$, default: `NONE`, possible values: `NONE,SNAPPY`)*
-$$consistencyLevel$$:: $$the consistencyLevel option of WriteOptions$$ *($$ConsistencyLevel$$, no default, possible values: `ANY,ONE,TWO,THREE,QUOROM,LOCAL_QUOROM,EACH_QUOROM,ALL,LOCAL_ONE,SERIAL,LOCAL_SERIAL`)*
-$$spring.cassandra.contactPoints$$:: $$the comma-delimited string of the hosts to connect to Cassandra$$ *($$String$$, default: `localhost`)*
-$$entityBasePackages$$:: $$the base packages to scan for entities annotated with Table annotations$$ *($$String[]$$, default: `[]`)*
-$$ingestQuery$$:: $$the ingest Cassandra query$$ *($$String$$, no default)*
-$$spring.cassandra.initScript$$:: $$the path to file with CQL scripts (delimited by ';') to initialize keyspace schema$$ *($$String$$, no default)*
-$$spring.cassandra.keyspace$$:: $$the keyspace name to connect to$$ *($$String$$, default: `<stream name>`)*
-$$metricsEnabled$$:: $$enable/disable metrics collection for the created cluster$$ *($$boolean$$, default: `true`)*
-$$spring.cassandra.password$$:: $$the password for connection$$ *($$String$$, no default)*
-$$spring.cassandra.port$$:: $$the port to use to connect to the Cassandra host$$ *($$int$$, default: `9042`)*
-$$queryType$$:: $$the queryType for Cassandra Sink$$ *($$Type$$, default: `INSERT`, possible values: `INSERT,UPDATE,DELETE,STATEMENT`)*
-$$retryPolicy$$:: $$the retryPolicy  option of WriteOptions$$ *($$RetryPolicy$$, no default, possible values: `DEFAULT,DOWNGRADING_CONSISTENCY,FALLTHROUGH,LOGGING`)*
-$$statementExpression$$:: $$the expression in Cassandra query DSL style$$ *($$String$$, no default)*
-$$spring.cassandra.schemaAction$$:: $$schema action to perform$$ *($$SchemaAction$$, default: `NONE`, possible values: `CREATE,NONE,RECREATE,RECREATE_DROP_UNUSED`)*
-$$ttl$$:: $$the time-to-live option of WriteOptions$$ *($$int$$, default: `0`)*
-$$spring.cassandra.username$$:: $$the username for connection$$ *($$String$$, no default)*
+//tag::configuration-properties[]
+$$consistency-level$$:: $$The consistencyLevel option of WriteOptions.$$ *($$ConsistencyLevel$$, default: `<none>` possible values: `ANY`,`ONE`,`TWO`,`THREE`,`QUOROM`,`LOCAL_QUOROM`,`EACH_QUOROM`,`ALL`,`LOCAL_ONE`,`SERIAL`,`LOCAL_SERIAL`)*
+$$ingest-query$$:: $$The ingest Cassandra query.$$ *($$String$$, default: `<none>`)*
+$$query-type$$:: $$The queryType for Cassandra Sink.$$ *($$Type$$, default: `<none>`)*
+$$retry-policy$$:: $$The retryPolicy option of WriteOptions.$$ *($$RetryPolicy$$, default: `<none>` possible values: `DEFAULT`,`DOWNGRADING_CONSISTENCY`,`FALLTHROUGH`,`LOGGING`)*
+$$spring.cassandra.compression-type$$:: $$The compression to use for the transport.$$ *($$CompressionType$$, default: `<none>` possible values: `NONE`,`SNAPPY`)*
+$$spring.cassandra.contact-points$$:: $$The comma-delimited string of the hosts to connect to Cassandra.$$ *($$String$$, default: `<none>`)*
+$$spring.cassandra.create-keyspace$$:: $$The flag to create (or not) keyspace on module startup.$$ *($$Boolean$$, default: `false`)*
+$$spring.cassandra.entity-base-packages$$:: $$The base packages to scan for entities annotated with Table annotations.$$ *($$String[]$$, default: `[Ljava.lang.Object;@b7695b`)*
+$$spring.cassandra.init-script$$:: $$The resource with CQL scripts (delimited by ';') to initialize keyspace schema.$$ *($$Resource$$, default: `<none>`)*
+$$spring.cassandra.keyspace$$:: $$The keyspace name to connect to.$$ *($$String$$, default: `<none>`)*
+$$spring.cassandra.metrics-enabled$$:: $$Enable/disable metrics collection for the created cluster.$$ *($$Boolean$$, default: `<none>`)*
+$$spring.cassandra.password$$:: $$The password for connection.$$ *($$String$$, default: `<none>`)*
+$$spring.cassandra.port$$:: $$The port to use to connect to the Cassandra host.$$ *($$Integer$$, default: `<none>`)*
+$$spring.cassandra.schema-action$$:: $$The schema action to perform.$$ *($$SchemaAction$$, default: `<none>` possible values: `NONE`,`CREATE`,`RECREATE`,`RECREATE_DROP_UNUSED`)*
+$$spring.cassandra.username$$:: $$The username for connection.$$ *($$String$$, default: `<none>`)*
+$$statement-expression$$:: $$The expression in Cassandra query DSL style.$$ *($$Expression$$, default: `<none>`)*
+$$ttl$$:: $$The time-to-live option of WriteOptions.$$ *($$Integer$$, default: `0`)*
+//end::configuration-properties[]
 
 //end::ref-doc[]
 

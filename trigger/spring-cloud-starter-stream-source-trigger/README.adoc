@@ -7,13 +7,8 @@ also be sent each time the trigger fires.
 == Options
 The **$$trigger$$** $$source$$ has the following options:
 
-$$payload$$:: $$a SpEL expression.$$ *($$int$$, default: ``)*
-$$fixedDelay$$:: $$fixed delay for the Periodic trigger$$ *($$String$$, default: `yyyy-MM-dd HH:mm:ss`)*
-$$initialDelay$$:: $$initial delay for the Periodic trigger$$ *($$int$$, default: `0`)*
-$$timeUnit$$:: $$time unit to apply for delay$$ *($$String$$, default: `SECONDS`)*
-$$date$$:: $$the date value for the trigger$$ *($$String$$)*
-$$dateFormat$$:: $$format for the date value$$ *($$String$$)*
-$$cron$$:: $$the Cron expression for the Cron Trigger$$ *($$String$$, default: `SECONDS`)*
+//tag::configuration-properties[]
+//end::configuration-properties[]
 
 //end::ref-doc[]
 == Build

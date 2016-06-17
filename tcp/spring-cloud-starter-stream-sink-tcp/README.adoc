@@ -10,15 +10,17 @@ available, the default being 'CRLF'.
 
 The **$$tcp$$** $$sink$$ has the following options:
 
-$$charset$$:: $$the charset used when converting from String to bytes$$ *($$String$$, default: `UTF-8`)*
-$$close$$:: $$whether to close the socket after each message$$ *($$boolean$$, default: `false`)*
-$$encoder$$:: $$the encoder to use when sending messages$$ *($$Encoding$$, default: `CRLF`, possible values: `CRLF,LF,NULL,STXETX,RAW,L1,L2,L4`)*
-$$host$$:: $$the remote host to connect to$$ *($$String$$, default: `localhost`)*
-$$nio$$:: $$whether or not to use NIO$$ *($$boolean$$, default: `false`)*
-$$port$$:: $$the port on the remote host to connect to$$ *($$int$$, default: `1234`)*
-$$reverseLookup$$:: $$perform a reverse DNS lookup on the remote IP Address$$ *($$boolean$$, default: `false`)*
-$$socketTimeout$$:: $$the timeout (ms) before closing the socket when no data is received$$ *($$int$$, default: `120000`)*
-$$useDirectBuffers$$:: $$whether or not to use direct buffers$$ *($$boolean$$, default: `false`)*
+//tag::configuration-properties[]
+$$tcp.charset$$:: $$The charset used when converting from bytes to String.$$ *($$String$$, default: `UTF-8`)*
+$$tcp.close$$:: $$Whether to close the socket after each message.$$ *($$Boolean$$, default: `false`)*
+$$tcp.encoder$$:: $$The encoder to use when sending messages.$$ *($$Encoding$$, default: `<none>` possible values: `CRLF`,`LF`,`NULL`,`STXETX`,`RAW`,`L1`,`L2`,`L4`)*
+$$tcp.host$$:: $$The host to which this sink will connect.$$ *($$String$$, default: `<none>`)*
+$$tcp.nio$$:: $$<documentation missing>$$ *($$Boolean$$, default: `<none>`)*
+$$tcp.port$$:: $$<documentation missing>$$ *($$Integer$$, default: `<none>`)*
+$$tcp.reverse-lookup$$:: $$<documentation missing>$$ *($$Boolean$$, default: `<none>`)*
+$$tcp.socket-timeout$$:: $$<documentation missing>$$ *($$Integer$$, default: `<none>`)*
+$$tcp.use-direct-buffers$$:: $$<documentation missing>$$ *($$Boolean$$, default: `<none>`)*
+//end::configuration-properties[]
 
 == Available Encoders
 

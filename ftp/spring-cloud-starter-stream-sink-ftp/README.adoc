@@ -16,18 +16,16 @@ use the original name of that file.
 
 The **$$ftp$$** $$sink$$ has the following options:
 
-$$autoCreateDir$$:: $$remote directory must be auto created if it does not exist$$ *($$boolean$$, default: `true`)*
-$$clientMode$$:: $$client mode to use: 2 for passive mode and 0 for active mode$$ *($$int$$, default: `0`)*
-$$host$$:: $$the host name for the FTP server$$ *($$String$$, default: `localhost`)*
-$$mode$$:: $$what to do if the file already exists$$ *($$Mode$$, default: `REPLACE`, possible values: `APPEND,REPLACE,FAIL,IGNORE`)*
-$$password$$:: $$the password for the FTP connection$$ *($$Password$$, no default)*
-$$port$$:: $$the port for the FTP server$$ *($$int$$, default: `21`)*
-$$remoteDir$$:: $$the remote directory to transfer the files to$$ *($$String$$, default: `/`)*
-$$remoteFileSeparator$$:: $$file separator to use on the remote side$$ *($$String$$, default: `/`)*
-$$temporaryRemoteDir$$:: $$temporary remote directory that should be used$$ *($$String$$, default: `/`)*
-$$tmpFileSuffix$$:: $$extension to use on server side when uploading files$$ *($$String$$, default: `.tmp`)*
-$$useTemporaryFilename$$:: $$use a temporary filename while transferring the file and rename it to its final name once it's fully transferred$$ *($$boolean$$, default: `true`)*
-$$username$$:: $$the username for the FTP connection$$ *($$String$$, no default)*
+//tag::configuration-properties[]
+$$ftp.auto-create-dir$$:: $$<documentation missing>$$ *($$Boolean$$, default: `<none>`)*
+$$ftp.filename-expression$$:: $$<documentation missing>$$ *($$Expression$$, default: `<none>`)*
+$$ftp.mode$$:: $$<documentation missing>$$ *($$FileExistsMode$$, default: `<none>` possible values: `APPEND`,`FAIL`,`IGNORE`,`REPLACE`)*
+$$ftp.remote-dir$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
+$$ftp.remote-file-separator$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
+$$ftp.temporary-remote-dir$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
+$$ftp.tmp-file-suffix$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
+$$ftp.use-temporary-filename$$:: $$<documentation missing>$$ *($$Boolean$$, default: `<none>`)*
+//end::configuration-properties[]
 
 //end::ref-doc[]
 

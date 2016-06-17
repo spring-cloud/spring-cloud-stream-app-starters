@@ -9,11 +9,10 @@ You need to supply all keys and secrets (both consumer and accessToken) to authe
 
 The **$$twitterstream$$** $$source$$ has the following options:
 
-$$accessToken$$:: $$a valid OAuth access token$$ *($$String$$, no default)*
-$$accessTokenSecret$$:: $$an OAuth secret corresponding to the access token$$ *($$String$$, no default)*
-$$consumerKey$$:: $$a consumer key issued by twitter$$ *($$String$$, no default)*
-$$consumerSecret$$:: $$consumer secret corresponding to the consumer key$$ *($$String$$, no default)*
-$$language$$:: $$language code e.g. 'en'$$ *($$String$$, default: ``)*
+//tag::configuration-properties[]
+$$twitter.stream.language$$:: $$The language of the tweet text.$$ *($$String$$, default: `<none>`)*
+$$twitter.stream.stream-type$$:: $$Twitter stream type (such as sample, firehose). Default is sample.$$ *($$TwitterStreamType$$, default: `<none>` possible values: `SAMPLE`,`FIREHOSE`)*
+//end::configuration-properties[]
 
 NOTE: `twitterstream` emit JSON in the https://dev.twitter.com/docs/platform-objects/tweets[native Twitter format].
 

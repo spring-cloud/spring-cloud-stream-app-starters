@@ -18,20 +18,17 @@ The payload of these 2 additional marker messages is of type `FileSplitter.FileM
 == Options
 
 The **$$s3$$** $$source$$ has the following options:
-
-$$autoCreateLocalDir$$:: $$if local directory must be auto created if it does not exist$$ *($$boolean$$, default: `true`)*
-$$deleteRemoteFiles$$:: $$delete remote files (S3 objects) after transfer$$ *($$boolean$$, default: `false`)*
-$$fixedDelay$$:: $$fixed delay in SECONDS to poll the remote directory (S3 bucket)$$ *($$int$$, default: `1`)*
-$$initialDelay$$:: $$an initial delay when using a fixed delay trigger, expressed in TimeUnits (seconds by default)$$ *($$int$$, default: `0`)*
-$$localDir$$:: $$set the local directory the remote files are transferred to$$ *($$File$$, default: `System.getProperty("java.io.tmpdir") + "/s3/source")`)*
-$$maxMessages$$:: $$the maximum messages per poll; -1 for unlimited$$ *($$long$$, default: `-1`)*
-$$mode$$:: $$specifies how the file is being read. By default the content of a file is provided as byte array$$ *($$FileReadingMode$$, default: `contents`, possible values: `ref,lines,contents`)*
-$$pattern$$:: $$simple filename pattern to apply to the filter$$ *($$String$$, no default)*
-$$regexPattern$$:: $$filename regex pattern to apply to the filter$$ *($$String$$, no default)*
-$$remoteDir$$:: $$the remote directory to transfer the files from$$ *($$String$$, default: `bucket`)*
-$$timeUnit$$:: $$the time unit for the fixed and initial delays$$ *($$String$$, default: `SECONDS`)*
-$$tmpFileSuffix$$:: $$extension to use when downloading files$$ *($$String$$, default: `.tmp`)*
-$$withMarkers$$:: $$if true emits start of file/end of file marker messages before/after the data. Only valid with FileReadingMode 'lines'$$ *($$Boolean$$, no default)*
+//tag::configuration-properties[]
+$$s3.auto-create-local-dir$$:: $$<documentation missing>$$ *($$Boolean$$, default: `<none>`)*
+$$s3.delete-remote-files$$:: $$<documentation missing>$$ *($$Boolean$$, default: `<none>`)*
+$$s3.filename-pattern$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
+$$s3.filename-regex$$:: $$<documentation missing>$$ *($$Pattern$$, default: `<none>`)*
+$$s3.local-dir$$:: $$<documentation missing>$$ *($$File$$, default: `<none>`)*
+$$s3.preserve-timestamp$$:: $$<documentation missing>$$ *($$Boolean$$, default: `<none>`)*
+$$s3.remote-dir$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
+$$s3.remote-file-separator$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
+$$s3.tmp-file-suffix$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
+//end::configuration-properties[]
 
 == Amazon AWS common options
 

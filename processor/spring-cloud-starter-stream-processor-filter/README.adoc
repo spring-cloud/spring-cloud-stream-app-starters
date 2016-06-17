@@ -6,7 +6,9 @@ Use the filter module in a stream to determine whether a Message should be passe
 
 The **$$filter$$** $$processor$$ has the following options:
 
-$$expression$$:: $$a SpEL expression used to transform messages$$ *($$String$$, default: `payload.toString()`)*
+//tag::configuration-properties[]
+$$filter.expression$$:: $$A SpEL expression to be evaluated against each message, to decide whether or not to accept it.$$ *($$Expression$$, default: `true`)*
+//end::configuration-properties[]
 
 //end::ref-doc[]
 == Building with Maven
