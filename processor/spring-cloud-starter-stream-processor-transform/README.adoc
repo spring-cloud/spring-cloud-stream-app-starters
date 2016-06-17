@@ -12,7 +12,9 @@ As part of the SpEL expression you can make use of the pre-registered JSON Path 
 
 The **$$transform$$** $$processor$$ has the following options:
 
-$$expression$$:: $$a SpEL expression used to transform messages$$ *($$String$$, default: `payload.toString()`)*
+//tag::configuration-properties[]
+$$transformer.expression$$:: $$<documentation missing>$$ *($$Expression$$, default: `payload`)*
+//end::configuration-properties[]
 
 //end::ref-doc[]
 == Building with Maven

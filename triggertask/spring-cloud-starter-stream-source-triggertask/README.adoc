@@ -9,16 +9,11 @@ that are used by the task.
 == Options
 The **$$triggertask$$** $$source$$ has the following options:
 
-$$commandLineArgs$$:: $$space separated --key=value pairs to be used as commandline arguments for the task.$$ *($$String$$, default: ``)*
-$$properties$$:: $$comma separated key=value pairs to be used as the Spring Boot properties for the task.  These are
-used to configure your Task.$$ *($$String$$, default: ``)*
-$$uri$$:: $$the uri to the task artifact.$$ *($$String$$, no default)*
-$$fixedDelay$$:: $$fixed delay for the periodic trigger in seconds$$ *($$int$$, default: `1`)*
-$$initialDelay$$:: $$initial delay for the Periodic trigger$$ *($$int$$, default: `0`)*
-$$timeUnit$$:: $$time unit to apply for delay$$ *($$String$$, default: `SECONDS`)*
-$$date$$:: $$the date value for the trigger$$ *($$String$$)*
-$$dateFormat$$:: $$format for the date value$$ *($$String$$)*
-$$cron$$:: $$the Cron expression for the Cron Trigger$$ *($$String$$, default: `SECONDS`)*
+//tag::configuration-properties[]
+$$command-line-args$$:: $$Space delimited key=value pairs to be used as commandline variables for the task.$$ *($$String$$, default: `<empty string>`)*
+$$properties$$:: $$Comma delimited key=value pairs to be used as properties for the task.$$ *($$String$$, default: `<empty string>`)*
+$$uri$$:: $$The uri to the task artifact.$$ *($$String$$, default: `<empty string>`)*
+//end::configuration-properties[]
 
 //end::ref-doc[]
 == Build

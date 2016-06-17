@@ -8,9 +8,10 @@ optionally storing counts in a separate store such as redis.
 
 The **$$counter$$** $$sink$$ has the following options:
 
-$$name$$:: $$The name of the counter to increment.$$ *($$String$$, default: `counts`)*
-$$nameExpression$$:: $$A SpEL expression (against the incoming Message) to derive the name of the counter to increment.$$ *($$String$$, default: ``)*
-$$store$$:: $$The name of a store used to store the counter.$$ *($$String$$, default: `redis`, possible values: `memory`, `redis`)*
+//tag::configuration-properties[]
+$$counter.name$$:: $$The name of the counter to increment.$$ *($$String$$, default: `<none>`)*
+$$counter.name-expression$$:: $$A SpEL expression (against the incoming Message) to derive the name of the counter to increment.$$ *($$Expression$$, default: `<none>`)*
+//end::configuration-properties[]
 
 //end::ref-doc[]
 

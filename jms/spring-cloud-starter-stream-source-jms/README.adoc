@@ -7,18 +7,16 @@ The "jms" source enables receiving messages from JMS.
 
 The **$$jms$$** $$source$$ has the following options:
 
-$$spring.jms.listener.acknowledgeMode$$:: $$the session acknowledge mode$$ *($$String$$, default: `AUTO`)*
-$$clientId$$:: $$an identifier for the client, to be associated with a durable or shared topic subscription$$ *($$String$$, no default)*
-$$destination$$:: $$the destination name from which messages will be received$$ *($$String$$, no default)*
-$$messageSelector$$:: $$a message selector to be applied to messages$$ *($$String$$, no default)*
-$$subscriptionDurable$$:: $$when true, indicates the subscription to a topic is durable$$ *($$boolean$$, default: `false`)*
-$$subscriptionShared$$:: $$when true, indicates the subscription to a topic is shared (JMS 2.0)$$ *($$boolean$$, default: `false`)*
-$$spring.jms.pubSubDomain$$:: $$when true, indicates that the destination is a topic$$ *($$boolean$$, default: `false`)*
-$$subscriptionName$$:: $$a name that will be assigned to the topic subscription$$ *($$String$$, no default)*
-$$sessionTransacted$$:: $$True to enable transactions and use a `DefaultMessageListenerContainer`, false to select a
-`SimpleMessageListenerContainer`$$ *($$String$$, default: true)*
-$$spring.jms.listener.concurrency$$:: The minimum number of consumer threads. *($$Integer$$, default: 1)
-$$spring.jms.listener.maxConcurrency$$:: The maximum number of consumer threads. Only supported when `sessionTransacted ` is true *($$Integer$$, default: 1)
+//tag::configuration-properties[]
+$$jms.client-id$$:: $$Client id for durable subscriptions.$$ *($$String$$, default: `<none>`)*
+$$jms.destination$$:: $$The destination from which to receive messages (queue or topic).$$ *($$String$$, default: `<none>`)*
+$$jms.message-selector$$:: $$A selector for messages;$$ *($$String$$, default: `<none>`)*
+$$jms.session-transacted$$:: $$True to enable transactions and select a DefaultMessageListenerContainer, false to
+ select a SimpleMessageListenerContainer.$$ *($$Boolean$$, default: `true`)*
+$$jms.subscription-durable$$:: $$True for a durable subscription.$$ *($$Boolean$$, default: `<none>`)*
+$$jms.subscription-name$$:: $$The name of a durable or shared subscription.$$ *($$String$$, default: `<none>`)*
+$$jms.subscription-shared$$:: $$True for a shared subscription.$$ *($$Boolean$$, default: `<none>`)*
+//end::configuration-properties[]
 
 
 NOTE: Spring boot broker configuration is used; refer to the

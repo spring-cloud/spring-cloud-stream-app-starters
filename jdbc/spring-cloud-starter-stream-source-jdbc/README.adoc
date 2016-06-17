@@ -10,10 +10,12 @@ information.
 
 The **$$jdbc$$** $$source$$ has the following options:
 
-$$query$$:: $$the query to use to select data$$ *($$String$$, no default, required)*
-$$update$$:: $$an SQL update statement to execute for marking polled messages as 'seen'$$ *($$String$$, no default)*
-$$split$$:: $$whether to split the SQL result as individual messages$$ *($$boolean$$, default: `true`)*
-$$maxRowsPerPoll$$:: $$max numbers of rows to process for each poll$$ *($$int$$, default: `0`)*
+//tag::configuration-properties[]
+$$jdbc.max-rows-per-poll$$:: $$Max numbers of rows to process for each poll.$$ *($$Integer$$, default: `0`)*
+$$jdbc.query$$:: $$The query to use to select data.$$ *($$String$$, default: `<none>`)*
+$$jdbc.split$$:: $$Whether to split the SQL result as individual messages.$$ *($$Boolean$$, default: `true`)*
+$$jdbc.update$$:: $$An SQL update statement to execute for marking polled messages as 'seen'.$$ *($$String$$, default: `<none>`)*
+//end::configuration-properties[]
 
 Also see the http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html[Spring Boot Documentation]
 for addition `DataSource` properties and `TriggerProperties` and `MaxMessagesProperties` for polling options.

@@ -8,10 +8,8 @@ as a property value. The language of the script can be specified (groovy/javascr
 
 The **$$scriptable-transform$$** $$processor$$ has the following options:
 
-$$script$$:: $$The script text$$ *($$String$$, default: ``)*
-lang:: $$The script language$$ *($$String$$, default: ``)*
-$$variables$$:: $$Variable bindings as a comma delimited string of name-value pairs, e.g. 'foo=bar,baz=car'$$ *($$String$$, default: ``)*
-$$variablesLocation$$:: $$The location of a properties file containing custom script variable bindings$$ *($$String$$, default: ``)*
+//tag::configuration-properties[]
+//end::configuration-properties[]
 
 //end::ref-doc[]
 == Build

@@ -7,9 +7,11 @@ A Processor module that retains or discards messages according to a predicate, e
 
 The **$$groovy-filter$$** $$processor$$ has the following options:
 
-$$script$$:: $$The script resource location$$ *($$String$$, default: ``)*
-$$variables$$:: $$Variable bindings as a comma delimited string of name-value pairs, e.g. 'foo=bar,baz=car'$$ *($$String$$, default: ``)*
-$$variablesLocation$$:: $$The location of a properties file containing custom script variable bindings$$ *($$String$$, default: ``)*
+//tag::configuration-properties[]
+$$groovy-filter.script$$:: $$The resource location of the groovy script$$ *($$Resource$$, default: `<none>`)*
+$$groovy-filter.variables$$:: $$Variable bindings as a new line delimited string of name-value pairs, e.g. 'foo=bar\n baz=car'.$$ *($$Properties$$, default: `<none>`)*
+$$groovy-filter.variables-location$$:: $$The location of a properties file containing custom script variable bindings.$$ *($$Resource$$, default: `<none>`)*
+//end::configuration-properties[]
 
 //end::ref-doc[]
 == Building with Maven

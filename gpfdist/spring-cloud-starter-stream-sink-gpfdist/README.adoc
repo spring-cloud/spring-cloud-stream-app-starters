@@ -14,32 +14,39 @@ the sink will block until such sessions are established.
 
 The **$$gpfdist$$** $$sink$$ has the following options:
 
-$$batchCount$$:: $$Number of windowed batch each segment takest$$ *($$int$$, default: `100`)*
-$$batchPeriod$$:: $$Time in seconds for each load operation to sleep in between operations$$ *($$int$$, default: `10`)*
-$$batchTimeout$$:: $$Timeout in seconds for segment inactivity.$$ *($$Integer$$, default: `4`)*
-$$columnDelimiter$$:: $$Data record column delimiter.$$ *($$Character$$, default: no default)
-$$controlFile$$:: $$path to yaml control file$$ *($$String$$, no default)*
-$$dbHost$$:: $$database host$$ *($$String$$, default: `localhost`)*
-$$dbName$$:: $$database name$$ *($$String$$, default: `gpadmin`)*
-$$dbPassword$$:: $$database password$$ *($$String$$, default: `gpadmin`)*
-$$dbPort$$:: $$database port$$ *($$int$$, default: `5432`)*
-$$dbUser$$:: $$database user$$ *($$String$$, default: `gpadmin`)*
-$$delimiter$$:: $$data line delimiter$$ *($$String$$, default: `newline character`)*
-$$errorTable$$:: $$Tablename to log errors.$$ *($$String$$, default: ``)*
-$$flushCount$$:: $$flush item count$$ *($$int$$, default: `100`)*
-$$flushTime$$:: $$flush item time$$ *($$int$$, default: `2`)*
-$$gpfdistPort$$::$$Port of gpfdist server. Default port `0` indicates that a random port is chosen.$$ *($$Integer$$, default: `0`)*
-$$matchColumns$$:: $$match columns with update$$ *($$String$$, no default)*
-$$mode$$:: $$mode, either insert or update$$ *($$String$$, no default)*
-$$nullString$$:: $$Null string definition.$$ *($$String$$, default: ``)*
-$$port$$:: $$gpfdist listen port$$ *($$int$$, default: `0`)*
-$$rateInterval$$:: $$enable transfer rate interval$$ *($$int$$, default: `0`)*
-$$segmentRejectLimit$$:: $$Error reject limit.$$ *($$String$$, default: ``)*
-$$segmentRejectType$$:: $$Error reject type, either `rows` or `percent`.$$ *($$String$$, default: ``)*
-$$sqlAfter$$:: $$sql to run after load$$ *($$String$$, no default)*
-$$sqlBefore$$:: $$sql to run before load$$ *($$String$$, no default)*
-$$table$$:: $$target database table$$ *($$String$$, no default)*
-$$updateColumns$$:: $$update columns with update$$ *($$String$$, no default)*
+//tag::configuration-properties[]
+$$gpfdist.batch-count$$:: $$<documentation missing>$$ *($$Integer$$, default: `100`)*
+$$gpfdist.batch-period$$:: $$<documentation missing>$$ *($$Integer$$, default: `10`)*
+$$gpfdist.batch-timeout$$:: $$<documentation missing>$$ *($$Integer$$, default: `4`)*
+$$gpfdist.column-delimiter$$:: $$<documentation missing>$$ *($$Character$$, default: `<none>`)*
+$$gpfdist.control-file$$:: $$<documentation missing>$$ *($$Resource$$, default: `<none>`)*
+$$gpfdist.db-host$$:: $$<documentation missing>$$ *($$String$$, default: `localhost`)*
+$$gpfdist.db-name$$:: $$<documentation missing>$$ *($$String$$, default: `gpadmin`)*
+$$gpfdist.db-password$$:: $$<documentation missing>$$ *($$String$$, default: `gpadmin`)*
+$$gpfdist.db-port$$:: $$<documentation missing>$$ *($$Integer$$, default: `5432`)*
+$$gpfdist.db-user$$:: $$<documentation missing>$$ *($$String$$, default: `gpadmin`)*
+$$gpfdist.delimiter$$:: $$<documentation missing>$$ *($$String$$, default: `
+`)*
+$$gpfdist.error-table$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
+$$gpfdist.flush-count$$:: $$<documentation missing>$$ *($$Integer$$, default: `100`)*
+$$gpfdist.flush-time$$:: $$<documentation missing>$$ *($$Integer$$, default: `2`)*
+$$gpfdist.gpfdist-port$$:: $$<documentation missing>$$ *($$Integer$$, default: `0`)*
+$$gpfdist.match-columns$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
+$$gpfdist.mode$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
+$$gpfdist.null-string$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
+$$gpfdist.rate-interval$$:: $$<documentation missing>$$ *($$Integer$$, default: `0`)*
+$$gpfdist.segment-reject-limit$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
+$$gpfdist.segment-reject-type$$:: $$<documentation missing>$$ *($$SegmentRejectType$$, default: `<none>` possible values: `ROWS`,`PERCENT`)*
+$$gpfdist.sql-after$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
+$$gpfdist.sql-before$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
+$$gpfdist.table$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
+$$gpfdist.update-columns$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
+$$spring.net.hostdiscovery.loopback$$:: $$<documentation missing>$$ *($$Boolean$$, default: `false`)*
+$$spring.net.hostdiscovery.match-interface$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
+$$spring.net.hostdiscovery.match-ipv4$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
+$$spring.net.hostdiscovery.point-to-point$$:: $$<documentation missing>$$ *($$Boolean$$, default: `false`)*
+$$spring.net.hostdiscovery.prefer-interface$$:: $$<documentation missing>$$ *($$String>$$, default: `<none>`)*
+//end::configuration-properties[]
 
 == Implementation Notes
 

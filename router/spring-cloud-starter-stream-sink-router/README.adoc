@@ -7,13 +7,18 @@ This module routes messages to named channels.
 
 The **$$router$$** $$sink$$ has the following options:
 
-$$destinations$$:: $$comma-delimited destinations mapped from evaluation results$$ *($$String$$, no default)*
-$$defaultOutputChannel$$:: $$Where to route messages where the channel cannot be resolved$$ *($$String$$, default: `nullChannel`)*
-$$expression$$:: $$a SpEL expression used to determine the destination$$ *($$String$$, default: `headers['routeTo']`)*
-$$propertiesLocation$$:: $$the path of a properties file containing custom script variable bindings$$ *($$String$$, no default)*
-$$refreshDelay$$:: $$how often to check (in milliseconds) whether the script (if present) has changed; -1 for never$$ *($$long$$, default: `60000`)*
-$$script$$:: $$reference to a script used to process messages$$ *($$String$$, no default)*
-$$destinationMappings$$:: $$Destination mappings as a new line delimited string of name-value pairs, e.g. 'foo=bar\n baz=car'.$$ *($$String$$, no default)*
+//tag::configuration-properties[]
+$$router.default-output-channel$$:: $$Where to send unroutable messages.$$ *($$String$$, default: `nullChannel`)*
+$$router.destination-mappings$$:: $$Destination mappings as a new line delimited string of name-value pairs, e.g. 'foo=bar\n baz=car'.$$ *($$Properties$$, default: `<none>`)*
+$$router.expression$$:: $$The expression to be applied to the message to determine the channel(s)
+ to route to.$$ *($$Expression$$, default: `<none>`)*
+$$router.refresh-delay$$:: $$How often to check for script changes in ms (if present); < 0 means don't refresh.$$ *($$Integer$$, default: `60000`)*
+$$router.resolution-required$$:: $$Whether or not channel resolution is required.$$ *($$Boolean$$, default: `false`)*
+$$router.script$$:: $$The location of a groovy script that returns channels or channel mapping
+ resolution keys.$$ *($$Resource$$, default: `<none>`)*
+$$router.variables$$:: $$Variable bindings as a new line delimited string of name-value pairs, e.g. 'foo=bar\n baz=car'.$$ *($$Properties$$, default: `<none>`)*
+$$router.variables-location$$:: $$The location of a properties file containing custom script variable bindings.$$ *($$Resource$$, default: `<none>`)*
+//end::configuration-properties[]
 
 NOTE: Since this is a dynamic router, destinations are created as needed; therefore, by default the `defaultOutputChannel`
 and `resolutionRequired` will only be used if the `Binder` has some problem binding to the destination.

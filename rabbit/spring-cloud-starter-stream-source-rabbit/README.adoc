@@ -10,16 +10,17 @@ You can easily create a Queue using the RabbitMQ web UI.
 
 The **$$rabbit$$** $$source$$ has the following options:
 
-$$enableRetry$$:: $$enable retry; when retries are exhausted the message will be rejected; message disposition will depend on dead letter configuration$$ *($$boolean$$, default: `false`)*
-$$initialRetryInterval$$:: $$initial interval between retries$$ *($$int$$, default: `1000`)*
-$$mappedRequestHeaders$$:: $$request message header names to be mapped from the incoming message$$ *($$String$$, default: `STANDARD_REQUEST_HEADERS`)*
-$$maxAttempts$$:: $$maximum delivery attempts$$ *($$int$$, default: `3`)*
-$$maxConcurrency$$:: $$the maximum number of consumers$$ *($$int$$, default: `1`)*
-$$maxRetryInterval$$:: $$maximum retry interval$$ *($$int$$, default: `30000`)*
-$$queues$$:: $$the queue(s) from which messages will be received$$ *($$String$$, default: no default)*
-$$requeue$$:: $$whether rejected messages will be requeued by default$$ *($$boolean$$, default: `true`)*
-$$retryMultiplier$$:: $$retry interval multiplier$$ *($$double$$, default: `2.0`)*
-$$transacted$$:: $$true if the channel is to be transacted$$ *($$boolean$$, default: `false`)*
+//tag::configuration-properties[]
+$$enable-retry$$:: $$true to enable retry.$$ *($$Boolean$$, default: `false`)*
+$$initial-retry-interval$$:: $$Initial retry interval when retry is enabled.$$ *($$Integer$$, default: `1000`)*
+$$mapped-request-headers$$:: $$Headers that will be mapped.$$ *($$String[]$$, default: `[Ljava.lang.Object;@6c44980b`)*
+$$max-attempts$$:: $$The maximum delivery attempts when retry is enabled.$$ *($$Integer$$, default: `3`)*
+$$max-retry-interval$$:: $$Max retry interval when retry is enabled.$$ *($$Integer$$, default: `30000`)*
+$$queues$$:: $$The queues to which the source will listen for messages.$$ *($$String[]$$, default: `<none>`)*
+$$requeue$$:: $$Whether rejected messages should be requeued.$$ *($$Boolean$$, default: `true`)*
+$$retry-multiplier$$:: $$Retry backoff multiplier when retry is enabled.$$ *($$Double$$, default: `2`)*
+$$transacted$$:: $$Whether the channel is transacted.$$ *($$Boolean$$, default: `false`)*
+//end::configuration-properties[]
 
 Also see the http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html[Spring Boot Documentation]
 for addition properties for the broker connections and listener properties.

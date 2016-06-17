@@ -6,11 +6,13 @@ A simple Websocket Sink implementation.
 == Options
 The following commmand line arguments are supported:
 
-$$port$$:: $$controls the port onto which the Netty server binds$$ *($$String$$, default: `9292`)*
-$$path$$:: $$controls the path where the WebsocketServer expects Websocket connections$$ *($$String$$, default: `/websocket`)*
-$$ssl$$:: $$controls whether the Websocket server should accept SSL connections (i.e. `wss://host:9292/websocket`)$$ *($$Boolean$$, default: `false`)*
-$$logLevel$$:: $$controls the loglevel of the underlying Netty loghandler$$ *($$String$$, default: `WARN`)*
-$$threads$$:: $$controls the number of worker threads used for the Netty event loop$$ *($$String$$, default: `1`)*
+//tag::configuration-properties[]
+$$websocket.log-level$$:: $$the logLevel for netty channels. Default is <tt>WARN</tt>$$ *($$String$$, default: `<none>`)*
+$$websocket.path$$:: $$the path on which a WebsocketSink consumer needs to connect. Default is <tt>/websocket</tt>$$ *($$String$$, default: `/websocket`)*
+$$websocket.port$$:: $$the port on which the Netty server listens. Default is <tt>9292</tt>$$ *($$Integer$$, default: `9292`)*
+$$websocket.ssl$$:: $$whether or not to create a {@link io.netty.handler.ssl.SslContext}$$ *($$Boolean$$, default: `false`)*
+$$websocket.threads$$:: $$the number of threads for the Netty {@link io.netty.channel.EventLoopGroup}. Default is <tt>1</tt>$$ *($$Integer$$, default: `1`)*
+//end::configuration-properties[]
 
 == Example
 To verify that the websocket-sink receives messages from other spring-cloud-stream apps, you can use the
