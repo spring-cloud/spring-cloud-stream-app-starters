@@ -21,7 +21,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * @author David Turanski
  */
-@ConfigurationProperties
+@ConfigurationProperties("gemfire")
 public class GemfireSinkProperties {
 
 	/**

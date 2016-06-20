@@ -15,10 +15,14 @@
 
 package org.springframework.cloud.stream.app.gemfire.sink;
 
-import com.gemstone.gemfire.cache.Region;
-import com.gemstone.gemfire.cache.client.Pool;
+import static junit.framework.TestCase.assertNull;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+import javax.annotation.Resource;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.PropertyPlaceholderAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -28,10 +32,8 @@ import org.springframework.cloud.stream.test.binder.TestSupportBinderAutoConfigu
 import org.springframework.data.gemfire.client.Interest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.annotation.Resource;
-
-import static junit.framework.TestCase.assertNull;
-import static org.hamcrest.MatcherAssert.assertThat;
+import com.gemstone.gemfire.cache.Region;
+import com.gemstone.gemfire.cache.client.Pool;
 
 /**
  * @author David Turanski
@@ -40,8 +42,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @SpringApplicationConfiguration(classes = {GemfireSinkConfiguration.class,
 		PropertyPlaceholderAutoConfiguration.class,
 		TestSupportBinderAutoConfiguration.class})
-@IntegrationTest({"regionName=Stocks", "keyExpression='key'",
-		"hostAddresses=localhost:42424", "connectType=server"})
+@IntegrationTest({"gemfire.region.regionName=Stocks", "gemfire.keyExpression='key'",
+		"gemfire.pool.hostAddresses=localhost:42424", "gemfire.pool.connectType=server"})
 @EnableConfigurationProperties(GemfireSinkProperties.class)
 public class GemfireSinkConfigurationTests {
 
