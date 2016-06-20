@@ -99,12 +99,17 @@ public class AwsIntegrationTestStackRule extends ExternalResource {
 
 	@Override
 	protected void after() {
-		this.cloudFormation.deleteStack(new DeleteStackRequest().withStackName(this.stackName));
+		this.cloudFormation.deleteStack(new DeleteStackRequest()
+				.withStackName(this.stackName));
 		try {
 			waitForCompletion();
 		}
 		catch (InterruptedException e) {
 			// Ignore the InterruptedException
+		}
+		finally {
+			System.clearProperty("cloud.aws.credentials.accessKey");
+			System.clearProperty("cloud.aws.credentials.secretKey");
 		}
 	}
 

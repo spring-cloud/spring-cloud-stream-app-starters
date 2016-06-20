@@ -15,6 +15,7 @@
 
 	<modules>
 		<module>spring-cloud-starter-stream-source-s3</module>
+		<module>spring-cloud-starter-stream-sink-s3</module>
 	</modules>
 
 </project>

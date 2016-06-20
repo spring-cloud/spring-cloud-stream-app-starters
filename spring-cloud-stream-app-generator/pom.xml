@@ -117,6 +117,10 @@
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.redis.RedisSinkTestConfiguration.class</extraTestConfigClass>
 						</redis-sink>
 						<router-sink />
+						<s3-sink>
+							<autoConfigClass>org.springframework.cloud.stream.app.s3.sink.AmazonS3SinkConfiguration.class</autoConfigClass>
+							<!--<testsIgnored>true</testsIgnored>-->
+						</s3-sink>
 						<s3-source>
 							<autoConfigClass>org.springframework.cloud.stream.app.s3.source.AmazonS3SourceConfiguration.class</autoConfigClass>
 							<testsIgnored>true</testsIgnored>

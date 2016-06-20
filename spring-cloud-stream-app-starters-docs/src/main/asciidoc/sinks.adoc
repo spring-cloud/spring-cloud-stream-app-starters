@@ -44,6 +44,9 @@ include::{app-starters-root}/redis/spring-cloud-starter-stream-sink-redis/README
 [[spring-cloud-stream-modules-router-sink]]
 include::{app-starters-root}/router/spring-cloud-starter-stream-sink-router/README.adoc[tags=ref-doc]
 
+[[spring-cloud-stream-modules-s3-sink]]
+include::{app-starters-root}/s3/spring-cloud-starter-stream-sink-s3/README.adoc[tags=ref-doc]
+
 [[spring-cloud-stream-modules-tcp-sink]]
 include::{app-starters-root}/tcp/spring-cloud-starter-stream-sink-tcp/README.adoc[tags=ref-doc]
 

@@ -59,6 +59,7 @@ And for AWS `Stack`:
 - cloud.aws.stack.name
 
 //end::ref-doc[]
+
 == Build
 
 ```
