@@ -16,6 +16,7 @@
 
 package org.springframework.cloud.stream.app.time.source;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,6 @@ import org.springframework.cloud.stream.app.trigger.TriggerConfiguration;
 import org.springframework.cloud.stream.app.trigger.TriggerProperties;
 import org.springframework.cloud.stream.app.trigger.TriggerPropertiesMaxMessagesDefaultOne;
 import org.springframework.cloud.stream.messaging.Source;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
 /**
@@ -42,7 +42,7 @@ public class TimeSourceConfiguration {
 
 	@PollableSource
 	public String publishTime() {
-		return this.triggerProperties.getDateFormat().format(new Date());
+		return new SimpleDateFormat(this.triggerProperties.getDateFormat()).format(new Date());
 	}
 
 }

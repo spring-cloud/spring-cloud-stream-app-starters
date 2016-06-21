@@ -20,11 +20,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import javax.validation.ValidationException;
 import javax.validation.constraints.AssertFalse;
 import javax.validation.constraints.Min;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.stream.app.time.DateFormat;
 import org.springframework.util.StringUtils;
 
 @ConfigurationProperties("trigger")
@@ -115,10 +115,10 @@ public class TriggerPropertiesMaxMessagesDefaultUnlimited implements TriggerProp
     public Date getDate() {
         if (StringUtils.hasText(this.date)) {
             try {
-                return this.getDateFormat().parse(this.date);
+                return new SimpleDateFormat(this.dateFormat).parse(this.date);
             }
             catch (ParseException e) {
-                throw new ValidationException("Invalid date value :" + this.date);
+                throw new IllegalArgumentException(e);
             }
         }
         else {
@@ -132,16 +132,9 @@ public class TriggerPropertiesMaxMessagesDefaultUnlimited implements TriggerProp
     }
 
 
-    public SimpleDateFormat getDateFormat() {
-        if (!StringUtils.hasText(this.dateFormat)) {
-            throw new ValidationException("'dateFormat' must not be empty.");
-        }
-        try {
-            return new SimpleDateFormat(this.dateFormat);
-        }
-        catch (IllegalArgumentException e) {
-            throw new ValidationException("Invalid Date format for the string: " + this.dateFormat);
-        }
+    @DateFormat
+    public String getDateFormat() {
+        return dateFormat;
     }
 
 

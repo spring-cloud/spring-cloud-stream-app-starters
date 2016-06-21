@@ -15,11 +15,11 @@
  */
 package org.springframework.cloud.stream.app.trigger;
 
-import javax.validation.constraints.AssertFalse;
-import javax.validation.constraints.Min;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+
+import javax.validation.constraints.AssertFalse;
+import javax.validation.constraints.Min;
 
 public interface TriggerProperties {
 
@@ -48,7 +48,7 @@ public interface TriggerProperties {
 
     void setDate(String date);
 
-    SimpleDateFormat getDateFormat();
+    String getDateFormat();
 
     void setDateFormat(String dateFormat);
 
