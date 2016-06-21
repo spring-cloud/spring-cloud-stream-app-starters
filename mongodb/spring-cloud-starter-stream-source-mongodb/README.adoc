@@ -10,7 +10,7 @@ information.
 
 The **$$mongodb$$** $$source$$ has the following options:
 
-$$collection$$:: $$the collection to target$$ *($$String$$, no default, required)*
+$$collection$$:: $$the collection within the database to target for the query$$ *($$String$$, no default, required)*
 $$query$$:: $$the query to use to select data$$ *($$String$$, default: `{ }`)*
 $$split$$:: $$whether to split the results as individual messages$$ *($$boolean$$, default: `true`)*
 
