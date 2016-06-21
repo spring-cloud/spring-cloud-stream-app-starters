@@ -23,7 +23,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author Adam Zwickey
  *
  */
-@ConfigurationProperties
+@ConfigurationProperties("mongodb")
 public class MongoDBSourceProperties {
 
     /**

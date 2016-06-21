@@ -78,7 +78,7 @@ public abstract class MongoDBSourceApplicationTests {
 
 	}
 
-	@IntegrationTest(value = {"collection=testing", "fixedDelay=1", "maxRowsPerPoll=2"})
+	@IntegrationTest(value = {"mongodb.collection=testing", "trigger.fixedDelay=1"})
 	public static class DefaultTests extends MongoDBSourceApplicationTests {
 		@Test
 		public void test() throws InterruptedException {
@@ -88,7 +88,7 @@ public abstract class MongoDBSourceApplicationTests {
 		}
 	}
 
-	@IntegrationTest(value = {"collection=testing", "fixedDelay=1", "query={ 'greeting': 'hola' }", "maxRowsPerPoll=2"})
+	@IntegrationTest(value = {"mongodb.collection=testing",  "mongodb.query={ 'greeting': 'hola' }", "trigger.fixedDelay=1"})
 	public static class ValidQueryTests extends MongoDBSourceApplicationTests {
 		@Test
 		public void test() throws InterruptedException {
@@ -98,7 +98,7 @@ public abstract class MongoDBSourceApplicationTests {
 		}
 	}
 
-	@IntegrationTest(value = {"collection=testing", "fixedDelay=1", "query={ 'greeting': 'bogus' }", "maxRowsPerPoll=2"})
+	@IntegrationTest(value = {"mongodb.collection=testing", "mongodb.query={ 'greeting': 'bogus' }", "trigger.fixedDelay=1"})
 	public static class InvalidQueryTests extends MongoDBSourceApplicationTests {
 		@Test
 		public void test() throws InterruptedException {
@@ -107,7 +107,7 @@ public abstract class MongoDBSourceApplicationTests {
 		}
 	}
 
-	@IntegrationTest(value = {"collection=testing", "fixedDelay=1", "maxRowsPerPoll=2", "split=false"})
+	@IntegrationTest(value = {"mongodb.collection=testing", "trigger.fixedDelay=1", "mongodb.split=false"})
 	public static class NoSplitTests extends MongoDBSourceApplicationTests {
 		@Test
 		public void test() throws InterruptedException {
@@ -116,6 +116,15 @@ public abstract class MongoDBSourceApplicationTests {
 			assertThat(received.getPayload(), Matchers.instanceOf(List.class));
 			assertThat(received.getPayload().toString(), CoreMatchers.containsString("hola"));
 			assertThat(received.getPayload().toString(), CoreMatchers.containsString("hello"));
+		}
+	}
+
+	@IntegrationTest(value = {"mongodb.collection=testing", "trigger.fixedDelay=100"})
+	public static class MongoTriggerTests extends MongoDBSourceApplicationTests {
+		@Test
+		public void test() throws InterruptedException {
+			Message<?> received = messageCollector.forChannel(source.output()).poll(1, TimeUnit.SECONDS);
+			assertThat(received, CoreMatchers.nullValue());
 		}
 	}
 

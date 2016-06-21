@@ -10,12 +10,12 @@ information.
 
 The **$$mongodb$$** $$source$$ has the following options:
 
-$$collection$$:: $$the collection within the database to target for the query$$ *($$String$$, no default, required)*
+$$collection$$:: $$the MongoDB collection name.$$ *($$String$$, no default, required)*
 $$query$$:: $$the query to use to select data$$ *($$String$$, default: `{ }`)*
 $$split$$:: $$whether to split the results as individual messages$$ *($$boolean$$, default: `true`)*
 
-Also see the http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html[Spring Boot Documentation]
-for additional `MongoProperties` properties and `TriggerProperties` for polling options.
+Also see the http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html[Spring Boot Documentation] for additional `MongoProperties` properties.
+See and `TriggerProperties` for polling options.
 
 //end::ref-doc[]
 == Build

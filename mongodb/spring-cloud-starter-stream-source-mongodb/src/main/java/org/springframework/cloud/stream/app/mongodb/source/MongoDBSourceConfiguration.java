@@ -34,13 +34,15 @@ import org.springframework.integration.mongodb.inbound.MongoDbMessageSource;
 import org.springframework.messaging.MessageChannel;
 
 /**
- * * A module that reads data from an MongoDB instance and creates a payload with the data.
+ * A starter configuration for MongoDB Source applications.
+ * Produces MongoDbMessageSource which polls collection with the query after startup according to the polling properties.
  *
  * @author Adam Zwickey
  *
  */
 @EnableBinding(Source.class)
 @EnableConfigurationProperties(MongoDBSourceProperties.class)
+@Import({ TriggerConfiguration.class, TriggerPropertiesConfiguration.class })
 public class MongoDBSourceConfiguration {
 
     @Autowired
