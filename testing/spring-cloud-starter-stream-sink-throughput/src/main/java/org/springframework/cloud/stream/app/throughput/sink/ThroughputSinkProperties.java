@@ -23,7 +23,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *
  * @author Glenn Renfro
  */
-@ConfigurationProperties
+@ConfigurationProperties("throughput")
 public class ThroughputSinkProperties {
 
 	private int reportEveryMs = 1000;

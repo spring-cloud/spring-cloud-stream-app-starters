@@ -1,5 +1,6 @@
 /*
  * Copyright 2016 the original author or authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,10 +19,13 @@ package org.springframework.cloud.stream.app.trigger.source;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.app.trigger.SourcePayloadProperties;
 import org.springframework.cloud.stream.app.annotation.PollableSource;
+import org.springframework.cloud.stream.app.trigger.SourcePayloadProperties;
 import org.springframework.cloud.stream.app.trigger.TriggerConfiguration;
+import org.springframework.cloud.stream.app.trigger.TriggerProperties;
+import org.springframework.cloud.stream.app.trigger.TriggerPropertiesMaxMessagesDefaultOne;
 import org.springframework.cloud.stream.messaging.Source;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
 /**
@@ -32,7 +36,7 @@ import org.springframework.context.annotation.Import;
  * @author Gary Russell
  */
 @EnableBinding(Source.class)
-@EnableConfigurationProperties(SourcePayloadProperties.class)
+@EnableConfigurationProperties({SourcePayloadProperties.class, TriggerPropertiesMaxMessagesDefaultOne.class})
 @Import(TriggerConfiguration.class)
 public class TriggerSourceConfiguration {
 

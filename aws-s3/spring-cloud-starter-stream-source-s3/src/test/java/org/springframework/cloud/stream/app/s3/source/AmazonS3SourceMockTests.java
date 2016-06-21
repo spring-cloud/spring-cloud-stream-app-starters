@@ -84,8 +84,8 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 		"cloud.aws.credentials.accessKey=" + AmazonS3SourceMockTests.AWS_ACCESS_KEY,
 		"cloud.aws.credentials.secretKey=" + AmazonS3SourceMockTests.AWS_SECRET_KEY,
 		"cloud.aws.region.static=" + AmazonS3SourceMockTests.AWS_REGION,
-		"initialDelay=1",
-		"remoteDir=" + AmazonS3SourceMockTests.S3_BUCKET })
+		"trigger.initialDelay=1",
+		"s3.remoteDir=" + AmazonS3SourceMockTests.S3_BUCKET })
 public abstract class AmazonS3SourceMockTests {
 
 	@ClassRule
@@ -139,12 +139,12 @@ public abstract class AmazonS3SourceMockTests {
 
 		String localFolder = TEMPORARY_FOLDER.newFolder("local").getAbsolutePath();
 
-		System.setProperty("localDir", localFolder);
+		System.setProperty("s3.localDir", localFolder);
 	}
 
 	@AfterClass
 	public static void tearDown() {
-		System.clearProperty("localDir");
+		System.clearProperty("s3.localDir");
 	}
 
 	@Before
@@ -193,7 +193,7 @@ public abstract class AmazonS3SourceMockTests {
 
 	public abstract void test() throws Exception;
 
-	@IntegrationTest({ "mode=ref", "filenameRegex=.*\\\\.test$" })
+	@IntegrationTest({ "file.consumer.mode=ref", "s3.filenameRegex=.*\\\\.test$" })
 	public static class AmazonS3FilesTransferredTests extends AmazonS3SourceMockTests {
 
 
@@ -223,7 +223,7 @@ public abstract class AmazonS3SourceMockTests {
 
 	}
 
-	@IntegrationTest({ "mode=lines", "filenamePattern=otherFile", "with-markers=false" })
+	@IntegrationTest({ "file.consumer.mode=lines", "s3.filenamePattern=otherFile", "file.consumer.with-markers=false" })
 	public static class AmazonS3LinesTransferredTests extends AmazonS3SourceMockTests {
 
 

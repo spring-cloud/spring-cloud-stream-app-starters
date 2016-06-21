@@ -6,10 +6,10 @@ A simple Websocket Sink implementation.
 == Options
 The following commmand line arguments are supported:
 
-$$websocketPort$$:: $$controls the port onto which the Netty server binds$$ *($$String$$, default: `9292`)*
-$$websocketPath$$:: $$controls the path where the WebsocketServer expects Websocket connections$$ *($$String$$, default: `/websocket`)*
+$$port$$:: $$controls the port onto which the Netty server binds$$ *($$String$$, default: `9292`)*
+$$path$$:: $$controls the path where the WebsocketServer expects Websocket connections$$ *($$String$$, default: `/websocket`)*
 $$ssl$$:: $$controls whether the Websocket server should accept SSL connections (i.e. `wss://host:9292/websocket`)$$ *($$Boolean$$, default: `false`)*
-$$websocketLoglevel$$:: $$controls the loglevel of the underlying Netty loghandler$$ *($$String$$, default: `WARN`)*
+$$logLevel$$:: $$controls the loglevel of the underlying Netty loghandler$$ *($$String$$, default: `WARN`)*
 $$threads$$:: $$controls the number of worker threads used for the Netty event loop$$ *($$String$$, default: `1`)*
 
 == Example

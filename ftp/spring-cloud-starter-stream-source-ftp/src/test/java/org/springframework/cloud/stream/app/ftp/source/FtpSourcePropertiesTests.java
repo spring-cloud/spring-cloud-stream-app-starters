@@ -37,7 +37,7 @@ public class FtpSourcePropertiesTests {
 	@Test
 	public void localDirCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "localDir:local");
+		EnvironmentTestUtils.addEnvironment(context, "ftp.localDir:local");
 		context.register(Conf.class);
 		context.refresh();
 		FtpSourceProperties properties = context.getBean(FtpSourceProperties.class);
@@ -47,7 +47,7 @@ public class FtpSourcePropertiesTests {
 	@Test
 	public void remoteDirCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "remoteDir:/remote");
+		EnvironmentTestUtils.addEnvironment(context, "ftp.remoteDir:/remote");
 		context.register(Conf.class);
 		context.refresh();
 		FtpSourceProperties properties = context.getBean(FtpSourceProperties.class);
@@ -57,7 +57,7 @@ public class FtpSourcePropertiesTests {
 	@Test
 	public void deleteRemoteFilesCanBeEnabled() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "deleteRemoteFiles:true");
+		EnvironmentTestUtils.addEnvironment(context, "ftp.deleteRemoteFiles:true");
 		context.register(Conf.class);
 		context.refresh();
 		FtpSourceProperties properties = context.getBean(FtpSourceProperties.class);
@@ -67,7 +67,7 @@ public class FtpSourcePropertiesTests {
 	@Test
 	public void autoCreateLocalDirCanBeDisabled() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "autoCreateLocalDir:false");
+		EnvironmentTestUtils.addEnvironment(context, "ftp.autoCreateLocalDir:false");
 		context.register(Conf.class);
 		context.refresh();
 		FtpSourceProperties properties = context.getBean(FtpSourceProperties.class);
@@ -77,7 +77,7 @@ public class FtpSourcePropertiesTests {
 	@Test
 	public void tmpFileSuffixCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "tmpFileSuffix:.foo");
+		EnvironmentTestUtils.addEnvironment(context, "ftp.tmpFileSuffix:.foo");
 		context.register(Conf.class);
 		context.refresh();
 		FtpSourceProperties properties = context.getBean(FtpSourceProperties.class);
@@ -87,7 +87,7 @@ public class FtpSourcePropertiesTests {
 	@Test
 	public void filenamePatternCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "filenamePattern:*.foo");
+		EnvironmentTestUtils.addEnvironment(context, "ftp.filenamePattern:*.foo");
 		context.register(Conf.class);
 		context.refresh();
 		FtpSourceProperties properties = context.getBean(FtpSourceProperties.class);
@@ -97,7 +97,7 @@ public class FtpSourcePropertiesTests {
 	@Test
 	public void remoteFileSeparatorCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "remoteFileSeparator:\\");
+		EnvironmentTestUtils.addEnvironment(context, "ftp.remoteFileSeparator:\\");
 		context.register(Conf.class);
 		context.refresh();
 		FtpSourceProperties properties = context.getBean(FtpSourceProperties.class);
@@ -108,7 +108,7 @@ public class FtpSourcePropertiesTests {
 	@Test
 	public void preserveTimestampDirCanBeDisabled() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "preserveTimestamp:false");
+		EnvironmentTestUtils.addEnvironment(context, "ftp.preserveTimestamp:false");
 		context.register(Conf.class);
 		context.refresh();
 		FtpSourceProperties properties = context.getBean(FtpSourceProperties.class);

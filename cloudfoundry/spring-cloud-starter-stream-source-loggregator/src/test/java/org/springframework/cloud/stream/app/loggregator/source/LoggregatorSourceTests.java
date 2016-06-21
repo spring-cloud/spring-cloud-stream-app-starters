@@ -57,8 +57,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = LoggregatorSourceApplication.class)
 @EnableConfigurationProperties(LoggregatorProperties.class)
-@IntegrationTest({"applicationName=foo", "cloudFoundryUser=bar",
-		"cloudFoundryPassword=baz", "cloudFoundryApi=qux"})
+@IntegrationTest({"loggregator.applicationName=foo", "loggregator.cloudFoundryUser=bar",
+		"loggregator.cloudFoundryPassword=baz", "loggregator.cloudFoundryApi=qux"})
 @DirtiesContext
 public class LoggregatorSourceTests {
 

@@ -15,8 +15,8 @@
 
 package org.springframework.cloud.stream.app.gemfire.source;
 
-import com.gemstone.gemfire.cache.Region;
-import com.gemstone.gemfire.pdx.PdxInstance;
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -35,7 +35,8 @@ import org.springframework.integration.gemfire.inbound.CacheListeningMessageProd
 import org.springframework.integration.router.PayloadTypeRouter;
 import org.springframework.messaging.MessageChannel;
 
-import javax.annotation.Resource;
+import com.gemstone.gemfire.cache.Region;
+import com.gemstone.gemfire.pdx.PdxInstance;
 
 /**
  * The Gemfire Source provides a {@link CacheListeningMessageProducer} which produces a
@@ -64,7 +65,7 @@ import javax.annotation.Resource;
 		GemfirePoolConfiguration.class,
 		GemfireClientRegionConfiguration.class })
 @EnableConfigurationProperties(GemfireSourceProperties.class)
-@PropertySource("classpath:gemfire-source.yml")
+@PropertySource("classpath:gemfire-source.properties")
 public class GemfireSourceConfiguration {
 
 	@Autowired

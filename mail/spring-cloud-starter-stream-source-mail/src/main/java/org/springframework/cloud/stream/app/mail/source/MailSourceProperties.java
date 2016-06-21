@@ -29,14 +29,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author Amol
  * @author Artem Bilan
  */
-@ConfigurationProperties
+@ConfigurationProperties("mail")
 public class MailSourceProperties {
 
 	/**
 	 * Mail connection URL for connection to Mail server e.g.
 	 * 'imaps://username:password@imap.server.com:993/Inbox'.
 	 */
-	private URLName mailUrl;
+	private URLName url;
 
 	/**
 	 * Set to true to mark email as read.
@@ -127,18 +127,18 @@ public class MailSourceProperties {
 	}
 
 	/**
-	 * @return the mailUrl
+	 * @return the url
 	 */
 	@NotNull
-	public URLName getMailUrl() {
-		return this.mailUrl;
+	public URLName getUrl() {
+		return this.url;
 	}
 
 	/**
-	 * @param mailUrl the mailUrl to set
+	 * @param url the url to set
 	 */
-	public void setMailUrl(URLName mailUrl) {
-		this.mailUrl = mailUrl;
+	public void setUrl(URLName url) {
+		this.url = url;
 	}
 
 	/**

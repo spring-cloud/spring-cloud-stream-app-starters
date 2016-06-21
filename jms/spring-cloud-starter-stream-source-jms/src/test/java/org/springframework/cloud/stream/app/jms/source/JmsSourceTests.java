@@ -35,7 +35,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
-import org.springframework.cloud.stream.app.jms.source.JmsSourceProperties;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.cloud.stream.test.binder.MessageCollector;
 import org.springframework.integration.jms.JmsMessageDrivenEndpoint;
@@ -71,9 +70,9 @@ public abstract class JmsSourceTests {
 	@Autowired
 	protected JmsMessageDrivenEndpoint endpoint;
 
-	@IntegrationTest({ "sessionTransacted = false", "clientId = client", "destination = topic",
-						"messageSelector = JMSCorrelationId=foo",
-						"subscriptionDurable = false", "subscriptionShared = false",
+	@IntegrationTest({ "jms.sessionTransacted = false", "jms.clientId = client", "jms.destination = topic",
+						"jms.messageSelector = JMSCorrelationId=foo",
+						"jms.subscriptionDurable = false", "jms.subscriptionShared = false",
 						"spring.jms.listener.acknowledgeMode = DUPS_OK",
 						"spring.jms.listener.concurrency = 3",
 						"spring.jms.listener.maxConcurrency = 4",
@@ -98,9 +97,9 @@ public abstract class JmsSourceTests {
 
 	}
 
-	@IntegrationTest({ "sessionTransacted = true", "clientId = client", "destination = topic",
-			"subscriptionName = subName", "subscriptionDurable = true",
-			"subscriptionShared = false", "spring.jms.listener.acknowledgeMode = AUTO",
+	@IntegrationTest({ "jms.sessionTransacted = true", "jms.clientId = client", "jms.destination = topic",
+			"jms.subscriptionName = subName", "jms.subscriptionDurable = true",
+			"jms.subscriptionShared = false", "spring.jms.listener.acknowledgeMode = AUTO",
 			"spring.jms.listener.concurrency = 3",
 			"spring.jms.listener.maxConcurrency = 4" })
 	public static class PropertiesPopulated2Tests extends JmsSourceTests {
@@ -124,9 +123,9 @@ public abstract class JmsSourceTests {
 
 	}
 
-	@IntegrationTest({ "sessionTransacted = true", "destination = jmssource.test.queue",
-		"messageSelector = JMSCorrelationId=foo",
-		"subscriptionDurable = false", "subscriptionShared = false",
+	@IntegrationTest({ "jms.sessionTransacted = true", "jms.destination = jmssource.test.queue",
+		"jms.messageSelector = JMSCorrelationId=foo",
+		"jms.subscriptionDurable = false", "jms.subscriptionShared = false",
 		"spring.jms.listener.acknowledgeMode = AUTO",
 		"spring.jms.listener.concurrency = 3",
 		"spring.jms.listener.maxConcurrency = 4",

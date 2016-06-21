@@ -28,7 +28,7 @@ import javax.validation.constraints.NotNull;
  * @author Eric Bottard
  * @author Gary Russell
  */
-@ConfigurationProperties
+@ConfigurationProperties("filter")
 public class FilterProcessorProperties {
 
 	private static final Expression DEFAULT_EXPRESSION = new SpelExpressionParser().parseExpression("true");

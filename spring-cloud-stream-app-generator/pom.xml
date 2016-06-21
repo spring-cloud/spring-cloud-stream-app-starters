@@ -33,6 +33,12 @@
 						<kafka />
 						<rabbit />
 					</binders>
+					<additionalGlobalDependencies>
+						<dependency>
+							<groupId>org.springframework.cloud</groupId>
+							<artifactId>spring-cloud-starter-config</artifactId>
+						</dependency>
+					</additionalGlobalDependencies>
 					<generatedApps>
 						<aggregate-counter-sink>
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.aggregate.counter.AggregateCounterSinkTestConfiguration.class</extraTestConfigClass>
@@ -88,23 +94,8 @@
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.http.HttpClientProcessorTestConfiguration.class</extraTestConfigClass>
 						</httpclient-processor>
 						<http-source />
-						<jdbc-sink>
-							<testDependencies>
-								<dependency>
-									<groupId>org.hsqldb</groupId>
-									<artifactId>hsqldb</artifactId>
-								</dependency>
-							</testDependencies>
-						</jdbc-sink>
-						<jdbc-source>
-							<testDependencies>
-								<dependency>
-									<groupId>org.hsqldb</groupId>
-									<artifactId>hsqldb</artifactId>
-								</dependency>
-							</testDependencies>
-							<extraTestConfigClass>org.springframework.cloud.stream.app.test.jdbc.JdbcSourceTestConfiguration.class</extraTestConfigClass>
-						</jdbc-source>
+						<jdbc-sink />
+						<jdbc-source />
 						<jms-source>
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.jms.JmsSourceTestConfiguration.class</extraTestConfigClass>
 						</jms-source>
@@ -144,6 +135,7 @@
 						<syslog-source>
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.ip.IpSourceTestConfiguration.class</extraTestConfigClass>
 						</syslog-source>
+						<task-launcher-local-sink/>
 						<tcp-sink>
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.ip.IpSinkTestConfiguration.class</extraTestConfigClass>
 						</tcp-sink>
@@ -153,6 +145,7 @@
 						<time-source />
 						<transform-processor />
 						<trigger-source />
+						<triggertask-source/>
 						<twitterstream-source>
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.twitter.TwitterTestConfiguration.class</extraTestConfigClass>
 						</twitterstream-source>

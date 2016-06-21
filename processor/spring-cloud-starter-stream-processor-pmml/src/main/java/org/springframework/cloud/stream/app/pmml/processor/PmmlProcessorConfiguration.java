@@ -71,6 +71,7 @@ import org.springframework.util.Assert;
 public class PmmlProcessorConfiguration {
 
 	private static final Log logger = LogFactory.getLog(PmmlProcessorConfiguration.class);
+	private static final String DEFAULT_OUTPUT_FIELD = "_output";
 
 	private final ModelEvaluatorFactory modelEvaluatorFactory = ModelEvaluatorFactory.newInstance();
 
@@ -122,7 +123,13 @@ public class PmmlProcessorConfiguration {
 		MutableMessage<?> result = convertToMutable(input);
 
 		for (Map.Entry<FieldName, ?> entry : results.entrySet()) {
-			String fieldName = entry.getKey().getValue();
+
+                        String fieldName = null;
+                        if (entry.getKey()==null)
+                            fieldName = DEFAULT_OUTPUT_FIELD;
+                        else 
+			    fieldName = entry.getKey().getValue();
+
 			Expression expression = properties.getOutputs().get(fieldName);
 			if (expression == null) {
 				expression = spelExpressionParser.parseExpression("payload." + fieldName);

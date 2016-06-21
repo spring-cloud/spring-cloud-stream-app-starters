@@ -69,14 +69,14 @@ public class SftpSourceIntegrationTests extends SftpTestSupport {
 	public static void configureSource() throws Throwable {
 
 		Properties properties = new Properties();
-		properties.put("remoteDir", "sftpSource");
-		properties.put("localDir", localTemporaryFolder.getRoot().getAbsolutePath() + File.separator + "localTarget");
-		properties.put("username", "foo");
-		properties.put("password", "foo");
-		properties.put("port", port);
-		properties.put("mode", "ref");
-		properties.put("allowUnknownKeys", "true");
-		properties.put("filenameRegex", ".*");
+		properties.put("sftp.remoteDir", "sftpSource");
+		properties.put("sftp.localDir", localTemporaryFolder.getRoot().getAbsolutePath() + File.separator + "localTarget");
+		properties.put("sftp.factory.username", "foo");
+		properties.put("sftp.factory.password", "foo");
+		properties.put("sftp.factory.port", port);
+		properties.put("file.consumer.mode", "ref");
+		properties.put("sftp.factory.allowUnknownKeys", "true");
+		properties.put("sftp.filenameRegex", ".*");
 		PropertiesInitializer.PROPERTIES = properties;
 	}
 

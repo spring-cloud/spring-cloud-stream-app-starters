@@ -24,7 +24,7 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
  *
  * @author David Turanski
  */
-@ConfigurationProperties
+@ConfigurationProperties("gemfire")
 public class GemfireSourceProperties {
 
 	private static final String DEFAULT_EXPRESSION = "newValue";

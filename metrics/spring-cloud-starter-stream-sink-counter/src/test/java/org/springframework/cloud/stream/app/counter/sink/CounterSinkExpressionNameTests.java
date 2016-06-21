@@ -24,7 +24,7 @@ import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 
-@WebIntegrationTest({ "nameExpression:payload" })
+@WebIntegrationTest({ "counter.nameExpression:payload" })
 public class CounterSinkExpressionNameTests extends AbstractCounterSinkTests {
 
 	@Test

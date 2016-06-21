@@ -1,10 +1,11 @@
 /*
  * Copyright 2016 the original author or authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,126 +13,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.cloud.stream.app.trigger;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.util.StringUtils;
-
-import javax.validation.ValidationException;
 import javax.validation.constraints.AssertFalse;
 import javax.validation.constraints.Min;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author David Turanski
- * @author Ilayaperumal Gopinathan
- */
-@ConfigurationProperties
-public class TriggerProperties {
+public interface TriggerProperties {
 
-	/**
-	 * Fixed delay for periodic triggers. Default is 1 TimeUnit.
-	 */
-	private int fixedDelay = 1;
+    long getMaxMessages();
 
-	/**
-	 * Initial delay for periodic triggers. Default is 0.
-	 */
-	private int initialDelay = 0;
+    void setMaxMessages(long maxMessages);
 
-	/**
-	 * The TimeUnit to apply to delay values. Default is TimeUnit.SECONDS
-	 */
-	private TimeUnit timeUnit = TimeUnit.SECONDS;
+    @Min(0)
+    int getInitialDelay();
 
-	/**
-	 * The date value for the date trigger.
-	 */
-	private String date;
+    void setInitialDelay(int initialDelay);
 
-	/**
-	 * Format for the date value.
-	 */
-	private String dateFormat = TriggerConstants.DATE_FORMAT;
+    TimeUnit getTimeUnit();
 
-	/**
-	 * Cron expression value for the Cron Trigger.
-	 */
-	private String cron;
+    void setTimeUnit(TimeUnit timeUnit);
 
-	@Min(0)
-	public int getInitialDelay() {
-		return initialDelay;
-	}
+    int getFixedDelay();
 
-	public void setInitialDelay(int initialDelay) {
-		this.initialDelay = initialDelay;
-	}
+    void setFixedDelay(int fixedDelay);
 
-	public TimeUnit getTimeUnit() {
-		return timeUnit;
-	}
+    String getCron();
 
-	public void setTimeUnit(TimeUnit timeUnit) {
-		this.timeUnit = timeUnit;
-	}
+    void setCron(String cron);
 
-	public int getFixedDelay() {
-		return fixedDelay;
-	}
+    Date getDate();
 
-	public void setFixedDelay(int fixedDelay) {
-		this.fixedDelay = fixedDelay;
-	}
+    void setDate(String date);
 
-	public String getCron() {
-		return this.cron;
-	}
+    SimpleDateFormat getDateFormat();
 
-	public void setCron(String cron) {
-		this.cron = cron;
-	}
+    void setDateFormat(String dateFormat);
 
-	public Date getDate() {
-		if (StringUtils.hasText(this.date)) {
-			try {
-				return this.getDateFormat().parse(this.date);
-			}
-			catch (ParseException e) {
-				throw new ValidationException("Invalid date value :" + this.date);
-			}
-		}
-		else {
-			return null;
-		}
-	}
-
-	public void setDate(String date) {
-		this.date = date;
-	}
-
-	public SimpleDateFormat getDateFormat() {
-		if (!StringUtils.hasText(this.dateFormat)) {
-			throw new ValidationException("'dateFormat' must not be empty.");
-		}
-		try {
-			return new SimpleDateFormat(this.dateFormat);
-		}
-		catch (IllegalArgumentException e) {
-			throw new ValidationException("Invalid Date format for the string: " + this.dateFormat);
-		}
-	}
-	public void setDateFormat(String dateFormat) {
-		this.dateFormat = dateFormat;
-	}
-
-	@AssertFalse
-	public boolean isMutuallyExclusive() {
-		return this.date != null && this.cron != null && this.fixedDelay != 1;
-	}
-
+    @AssertFalse
+    boolean isMutuallyExclusive();
 }

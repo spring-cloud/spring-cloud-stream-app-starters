@@ -53,13 +53,13 @@ public class FtpSinkIntegrationTests extends FtpTestSupport {
 	public static void configureSink() throws Throwable {
 
 		Properties properties = new Properties();
-		properties.put("remoteDir", "ftpTarget");
-		properties.put("username", "foo");
-		properties.put("password", "foo");
-		properties.put("filenamePattern", "*");
-		properties.put("port", port);
-		properties.put("mode", "FAIL");
-		properties.put("filenameExpression", "payload.name.toUpperCase()");
+		properties.put("ftp.remoteDir", "ftpTarget");
+		properties.put("ftp.factory.username", "foo");
+		properties.put("ftp.factory.password", "foo");
+		//properties.put("filenamePattern", "*");
+		properties.put("ftp.factory.port", port);
+		properties.put("ftp.mode", "FAIL");
+		properties.put("ftp.filenameExpression", "payload.name.toUpperCase()");
 		PropertiesInitializer.PROPERTIES = properties;
 	}
 

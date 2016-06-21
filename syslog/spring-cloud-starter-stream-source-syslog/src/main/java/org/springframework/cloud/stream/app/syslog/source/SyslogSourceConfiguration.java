@@ -53,14 +53,15 @@ public class SyslogSourceConfiguration {
 	private SyslogSourceProperties properties;
 
 	@Bean
-	@ConditionalOnProperty(name = "protocol", havingValue = "udp")
+	@ConditionalOnProperty(name = "syslog.protocol", havingValue = "udp")
 	public UdpSyslogReceivingChannelAdapter udpAdapter() {
 		return createUdpAdapter();
 	}
 
 	@Bean
-	@ConditionalOnProperty(name = "protocol", havingValue = "both")
+	@ConditionalOnProperty(name = "syslog.protocol", havingValue = "both")
 	public UdpSyslogReceivingChannelAdapter udpBothAdapter() {
+		System.out.println("WOOOOT");
 		return createUdpAdapter();
 	}
 
@@ -71,14 +72,14 @@ public class SyslogSourceConfiguration {
 	}
 
 	@Bean
-	@ConditionalOnProperty(name = "protocol", havingValue = "tcp", matchIfMissing = true)
+	@ConditionalOnProperty(name = "syslog.protocol", havingValue = "tcp", matchIfMissing = true)
 	public TcpSyslogReceivingChannelAdapter tcpAdapter(
 			@Qualifier("syslogSourceConnectionFactory") AbstractServerConnectionFactory connectionFactory) {
 		return createTcpAdapter(connectionFactory);
 	}
 
 	@Bean
-	@ConditionalOnProperty(name = "protocol", havingValue = "both")
+	@ConditionalOnProperty(name = "syslog.protocol", havingValue = "both")
 	public TcpSyslogReceivingChannelAdapter tcpBothAdapter(
 			@Qualifier("syslogSourceConnectionFactory") AbstractServerConnectionFactory connectionFactory) {
 		return createTcpAdapter(connectionFactory);
@@ -98,7 +99,7 @@ public class SyslogSourceConfiguration {
 	}
 
 	@Configuration
-	@ConditionalOnProperty(name = "protocol", havingValue = "tcp", matchIfMissing = true)
+	@ConditionalOnProperty(name = "syslog.protocol", havingValue = "tcp", matchIfMissing = true)
 	protected static class TcpBits {
 
 		@Autowired
@@ -134,7 +135,7 @@ public class SyslogSourceConfiguration {
 	}
 
 	@Configuration
-	@ConditionalOnProperty(name = "protocol", havingValue = "both")
+	@ConditionalOnProperty(name = "syslog.protocol", havingValue = "both")
 	protected static class BothBits extends TcpBits {
 
 	}

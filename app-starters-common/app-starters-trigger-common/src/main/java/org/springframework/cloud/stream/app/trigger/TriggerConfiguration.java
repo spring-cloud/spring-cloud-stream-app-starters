@@ -18,7 +18,6 @@ package org.springframework.cloud.stream.app.trigger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.NoneNestedConditions;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.config.SpelExpressionConverterConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
@@ -35,15 +34,11 @@ import org.springframework.scheduling.support.PeriodicTrigger;
  * @author Artem Bilan
  */
 @Configuration
-@EnableConfigurationProperties({ TriggerProperties.class, MaxMessagesProperties.class })
 @Import(SpelExpressionConverterConfiguration.class)
 public class TriggerConfiguration {
 
 	@Autowired
-	TriggerProperties config;
-
-	@Autowired
-	private MaxMessagesProperties maxMessagesProperties;
+	TriggerProperties triggerProperties;
 
 	@Bean(name = { "defaultPoller", PollerMetadata.DEFAULT_POLLER })
 	public PollerMetadata defaultPoller(Trigger trigger) {
@@ -51,8 +46,8 @@ public class TriggerConfiguration {
 		pollerMetadata.setTrigger(trigger);
 		// the default is 1 since a source might return
 		// a non-null and non-interruptible value every time it is invoked
-		pollerMetadata.setMaxMessagesPerPoll(this.maxMessagesProperties.getMaxMessages() > -1
-				? this.maxMessagesProperties.getMaxMessages()
+		pollerMetadata.setMaxMessagesPerPoll(this.triggerProperties.getMaxMessages() > -1
+				? this.triggerProperties.getMaxMessages()
 				: 1);
 		return pollerMetadata;
 	}
@@ -60,22 +55,22 @@ public class TriggerConfiguration {
 	@Bean(name = TriggerConstants.TRIGGER_BEAN_NAME)
 	@ConditionalOnProperty(TriggerConstants.CRON_TRIGGER_OPTION)
 	public Trigger cronTrigger() {
-		return new CronTrigger(config.getCron());
+		return new CronTrigger(triggerProperties.getCron());
 	}
 
 	@Bean(name = TriggerConstants.TRIGGER_BEAN_NAME)
 	@Conditional(PeriodicTriggerCondition.class)
 	public Trigger periodicTrigger() {
-		PeriodicTrigger trigger = new PeriodicTrigger(config.getFixedDelay(),
-				config.getTimeUnit());
-		trigger.setInitialDelay(config.getInitialDelay());
+		PeriodicTrigger trigger = new PeriodicTrigger(triggerProperties.getFixedDelay(),
+				triggerProperties.getTimeUnit());
+		trigger.setInitialDelay(triggerProperties.getInitialDelay());
 		return trigger;
 	}
 
 	@Bean(name = TriggerConstants.TRIGGER_BEAN_NAME)
 	@ConditionalOnProperty(TriggerConstants.DATE_TRIGGER_OPTION)
 	public Trigger dateTrigger() {
-		return new DateTrigger(config.getDate());
+		return new DateTrigger(triggerProperties.getDate());
 	}
 
 	static class PeriodicTriggerCondition extends NoneNestedConditions {

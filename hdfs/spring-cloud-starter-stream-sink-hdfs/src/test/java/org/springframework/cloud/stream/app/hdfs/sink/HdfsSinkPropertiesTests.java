@@ -33,7 +33,7 @@ public class HdfsSinkPropertiesTests {
 	@Test
 	public void fsUriCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "fsUri:hdfs://localhost:8020");
+		EnvironmentTestUtils.addEnvironment(context, "hdfs.fsUri:hdfs://localhost:8020");
 		context.register(Conf.class);
 		context.refresh();
 		HdfsSinkProperties properties = context.getBean(HdfsSinkProperties.class);
@@ -43,7 +43,7 @@ public class HdfsSinkPropertiesTests {
 	@Test
 	public void directoryCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "directory:/tmp/test");
+		EnvironmentTestUtils.addEnvironment(context, "hdfs.directory:/tmp/test");
 		context.register(Conf.class);
 		context.refresh();
 		HdfsSinkProperties properties = context.getBean(HdfsSinkProperties.class);
@@ -53,7 +53,7 @@ public class HdfsSinkPropertiesTests {
 	@Test
 	public void fileNameCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "fileName:mydata");
+		EnvironmentTestUtils.addEnvironment(context, "hdfs.fileName:mydata");
 		context.register(Conf.class);
 		context.refresh();
 		HdfsSinkProperties properties = context.getBean(HdfsSinkProperties.class);
@@ -63,7 +63,7 @@ public class HdfsSinkPropertiesTests {
 	@Test
 	public void fileExtensionCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "fileExtension:test");
+		EnvironmentTestUtils.addEnvironment(context, "hdfs.fileExtension:test");
 		context.register(Conf.class);
 		context.refresh();
 		HdfsSinkProperties properties = context.getBean(HdfsSinkProperties.class);
@@ -73,7 +73,7 @@ public class HdfsSinkPropertiesTests {
 	@Test
 	public void codecCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "codec:snappy");
+		EnvironmentTestUtils.addEnvironment(context, "hdfs.codec:snappy");
 		context.register(Conf.class);
 		context.refresh();
 		HdfsSinkProperties properties = context.getBean(HdfsSinkProperties.class);
@@ -83,7 +83,7 @@ public class HdfsSinkPropertiesTests {
 	@Test
 	public void fileUuidCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "fileUuid:true");
+		EnvironmentTestUtils.addEnvironment(context, "hdfs.fileUuid:true");
 		context.register(Conf.class);
 		context.refresh();
 		HdfsSinkProperties properties = context.getBean(HdfsSinkProperties.class);
@@ -93,7 +93,7 @@ public class HdfsSinkPropertiesTests {
 	@Test
 	public void overwriteCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "overwrite:true");
+		EnvironmentTestUtils.addEnvironment(context, "hdfs.overwrite:true");
 		context.register(Conf.class);
 		context.refresh();
 		HdfsSinkProperties properties = context.getBean(HdfsSinkProperties.class);
@@ -103,7 +103,7 @@ public class HdfsSinkPropertiesTests {
 	@Test
 	public void rolloverCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "rollover:5555555");
+		EnvironmentTestUtils.addEnvironment(context, "hdfs.rollover:5555555");
 		context.register(Conf.class);
 		context.refresh();
 		HdfsSinkProperties properties = context.getBean(HdfsSinkProperties.class);
@@ -113,7 +113,7 @@ public class HdfsSinkPropertiesTests {
 	@Test
 	public void idleTimeoutCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "idleTimeout:12345");
+		EnvironmentTestUtils.addEnvironment(context, "hdfs.idleTimeout:12345");
 		context.register(Conf.class);
 		context.refresh();
 		HdfsSinkProperties properties = context.getBean(HdfsSinkProperties.class);
@@ -123,7 +123,7 @@ public class HdfsSinkPropertiesTests {
 	@Test
 	public void closeTimeoutCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "closeTimeout:12345");
+		EnvironmentTestUtils.addEnvironment(context, "hdfs.closeTimeout:12345");
 		context.register(Conf.class);
 		context.refresh();
 		HdfsSinkProperties properties = context.getBean(HdfsSinkProperties.class);
@@ -133,7 +133,7 @@ public class HdfsSinkPropertiesTests {
 	@Test
 	public void enableSyncCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "enableSync:true");
+		EnvironmentTestUtils.addEnvironment(context, "hdfs.enableSync:true");
 		context.register(Conf.class);
 		context.refresh();
 		HdfsSinkProperties properties = context.getBean(HdfsSinkProperties.class);
@@ -143,7 +143,7 @@ public class HdfsSinkPropertiesTests {
 	@Test
 	public void flushTimeoutCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "flushTimeout:12345");
+		EnvironmentTestUtils.addEnvironment(context, "hdfs.flushTimeout:12345");
 		context.register(Conf.class);
 		context.refresh();
 		HdfsSinkProperties properties = context.getBean(HdfsSinkProperties.class);
@@ -153,7 +153,7 @@ public class HdfsSinkPropertiesTests {
 	@Test
 	public void inUsePrefixCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "inUsePrefix:_");
+		EnvironmentTestUtils.addEnvironment(context, "hdfs.inUsePrefix:_");
 		context.register(Conf.class);
 		context.refresh();
 		HdfsSinkProperties properties = context.getBean(HdfsSinkProperties.class);
@@ -163,7 +163,7 @@ public class HdfsSinkPropertiesTests {
 	@Test
 	public void inUseSuffixCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "inUseSuffix:tmp");
+		EnvironmentTestUtils.addEnvironment(context, "hdfs.inUseSuffix:tmp");
 		context.register(Conf.class);
 		context.refresh();
 		HdfsSinkProperties properties = context.getBean(HdfsSinkProperties.class);
@@ -173,7 +173,7 @@ public class HdfsSinkPropertiesTests {
 	@Test
 	public void fileOpenAttemptsCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "fileOpenAttempts:5");
+		EnvironmentTestUtils.addEnvironment(context, "hdfs.fileOpenAttempts:5");
 		context.register(Conf.class);
 		context.refresh();
 		HdfsSinkProperties properties = context.getBean(HdfsSinkProperties.class);
@@ -183,7 +183,7 @@ public class HdfsSinkPropertiesTests {
 	@Test
 	public void partitionPathCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "partitionPath:dateFormat('yyyy/MM/dd')");
+		EnvironmentTestUtils.addEnvironment(context, "hdfs.partitionPath:dateFormat('yyyy/MM/dd')");
 		context.register(Conf.class);
 		context.refresh();
 		HdfsSinkProperties properties = context.getBean(HdfsSinkProperties.class);

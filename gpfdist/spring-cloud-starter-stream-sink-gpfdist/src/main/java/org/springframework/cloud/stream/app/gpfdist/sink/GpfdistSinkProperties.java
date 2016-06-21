@@ -25,7 +25,7 @@ import org.springframework.core.io.Resource;
  *
  * @author Janne Valkealahti
  */
-@ConfigurationProperties
+@ConfigurationProperties("gpfdist")
 public class GpfdistSinkProperties {
 
 	private int gpfdistPort = 0;

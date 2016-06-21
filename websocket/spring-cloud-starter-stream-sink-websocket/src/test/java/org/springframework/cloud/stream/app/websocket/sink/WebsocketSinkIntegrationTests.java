@@ -53,10 +53,10 @@ import org.springframework.web.socket.handler.AbstractWebSocketHandler;
 @SpringApplicationConfiguration(classes = WebsocketSinkIntegrationTests.WebsocketSinkApplication.class)
 @WebIntegrationTest({
 	"server.port:0",
-	"websocketPort=0",
-	"websocketPath=/some_websocket_path",
-	"websocketLoglevel=DEBUG",
-	"threads=2"
+	"websocket.port=0",
+	"websocket.path=/some_websocket_path",
+	"websocket.logLevel=DEBUG",
+	"websocket.threads=2"
 })
 public class WebsocketSinkIntegrationTests {
 
@@ -83,9 +83,9 @@ public class WebsocketSinkIntegrationTests {
 
 	@Test
 	public void checkCmdlineArgs() {
-		assertThat(properties.getWebsocketPath(), is("/some_websocket_path"));
-		assertThat(properties.getWebsocketPort(), is(0));
-		assertThat(properties.getWebsocketLoglevel(), is("DEBUG"));
+		assertThat(properties.getPath(), is("/some_websocket_path"));
+		assertThat(properties.getPort(), is(0));
+		assertThat(properties.getLogLevel(), is("DEBUG"));
 		assertThat(properties.getThreads(), is(2));
 	}
 
@@ -144,7 +144,7 @@ public class WebsocketSinkIntegrationTests {
 
 	private WebSocketSession doHandshake(WebsocketSinkClientHandler handler)
 			throws InterruptedException, ExecutionException {
-		String wsEndpoint = "ws://localhost:" + this.sinkServer.getPort() + this.properties.getWebsocketPath();
+		String wsEndpoint = "ws://localhost:" + this.sinkServer.getPort() + this.properties.getPath();
 		return new StandardWebSocketClient().doHandshake(handler, wsEndpoint).get();
 	}
 

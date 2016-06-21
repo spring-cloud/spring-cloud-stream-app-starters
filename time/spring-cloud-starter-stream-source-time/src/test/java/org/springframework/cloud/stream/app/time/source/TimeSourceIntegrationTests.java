@@ -56,7 +56,7 @@ public abstract class TimeSourceIntegrationTests {
 		}
 	}
 
-	@IntegrationTest({ "timeUnit=MILLISECONDS" })
+	@IntegrationTest({ "trigger.timeUnit=MILLISECONDS" })
 	public static class TimeUnitPropertiesTests extends TimeSourceIntegrationTests {
 		@Test
 		public void test() throws InterruptedException {

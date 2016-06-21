@@ -53,14 +53,14 @@ public class SftpSinkIntegrationTests extends SftpTestSupport {
 	public static void configureSink() throws Throwable {
 
 		Properties properties = new Properties();
-		properties.put("remoteDir", "sftpTarget");
-		properties.put("username", "foo");
-		properties.put("password", "foo");
-		properties.put("filenamePattern", "*");
-		properties.put("port", port);
-		properties.put("mode", "FAIL");
-		properties.put("filenameExpression", "payload.name.toUpperCase()");
-		properties.put("allowUnknownKeys", "true");
+		properties.put("sftp.remoteDir", "sftpTarget");
+		properties.put("sftp.factory.username", "foo");
+		properties.put("sftp.factory.password", "foo");
+
+		properties.put("sftp.factory.port", port);
+		properties.put("sftp.mode", "FAIL");
+		properties.put("sftp.filenameExpression", "payload.name.toUpperCase()");
+		properties.put("sftp.factory.allowUnknownKeys", "true");
 		PropertiesInitializer.PROPERTIES = properties;
 	}
 

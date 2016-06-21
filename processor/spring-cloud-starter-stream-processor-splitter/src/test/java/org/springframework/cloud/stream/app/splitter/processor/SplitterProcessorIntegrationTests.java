@@ -58,10 +58,11 @@ import static org.springframework.integration.test.matcher.PayloadMatcher.hasPay
 /**
  * Integration Tests for the Splitter Processor.
  *
+ * @author Gary Russell
+ * @author Artem Bilan
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SplitterProcessorIntegrationTests.SplitterProcessorApplication.class)
-@WebIntegrationTest(randomPort = true)
 @DirtiesContext
 public abstract class SplitterProcessorIntegrationTests {
 
@@ -94,8 +95,8 @@ public abstract class SplitterProcessorIntegrationTests {
 		}
 	}
 
-	@IntegrationTest("delimiters = ,")
-	public static class withDelimitersTests extends SplitterProcessorIntegrationTests {
+	@IntegrationTest("splitter.delimiters = ,")
+	public static class WithDelimitersTests extends SplitterProcessorIntegrationTests {
 
 		@Test
 		public void test() {
@@ -107,8 +108,8 @@ public abstract class SplitterProcessorIntegrationTests {
 		}
 	}
 
-	@IntegrationTest({ "fileMarkers = false", "charset = UTF-8", "applySequence = false" })
-	public static class fromFileTests extends SplitterProcessorIntegrationTests {
+	@IntegrationTest({ "splitter.fileMarkers = false", "splitter.charset = UTF-8", "splitter.applySequence = false" })
+	public static class FromFileTests extends SplitterProcessorIntegrationTests {
 
 		@Test
 		public void test() throws Exception {
@@ -128,8 +129,8 @@ public abstract class SplitterProcessorIntegrationTests {
 		}
 	}
 
-	@IntegrationTest({ "fileMarkers = true", "charset = UTF-8" })
-	public static class fromFileWithMarkersTests extends SplitterProcessorIntegrationTests {
+	@IntegrationTest({ "splitter.fileMarkers = true", "splitter.charset = UTF-8", "splitter.markersJson = false" })
+	public static class FromFileWithMarkersTests extends SplitterProcessorIntegrationTests {
 
 		@Test
 		public void test() throws Exception {
@@ -155,7 +156,7 @@ public abstract class SplitterProcessorIntegrationTests {
 		}
 	}
 
-	@IntegrationTest("expression=payload.split(',')")
+	@IntegrationTest("splitter.expression=payload.split(',')")
 	public static class UsingExpressionIntegrationTests extends SplitterProcessorIntegrationTests {
 
 		@Test

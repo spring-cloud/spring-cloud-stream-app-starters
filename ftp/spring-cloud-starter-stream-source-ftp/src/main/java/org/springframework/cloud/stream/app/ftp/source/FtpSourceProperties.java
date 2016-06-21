@@ -22,7 +22,7 @@ import org.springframework.cloud.stream.app.file.remote.AbstractRemoteFileSource
  * @author David Turanski
  * @author Gary Russell
  */
-@ConfigurationProperties
+@ConfigurationProperties("ftp")
 public class FtpSourceProperties extends AbstractRemoteFileSourceProperties {
 
 }

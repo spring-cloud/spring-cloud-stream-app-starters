@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 the original author or authors.
+ * Copyright 2015-2016 the original author or authors.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,21 +15,22 @@
 
 package org.springframework.cloud.stream.app.gemfire.config;
 
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import java.net.InetSocketAddress;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * Gemfire client pool configuration properties
  *
  * @author David Turanski
  */
-@ConfigurationProperties
+@ConfigurationProperties("gemfire.pool")
 public class GemfirePoolProperties {
-	static enum ConnectType {locator, server}
 
-	;
+	public enum ConnectType {locator, server}
+
 	/**
 	 * Specifies one or more Gemfire locator or server addresses formatted as [host]:[port].
 	 */
@@ -69,4 +70,5 @@ public class GemfirePoolProperties {
 	public void setSubscriptionEnabled(boolean subscriptionEnabled) {
 		this.subscriptionEnabled = subscriptionEnabled;
 	}
+
 }

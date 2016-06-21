@@ -20,7 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.app.script.ScriptVariableGeneratorConfiguration;
 import org.springframework.cloud.stream.binding.BinderAwareChannelResolver;
 import org.springframework.cloud.stream.config.SpelExpressionConverterConfiguration;
 import org.springframework.cloud.stream.messaging.Sink;
@@ -40,7 +39,7 @@ import org.springframework.scripting.ScriptSource;
  * @author Gary Russell
  */
 @EnableBinding(Sink.class)
-@Import({SpelExpressionConverterConfiguration.class, ScriptVariableGeneratorConfiguration.class})
+@Import({SpelExpressionConverterConfiguration.class})
 @EnableConfigurationProperties(RouterSinkProperties.class)
 public class RouterSinkConfiguration {
 
@@ -68,7 +67,7 @@ public class RouterSinkConfiguration {
 	}
 
 	@Bean
-	@ConditionalOnProperty("script")
+	@ConditionalOnProperty("router.script")
 	public GroovyScriptExecutingMessageProcessor scriptProcessor(ScriptVariableGenerator scriptVariableGenerator,
 			RouterSinkProperties properties) {
 		ScriptSource scriptSource = new RefreshableResourceScriptSource(properties.getScript(),

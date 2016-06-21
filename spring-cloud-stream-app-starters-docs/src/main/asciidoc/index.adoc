@@ -1,5 +1,5 @@
-= Spring Cloud Stream Reference Guide
-Sabby Anandan, Artem Bilan, Marius Bogoevici, Eric Bottard, Mark Fisher, Ilayaperumal Gopinathan, Gunnar Hillert, Mark Pollack, Patrick Peralta, Glenn Renfro, Gary Russell, Thomas Risberg, David Turanski, Janne Valkealahti
+= Spring Cloud Stream App Starters Reference Guide
+Sabby Anandan; Artem Bilan; Marius Bogoevici; Eric Bottard; Mark Fisher; Ilayaperumal Gopinathan; Gunnar Hillert; Mark Pollack; Patrick Peralta; Glenn Renfro; Gary Russell; Thomas Risberg; David Turanski; Janne Valkealahti
 :doctype: book
 :toc:
 :toclevels: 4
@@ -7,6 +7,11 @@ Sabby Anandan, Artem Bilan, Marius Bogoevici, Eric Bottard, Mark Fisher, Ilayape
 :numbered:
 :icons: font
 :hide-uri-scheme:
+
+// Since the core projects will be at different release cadences, the following tokens need changed at the time of every release
+:scst-core-version: current-SNAPSHOT
+
+
 
 // ======================================================================================
 

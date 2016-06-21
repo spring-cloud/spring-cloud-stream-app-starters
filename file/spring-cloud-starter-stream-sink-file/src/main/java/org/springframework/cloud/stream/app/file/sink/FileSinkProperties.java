@@ -29,7 +29,7 @@ import java.io.File;
  *
  * @author Mark Fisher
  */
-@ConfigurationProperties
+@ConfigurationProperties("file")
 public class FileSinkProperties {
 
 	private static final String DEFAULT_DIR = System.getProperty("java.io.tmpdir") +
@@ -119,6 +119,10 @@ public class FileSinkProperties {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public String getNameExpression() {

@@ -16,12 +16,16 @@
 
 package org.springframework.cloud.stream.app.jdbc.source;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.Bindings;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.app.trigger.TriggerConfiguration;
+import org.springframework.cloud.stream.app.trigger.TriggerProperties;
+import org.springframework.cloud.stream.app.trigger.TriggerPropertiesMaxMessagesDefaultOne;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -34,8 +38,6 @@ import org.springframework.integration.dsl.support.Consumer;
 import org.springframework.integration.jdbc.JdbcPollingChannelAdapter;
 import org.springframework.integration.scheduling.PollerMetadata;
 
-import javax.sql.DataSource;
-
 /**
  * A module that reads data from an RDBMS using JDBC and creates a payload with the data.
  *
@@ -43,7 +45,7 @@ import javax.sql.DataSource;
  */
 @EnableBinding(Source.class)
 @Import(TriggerConfiguration.class)
-@EnableConfigurationProperties(JdbcSourceProperties.class)
+@EnableConfigurationProperties({JdbcSourceProperties.class, TriggerPropertiesMaxMessagesDefaultOne.class})
 public class JdbcSourceConfiguration {
 
 	@Autowired

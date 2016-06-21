@@ -29,11 +29,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import org.springframework.analytics.metrics.FieldValueCounterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.cloud.stream.annotation.Bindings;
-import org.springframework.cloud.stream.app.metrics.FieldValueCounterRepository;
 import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.cloud.stream.test.junit.redis.RedisTestSupport;
 import org.springframework.messaging.Message;
@@ -48,7 +48,7 @@ import org.springframework.tuple.TupleBuilder;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = TestFieldValueCounterSinkApplication.class)
-@WebIntegrationTest({"server.port:-1", "name:FVCounter", "store:redis", "fieldName:test"})
+@WebIntegrationTest({"server.port:-1", "field-value-counter.name:FVCounter", "field-value-counter.fieldName:test"})
 @DirtiesContext
 public class FieldValueCounterSinkTests {
 

@@ -16,7 +16,6 @@
 package org.springframework.cloud.stream.app.ftp.source;
 
 import org.apache.commons.net.ftp.FTPFile;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -25,6 +24,8 @@ import org.springframework.cloud.stream.app.file.FileConsumerProperties;
 import org.springframework.cloud.stream.app.file.FileUtils;
 import org.springframework.cloud.stream.app.ftp.FtpSessionFactoryConfiguration;
 import org.springframework.cloud.stream.app.trigger.TriggerConfiguration;
+import org.springframework.cloud.stream.app.trigger.TriggerProperties;
+import org.springframework.cloud.stream.app.trigger.TriggerPropertiesMaxMessagesDefaultUnlimited;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -47,7 +48,8 @@ import org.springframework.util.StringUtils;
  * @author Gary Russell
  */
 @EnableBinding(Source.class)
-@EnableConfigurationProperties({FtpSourceProperties.class, FileConsumerProperties.class})
+@EnableConfigurationProperties({FtpSourceProperties.class, FileConsumerProperties.class,
+		TriggerPropertiesMaxMessagesDefaultUnlimited.class})
 @Import({TriggerConfiguration.class, FtpSessionFactoryConfiguration.class})
 public class FtpSourceConfiguration {
 

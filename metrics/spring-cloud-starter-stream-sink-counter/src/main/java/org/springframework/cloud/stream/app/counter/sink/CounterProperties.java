@@ -15,13 +15,12 @@
  */
 package org.springframework.cloud.stream.app.counter.sink;
 
-import javax.validation.constraints.AssertTrue;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.cloud.stream.app.metrics.MetricProperties;
 import org.springframework.expression.Expression;
 import org.springframework.expression.common.LiteralExpression;
+
+import javax.validation.constraints.AssertTrue;
 
 /**
  * Common configuration properties for the Spring Cloud Stream metric modules.
@@ -30,8 +29,8 @@ import org.springframework.expression.common.LiteralExpression;
  * @author Ilayaperumal Gopinathan
  * @author Gary Russell
  */
-@ConfigurationProperties
-public class CounterProperties extends MetricProperties {
+@ConfigurationProperties("counter")
+public class CounterProperties {
 
 	/**
 	 * The default name of the counter

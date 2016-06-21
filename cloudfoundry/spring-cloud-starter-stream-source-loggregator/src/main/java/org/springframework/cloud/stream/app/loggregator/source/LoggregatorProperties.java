@@ -23,7 +23,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author Josh Long
  * @author Gary Russell
  */
-@ConfigurationProperties
+@ConfigurationProperties("loggregator")
 public class LoggregatorProperties {
 
 	private String cloudFoundryApi;

@@ -16,18 +16,18 @@
 
 package org.springframework.cloud.stream.app.jdbc.sink;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import java.util.Collections;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * Holds configuration properties for the Jdbc Sink module.
  *
  * @author Eric Bottard
  */
-@ConfigurationProperties
+@ConfigurationProperties("jdbc")
 public class JdbcSinkProperties {
 
 	/**

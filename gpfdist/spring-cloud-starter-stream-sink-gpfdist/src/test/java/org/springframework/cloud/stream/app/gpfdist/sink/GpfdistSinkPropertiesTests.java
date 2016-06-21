@@ -15,16 +15,17 @@
  */
 package org.springframework.cloud.stream.app.gpfdist.sink;
 
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+
 import org.junit.Test;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.app.gpfdist.sink.support.SegmentRejectType;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Configuration;
-
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 
 public class GpfdistSinkPropertiesTests {
 
@@ -33,9 +34,9 @@ public class GpfdistSinkPropertiesTests {
 		SpringApplication app = new SpringApplication(TestConfiguration.class);
 		app.setWebEnvironment(false);
 		ConfigurableApplicationContext context = app
-				.run(new String[] { "--errorTable=myerror",
-						"--segmentRejectLimit=1",
-						"--segmentRejectType=ROWS" });
+				.run(new String[] { "--gpfdist.errorTable=myerror",
+						"--gpfdist.segmentRejectLimit=1",
+						"--gpfdist.segmentRejectType=ROWS" });
 
 		GpfdistSinkProperties properties = context.getBean(GpfdistSinkProperties.class);
 		assertThat(properties, notNullValue());
@@ -50,9 +51,9 @@ public class GpfdistSinkPropertiesTests {
 		SpringApplication app = new SpringApplication(TestConfiguration.class);
 		app.setWebEnvironment(false);
 		ConfigurableApplicationContext context = app
-				.run(new String[] { "--errorTable=myerror",
-						"--segmentRejectLimit=1",
-						"--segmentRejectType=percent" });
+				.run(new String[] { "--gpfdist.errorTable=myerror",
+						"--gpfdist.segmentRejectLimit=1",
+						"--gpfdist.segmentRejectType=percent" });
 
 		GpfdistSinkProperties properties = context.getBean(GpfdistSinkProperties.class);
 		assertThat(properties, notNullValue());
@@ -67,7 +68,7 @@ public class GpfdistSinkPropertiesTests {
 		SpringApplication app = new SpringApplication(TestConfiguration.class);
 		app.setWebEnvironment(false);
 		ConfigurableApplicationContext context = app
-				.run(new String[] { "--nullString=mynullstring" });
+				.run(new String[] { "--gpfdist.nullString=mynullstring" });
 
 		GpfdistSinkProperties properties = context.getBean(GpfdistSinkProperties.class);
 		assertThat(properties, notNullValue());

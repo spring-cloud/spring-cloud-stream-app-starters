@@ -79,7 +79,7 @@ public class SplitterProcessorConfiguration {
 						if (markers == null) {
 							markers = false;
 						}
-						FileSplitter splitter = new FileSplitter(true, markers);
+						FileSplitter splitter = new FileSplitter(true, markers, properties.getMarkersJson());
 						if (charset != null) {
 							splitter.setCharset(Charset.forName(charset));
 						}

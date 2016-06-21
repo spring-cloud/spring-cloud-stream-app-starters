@@ -1,7 +1,7 @@
 [[overview]]
 
 This section will provide you with a detailed overview of Spring Cloud Stream Application Starters, their purpose, and how to use them.
-It assumes familiarity with general Spring Cloud Stream concepts, which can be found in the Spring Cloud Stream http://docs.spring.io/spring-cloud-stream/docs/current-SNAPSHOT/reference/htmlsingle/[reference documentation]].
+It assumes familiarity with general Spring Cloud Stream concepts, which can be found in the Spring Cloud Stream http://docs.spring.io/spring-cloud-stream/docs/{scst-core-version}/reference/htmlsingle/[reference documentation].
 
 == Introduction
 
@@ -50,18 +50,18 @@ The prebuilt applications follow a naming convention too: `<functionality>-<type
 
 You either get access to the artifacts produced by Spring Cloud Stream Application Starters via Maven, Docker, or building the artifacts yourself.
 
-==== Maven and Docker accesss
+==== Maven and Docker access
 
 Starters are available as Maven artifacts in the https://github.com/spring-projects/spring-framework/wiki/Spring-repository-FAQ[Spring repositories]. You can add them as dependencies to your application, as follows:
 
 [source,xml]
-```
+----
 <dependency>
   <group>org.springframework.cloud.stream.app</group>
   <artifactId>spring-cloud-starter-stream-sink-cassandra</artifactId>
   <version>1.0.0.BUILD-SNAPSHOT</version>
 </dependency>
-```
+----
 
 From this, you can infer the coordinates for other starters found in this guide.
 While the version may vary, the group will always remain `org.springframework.cloud.stream.app` and the artifact id follows the naming convention `spring-cloud-starter-stream-<type>-<functionality>` described <<classification,previously>>.
@@ -70,9 +70,9 @@ Prebuilt applications are available as Maven artifacts too.
 It is not encouraged to use them directly as dependencies, as starters should be used instead.
 Following the typical Maven `<group>:<artifactId>:<version>` convention, they can be referenced for example as:
 
-```
+----
 org.springframework.cloud.stream.app:cassandra-sink-rabbit:1.0.0.BUILD-SNAPSHOT
-```
+----
 
 Just as with the starters, you can infer the coordinates for other prebuilt applications found in the guide.
 The group will be always `org.springframework.cloud.stream.app`.
@@ -81,9 +81,10 @@ The artifact id follows the format `<functionality>-<type>-<binder>` <<classific
 
 The Docker versions of the applications are available in Docker Hub, at `https://hub.docker.com/r/springcloudstream/`. Naming and versioning follows the same general conventions as Maven, e.g.
 
-```
+[source,bash]
+----
 docker pull springcloudstream/cassandra-sink-kafka
-```
+----
 
 will pull the _latest_ Docker image of the _Cassandra sink_ with the Kafka binder.
 
@@ -96,9 +97,10 @@ First, you need to generate the prebuilt applications.
 This is done by running the application generation Maven plugin.
 You can do so by simply invoking the corresponding script in the root of the project.
 
-```
+[source,bash]
+----
 ./generate.sh
-```
+----
 
 For the each of the prebuilt applications, the script will generate the following items:
 
@@ -199,3 +201,54 @@ As a reminder, this involves:
 * adding the main class and importing the starter configuration.
 
 After doing so, you can simply add the additional configuration for the extra features of your application.
+
+=== Patching pre-built applications
+
+If you're looking to patch the pre-built applications to accommodate addition of new dependencies, you can use the following example as the reference. Let's review the steps to add `mysql` driver to `jdbc-sink` application.  
+
+* Go to: http://start-scs.cfapps.io/
+* Select the appliation and binder dependencies [_`JDBC sink` and `Rabbit binder starter`_]
+* Generate and load the project in an IDE
+* Add `mysql` java-driver dependency
+
+[source,xml]
+----
+<dependencies>
+  <dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>5.1.37</version>
+  </dependency>
+  <dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-stream-binder-rabbit</artifactId>
+  </dependency>
+  <dependency>
+    <groupId>org.springframework.cloud.stream.app</groupId>
+    <artifactId>spring-cloud-starter-stream-sink-jdbc</artifactId>
+  </dependency>
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-test</artifactId>
+    <scope>test</scope>
+  </dependency>
+</dependencies>
+----
+
+* Import the respective configuration _class_ to the generated Spring Boot application. In the case of `jdbc` sink, it is: `@Import(org.springframework.cloud.stream.app.jdbc.sink.JdbcSinkConfiguration.class)`. You can find the configuration _class_ for other applications in their respective https://github.com/spring-cloud/spring-cloud-stream-app-starters[packages].
+
+[source,java]
+----
+@SpringBootApplication
+@Import(org.springframework.cloud.stream.app.jdbc.sink.JdbcSinkConfiguration.class)
+public class DemoApplication {
+
+  public static void main(String[] args) {
+    SpringApplication.run(DemoApplication.class, args);
+  }
+}
+----
+
+* Build and install the application to desired maven repository
+* The patched copy of `jdbc-sink` application now includes `mysql` driver in it
+* This application can be run as standalone _uberjars_

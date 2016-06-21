@@ -16,6 +16,8 @@
 
 package org.springframework.cloud.stream.app.file.source;
 
+import java.io.File;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -23,6 +25,8 @@ import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.app.file.FileConsumerProperties;
 import org.springframework.cloud.stream.app.file.FileUtils;
 import org.springframework.cloud.stream.app.trigger.TriggerConfiguration;
+import org.springframework.cloud.stream.app.trigger.TriggerProperties;
+import org.springframework.cloud.stream.app.trigger.TriggerPropertiesMaxMessagesDefaultUnlimited;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -37,8 +41,6 @@ import org.springframework.integration.file.FileReadingMessageSource;
 import org.springframework.integration.scheduling.PollerMetadata;
 import org.springframework.util.StringUtils;
 
-import java.io.File;
-
 /**
  * Creates a {@link FileReadingMessageSource} bean and registers it as a
  * Inbound Channel Adapter that sends messages to the Source output channel.
@@ -47,7 +49,8 @@ import java.io.File;
  */
 @EnableBinding(Source.class)
 @Import(TriggerConfiguration.class)
-@EnableConfigurationProperties({FileSourceProperties.class, FileConsumerProperties.class})
+@EnableConfigurationProperties({FileSourceProperties.class, FileConsumerProperties.class,
+		TriggerPropertiesMaxMessagesDefaultUnlimited.class})
 public class FileSourceConfiguration {
 
 	@Autowired

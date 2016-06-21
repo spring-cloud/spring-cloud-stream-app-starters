@@ -15,12 +15,23 @@
 
 package org.springframework.cloud.stream.app.gemfire.sink;
 
-import com.gemstone.gemfire.cache.Region;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import javax.annotation.Resource;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -37,16 +48,7 @@ import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.annotation.Resource;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertTrue;
+import com.gemstone.gemfire.cache.Region;
 
 
 /**
@@ -54,7 +56,8 @@ import static org.junit.Assert.assertTrue;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = {GemfireSinkIntegrationTests.GemfireSinkApplication.class})
-@IntegrationTest({"regionName=Stocks", "keyExpression='key'", "hostAddresses=localhost:42424", "connectType=server"})
+@IntegrationTest({"gemfire.region.regionName=Stocks", "gemfire.keyExpression='key'", "gemfire.pool.hostAddresses=localhost:42424",
+		"gemfire.pool.connectType=server"})
 @EnableConfigurationProperties(GemfireSinkProperties.class)
 public class GemfireSinkIntegrationTests {
 

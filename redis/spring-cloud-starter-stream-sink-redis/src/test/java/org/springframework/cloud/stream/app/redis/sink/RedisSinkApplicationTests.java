@@ -48,7 +48,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = RedisSinkApplicationTests.RedisSinkApplication.class)
-@WebIntegrationTest({"server.port:0","key=foo"})
+@WebIntegrationTest({"server.port:0","redis.key=foo"})
 @DirtiesContext
 public class RedisSinkApplicationTests {
 

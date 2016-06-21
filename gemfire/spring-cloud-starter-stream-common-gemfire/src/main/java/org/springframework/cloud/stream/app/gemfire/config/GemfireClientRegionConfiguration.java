@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 the original author or authors.
+ * Copyright 2015-2016 the original author or authors.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -57,13 +57,13 @@ public class GemfireClientRegionConfiguration {
 	private List<Interest> keyInterests;
 
 	@Bean(name = "clientRegion")
+	@SuppressWarnings({"rawtype", "unchecked"})
 	public ClientRegionFactoryBean clientRegionFactoryBean() {
 		ClientRegionFactoryBean clientRegionFactoryBean = new ClientRegionFactoryBean();
-		clientRegionFactoryBean.setRegionName(config.getRegionName());
+		clientRegionFactoryBean.setRegionName(this.config.getRegionName());
 		clientRegionFactoryBean.setDataPolicy(DataPolicy.EMPTY);
-		if (!CollectionUtils.isEmpty(keyInterests)) {
-			clientRegionFactoryBean.setInterests((Interest[]) keyInterests
-					.toArray(new Interest[keyInterests.size()]));
+		if (!CollectionUtils.isEmpty(this.keyInterests)) {
+			clientRegionFactoryBean.setInterests(this.keyInterests.toArray(new Interest[this.keyInterests.size()]));
 		}
 
 		try {
@@ -73,4 +73,5 @@ public class GemfireClientRegionConfiguration {
 		}
 		return clientRegionFactoryBean;
 	}
+
 }

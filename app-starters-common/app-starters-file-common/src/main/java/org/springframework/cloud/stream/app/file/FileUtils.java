@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 the original author or authors.
+ * Copyright 2015-2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,17 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.cloud.stream.app.file;
 
-import org.springframework.integration.dsl.IntegrationFlowBuilder;
-import org.springframework.integration.dsl.file.Files;
-import org.springframework.integration.dsl.support.Transformers;
-import org.springframework.messaging.MessageHeaders;
+package org.springframework.cloud.stream.app.file;
 
 import java.util.Collections;
 
+import org.springframework.integration.dsl.IntegrationFlowBuilder;
+import org.springframework.integration.dsl.support.Transformers;
+import org.springframework.integration.file.splitter.FileSplitter;
+import org.springframework.messaging.MessageHeaders;
+
 /**
  * @author Gary Russell
+ * @author Artem Bilan
  *
  */
 public class FileUtils {
@@ -44,9 +46,13 @@ public class FileUtils {
 					.transform(Transformers.fileToByteArray());
 			break;
 		case lines:
+			Boolean withMarkers = fileConsumerProperties.getWithMarkers();
+			if (withMarkers == null) {
+				withMarkers = false;
+			}
 			flowBuilder.enrichHeaders(Collections.<String, Object>singletonMap(MessageHeaders.CONTENT_TYPE,
 					"text/plain"))
-					.split(Files.splitter(true, fileConsumerProperties.getWithMarkers()));
+					.split(new FileSplitter(true, withMarkers, fileConsumerProperties.getMarkersJson()));
 		case ref:
 			break;
 		default:

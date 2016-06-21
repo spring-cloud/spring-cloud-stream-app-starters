@@ -28,7 +28,7 @@ import javax.validation.constraints.NotNull;
  * @author David Turanski
  * @author Gary Russell
  */
-@ConfigurationProperties
+@ConfigurationProperties("ftp.factory")
 public class FtpSessionFactoryProperties extends AbstractRemoteServerProperties {
 
 	/**

@@ -25,7 +25,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author Thomas Risberg
  */
 @SuppressWarnings("unused")
-@ConfigurationProperties
+@ConfigurationProperties("hdfs.dataset")
 public class HdfsDatasetSinkProperties {
 
 	/**

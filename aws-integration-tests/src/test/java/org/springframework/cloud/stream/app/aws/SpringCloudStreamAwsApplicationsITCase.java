@@ -68,7 +68,7 @@ public class SpringCloudStreamAwsApplicationsITCase {
 		String content = "Spring Cloud Stream AWS S3 Source test";
 
 		this.applicationContext = SpringApplication.run(S3SourceBootConfiguration.class,
-				"--remoteDir=" + bucket, "--mode=lines", "--with-markers=false");
+				"--s3.remoteDir=" + bucket, "--file.consumer.mode=lines", "--file.consumer.with-markers=false");
 
 		ResourceIdResolver resourceIdResolver = this.applicationContext.getBean(ResourceIdResolver.class);
 
@@ -78,12 +78,17 @@ public class SpringCloudStreamAwsApplicationsITCase {
 		String bucketName = resourceIdResolver.resolveToPhysicalResourceId(bucket);
 		amazonS3.putObject(bucketName, key, new ByteArrayInputStream(content.getBytes("UTF-8")), objectMetadata);
 
-		Source source = this.applicationContext.getBean(Source.class);
-		MessageCollector messageCollector = this.applicationContext.getBean(MessageCollector.class);
-		Message<?> received = messageCollector.forChannel(source.output()).poll(10, TimeUnit.SECONDS);
-		assertNotNull(received);
-		assertThat(received, hasHeader(FileHeaders.FILENAME, key));
-		assertThat(received, hasPayload("Spring Cloud Stream AWS S3 Source test"));
+		try {
+			Source source = this.applicationContext.getBean(Source.class);
+			MessageCollector messageCollector = this.applicationContext.getBean(MessageCollector.class);
+			Message<?> received = messageCollector.forChannel(source.output()).poll(10, TimeUnit.SECONDS);
+			assertNotNull(received);
+			assertThat(received, hasHeader(FileHeaders.FILENAME, key));
+			assertThat(received, hasPayload("Spring Cloud Stream AWS S3 Source test"));
+		}
+		finally {
+			amazonS3.deleteObject(bucketName, key);
+		}
 	}
 
 	@Configuration

@@ -45,15 +45,15 @@ import static org.junit.Assert.assertTrue;
 @SpringApplicationConfiguration(classes = HdfsSinkConfigurationTests.HdfsSinkApplication.class)
 @WebIntegrationTest({"server.port:0",
 		"spring.hadoop.fsUri=file:///",
-		"directory=${java.io.tmpdir}/hdfs-sink",
-		"closeTimeout=100"})
+		"hdfs.directory=${java.io.tmpdir}/hdfs-sink",
+		"hdfs.closeTimeout=100"})
 @DirtiesContext
 public class HdfsSinkConfigurationTests {
 
 	@Autowired
 	ConfigurableApplicationContext applicationContext;
 
-	@Value("${directory}")
+	@Value("${hdfs.directory}")
 	private String testDir;
 
 	@Autowired

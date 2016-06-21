@@ -56,7 +56,7 @@ public abstract class ScriptableTransformProcessorIntegrationTests {
 	@Autowired
 	protected MessageCollector collector;
 
-	@IntegrationTest({"script=function add(a,b) { return a+b;};add(1,3)", "language=js"})
+	@IntegrationTest({"scriptable-transformer.script=function add(a,b) { return a+b;};add(1,3)", "scriptable-transformer.language=js"})
 	public static class JavascriptScriptProperty1Tests extends ScriptableTransformProcessorIntegrationTests {
 
 		@Test
@@ -67,7 +67,7 @@ public abstract class ScriptableTransformProcessorIntegrationTests {
 		}
 	}
 
-	@IntegrationTest({"script=payload+foo", "language=js", "variables=foo=\\\\\40WORLD"})
+	@IntegrationTest({"scriptable-transformer.script=payload+foo", "scriptable-transformer.language=js", "scriptable-transformer.variables=foo=\\\\\40WORLD"})
 	public static class JavascriptScriptProperty2Tests extends ScriptableTransformProcessorIntegrationTests {
 
 		@Test
@@ -78,7 +78,7 @@ public abstract class ScriptableTransformProcessorIntegrationTests {
 
 	}
 
-	@IntegrationTest({"script=payload*limit", "language=js", "variables=limit=5"})
+	@IntegrationTest({"scriptable-transformer.script=payload*limit", "scriptable-transformer.language=js", "scriptable-transformer.variables=limit=5"})
 	public static class JavascriptScriptProperty3Tests extends ScriptableTransformProcessorIntegrationTests {
 
 		@Test
@@ -89,7 +89,7 @@ public abstract class ScriptableTransformProcessorIntegrationTests {
 
 	}
 
-	@IntegrationTest({"script=payload+foo", "language=groovy", "variables=foo=\\\\\40WORLD"})
+	@IntegrationTest({"scriptable-transformer.script=payload+foo", "scriptable-transformer.language=groovy", "scriptable-transformer.variables=foo=\\\\\40WORLD"})
 	public static class GroovyScriptProperty1Tests extends ScriptableTransformProcessorIntegrationTests {
 
 		@Test
@@ -100,8 +100,8 @@ public abstract class ScriptableTransformProcessorIntegrationTests {
 
 	}
 
-	@IntegrationTest({"script=payload.substring(0, limit as int) + foo", "language=groovy",
-			"variables=limit=5\\n foo=\\\\\40WORLD"})
+	@IntegrationTest({"scriptable-transformer.script=payload.substring(0, limit as int) + foo", "scriptable-transformer.language=groovy",
+			"scriptable-transformer.variables=limit=5\\n foo=\\\\\40WORLD"})
 	public static class GroovyScriptProperty2Tests extends ScriptableTransformProcessorIntegrationTests {
 
 		@Test
@@ -112,7 +112,7 @@ public abstract class ScriptableTransformProcessorIntegrationTests {
 
 	}
 
-	@IntegrationTest({"script=return \"\"#{payload.upcase}\"\"", "language=ruby"})
+	@IntegrationTest({"scriptable-transformer.script=return \"\"#{payload.upcase}\"\"", "scriptable-transformer.language=ruby"})
 	public static class RubyScriptProperty1Tests extends ScriptableTransformProcessorIntegrationTests {
 
 		@Test
@@ -123,7 +123,7 @@ public abstract class ScriptableTransformProcessorIntegrationTests {
 
 	}
 
-	@IntegrationTest({"script=\"def foo(x)\\n  return x+5\\nend\\nfoo(payload)\\n\"", "language=ruby"})
+	@IntegrationTest({"scriptable-transformer.script=\"def foo(x)\\n  return x+5\\nend\\nfoo(payload)\\n\"", "scriptable-transformer.language=ruby"})
 	public static class RubyScriptProperty2Tests extends ScriptableTransformProcessorIntegrationTests {
 
 		@Test
@@ -136,8 +136,8 @@ public abstract class ScriptableTransformProcessorIntegrationTests {
 
 	// Python not currently supported, problems running it in SCDF
 
-	@IntegrationTest({"script=\"def multiply(x,y):\\n  return x*y\\nanswer = multiply(payload,5)\\n\"",
-			"language=python"})
+	@IntegrationTest({"scriptable-transformer.script=\"def multiply(x,y):\\n  return x*y\\nanswer = multiply(payload,5)\\n\"",
+			"scriptable-transformer.language=python"})
 	public static class PythonScriptProperty1Tests extends ScriptableTransformProcessorIntegrationTests {
 
 		@Test
@@ -148,8 +148,8 @@ public abstract class ScriptableTransformProcessorIntegrationTests {
 
 	}
 
-	@IntegrationTest({"script=\"def concat(x,y):\\n  return x+y\\nanswer = concat(\"\"hello \"\",payload)\\n\"",
-			"language=python"})
+	@IntegrationTest({"scriptable-transformer.script=\"def concat(x,y):\\n  return x+y\\nanswer = concat(\"\"hello \"\",payload)\\n\"",
+			"scriptable-transformer.language=python"})
 	public static class PythonScriptProperty2Tests extends ScriptableTransformProcessorIntegrationTests {
 
 		@Test

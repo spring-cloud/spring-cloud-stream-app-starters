@@ -73,7 +73,7 @@ public abstract class FilterProcessorIntegrationTests {
 		}
 	}
 
-	@IntegrationTest("expression=payload.length()>5")
+	@IntegrationTest("filter.expression=payload.length()>5")
 	public static class UsingExpressionIntegrationTests extends FilterProcessorIntegrationTests {
 
 		@Test

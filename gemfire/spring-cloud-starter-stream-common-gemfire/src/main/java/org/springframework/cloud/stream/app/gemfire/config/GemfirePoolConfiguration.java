@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 the original author or authors.
+ * Copyright 2015-2016 the original author or authors.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -22,6 +22,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.gemfire.client.PoolFactoryBean;
 import org.springframework.data.gemfire.config.GemfireConstants;
+import org.springframework.data.gemfire.support.ConnectionEndpointList;
 
 import java.util.Arrays;
 
@@ -45,20 +46,21 @@ public class GemfirePoolConfiguration {
 	@Bean
 	public PoolFactoryBean gemfirePool() {
 		PoolFactoryBean poolFactoryBean = new PoolFactoryBean();
+		ConnectionEndpointList endpointList = ConnectionEndpointList.from(Arrays.asList(this.config.getHostAddresses()));
 
 		switch (config.getConnectType()) {
 			case locator:
-				poolFactoryBean.setLocators(Arrays.asList(config.getHostAddresses()));
+				poolFactoryBean.setLocatorEndpointList(endpointList);
 				break;
 			case server:
-				poolFactoryBean.setServers(Arrays.asList(config.getHostAddresses()));
+				poolFactoryBean.setServerEndpointList(endpointList);
 				break;
 			default:
-				throw new IllegalArgumentException(
-						"connectType " + config.getConnectType() + " is not supported.");
+				throw new IllegalArgumentException("connectType " + config.getConnectType() + " is not supported.");
 			}
 		poolFactoryBean.setSubscriptionEnabled(config.isSubscriptionEnabled());
 		poolFactoryBean.setName("gemfirePool");
 		return poolFactoryBean;
 	}
+
 }

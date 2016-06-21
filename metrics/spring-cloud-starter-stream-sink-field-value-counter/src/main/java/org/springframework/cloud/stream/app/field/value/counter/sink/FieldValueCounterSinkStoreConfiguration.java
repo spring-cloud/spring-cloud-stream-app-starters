@@ -15,12 +15,12 @@
  */
 package org.springframework.cloud.stream.app.field.value.counter.sink;
 
+import java.util.Collections;
+
+import org.springframework.analytics.metrics.FieldValueCounterRepository;
+import org.springframework.analytics.metrics.redis.RedisFieldValueCounterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.cloud.stream.app.metrics.FieldValueCounterRepository;
-import org.springframework.cloud.stream.app.metrics.MetricProperties;
-import org.springframework.cloud.stream.app.metrics.memory.InMemoryFieldValueCounterRepository;
-import org.springframework.cloud.stream.app.metrics.redis.RedisFieldValueCounterRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.RedisConnectionFailureException;
@@ -29,8 +29,6 @@ import org.springframework.retry.RetryOperations;
 import org.springframework.retry.backoff.ExponentialBackOffPolicy;
 import org.springframework.retry.policy.SimpleRetryPolicy;
 import org.springframework.retry.support.RetryTemplate;
-
-import java.util.Collections;
 
 /**
  * Configuration class for the Field Value Counter.
@@ -50,12 +48,7 @@ public class FieldValueCounterSinkStoreConfiguration {
 
 	@Bean
 	public FieldValueCounterRepository redisMetricRepository() {
-		if (this.config.getStore().equals(MetricProperties.REDIS_STORE_VALUE)) {
-			return new RedisFieldValueCounterRepository(redisConnectionFactory, retryOperations());
-		}
-		else {
-			return new InMemoryFieldValueCounterRepository();
-		}
+		return new RedisFieldValueCounterRepository(redisConnectionFactory, retryOperations());
 	}
 
 	@Bean

@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
  *
  * @author Gary Russell
  */
-@ConfigurationProperties
+@ConfigurationProperties("file")
 public class FileSourceProperties {
 
 	private static final String DEFAULT_DIR = System.getProperty("java.io.tmpdir") +

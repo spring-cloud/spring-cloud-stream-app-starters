@@ -83,7 +83,7 @@ public abstract class TwitterSourceIntegrationTests {
 
 	}
 
-	@IntegrationTest({ "streamType=FIREHOSE", "language=english" })
+	@IntegrationTest({ "twitter.stream.streamType=FIREHOSE", "twitter.stream.language=english" })
 	public static class FireHoseTests extends TwitterSourceIntegrationTests {
 
 		@Test

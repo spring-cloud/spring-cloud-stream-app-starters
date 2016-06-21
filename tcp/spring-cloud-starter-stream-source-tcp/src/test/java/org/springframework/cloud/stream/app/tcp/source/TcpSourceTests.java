@@ -53,7 +53,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = TcpSourceTests.TcpSourceApplication.class)
 @DirtiesContext
-@WebIntegrationTest(randomPort = true, value = "port = 0")
+@WebIntegrationTest(randomPort = true, value = "tcp.port = 0")
 public abstract class TcpSourceTests {
 
 	@Autowired
@@ -68,8 +68,8 @@ public abstract class TcpSourceTests {
 	@Autowired
 	protected TcpSourceProperties properties;
 
-	@IntegrationTest({ "nio = true", "reverseLookup = true",
-					"useDirectBuffers = true", "socketTimeout = 123", "bufferSize = 5" })
+	@IntegrationTest({ "tcp.nio = true", "tcp.reverseLookup = true",
+					"tcp.useDirectBuffers = true", "tcp.socketTimeout = 123", "tcp.bufferSize = 5" })
 	public static class PropertiesPopulatedTests extends TcpSourceTests {
 
 		@Test
@@ -104,7 +104,7 @@ public abstract class TcpSourceTests {
 
 	}
 
-	@IntegrationTest({ "decoder = LF" })
+	@IntegrationTest({ "tcp.decoder = LF" })
 	public static class LFTests extends TcpSourceTests {
 
 		@Test
@@ -114,7 +114,7 @@ public abstract class TcpSourceTests {
 
 	}
 
-	@IntegrationTest({ "decoder = NULL" })
+	@IntegrationTest({ "tcp.decoder = NULL" })
 	public static class NULLTests extends TcpSourceTests {
 
 		@Test
@@ -124,7 +124,7 @@ public abstract class TcpSourceTests {
 
 	}
 
-	@IntegrationTest({ "decoder = STXETX" })
+	@IntegrationTest({ "tcp.decoder = STXETX" })
 	public static class STXETXTests extends TcpSourceTests {
 
 		@Test
@@ -134,7 +134,7 @@ public abstract class TcpSourceTests {
 
 	}
 
-	@IntegrationTest({ "decoder = L1" })
+	@IntegrationTest({ "tcp.decoder = L1" })
 	public static class L1Tests extends TcpSourceTests {
 
 		@Test
@@ -144,7 +144,7 @@ public abstract class TcpSourceTests {
 
 	}
 
-	@IntegrationTest({ "decoder = L2" })
+	@IntegrationTest({ "tcp.decoder = L2" })
 	public static class L2Tests extends TcpSourceTests {
 
 		@Test
@@ -154,7 +154,7 @@ public abstract class TcpSourceTests {
 
 	}
 
-	@IntegrationTest({ "decoder = L4" })
+	@IntegrationTest({ "tcp.decoder = L4" })
 	public static class L4Tests extends TcpSourceTests {
 
 		@Test
@@ -164,7 +164,7 @@ public abstract class TcpSourceTests {
 
 	}
 
-	@IntegrationTest({ "decoder = RAW" })
+	@IntegrationTest({ "tcp.decoder = RAW" })
 	public static class RAWTests extends TcpSourceTests {
 
 		@Test

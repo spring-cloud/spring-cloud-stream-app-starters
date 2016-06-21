@@ -29,14 +29,14 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import org.springframework.analytics.metrics.AggregateCounter;
+import org.springframework.analytics.metrics.AggregateCounterRepository;
+import org.springframework.analytics.metrics.AggregateCounterResolution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.cloud.stream.annotation.Bindings;
-import org.springframework.cloud.stream.app.metrics.AggregateCounter;
-import org.springframework.cloud.stream.app.metrics.AggregateCounterRepository;
-import org.springframework.cloud.stream.app.metrics.AggregateCounterResolution;
 import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.cloud.stream.test.junit.redis.RedisTestSupport;
 import org.springframework.messaging.support.GenericMessage;
@@ -51,7 +51,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = TestAggregateCounterSinkApplication.class)
-@IntegrationTest({"store=redis", "server.port=-1"})
+@IntegrationTest({"server.port=-1"})
 public abstract class AggregateCounterTests {
 
 	@Rule
@@ -76,7 +76,7 @@ public abstract class AggregateCounterTests {
 	}
 
 
-	@WebIntegrationTest("name="+ AGGREGATE_COUNTER_NAME)
+	@WebIntegrationTest("aggregate-counter.name="+ AGGREGATE_COUNTER_NAME)
 	public static class NullTimefieldAggregateCounterTests extends AggregateCounterTests {
 
 		@Test
@@ -89,7 +89,7 @@ public abstract class AggregateCounterTests {
 		}
 	}
 
-	@WebIntegrationTest({"name="+ AGGREGATE_COUNTER_NAME, "timeField=payload.ts", "dateFormat=dd/MM/yyyy"})
+	@WebIntegrationTest({"aggregate-counter.name="+ AGGREGATE_COUNTER_NAME, "aggregate-counter.timeField=payload.ts", "aggregate-counter.dateFormat=dd/MM/yyyy"})
 	public static class CountWithTimestampInMessageAndCustomFormatTests extends AggregateCounterTests {
 
 		@Test
@@ -102,7 +102,7 @@ public abstract class AggregateCounterTests {
 		}
 	}
 
-	@WebIntegrationTest({"name="+ AGGREGATE_COUNTER_NAME, "incrementExpression=payload"})
+	@WebIntegrationTest({"aggregate-counter.name="+ AGGREGATE_COUNTER_NAME, "aggregate-counter.incrementExpression=payload"})
 	public static class CountWithCustomIncrementTests extends AggregateCounterTests {
 
 		@Test
@@ -114,7 +114,7 @@ public abstract class AggregateCounterTests {
 		}
 	}
 
-	@WebIntegrationTest({"nameExpression=payload.counterName"})
+	@WebIntegrationTest({"aggregate-counter.nameExpression=payload.counterName"})
 	public static class CountWithNameExpressionTests extends AggregateCounterTests {
 
 		@Test
@@ -127,7 +127,7 @@ public abstract class AggregateCounterTests {
 		}
 	}
 
-	@WebIntegrationTest({"nameExpression=payload.counterName"})
+	@WebIntegrationTest({"aggregate-counter.nameExpression=payload.counterName"})
 	public static class CounterListTest extends AggregateCounterTests {
 
 		@Test

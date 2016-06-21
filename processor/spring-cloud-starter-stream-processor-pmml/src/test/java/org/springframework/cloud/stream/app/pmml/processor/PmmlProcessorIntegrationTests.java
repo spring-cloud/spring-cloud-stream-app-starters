@@ -47,7 +47,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = PmmlProcessorIntegrationTests.PmmlProcessorApplication.class)
 @DirtiesContext
-@IntegrationTest({"server.port=-1", "modelLocation=classpath:pmml/iris-flower-classification-naive-bayes-1.pmml.xml"})
+@IntegrationTest({"server.port=-1", "pmml.modelLocation=classpath:pmml/iris-flower-classification-naive-bayes-1.pmml.xml"})
 public abstract class PmmlProcessorIntegrationTests {
 
 	@Autowired
@@ -57,11 +57,11 @@ public abstract class PmmlProcessorIntegrationTests {
 	@Autowired
 	protected MessageCollector messageCollector;
 
-	@WebIntegrationTest({"inputs:Sepal.Length = payload.sepalLength," +
+	@WebIntegrationTest({"pmml.inputs:Sepal.Length = payload.sepalLength," +
 			"Sepal.Width = payload.sepalWidth," +
 			"Petal.Length = payload.petalLength," +
 			"Petal.Width = payload.petalWidth",
-			"outputs: Predicted_Species=payload.predictedSpecies"})
+			"pmml.outputs: Predicted_Species=payload.predictedSpecies"})
 	public static class SimpleMappingTests extends PmmlProcessorIntegrationTests {
 
 		@Test

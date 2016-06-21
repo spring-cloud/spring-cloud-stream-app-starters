@@ -24,7 +24,7 @@ import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 
-@WebIntegrationTest({ "name:simpleCounter" })
+@WebIntegrationTest({ "counter.name:simpleCounter" })
 public class CounterSinkNameTests extends AbstractCounterSinkTests {
 
 	@Test

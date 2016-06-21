@@ -73,7 +73,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = TcpSinkTests.TcpSinkApplication.class)
 @DirtiesContext
-@WebIntegrationTest(randomPort = true, value = { "host = localhost", "port = ${tcp.sink.test.port}" })
+@WebIntegrationTest(randomPort = true, value = { "tcp.host = localhost", "tcp.port = ${tcp.sink.test.port}" })
 public abstract class TcpSinkTests {
 
 	private static TestTCPServer server;
@@ -103,8 +103,8 @@ public abstract class TcpSinkTests {
 		server.shutDown();
 	}
 
-	@IntegrationTest({ "host = foo", "nio = true", "reverseLookup = true",
-					"useDirectBuffers = true", "socketTimeout = 123", "close = true", "charset = bar" })
+	@IntegrationTest({ "tcp.host = foo", "tcp.nio = true", "tcp.reverseLookup = true",
+					"tcp.useDirectBuffers = true", "tcp.socketTimeout = 123", "tcp.close = true", "tcp.charset = bar" })
 	public static class PropertiesPopulatedTests extends TcpSinkTests {
 
 		@Test
@@ -120,7 +120,7 @@ public abstract class TcpSinkTests {
 
 	}
 
-	@IntegrationTest({ "host = foo" })
+	@IntegrationTest({ "tcp.host = foo" })
 	public static class NotNioTests extends TcpSinkTests {
 
 		@Test
@@ -142,7 +142,7 @@ public abstract class TcpSinkTests {
 
 	}
 
-	@IntegrationTest({ "encoder = LF" })
+	@IntegrationTest({ "tcp.encoder = LF" })
 	public static class LFTests extends TcpSinkTests {
 
 		@Test
@@ -152,7 +152,7 @@ public abstract class TcpSinkTests {
 
 	}
 
-	@IntegrationTest({ "encoder = NULL" })
+	@IntegrationTest({ "tcp.encoder = NULL" })
 	public static class NULLTests extends TcpSinkTests {
 
 		@Test
@@ -162,7 +162,7 @@ public abstract class TcpSinkTests {
 
 	}
 
-	@IntegrationTest({ "encoder = STXETX" })
+	@IntegrationTest({ "tcp.encoder = STXETX" })
 	public static class STXETXTests extends TcpSinkTests {
 
 		@Test
@@ -172,7 +172,7 @@ public abstract class TcpSinkTests {
 
 	}
 
-	@IntegrationTest({ "encoder = L1" })
+	@IntegrationTest({ "tcp.encoder = L1" })
 	public static class L1Tests extends TcpSinkTests {
 
 		@Test
@@ -182,7 +182,7 @@ public abstract class TcpSinkTests {
 
 	}
 
-	@IntegrationTest({ "encoder = L2" })
+	@IntegrationTest({ "tcp.encoder = L2" })
 	public static class L2Tests extends TcpSinkTests {
 
 		@Test
@@ -192,7 +192,7 @@ public abstract class TcpSinkTests {
 
 	}
 
-	@IntegrationTest({ "encoder = L4" })
+	@IntegrationTest({ "tcp.encoder = L4" })
 	public static class L4Tests extends TcpSinkTests {
 
 		@Test
@@ -202,7 +202,7 @@ public abstract class TcpSinkTests {
 
 	}
 
-	@IntegrationTest({ "encoder = RAW", "close = true" })
+	@IntegrationTest({ "tcp.encoder = RAW", "tcp.close = true" })
 	public static class RAWTests extends TcpSinkTests {
 
 		@Test

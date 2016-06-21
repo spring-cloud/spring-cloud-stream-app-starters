@@ -23,6 +23,8 @@ import org.springframework.cloud.stream.app.file.FileConsumerProperties;
 import org.springframework.cloud.stream.app.file.FileUtils;
 import org.springframework.cloud.stream.app.sftp.SftpSessionFactoryConfiguration;
 import org.springframework.cloud.stream.app.trigger.TriggerConfiguration;
+import org.springframework.cloud.stream.app.trigger.TriggerProperties;
+import org.springframework.cloud.stream.app.trigger.TriggerPropertiesMaxMessagesDefaultUnlimited;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -46,7 +48,7 @@ import com.jcraft.jsch.ChannelSftp.LsEntry;
  */
 @EnableBinding(Source.class)
 @EnableConfigurationProperties({SftpSourceProperties.class, FileConsumerProperties.class})
-@Import({TriggerConfiguration.class, SftpSessionFactoryConfiguration.class})
+@Import({TriggerConfiguration.class, SftpSessionFactoryConfiguration.class, TriggerPropertiesMaxMessagesDefaultUnlimited.class})
 public class SftpSourceConfiguration {
 
 	@Autowired

@@ -16,21 +16,20 @@
 
 package org.springframework.cloud.stream.app.field.value.counter.sink;
 
-import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.NotNull;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.cloud.stream.app.metrics.MetricProperties;
 import org.springframework.expression.Expression;
 import org.springframework.expression.common.LiteralExpression;
+
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author Ilayaperumal Gopinathan
  * @author Gary Russell
  */
-@ConfigurationProperties
-public class FieldValueCounterSinkProperties extends MetricProperties {
+@ConfigurationProperties("field-value-counter")
+public class FieldValueCounterSinkProperties {
 
 	private String fieldName;
 	/**
