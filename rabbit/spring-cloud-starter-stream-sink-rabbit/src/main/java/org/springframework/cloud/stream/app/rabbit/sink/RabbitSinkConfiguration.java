@@ -48,7 +48,7 @@ public class RabbitSinkConfiguration {
 	@Autowired
 	private RabbitSinkProperties properties;
 
-	@Value("#{${converterBeanName:null}}")
+	@Value("#{${rabbit.converterBeanName:null}}")
 	private MessageConverter messageConverter;
 
 	@ServiceActivator(inputChannel = Sink.INPUT)
@@ -86,7 +86,7 @@ public class RabbitSinkConfiguration {
 	}
 
 	@Bean
-	@ConditionalOnProperty(name = "converterBeanName", havingValue = RabbitSinkProperties.JSON_CONVERTER)
+	@ConditionalOnProperty(name = "rabbit.converterBeanName", havingValue = RabbitSinkProperties.JSON_CONVERTER)
 	public Jackson2JsonMessageConverter jsonConverter() {
 		return new Jackson2JsonMessageConverter();
 	}

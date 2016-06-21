@@ -78,9 +78,9 @@ public abstract class RabbitSinkTests {
 	@Autowired(required = false)
 	protected MessageConverter myConverter;
 
-	@IntegrationTest({ "routingKey=scsapp-testq",
-		"persistentDeliveryMode=true",
-		"mappedRequestHeaders=STANDARD_REQUEST_HEADERS,bar" })
+	@IntegrationTest({ "rabbit.routingKey=scsapp-testq",
+		"rabbit.persistentDeliveryMode=true",
+		"rabbit.mappedRequestHeaders=STANDARD_REQUEST_HEADERS,bar" })
 	public static class SimpleRoutingKeyAndCustomHeaderTests extends RabbitSinkTests {
 
 		@Test
@@ -100,10 +100,10 @@ public abstract class RabbitSinkTests {
 
 	}
 
-	@IntegrationTest({ "exchange=scsapp-testex",
-		"routingKey=scsapp-testrk",
-		"converterBeanName=myConverter",
-		"mappedRequestHeaders=STANDARD_REQUEST_HEADERS,bar" })
+	@IntegrationTest({ "rabbit.exchange=scsapp-testex",
+		"rabbit.routingKey=scsapp-testrk",
+		"rabbit.converterBeanName=myConverter",
+		"rabbit.mappedRequestHeaders=STANDARD_REQUEST_HEADERS,bar" })
 	public static class ExchangeRoutingKeyAndCustomHeaderTests extends RabbitSinkTests {
 
 		@Test
@@ -122,9 +122,9 @@ public abstract class RabbitSinkTests {
 
 	}
 
-	@IntegrationTest({ "exchangeExpression='scsapp-testex'",
-		"routingKeyExpression='scsapp-testrk'",
-		"converterBeanName=jsonConverter" })
+	@IntegrationTest({ "rabbit.exchangeExpression='scsapp-testex'",
+		"rabbit.routingKeyExpression='scsapp-testrk'",
+		"rabbit.converterBeanName=jsonConverter" })
 	public static class ExchangeRoutingKeyExpressionsAndCustomHeaderTests extends RabbitSinkTests {
 
 		@Test
