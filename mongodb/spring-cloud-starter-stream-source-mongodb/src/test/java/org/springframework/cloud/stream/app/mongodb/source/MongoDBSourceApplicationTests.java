@@ -36,6 +36,7 @@ import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.cloud.stream.test.binder.MessageCollector;
 import org.springframework.messaging.Message;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
@@ -49,8 +50,8 @@ import static org.junit.Assert.assertThat;
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = { MongoDBSourceApplicationTests.MongoSourceApplication.class, EmbeddedMongoAutoConfiguration.class})
-@WebIntegrationTest(randomPort = true)
+@SpringApplicationConfiguration(classes = { MongoDBSourceApplicationTests.MongoSourceApplication.class})
+@TestPropertySource(properties = {"spring.data.mongodb.port=0"})
 @DirtiesContext
 public abstract class MongoDBSourceApplicationTests {
 
