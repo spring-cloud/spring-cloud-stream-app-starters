@@ -3,8 +3,8 @@
 
 This source polls data from MongoDB.
 This source is fully based on the `MongoDataAutoConfiguration`, so refer to the
-http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-nosql.html#boot-features-mongodb[Spring Boot MongoDB Support] for more
-information.
+http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-nosql.html#boot-features-mongodb[Spring Boot MongoDB Support]
+for more information.
 
 == Options
 

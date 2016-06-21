@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.app.trigger.TriggerConfiguration;
+import org.springframework.cloud.stream.app.trigger.TriggerPropertiesMaxMessagesDefaultUnlimited;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -41,8 +42,8 @@ import org.springframework.messaging.MessageChannel;
  *
  */
 @EnableBinding(Source.class)
-@EnableConfigurationProperties(MongoDBSourceProperties.class)
-@Import({ TriggerConfiguration.class, TriggerPropertiesConfiguration.class })
+@EnableConfigurationProperties({MongoDBSourceProperties.class, TriggerPropertiesMaxMessagesDefaultUnlimited.class})
+@Import({ TriggerConfiguration.class })
 public class MongoDBSourceConfiguration {
 
     @Autowired
