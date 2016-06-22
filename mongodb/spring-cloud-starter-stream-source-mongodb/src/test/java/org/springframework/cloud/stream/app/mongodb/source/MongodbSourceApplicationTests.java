@@ -1,10 +1,11 @@
 /*
- * Copyright (c) 2016 the original author or authors.
- * Licensed under the Apache License, Version 2.0 (the "License") ;
+ * Copyright 2016 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *          http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,10 +16,11 @@
 
 package org.springframework.cloud.stream.app.mongodb.source;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.MongoClient;
+import static org.junit.Assert.assertThat;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.Matchers;
 import org.junit.After;
@@ -27,10 +29,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.cloud.stream.annotation.Bindings;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.cloud.stream.test.binder.MessageCollector;
@@ -39,27 +39,26 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.MongoClient;
 
 /**
  * @author Adam Zwickey
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = { MongoDBSourceApplicationTests.MongoSourceApplication.class})
+@SpringApplicationConfiguration(classes = { MongodbSourceApplicationTests.MongoSourceApplication.class})
 @TestPropertySource(properties = {"spring.data.mongodb.port=0"})
 @DirtiesContext
-public abstract class MongoDBSourceApplicationTests {
+public abstract class MongodbSourceApplicationTests {
 
 	@Autowired
 	private MongoClient mongo;
 
 	@Autowired
-	@Bindings(MongoDBSourceConfiguration.class)
+	@Bindings(MongodbSourceConfiguration.class)
 	protected Source source;
 
 	@Autowired
@@ -79,7 +78,7 @@ public abstract class MongoDBSourceApplicationTests {
 	}
 
 	@IntegrationTest(value = {"mongodb.collection=testing", "trigger.fixedDelay=1"})
-	public static class DefaultTests extends MongoDBSourceApplicationTests {
+	public static class DefaultTests extends MongodbSourceApplicationTests {
 		@Test
 		public void test() throws InterruptedException {
 			Message<?> received = messageCollector.forChannel(source.output()).poll(2, TimeUnit.SECONDS);
@@ -89,7 +88,7 @@ public abstract class MongoDBSourceApplicationTests {
 	}
 
 	@IntegrationTest(value = {"mongodb.collection=testing",  "mongodb.query={ 'greeting': 'hola' }", "trigger.fixedDelay=1"})
-	public static class ValidQueryTests extends MongoDBSourceApplicationTests {
+	public static class ValidQueryTests extends MongodbSourceApplicationTests {
 		@Test
 		public void test() throws InterruptedException {
 			Message<?> received = messageCollector.forChannel(source.output()).poll(2, TimeUnit.SECONDS);
@@ -99,7 +98,7 @@ public abstract class MongoDBSourceApplicationTests {
 	}
 
 	@IntegrationTest(value = {"mongodb.collection=testing", "mongodb.query={ 'greeting': 'bogus' }", "trigger.fixedDelay=1"})
-	public static class InvalidQueryTests extends MongoDBSourceApplicationTests {
+	public static class InvalidQueryTests extends MongodbSourceApplicationTests {
 		@Test
 		public void test() throws InterruptedException {
 			Message<?> received = messageCollector.forChannel(source.output()).poll(2, TimeUnit.SECONDS);
@@ -108,7 +107,7 @@ public abstract class MongoDBSourceApplicationTests {
 	}
 
 	@IntegrationTest(value = {"mongodb.collection=testing", "trigger.fixedDelay=1", "mongodb.split=false"})
-	public static class NoSplitTests extends MongoDBSourceApplicationTests {
+	public static class NoSplitTests extends MongodbSourceApplicationTests {
 		@Test
 		public void test() throws InterruptedException {
 			Message<?> received = messageCollector.forChannel(source.output()).poll(2, TimeUnit.SECONDS);
@@ -120,7 +119,7 @@ public abstract class MongoDBSourceApplicationTests {
 	}
 
 	@IntegrationTest(value = {"mongodb.collection=testing", "trigger.fixedDelay=100"})
-	public static class MongoTriggerTests extends MongoDBSourceApplicationTests {
+	public static class MongoTriggerTests extends MongodbSourceApplicationTests {
 		@Test
 		public void test() throws InterruptedException {
 			Message<?> received = messageCollector.forChannel(source.output()).poll(1, TimeUnit.SECONDS);

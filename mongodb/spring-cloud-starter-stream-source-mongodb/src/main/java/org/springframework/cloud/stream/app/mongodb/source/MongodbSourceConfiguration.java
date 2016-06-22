@@ -42,12 +42,12 @@ import org.springframework.messaging.MessageChannel;
  *
  */
 @EnableBinding(Source.class)
-@EnableConfigurationProperties({MongoDBSourceProperties.class, TriggerPropertiesMaxMessagesDefaultUnlimited.class})
+@EnableConfigurationProperties({MongodbSourceProperties.class, TriggerPropertiesMaxMessagesDefaultUnlimited.class})
 @Import({ TriggerConfiguration.class })
-public class MongoDBSourceConfiguration {
+public class MongodbSourceConfiguration {
 
     @Autowired
-    private MongoDBSourceProperties config;
+    private MongodbSourceProperties config;
 
     @Autowired
     @Qualifier(Source.OUTPUT)
