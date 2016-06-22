@@ -111,7 +111,8 @@ public class ConfigurationMetadataDocumentationMojo extends AbstractMojo {
 		}
 		catch (Exception e) {
 			throw new MojoExecutionException("Error generating documentation", e);
-		} finally {
+		}
+		finally {
 			tmp.delete();
 		}
 
@@ -151,10 +152,47 @@ public class ConfigurationMetadataDocumentationMojo extends AbstractMojo {
 	private String niceDefault(ConfigurationMetadataProperty property) {
 		if (property.getDefaultValue() == null) {
 			return "<none>";
-		} else if ("".equals(property.getDefaultValue())) {
+		}
+		else if ("".equals(property.getDefaultValue())) {
 			return "<empty string>";
 		}
-		return String.valueOf(property.getDefaultValue());
+		else {
+			return stringify(property.getDefaultValue());
+		}
+	}
+
+	private String stringify(Object element) {
+		Class<?> clazz = element.getClass();
+		if (clazz == byte[].class) {
+			return Arrays.toString((byte[]) element);
+		}
+		else if (clazz == short[].class) {
+			return Arrays.toString((short[]) element);
+		}
+		else if (clazz == int[].class) {
+			return Arrays.toString((int[]) element);
+		}
+		else if (clazz == long[].class) {
+			return Arrays.toString((long[]) element);
+		}
+		else if (clazz == char[].class) {
+			return Arrays.toString((char[]) element);
+		}
+		else if (clazz == float[].class) {
+			return Arrays.toString((float[]) element);
+		}
+		else if (clazz == double[].class) {
+			return Arrays.toString((double[]) element);
+		}
+		else if (clazz == boolean[].class) {
+			return Arrays.toString((boolean[]) element);
+		}
+		else if (element instanceof Object[]) {
+			return Arrays.deepToString((Object[]) element);
+		}
+		else {
+			return element.toString();
+		}
 	}
 
 	private String niceType(ConfigurationMetadataProperty property) {
@@ -182,7 +220,6 @@ public class ConfigurationMetadataDocumentationMojo extends AbstractMojo {
 	/**
 	 * An adapter to boot {@link Archive} that satisfies just enough of the API to craft a ClassLoader that
 	 * "sees" all the properties that this Mojo tries to document.
-	 *
 	 * @author Eric Bottard
 	 */
 	private static class ScatteredArchive extends Archive {
