@@ -107,6 +107,7 @@
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.pmml.PmmlProcessorTestConfiguration.class</extraTestConfigClass>
 						</pmml-processor>
 						<log-sink />
+						<mongodb-source />
 						<rabbit-sink>
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.rabbit.RabbitSinkTestConfiguration.class</extraTestConfigClass>
 						</rabbit-sink>
