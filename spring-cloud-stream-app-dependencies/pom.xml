@@ -482,7 +482,6 @@
 				<groupId>org.springframework.data</groupId>
 				<artifactId>spring-data-hadoop-util</artifactId>
 				<version>${spring-data-hadoop.version}</version>
-				<scope>provided</scope>
 				<exclusions>
 					<exclusion>
 						<groupId>org.apache.hadoop</groupId>
