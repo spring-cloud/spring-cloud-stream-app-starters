@@ -64,8 +64,8 @@ import static org.junit.Assert.assertTrue;
 		listeners = {IntegrationTestPropertiesListener.class,
 				CassandraUnitDependencyInjectionIntegrationTestExecutionListener.class})
 @SpringApplicationConfiguration(CassandraSinkIntegrationTests.CassandraSinkApplication.class)
-@IntegrationTest({"spring.cassandra.keyspace=" + CassandraSinkIntegrationTests.CASSANDRA_KEYSPACE,
-		"spring.cassandra.createKeyspace=true",
+@IntegrationTest({"cassandra.cluster.keyspace=" + CassandraSinkIntegrationTests.CASSANDRA_KEYSPACE,
+		"cassandra.cluster.createKeyspace=true",
 		"server.port=-1"})
 @EmbeddedCassandra(configuration = EmbeddedCassandraServerHelper.CASSANDRA_RNDPORT_YML_FILE, timeout = 120000)
 @DirtiesContext
@@ -82,16 +82,16 @@ public abstract class CassandraSinkIntegrationTests {
 
 	@BeforeClass
 	public static void setUp() {
-		System.setProperty("spring.cassandra.port", "" + EmbeddedCassandraServerHelper.getNativeTransportPort());
+		System.setProperty("cassandra.cluster.port", "" + EmbeddedCassandraServerHelper.getNativeTransportPort());
 	}
 
 	@AfterClass
 	public static void cleanup() {
-		System.clearProperty("spring.cassandra.port");
+		System.clearProperty("cassandra.cluster.port");
 	}
 
-	@WebIntegrationTest({"spring.cassandra.schema-action=RECREATE",
-			"spring.cassandra.entity-base-packages=org.springframework.cloud.stream.app.cassandra.domain"})
+	@WebIntegrationTest({"cassandra.cluster.schema-action=RECREATE",
+			"cassandra.cluster.entity-base-packages=org.springframework.cloud.stream.app.cassandra.domain"})
 	@Ignore("Ignoring temporarily until the CI failure root cause is resolved")
 	public static class CassandraEntityInsertTests extends CassandraSinkIntegrationTests {
 
@@ -120,10 +120,11 @@ public abstract class CassandraSinkIntegrationTests {
 
 			this.cassandraTemplate.delete(book);
 		}
+
 	}
 
-	@WebIntegrationTest(randomPort = true, value = {"spring.cassandra.init-script=init-db.cql",
-			"ingest-query=insert into book (isbn, title, author, pages, saleDate, inStock) values (?, ?, ?, ?, ?, ?)"})
+	@WebIntegrationTest(randomPort = true, value = {"cassandra.cluster.init-script=init-db.cql",
+			"cassandra.ingest-query=insert into book (isbn, title, author, pages, saleDate, inStock) values (?, ?, ?, ?, ?, ?)"})
 	@Ignore("Ignoring temporarily until the CI failure root cause is resolved")
 	public static class CassandraSinkIngestTests extends CassandraSinkIntegrationTests {
 
@@ -153,8 +154,8 @@ public abstract class CassandraSinkIntegrationTests {
 
 	}
 
-	@WebIntegrationTest(randomPort = true, value = {"spring.cassandra.init-script=init-db.cql",
-			"ingest-query=insert into book (isbn, title, author, pages, saleDate, inStock) values (:myIsbn, :myTitle, :myAuthor, ?, ?, ?)"})
+	@WebIntegrationTest(randomPort = true, value = {"cassandra.cluster.init-script=init-db.cql",
+			"cassandra.ingest-query=insert into book (isbn, title, author, pages, saleDate, inStock) values (:myIsbn, :myTitle, :myAuthor, ?, ?, ?)"})
 	@Ignore("Ignoring temporarily until the CI failure root cause is resolved")
 	public static class CassandraSinkIngestNamedParamsTests extends CassandraSinkIntegrationTests {
 
@@ -226,6 +227,7 @@ public abstract class CassandraSinkIntegrationTests {
 		public static void main(String[] args) {
 			SpringApplication.run(CassandraSinkApplication.class, args);
 		}
+
 	}
 
 }

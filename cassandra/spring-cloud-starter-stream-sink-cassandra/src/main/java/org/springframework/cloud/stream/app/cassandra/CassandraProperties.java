@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 the original author or authors.
+ * Copyright 2015-2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,11 @@
 
 package org.springframework.cloud.stream.app.cassandra;
 
+import javax.validation.constraints.AssertFalse;
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.Range;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cassandra.config.CassandraCqlClusterFactoryBean;
@@ -25,16 +29,13 @@ import org.springframework.core.io.Resource;
 import org.springframework.data.cassandra.config.SchemaAction;
 import org.springframework.util.StringUtils;
 
-import javax.validation.constraints.AssertFalse;
-import javax.validation.constraints.NotNull;
-
 /**
  * Common properties for the cassandra modules.
  *
  * @author Artem Bilan
  * @author Thomas Risberg
  */
-@ConfigurationProperties("spring.cassandra")
+@ConfigurationProperties("cassandra.cluster")
 public class CassandraProperties {
 
 	/**
@@ -54,7 +55,7 @@ public class CassandraProperties {
 	private String keyspace;
 
 	/**
-	 * The flag to create (or not) keyspace on module startup.
+	 * The flag to create (or not) keyspace on application startup.
 	 */
 	private boolean createKeyspace;
 

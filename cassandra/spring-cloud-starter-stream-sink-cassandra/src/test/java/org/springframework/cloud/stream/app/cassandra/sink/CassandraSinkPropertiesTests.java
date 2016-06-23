@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 the original author or authors.
+ * Copyright 2015-2016 the original author or authors.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,7 +15,11 @@
 
 package org.springframework.cloud.stream.app.cassandra.sink;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import org.junit.Test;
+
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.EnvironmentTestUtils;
 import org.springframework.cassandra.core.ConsistencyLevel;
@@ -27,20 +31,17 @@ import org.springframework.context.annotation.Import;
 import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.integration.cassandra.outbound.CassandraMessageHandler;
-import org.springframework.integration.config.EnableIntegration;
-
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * @author Thomas Risberg
+ * @author Artem Bilan
  */
 public class CassandraSinkPropertiesTests {
 
 	@Test
 	public void consistencyLevelCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "consistency-level:" + ConsistencyLevel.LOCAL_QUOROM);
+		EnvironmentTestUtils.addEnvironment(context, "CASSANDRA_CONSISTENCY_LEVEL:" + ConsistencyLevel.LOCAL_QUOROM);
 		context.register(Conf.class);
 		context.refresh();
 		CassandraSinkProperties properties = context.getBean(CassandraSinkProperties.class);
@@ -51,7 +52,7 @@ public class CassandraSinkPropertiesTests {
 	@Test
 	public void retryPolicyCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "retry-policy:" + RetryPolicy.DOWNGRADING_CONSISTENCY);
+		EnvironmentTestUtils.addEnvironment(context, "cassandra.retry-policy:" + RetryPolicy.DOWNGRADING_CONSISTENCY);
 		context.register(Conf.class);
 		context.refresh();
 		CassandraSinkProperties properties = context.getBean(CassandraSinkProperties.class);
@@ -62,7 +63,7 @@ public class CassandraSinkPropertiesTests {
 	@Test
 	public void ttlCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "ttl:" + 1000);
+		EnvironmentTestUtils.addEnvironment(context, "cassandra.ttl:" + 1000);
 		context.register(Conf.class);
 		context.refresh();
 		CassandraSinkProperties properties = context.getBean(CassandraSinkProperties.class);
@@ -73,7 +74,7 @@ public class CassandraSinkPropertiesTests {
 	@Test
 	public void queryTypeCanBeCustomized() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "query-type:" + CassandraMessageHandler.Type.UPDATE);
+		EnvironmentTestUtils.addEnvironment(context, "cassandra.query-type:" + CassandraMessageHandler.Type.UPDATE);
 		context.register(Conf.class);
 		context.refresh();
 		CassandraSinkProperties properties = context.getBean(CassandraSinkProperties.class);
@@ -85,7 +86,7 @@ public class CassandraSinkPropertiesTests {
 	public void ingestQueryCanBeCustomized() {
 		String query = "insert into book (isbn, title, author) values (?, ?, ?)";
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "ingest-query:" + query);
+		EnvironmentTestUtils.addEnvironment(context, "cassandra.ingest-query:" + query);
 		context.register(Conf.class);
 		context.refresh();
 		CassandraSinkProperties properties = context.getBean(CassandraSinkProperties.class);
@@ -98,7 +99,7 @@ public class CassandraSinkPropertiesTests {
 		String queryDsl = "Select(FOO.BAR).From(FOO)";
 		Expression expression =  new SpelExpressionParser().parseExpression(queryDsl);
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		EnvironmentTestUtils.addEnvironment(context, "statement-expression:" + queryDsl);
+		EnvironmentTestUtils.addEnvironment(context, "cassandra.statementExpression:" + queryDsl);
 		context.register(Conf.class);
 		context.refresh();
 		CassandraSinkProperties properties = context.getBean(CassandraSinkProperties.class);
@@ -107,7 +108,6 @@ public class CassandraSinkPropertiesTests {
 	}
 
 	@Configuration
-	@EnableIntegration
 	@EnableConfigurationProperties(CassandraSinkProperties.class)
 	@Import(SpelExpressionConverterConfiguration.class)
 	static class Conf {

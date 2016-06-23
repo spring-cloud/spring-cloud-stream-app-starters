@@ -1,28 +1,29 @@
 //tag::ref-doc[]
-= Cassandra Sink 
+= Cassandra Sink
 
-This module writes the content of each message it receives to Cassandra.
+This sink application writes the content of each message it receives into Cassandra.
 
 == Options
 
 The **$$cassandra$$** $$sink$$ has the following options:
 
-$$compressionType$$:: $$the compression to use for the transport$$ *($$CompressionType$$, default: `NONE`, possible values: `NONE,SNAPPY`)*
-$$consistencyLevel$$:: $$the consistencyLevel option of WriteOptions$$ *($$ConsistencyLevel$$, no default, possible values: `ANY,ONE,TWO,THREE,QUOROM,LOCAL_QUOROM,EACH_QUOROM,ALL,LOCAL_ONE,SERIAL,LOCAL_SERIAL`)*
-$$spring.cassandra.contactPoints$$:: $$the comma-delimited string of the hosts to connect to Cassandra$$ *($$String$$, default: `localhost`)*
-$$entityBasePackages$$:: $$the base packages to scan for entities annotated with Table annotations$$ *($$String[]$$, default: `[]`)*
 $$ingestQuery$$:: $$the ingest Cassandra query$$ *($$String$$, no default)*
-$$spring.cassandra.initScript$$:: $$the path to file with CQL scripts (delimited by ';') to initialize keyspace schema$$ *($$String$$, no default)*
-$$spring.cassandra.keyspace$$:: $$the keyspace name to connect to$$ *($$String$$, default: `<stream name>`)*
-$$metricsEnabled$$:: $$enable/disable metrics collection for the created cluster$$ *($$boolean$$, default: `true`)*
-$$spring.cassandra.password$$:: $$the password for connection$$ *($$String$$, no default)*
-$$spring.cassandra.port$$:: $$the port to use to connect to the Cassandra host$$ *($$int$$, default: `9042`)*
 $$queryType$$:: $$the queryType for Cassandra Sink$$ *($$Type$$, default: `INSERT`, possible values: `INSERT,UPDATE,DELETE,STATEMENT`)*
-$$retryPolicy$$:: $$the retryPolicy  option of WriteOptions$$ *($$RetryPolicy$$, no default, possible values: `DEFAULT,DOWNGRADING_CONSISTENCY,FALLTHROUGH,LOGGING`)*
 $$statementExpression$$:: $$the expression in Cassandra query DSL style$$ *($$String$$, no default)*
-$$spring.cassandra.schemaAction$$:: $$schema action to perform$$ *($$SchemaAction$$, default: `NONE`, possible values: `CREATE,NONE,RECREATE,RECREATE_DROP_UNUSED`)*
+$$consistencyLevel$$:: $$the consistencyLevel option of WriteOptions$$ *($$ConsistencyLevel$$, no default, possible values: `ANY,ONE,TWO,THREE,QUOROM,LOCAL_QUOROM,EACH_QUOROM,ALL,LOCAL_ONE,SERIAL,LOCAL_SERIAL`)*
+$$retryPolicy$$:: $$the retryPolicy  option of WriteOptions$$ *($$RetryPolicy$$, no default, possible values: `DEFAULT,DOWNGRADING_CONSISTENCY,FALLTHROUGH,LOGGING`)*
 $$ttl$$:: $$the time-to-live option of WriteOptions$$ *($$int$$, default: `0`)*
-$$spring.cassandra.username$$:: $$the username for connection$$ *($$String$$, no default)*
+$$cassandra.cluster.contactPoints$$:: $$the comma-delimited string of the hosts to connect to Cassandra$$ *($$String$$, default: `localhost`)*
+$$cassandra.cluster.port$$:: $$the port to use to connect to the Cassandra host$$ *($$int$$, default: `9042`)*
+$$cassandra.cluster.keyspace$$:: $$the keyspace name to connect to$$ *($$String$$, default: `<stream name>`)*
+$$cassandra.cluster.username$$:: $$the username for connection$$ *($$String$$, no default)*
+$$cassandra.cluster.password$$:: $$the password for connection$$ *($$String$$, no default)*
+$$cassandra.cluster.initScript$$:: $$the path to file with CQL scripts (delimited by ';') to initialize keyspace schema$$ *($$String$$, no default)*
+$$cassandra.cluster.schemaAction$$:: $$schema action to perform$$ *($$SchemaAction$$, default: `NONE`, possible values: `CREATE,NONE,RECREATE,RECREATE_DROP_UNUSED`)*
+$$cassandra.cluster.createKeyspace$$:: $$The flag to create (or not) keyspace on application startup$$ *($$Boolean$$, default: `false`)*
+$$cassandra.cluster.entityBasePackages$$:: $$the base packages to scan for entities annotated with Table annotations$$ *($$String[]$$, default: `[]`)*
+$$cassandra.cluster.compressionType$$:: $$the compression to use for the transport$$ *($$CompressionType$$, default: `NONE`, possible values: `NONE,SNAPPY`)*
+$$cassandra.cluster.metricsEnabled$$:: $$enable/disable metrics collection for the created cluster$$ *($$boolean$$, default: `true`)*
 
 //end::ref-doc[]
 

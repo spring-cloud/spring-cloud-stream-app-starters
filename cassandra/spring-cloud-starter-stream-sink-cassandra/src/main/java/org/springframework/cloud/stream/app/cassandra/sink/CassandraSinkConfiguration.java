@@ -16,20 +16,24 @@
 
 package org.springframework.cloud.stream.app.cassandra.sink;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.StdDateFormat;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cassandra.core.WriteOptions;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.app.cassandra.CassandraConfiguration;
-import org.springframework.cloud.stream.config.SpelExpressionConverterConfiguration;
 import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.cassandra.core.CassandraOperations;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.cassandra.outbound.CassandraMessageHandler;
@@ -44,19 +48,19 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.util.StringUtils;
 
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.StdDateFormat;
 
 /**
  * @author Artem Bilan
  * @author Thomas Risberg
  * @author Ashu Gairola
  */
-@Configuration
-@Import({SpelExpressionConverterConfiguration.class, CassandraConfiguration.class})
 @EnableBinding(Sink.class)
+@Import(CassandraConfiguration.class)
 @EnableConfigurationProperties(CassandraSinkProperties.class)
+@PropertySource("cassandra-application.properties")
 public class CassandraSinkConfiguration {
 
 	@Autowired
