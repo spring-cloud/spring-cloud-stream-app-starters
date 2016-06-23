@@ -40,17 +40,17 @@ public class RedisSinkProperties {
 	/**
 	 * A SpEL expression to use for topic.
 	 */
-	private String topicExpression;
+	private Expression topicExpression;
 
 	/**
 	 * A SpEL expression to use for queue.
 	 */
-	private String queueExpression;
+	private Expression queueExpression;
 
 	/**
 	 * A SpEL expression to use for storing to a key.
 	 */
-	private String keyExpression;
+	private Expression keyExpression;
 
 	/**
 	 * A literal key name to use when storing to a key.
@@ -79,51 +79,63 @@ public class RedisSinkProperties {
 		this.topic = topic;
 	}
 
-	public Expression getKeyExpression() {
-		return key != null ? new LiteralExpression(key) : parser.parseExpression(keyExpression);
+	public Expression keyExpression() {
+		return key != null ? new LiteralExpression(key) : keyExpression;
 	}
 
-	public void setKeyExpression(String keyExpression) {
+	public void setKeyExpression(Expression keyExpression) {
 		this.keyExpression = keyExpression;
 	}
 
-	public Expression getQueueExpression() {
-		return queue != null ? new LiteralExpression(queue) : parser.parseExpression(queueExpression);
+	public Expression queueExpression() {
+		return queue != null ? new LiteralExpression(queue) : queueExpression;
 	}
 
-	public void setQueueExpression(String queueExpression) {
+	public void setQueueExpression(Expression queueExpression) {
 		this.queueExpression = queueExpression;
 	}
 
-	public Expression getTopicExpression() {
-		return topic != null ? new LiteralExpression(topic) : parser.parseExpression(topicExpression);
+	public Expression topicExpression() {
+		return topic != null ? new LiteralExpression(topic) : topicExpression;
 	}
 
-	public void setTopicExpression(String topicExpression) {
+	public void setTopicExpression(Expression topicExpression) {
 		this.topicExpression = topicExpression;
 	}
 
-	public boolean isKey() {
-		return StringUtils.hasText(key) || StringUtils.hasText(keyExpression);
+	/*default*/ boolean isKey() {
+		return StringUtils.hasText(key) || keyExpression != null;
 	}
 
-	public boolean isQueue() {
-		return StringUtils.hasText(queue) || StringUtils.hasText(queueExpression);
+	/*default*/ boolean isQueue() {
+		return StringUtils.hasText(queue) || queueExpression != null;
 	}
 
-	public boolean isTopic() {
-		return StringUtils.hasText(topic) || StringUtils.hasText(topicExpression);
+	/*default*/ public boolean isTopic() {
+		return StringUtils.hasText(topic) || topicExpression != null;
 	}
 
-	private String getKey() {
+	public Expression getTopicExpression() {
+		return topicExpression;
+	}
+
+	public Expression getQueueExpression() {
+		return queueExpression;
+	}
+
+	public Expression getKeyExpression() {
+		return keyExpression;
+	}
+
+	public String getKey() {
 		return key;
 	}
 
-	private String getQueue() {
+	public String getQueue() {
 		return queue;
 	}
 
-	private String getTopic() {
+	public String getTopic() {
 		return topic;
 	}
 
@@ -132,7 +144,7 @@ public class RedisSinkProperties {
 	@AssertTrue(message = "Exactly one of 'queue', 'queueExpression', 'key', 'keyExpression', "
 			+ "'topic' and 'topicExpression' must be set")
 	public boolean isMutuallyExclusive() {
-		String[] props = new String[]{queue, queueExpression, key, keyExpression, topic, topicExpression};
+		Object[] props = new Object[]{queue, queueExpression, key, keyExpression, topic, topicExpression};
 		return (props.length - 1) == Collections.frequency(Arrays.asList(props), null);
 	}
 

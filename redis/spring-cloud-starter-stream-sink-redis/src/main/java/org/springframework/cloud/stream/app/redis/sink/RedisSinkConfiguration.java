@@ -18,9 +18,11 @@ package org.springframework.cloud.stream.app.redis.sink;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.config.SpelExpressionConverterConfiguration;
 import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.redis.outbound.RedisPublishingMessageHandler;
@@ -43,6 +45,7 @@ import org.springframework.messaging.MessageHandler;
 @Configuration
 @EnableConfigurationProperties(RedisSinkProperties.class)
 @EnableBinding(Sink.class)
+@Import(SpelExpressionConverterConfiguration.class)
 public class RedisSinkConfiguration {
 
 	@Autowired
@@ -57,17 +60,17 @@ public class RedisSinkConfiguration {
 		if (this.redisSinkProperties.isKey()) {
 			RedisStoreWritingMessageHandler redisStoreWritingMessageHandler = new RedisStoreWritingMessageHandler(
 					this.redisConnectionFactory);
-			redisStoreWritingMessageHandler.setKeyExpression(this.redisSinkProperties.getKeyExpression());
+			redisStoreWritingMessageHandler.setKeyExpression(this.redisSinkProperties.keyExpression());
 			return redisStoreWritingMessageHandler;
 		}
 		else if (this.redisSinkProperties.isQueue()) {
-			return new RedisQueueOutboundChannelAdapter(this.redisSinkProperties.getQueueExpression(),
+			return new RedisQueueOutboundChannelAdapter(this.redisSinkProperties.queueExpression(),
 					this.redisConnectionFactory);
 		}
 		else { // must be topic
 			RedisPublishingMessageHandler redisPublishingMessageHandler = new RedisPublishingMessageHandler(
 					this.redisConnectionFactory);
-			redisPublishingMessageHandler.setTopicExpression(this.redisSinkProperties.getTopicExpression());
+			redisPublishingMessageHandler.setTopicExpression(this.redisSinkProperties.topicExpression());
 			return redisPublishingMessageHandler;
 		}
 	}
