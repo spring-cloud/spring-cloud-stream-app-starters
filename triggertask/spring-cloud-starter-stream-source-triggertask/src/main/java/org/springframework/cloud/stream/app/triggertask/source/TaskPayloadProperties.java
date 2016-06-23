@@ -27,7 +27,7 @@ import org.springframework.util.Assert;
  *
  * @author Glenn Renfro
  */
-@ConfigurationProperties
+@ConfigurationProperties("triggertask")
 public class TaskPayloadProperties {
 
 	/**

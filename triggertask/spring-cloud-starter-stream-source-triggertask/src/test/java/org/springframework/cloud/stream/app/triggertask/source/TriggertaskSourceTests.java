@@ -53,7 +53,7 @@ public abstract class TriggertaskSourceTests {
 
 	private static final String CRON_DELAY = "cron=0/2 * * * * *";
 
-	private static final String URI_KEY = "uri=";
+	private static final String URI_KEY = "triggertask.uri=";
 
 	private static final String BASE_URI = "hello.world";
 
@@ -61,11 +61,11 @@ public abstract class TriggertaskSourceTests {
 
 	private static final String []PARAMS = {"param1=test", "param2=another test", "param3=boo"};
 
-	private static final String COMMAND_LINE_ARGS_KEY = "commandLineArgs=";
+	private static final String COMMAND_LINE_ARGS_KEY = "triggertask.commandLineArgs=";
 
 	private static final String COMMAND_LINE_ARGS = "param1='test' param2='another test' param3=boo";
 
-	private static final String PROPERTIES_KEY = "properties=";
+	private static final String PROPERTIES_KEY = "triggertask.properties=";
 
 	private static final String PROPERTIES ="prop.1=foo, prop.2=bar,prop.3=baz";
 
