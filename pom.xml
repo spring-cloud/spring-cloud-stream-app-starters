@@ -21,7 +21,6 @@
 
 	<properties>
 		<scs-app-maven-plugin.version>1.0.0.BUILD-SNAPSHOT</scs-app-maven-plugin.version>
-		<docker.tag>latest</docker.tag>
 	</properties>
 
 	<modules>
