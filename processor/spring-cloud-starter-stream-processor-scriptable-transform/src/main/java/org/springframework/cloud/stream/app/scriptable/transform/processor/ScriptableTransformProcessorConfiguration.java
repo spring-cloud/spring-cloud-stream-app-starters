@@ -15,21 +15,23 @@
  */
 package org.springframework.cloud.stream.app.scriptable.transform.processor;
 
+import java.util.regex.Matcher;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.integration.annotation.Transformer;
 import org.springframework.integration.dsl.scripting.Scripts;
 import org.springframework.integration.handler.MessageProcessor;
 import org.springframework.integration.scripting.ScriptVariableGenerator;
-
-import java.util.regex.Matcher;
 
 /**
  * A Processor module that transforms messages using a supplied script. The script
@@ -44,6 +46,7 @@ import java.util.regex.Matcher;
  */
 @EnableBinding(Processor.class)
 @EnableConfigurationProperties(ScriptableTransformProcessorProperties.class)
+@Import(ScriptVariableGeneratorConfiguration.class)
 public class ScriptableTransformProcessorConfiguration {
 
 	private static final String NEWLINE_ESCAPE = Matcher.quoteReplacement("\\n");
