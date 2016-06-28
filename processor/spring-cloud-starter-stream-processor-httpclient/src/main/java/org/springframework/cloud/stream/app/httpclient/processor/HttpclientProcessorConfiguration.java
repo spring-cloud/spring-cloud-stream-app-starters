@@ -26,11 +26,9 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.config.SpelExpressionConverterConfiguration;
 import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
@@ -51,7 +49,6 @@ import org.springframework.web.client.RestTemplate;
  */
 @Configuration
 @EnableBinding(Processor.class)
-@Import(SpelExpressionConverterConfiguration.class)
 @EnableConfigurationProperties(HttpclientProcessorProperties.class)
 public class HttpclientProcessorConfiguration {
 

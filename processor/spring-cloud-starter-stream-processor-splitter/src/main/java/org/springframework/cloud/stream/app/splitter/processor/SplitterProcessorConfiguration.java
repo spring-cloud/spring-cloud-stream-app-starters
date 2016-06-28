@@ -22,10 +22,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.Bindings;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.config.SpelExpressionConverterConfiguration;
 import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 import org.springframework.expression.Expression;
 import org.springframework.integration.annotation.Splitter;
 import org.springframework.integration.config.AbstractSimpleMessageHandlerFactoryBean;
@@ -45,7 +43,6 @@ import org.springframework.integration.splitter.ExpressionEvaluatingSplitter;
  * @author Gary Russell
  */
 @EnableBinding(Processor.class)
-@Import(SpelExpressionConverterConfiguration.class)
 @EnableConfigurationProperties(SplitterProcessorProperties.class)
 public class SplitterProcessorConfiguration {
 

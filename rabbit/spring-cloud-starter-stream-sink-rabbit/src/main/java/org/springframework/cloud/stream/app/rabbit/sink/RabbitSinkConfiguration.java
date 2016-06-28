@@ -42,7 +42,6 @@ import org.springframework.messaging.MessageHandler;
  */
 @EnableBinding(Sink.class)
 @EnableConfigurationProperties(RabbitSinkProperties.class)
-@Import(SpelExpressionConverterConfiguration.class)
 public class RabbitSinkConfiguration {
 
 	@Autowired
