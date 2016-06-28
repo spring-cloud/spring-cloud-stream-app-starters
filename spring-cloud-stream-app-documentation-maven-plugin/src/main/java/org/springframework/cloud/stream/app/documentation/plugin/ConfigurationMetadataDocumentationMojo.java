@@ -141,7 +141,7 @@ public class ConfigurationMetadataDocumentationMojo extends AbstractMojo {
 	}
 
 	private String asciidocFor(ConfigurationMetadataProperty property, ClassLoader classLoader) {
-		return String.format("$$%s$$:: $$%s$$ *($$%s$$, default: `%s`%s)*",
+		return String.format("$$%s$$:: $$%s$$ *($$%s$$, default: `$$%s$$`%s)*",
 				property.getId(),
 				niceDescription(property),
 				niceType(property),
@@ -217,7 +217,8 @@ public class ConfigurationMetadataDocumentationMojo extends AbstractMojo {
 		}
 		int lastDot = type.lastIndexOf('.');
 		int lastDollar = type.lastIndexOf('$');
-		return type.substring(Math.max(lastDot, lastDollar) + 1);
+		boolean hasGenerics = type.contains("<");
+		return hasGenerics ? type : type.substring(Math.max(lastDot, lastDollar) + 1);
 	}
 
 	private static class ClassLoaderExposingMetadataResolver extends ApplicationConfigurationMetadataResolver {
