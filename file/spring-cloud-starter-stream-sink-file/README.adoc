@@ -8,14 +8,14 @@ This module writes each message it receives to a file.
 The **$$file$$** $$sink$$ has the following options:
 
 //tag::configuration-properties[]
-$$file.binary$$:: $$A flag to indicate whether content should be written as bytes.$$ *($$Boolean$$, default: `false`)*
-$$file.charset$$:: $$The charset to use when writing text content.$$ *($$String$$, default: `UTF-8`)*
-$$file.directory$$:: $$The parent directory of the target file.$$ *($$String$$, default: `<none>`)*
-$$file.directory-expression$$:: $$The expression to evaluate for the parent directory of the target file.$$ *($$Expression$$, default: `<none>`)*
-$$file.mode$$:: $$The FileExistsMode to use if the target file already exists.$$ *($$FileExistsMode$$, default: `<none>`, possible values: `APPEND`,`FAIL`,`IGNORE`,`REPLACE`)*
-$$file.name$$:: $$The name of the target file.$$ *($$String$$, default: `file-sink`)*
-$$file.name-expression$$:: $$The expression to evaluate for the name of the target file.$$ *($$String$$, default: `<none>`)*
-$$file.suffix$$:: $$The suffix to append to file name.$$ *($$String$$, default: `<empty string>`)*
+$$file.binary$$:: $$A flag to indicate whether content should be written as bytes.$$ *($$Boolean$$, default: `$$false$$`)*
+$$file.charset$$:: $$The charset to use when writing text content.$$ *($$String$$, default: `$$UTF-8$$`)*
+$$file.directory$$:: $$The parent directory of the target file.$$ *($$String$$, default: `$$<none>$$`)*
+$$file.directory-expression$$:: $$The expression to evaluate for the parent directory of the target file.$$ *($$Expression$$, default: `$$<none>$$`)*
+$$file.mode$$:: $$The FileExistsMode to use if the target file already exists.$$ *($$FileExistsMode$$, default: `$$<none>$$`, possible values: `APPEND`,`FAIL`,`IGNORE`,`REPLACE`)*
+$$file.name$$:: $$The name of the target file.$$ *($$String$$, default: `$$file-sink$$`)*
+$$file.name-expression$$:: $$The expression to evaluate for the name of the target file.$$ *($$String$$, default: `$$<none>$$`)*
+$$file.suffix$$:: $$The suffix to append to file name.$$ *($$String$$, default: `$$<empty string>$$`)*
 //end::configuration-properties[]
 
 //end::ref-doc[]

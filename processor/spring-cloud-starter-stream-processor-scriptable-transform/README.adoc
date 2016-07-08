@@ -9,10 +9,10 @@ as a property value. The language of the script can be specified (groovy/javascr
 The **$$scriptable-transform$$** $$processor$$ has the following options:
 
 //tag::configuration-properties[]
-$$scriptable-transformer.language$$:: $$Language of the text in the script property. Supported: groovy, javascript, ruby, python.$$ *($$String$$, default: `<none>`)*
-$$scriptable-transformer.script$$:: $$Text of the script.$$ *($$String$$, default: `<none>`)*
-$$scriptable-transformer.variables$$:: $$Variable bindings as a new line delimited string of name-value pairs, e.g. 'foo=bar\n baz=car'.$$ *($$Properties$$, default: `<none>`)*
-$$scriptable-transformer.variables-location$$:: $$The location of a properties file containing custom script variable bindings.$$ *($$Resource$$, default: `<none>`)*
+$$scriptable-transformer.language$$:: $$Language of the text in the script property. Supported: groovy, javascript, ruby, python.$$ *($$String$$, default: `$$<none>$$`)*
+$$scriptable-transformer.script$$:: $$Text of the script.$$ *($$String$$, default: `$$<none>$$`)*
+$$scriptable-transformer.variables$$:: $$Variable bindings as a new line delimited string of name-value pairs, e.g. 'foo=bar\n baz=car'.$$ *($$Properties$$, default: `$$<none>$$`)*
+$$scriptable-transformer.variables-location$$:: $$The location of a properties file containing custom script variable bindings.$$ *($$Resource$$, default: `$$<none>$$`)*
 //end::configuration-properties[]
 
 //end::ref-doc[]

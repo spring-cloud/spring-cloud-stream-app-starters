@@ -8,11 +8,11 @@ A processor that evaluates a machine learning model stored in PMML format.
 The **$$pmml$$** $$processor$$ has the following options:
 
 //tag::configuration-properties[]
-$$pmml.inputs$$:: $$How to compute model active fields from input message properties as modelField->SpEL.$$ *($$Expression>$$, default: `<none>`)*
-$$pmml.model-location$$:: $$The location of the PMML model file.$$ *($$Resource$$, default: `<none>`)*
-$$pmml.model-name$$:: $$If the model file contains multiple models, the name of the one to use.$$ *($$String$$, default: `<none>`)*
-$$pmml.model-name-expression$$:: $$If the model file contains multiple models, the name of the one to use, as a SpEL expression.$$ *($$Expression$$, default: `<none>`)*
-$$pmml.outputs$$:: $$How to emit evaluation results in the output message as msgProperty->SpEL.$$ *($$Expression>$$, default: `<none>`)*
+$$pmml.inputs$$:: $$How to compute model active fields from input message properties as modelField->SpEL.$$ *($$java.util.Map<java.lang.String,org.springframework.expression.Expression>$$, default: `$$<none>$$`)*
+$$pmml.model-location$$:: $$The location of the PMML model file.$$ *($$Resource$$, default: `$$<none>$$`)*
+$$pmml.model-name$$:: $$If the model file contains multiple models, the name of the one to use.$$ *($$String$$, default: `$$<none>$$`)*
+$$pmml.model-name-expression$$:: $$If the model file contains multiple models, the name of the one to use, as a SpEL expression.$$ *($$Expression$$, default: `$$<none>$$`)*
+$$pmml.outputs$$:: $$How to emit evaluation results in the output message as msgProperty->SpEL.$$ *($$java.util.Map<java.lang.String,org.springframework.expression.Expression>$$, default: `$$<none>$$`)*
 //end::configuration-properties[]
 
 //end::ref-doc[]

@@ -17,14 +17,14 @@ use the original name of that file.
 The **$$ftp$$** $$sink$$ has the following options:
 
 //tag::configuration-properties[]
-$$ftp.auto-create-dir$$:: $$<documentation missing>$$ *($$Boolean$$, default: `<none>`)*
-$$ftp.filename-expression$$:: $$<documentation missing>$$ *($$Expression$$, default: `<none>`)*
-$$ftp.mode$$:: $$<documentation missing>$$ *($$FileExistsMode$$, default: `<none>`, possible values: `APPEND`,`FAIL`,`IGNORE`,`REPLACE`)*
-$$ftp.remote-dir$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
-$$ftp.remote-file-separator$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
-$$ftp.temporary-remote-dir$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
-$$ftp.tmp-file-suffix$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
-$$ftp.use-temporary-filename$$:: $$<documentation missing>$$ *($$Boolean$$, default: `<none>`)*
+$$ftp.auto-create-dir$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
+$$ftp.filename-expression$$:: $$<documentation missing>$$ *($$Expression$$, default: `$$<none>$$`)*
+$$ftp.mode$$:: $$<documentation missing>$$ *($$FileExistsMode$$, default: `$$<none>$$`, possible values: `APPEND`,`FAIL`,`IGNORE`,`REPLACE`)*
+$$ftp.remote-dir$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$ftp.remote-file-separator$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$ftp.temporary-remote-dir$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$ftp.tmp-file-suffix$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$ftp.use-temporary-filename$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
 //end::configuration-properties[]
 
 //end::ref-doc[]

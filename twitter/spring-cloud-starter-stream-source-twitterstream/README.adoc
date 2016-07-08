@@ -10,12 +10,12 @@ You need to supply all keys and secrets (both consumer and accessToken) to authe
 The **$$twitterstream$$** $$source$$ has the following options:
 
 //tag::configuration-properties[]
-$$twitter.credentials.access-token$$:: $$Access token$$ *($$String$$, default: `<none>`)*
-$$twitter.credentials.access-token-secret$$:: $$Access token secret$$ *($$String$$, default: `<none>`)*
-$$twitter.credentials.consumer-key$$:: $$Consumer key$$ *($$String$$, default: `<none>`)*
-$$twitter.credentials.consumer-secret$$:: $$Consumer secret$$ *($$String$$, default: `<none>`)*
-$$twitter.stream.language$$:: $$The language of the tweet text.$$ *($$String$$, default: `<none>`)*
-$$twitter.stream.stream-type$$:: $$Twitter stream type (such as sample, firehose). Default is sample.$$ *($$TwitterStreamType$$, default: `<none>`, possible values: `SAMPLE`,`FIREHOSE`)*
+$$twitter.credentials.access-token$$:: $$Access token$$ *($$String$$, default: `$$<none>$$`)*
+$$twitter.credentials.access-token-secret$$:: $$Access token secret$$ *($$String$$, default: `$$<none>$$`)*
+$$twitter.credentials.consumer-key$$:: $$Consumer key$$ *($$String$$, default: `$$<none>$$`)*
+$$twitter.credentials.consumer-secret$$:: $$Consumer secret$$ *($$String$$, default: `$$<none>$$`)*
+$$twitter.stream.language$$:: $$The language of the tweet text.$$ *($$String$$, default: `$$<none>$$`)*
+$$twitter.stream.stream-type$$:: $$Twitter stream type (such as sample, firehose). Default is sample.$$ *($$TwitterStreamType$$, default: `$$<none>$$`, possible values: `SAMPLE`,`FIREHOSE`)*
 //end::configuration-properties[]
 
 NOTE: `twitterstream` emit JSON in the https://dev.twitter.com/docs/platform-objects/tweets[native Twitter format].

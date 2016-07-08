@@ -13,7 +13,7 @@ As part of the SpEL expression you can make use of the pre-registered JSON Path 
 The **$$transform$$** $$processor$$ has the following options:
 
 //tag::configuration-properties[]
-$$transformer.expression$$:: $$<documentation missing>$$ *($$Expression$$, default: `payload`)*
+$$transformer.expression$$:: $$<documentation missing>$$ *($$Expression$$, default: `$$payload$$`)*
 //end::configuration-properties[]
 
 //end::ref-doc[]

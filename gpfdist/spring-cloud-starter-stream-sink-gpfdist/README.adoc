@@ -15,37 +15,37 @@ the sink will block until such sessions are established.
 The **$$gpfdist$$** $$sink$$ has the following options:
 
 //tag::configuration-properties[]
-$$gpfdist.batch-count$$:: $$Number of windowed batch each segment takest (int, default: 100)$$ *($$Integer$$, default: `100`)*
-$$gpfdist.batch-period$$:: $$Time in seconds for each load operation to sleep in between operations (int, default: 10)$$ *($$Integer$$, default: `10`)*
-$$gpfdist.batch-timeout$$:: $$Timeout in seconds for segment inactivity. (Integer, default: 4)$$ *($$Integer$$, default: `4`)*
-$$gpfdist.column-delimiter$$:: $$Data record column delimiter. *(Character, default: no default)$$ *($$Character$$, default: `<none>`)*
-$$gpfdist.control-file$$:: $$Path to yaml control file (String, no default)$$ *($$Resource$$, default: `<none>`)*
-$$gpfdist.db-host$$:: $$Database host (String, default: localhost)$$ *($$String$$, default: `localhost`)*
-$$gpfdist.db-name$$:: $$Database name (String, default: gpadmin)$$ *($$String$$, default: `gpadmin`)*
-$$gpfdist.db-password$$:: $$Database password (String, default: gpadmin)$$ *($$String$$, default: `gpadmin`)*
-$$gpfdist.db-port$$:: $$Database port (int, default: 5432)$$ *($$Integer$$, default: `5432`)*
-$$gpfdist.db-user$$:: $$Database user (String, default: gpadmin)$$ *($$String$$, default: `gpadmin`)*
-$$gpfdist.delimiter$$:: $$Data line delimiter (String, default: newline character)$$ *($$String$$, default: `
-`)*
-$$gpfdist.error-table$$:: $$Tablename to log errors. (String, default: ``)$$ *($$String$$, default: `<none>`)*
-$$gpfdist.flush-count$$:: $$Flush item count (int, default: 100)$$ *($$Integer$$, default: `100`)*
-$$gpfdist.flush-time$$:: $$Flush item time (int, default: 2)$$ *($$Integer$$, default: `2`)*
-$$gpfdist.gpfdist-port$$:: $$Port of gpfdist server. Default port `0` indicates that a random port is chosen. (Integer, default: 0)$$ *($$Integer$$, default: `0`)*
-$$gpfdist.match-columns$$:: $$Match columns with update (String, no default)$$ *($$String$$, default: `<none>`)*
-$$gpfdist.mode$$:: $$Mode, either insert or update (String, no default)$$ *($$String$$, default: `<none>`)*
-$$gpfdist.null-string$$:: $$Null string definition. (String, default: ``)$$ *($$String$$, default: `<none>`)*
-$$gpfdist.rate-interval$$:: $$Enable transfer rate interval (int, default: 0)$$ *($$Integer$$, default: `0`)*
-$$gpfdist.segment-reject-limit$$:: $$Error reject limit. (String, default: ``)$$ *($$String$$, default: `<none>`)*
-$$gpfdist.segment-reject-type$$:: $$Error reject type, either `rows` or `percent`. (String, default: ``)$$ *($$SegmentRejectType$$, default: `<none>`, possible values: `ROWS`,`PERCENT`)*
-$$gpfdist.sql-after$$:: $$Sql to run after load (String, no default)$$ *($$String$$, default: `<none>`)*
-$$gpfdist.sql-before$$:: $$Sql to run before load (String, no default)$$ *($$String$$, default: `<none>`)*
-$$gpfdist.table$$:: $$Target database table (String, no default)$$ *($$String$$, default: `<none>`)*
-$$gpfdist.update-columns$$:: $$Update columns with update (String, no default)$$ *($$String$$, default: `<none>`)*
-$$spring.net.hostdiscovery.loopback$$:: $$The new loopback flag. Default value is FALSE$$ *($$Boolean$$, default: `false`)*
-$$spring.net.hostdiscovery.match-interface$$:: $$The new match interface regex pattern. Default value is is empty$$ *($$String$$, default: `<none>`)*
-$$spring.net.hostdiscovery.match-ipv4$$:: $$Used to match ip address from a network using a cidr notation$$ *($$String$$, default: `<none>`)*
-$$spring.net.hostdiscovery.point-to-point$$:: $$The new point to point flag. Default value is FALSE$$ *($$Boolean$$, default: `false`)*
-$$spring.net.hostdiscovery.prefer-interface$$:: $$The new preferred interface list$$ *($$String>$$, default: `<none>`)*
+$$gpfdist.batch-count$$:: $$Number of windowed batch each segment takest (int, default: 100)$$ *($$Integer$$, default: `$$100$$`)*
+$$gpfdist.batch-period$$:: $$Time in seconds for each load operation to sleep in between operations (int, default: 10)$$ *($$Integer$$, default: `$$10$$`)*
+$$gpfdist.batch-timeout$$:: $$Timeout in seconds for segment inactivity. (Integer, default: 4)$$ *($$Integer$$, default: `$$4$$`)*
+$$gpfdist.column-delimiter$$:: $$Data record column delimiter. *(Character, default: no default)$$ *($$Character$$, default: `$$<none>$$`)*
+$$gpfdist.control-file$$:: $$Path to yaml control file (String, no default)$$ *($$Resource$$, default: `$$<none>$$`)*
+$$gpfdist.db-host$$:: $$Database host (String, default: localhost)$$ *($$String$$, default: `$$localhost$$`)*
+$$gpfdist.db-name$$:: $$Database name (String, default: gpadmin)$$ *($$String$$, default: `$$gpadmin$$`)*
+$$gpfdist.db-password$$:: $$Database password (String, default: gpadmin)$$ *($$String$$, default: `$$gpadmin$$`)*
+$$gpfdist.db-port$$:: $$Database port (int, default: 5432)$$ *($$Integer$$, default: `$$5432$$`)*
+$$gpfdist.db-user$$:: $$Database user (String, default: gpadmin)$$ *($$String$$, default: `$$gpadmin$$`)*
+$$gpfdist.delimiter$$:: $$Data line delimiter (String, default: newline character)$$ *($$String$$, default: `$$
+$$`)*
+$$gpfdist.error-table$$:: $$Tablename to log errors. (String, default: ``)$$ *($$String$$, default: `$$<none>$$`)*
+$$gpfdist.flush-count$$:: $$Flush item count (int, default: 100)$$ *($$Integer$$, default: `$$100$$`)*
+$$gpfdist.flush-time$$:: $$Flush item time (int, default: 2)$$ *($$Integer$$, default: `$$2$$`)*
+$$gpfdist.gpfdist-port$$:: $$Port of gpfdist server. Default port `0` indicates that a random port is chosen. (Integer, default: 0)$$ *($$Integer$$, default: `$$0$$`)*
+$$gpfdist.match-columns$$:: $$Match columns with update (String, no default)$$ *($$String$$, default: `$$<none>$$`)*
+$$gpfdist.mode$$:: $$Mode, either insert or update (String, no default)$$ *($$String$$, default: `$$<none>$$`)*
+$$gpfdist.null-string$$:: $$Null string definition. (String, default: ``)$$ *($$String$$, default: `$$<none>$$`)*
+$$gpfdist.rate-interval$$:: $$Enable transfer rate interval (int, default: 0)$$ *($$Integer$$, default: `$$0$$`)*
+$$gpfdist.segment-reject-limit$$:: $$Error reject limit. (String, default: ``)$$ *($$String$$, default: `$$<none>$$`)*
+$$gpfdist.segment-reject-type$$:: $$Error reject type, either `rows` or `percent`. (String, default: ``)$$ *($$SegmentRejectType$$, default: `$$<none>$$`, possible values: `ROWS`,`PERCENT`)*
+$$gpfdist.sql-after$$:: $$Sql to run after load (String, no default)$$ *($$String$$, default: `$$<none>$$`)*
+$$gpfdist.sql-before$$:: $$Sql to run before load (String, no default)$$ *($$String$$, default: `$$<none>$$`)*
+$$gpfdist.table$$:: $$Target database table (String, no default)$$ *($$String$$, default: `$$<none>$$`)*
+$$gpfdist.update-columns$$:: $$Update columns with update (String, no default)$$ *($$String$$, default: `$$<none>$$`)*
+$$spring.net.hostdiscovery.loopback$$:: $$The new loopback flag. Default value is FALSE$$ *($$Boolean$$, default: `$$false$$`)*
+$$spring.net.hostdiscovery.match-interface$$:: $$The new match interface regex pattern. Default value is is empty$$ *($$String$$, default: `$$<none>$$`)*
+$$spring.net.hostdiscovery.match-ipv4$$:: $$Used to match ip address from a network using a cidr notation$$ *($$String$$, default: `$$<none>$$`)*
+$$spring.net.hostdiscovery.point-to-point$$:: $$The new point to point flag. Default value is FALSE$$ *($$Boolean$$, default: `$$false$$`)*
+$$spring.net.hostdiscovery.prefer-interface$$:: $$The new preferred interface list$$ *($$java.util.List<java.lang.String>$$, default: `$$<none>$$`)*
 //end::configuration-properties[]
 
 == Implementation Notes

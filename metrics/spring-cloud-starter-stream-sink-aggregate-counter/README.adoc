@@ -9,16 +9,16 @@ The data can then be queried by supplying a start and end date and the resolutio
 The **$$aggregate-counter$$** $$sink$$ has the following options:
 
 //tag::configuration-properties[]
-$$aggregate-counter.date-format$$:: $$<documentation missing>$$ *($$String$$, default: `yyyy-MM-dd'T'HH:mm:ss.SSS'Z'`)*
-$$aggregate-counter.increment-expression$$:: $$Increment value for each bucket as a SpEL against the message$$ *($$Expression$$, default: `<none>`)*
-$$aggregate-counter.name$$:: $$The name of the aggregate counter.$$ *($$String$$, default: `<none>`)*
-$$aggregate-counter.name-expression$$:: $$A SpEL expression (against the incoming Message) to derive the name of the aggregate counter.$$ *($$Expression$$, default: `<none>`)*
-$$aggregate-counter.time-field$$:: $$A SpEL expression (against the incoming Message) to derive the timestamp value.$$ *($$Expression$$, default: `<none>`)*
-$$spring.redis.database$$:: $$Database index used by the connection factory.$$ *($$Integer$$, default: `0`)*
-$$spring.redis.host$$:: $$Redis server host.$$ *($$String$$, default: `localhost`)*
-$$spring.redis.password$$:: $$Login password of the redis server.$$ *($$String$$, default: `<none>`)*
-$$spring.redis.port$$:: $$Redis server port.$$ *($$Integer$$, default: `6379`)*
-$$spring.redis.timeout$$:: $$Connection timeout in milliseconds.$$ *($$Integer$$, default: `0`)*
+$$aggregate-counter.date-format$$:: $$<documentation missing>$$ *($$String$$, default: `$$yyyy-MM-dd'T'HH:mm:ss.SSS'Z'$$`)*
+$$aggregate-counter.increment-expression$$:: $$Increment value for each bucket as a SpEL against the message$$ *($$Expression$$, default: `$$<none>$$`)*
+$$aggregate-counter.name$$:: $$The name of the aggregate counter.$$ *($$String$$, default: `$$<none>$$`)*
+$$aggregate-counter.name-expression$$:: $$A SpEL expression (against the incoming Message) to derive the name of the aggregate counter.$$ *($$Expression$$, default: `$$<none>$$`)*
+$$aggregate-counter.time-field$$:: $$A SpEL expression (against the incoming Message) to derive the timestamp value.$$ *($$Expression$$, default: `$$<none>$$`)*
+$$spring.redis.database$$:: $$Database index used by the connection factory.$$ *($$Integer$$, default: `$$0$$`)*
+$$spring.redis.host$$:: $$Redis server host.$$ *($$String$$, default: `$$localhost$$`)*
+$$spring.redis.password$$:: $$Login password of the redis server.$$ *($$String$$, default: `$$<none>$$`)*
+$$spring.redis.port$$:: $$Redis server port.$$ *($$Integer$$, default: `$$6379$$`)*
+$$spring.redis.timeout$$:: $$Connection timeout in milliseconds.$$ *($$Integer$$, default: `$$0$$`)*
 //end::configuration-properties[]
 
 //end::ref-doc[]
