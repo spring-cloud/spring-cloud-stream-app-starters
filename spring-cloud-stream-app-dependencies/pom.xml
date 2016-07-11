@@ -30,7 +30,7 @@
 		<pmml.version>1.2.6</pmml.version>
 		<spring-cloud-deployer-spi.version>1.0.0.RC1</spring-cloud-deployer-spi.version>
 		<spring-cloud-deployer-local.version>1.0.0.RC1</spring-cloud-deployer-local.version>
-		<spring.cloud.task.version>1.0.0.RC1</spring.cloud.task.version>
+		<spring.cloud.task.version>1.0.1.RELEASE</spring.cloud.task.version>
 		<spring.cloud.dependencies.version>Brixton.SR1</spring.cloud.dependencies.version>
 		<spring-analytics.version>1.0.0.RC1</spring-analytics.version>
 	</properties>

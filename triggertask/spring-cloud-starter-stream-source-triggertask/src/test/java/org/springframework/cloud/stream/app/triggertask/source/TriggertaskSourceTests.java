@@ -65,18 +65,31 @@ public abstract class TriggertaskSourceTests {
 
 	private static final String COMMAND_LINE_ARGS = "param1='test' param2='another test' param3=boo";
 
-	private static final String PROPERTIES_KEY = "triggertask.properties=";
+	private static final String ENVIRONMENT_PROPERTIES_KEY = "triggertask.environmentProperties=";
 
-	private static final String PROPERTIES ="prop.1=foo, prop.2=bar,prop.3=baz";
+	private static final String ENVIRONMENT_PROPERTIES ="prop.1=foo, prop.2=bar,prop.3=baz";
+
+	private static final String DEPLOYMENT_PROPERTIES_KEY = "triggertask.deploymentProperties=";
+
+	private static final String DEPLOYMENT_PROPERTIES ="prop.1=aaa, prop.2=bbb,prop.3=ccc";
 
 	private static final String PROP_PREFIX = "prop.";
 
-	private static final Map<String, String> propertyMap = new HashMap<>();
+	private static final Map<String, String> environmentPropertyMap = new HashMap<>();
 	static
 	{
-		propertyMap.put(PROP_PREFIX + "1", "foo");
-		propertyMap.put(PROP_PREFIX + "2", "bar");
-		propertyMap.put(PROP_PREFIX + "3", "baz");
+		environmentPropertyMap.put(PROP_PREFIX + "1", "foo");
+		environmentPropertyMap.put(PROP_PREFIX + "2", "bar");
+		environmentPropertyMap.put(PROP_PREFIX + "3", "baz");
+
+	}
+
+	private static final Map<String, String> deploymentPropertyMap = new HashMap<>();
+	static
+	{
+		deploymentPropertyMap.put(PROP_PREFIX + "1", "aaa");
+		deploymentPropertyMap.put(PROP_PREFIX + "2", "bbb");
+		deploymentPropertyMap.put(PROP_PREFIX + "3", "ccc");
 
 	}
 
@@ -89,21 +102,26 @@ public abstract class TriggertaskSourceTests {
 
 	@IntegrationTest({FIXED_DELAY, INITIAL_DELAY, URI_KEY + BASE_URI,
 			COMMAND_LINE_ARGS_KEY + COMMAND_LINE_ARGS,
-			PROPERTIES_KEY + PROPERTIES})
+			ENVIRONMENT_PROPERTIES_KEY + ENVIRONMENT_PROPERTIES,
+			DEPLOYMENT_PROPERTIES_KEY + DEPLOYMENT_PROPERTIES})
 	public static class FixedDelayTest extends TriggertaskSourceTests {
 
 		@Test
 		public void fixedDelayTest() throws InterruptedException {
 			TaskLaunchRequest tlr = (TaskLaunchRequest) messageCollector.forChannel(triggerSource.output()).poll(2100, TimeUnit.MILLISECONDS).getPayload();
 			assertEquals(BASE_URI, tlr.getUri());
-			checkConfigurationSize(3, 3, tlr);
+			checkConfigurationSize(3, 3, 3, tlr);
 
 			for (int i = 0; i < 3; i++) {
-				assertEquals(String.format("the expected property for %s was %s but expected %s", PROP_PREFIX + i,
-						tlr.getProperties().get(PROP_PREFIX + i), propertyMap.get(PROP_PREFIX + i )),
-						propertyMap.get(PROP_PREFIX + i ), tlr.getProperties().get(PROP_PREFIX + i));
+				assertEquals(String.format("the expected environment property for %s was %s but expected %s",
+						PROP_PREFIX + i, tlr.getEnvironmentProperties().get(PROP_PREFIX + i), environmentPropertyMap.get(PROP_PREFIX + i )),
+						environmentPropertyMap.get(PROP_PREFIX + i ), tlr.getEnvironmentProperties().get(PROP_PREFIX + i));
 
-				assertEquals(String.format("the expected commandLineArg was %s but expected %s", PROP_PREFIX + i,
+				assertEquals(String.format("the expected deployment property for %s was %s but expected %s",
+						PROP_PREFIX + i, tlr.getDeploymentProperties().get(PROP_PREFIX + i), deploymentPropertyMap.get(PROP_PREFIX + i )),
+						deploymentPropertyMap.get(PROP_PREFIX + i ), tlr.getDeploymentProperties().get(PROP_PREFIX + i));
+
+				assertEquals(String.format("the expected commandLineArg was %s but expected param%s", i,
 						tlr.getCommandlineArguments().get(i), PARAMS[i]),
 						PARAMS[i], tlr.getCommandlineArguments().get(i));
 			}
@@ -117,7 +135,7 @@ public abstract class TriggertaskSourceTests {
 		public void fixedDelayNoCommantLineArgumentsTest() throws InterruptedException {
 			TaskLaunchRequest tlr = (TaskLaunchRequest) messageCollector.forChannel(triggerSource.output()).poll(2100, TimeUnit.MILLISECONDS).getPayload();
 			assertEquals(BASE_URI, tlr.getUri());
-			checkConfigurationSize(0, 0, tlr);
+			checkConfigurationSize(0, 0, 0, tlr);
 		}
 	}
 
@@ -137,7 +155,7 @@ public abstract class TriggertaskSourceTests {
 		public void fixedDelayTest() throws InterruptedException {
 			TaskLaunchRequest tlr = (TaskLaunchRequest) messageCollector.forChannel(triggerSource.output()).poll(2100, TimeUnit.MILLISECONDS).getPayload();
 			assertEquals(BASE_URI, tlr.getUri());
-			checkConfigurationSize(0, 0, tlr);
+			checkConfigurationSize(0, 0, 0, tlr);
 		}
 	}
 
@@ -150,7 +168,7 @@ public abstract class TriggertaskSourceTests {
 			assertEquals(CRON_URI, tlr.getUri());
 			tlr = (TaskLaunchRequest) messageCollector.forChannel(triggerSource.output()).poll(2100, TimeUnit.MILLISECONDS).getPayload();
 			assertEquals(CRON_URI, tlr.getUri());
-			checkConfigurationSize(0, 0, tlr);
+			checkConfigurationSize(0, 0, 0, tlr);
 		}
 	}
 
@@ -159,8 +177,9 @@ public abstract class TriggertaskSourceTests {
 
 	}
 
-	private static void checkConfigurationSize(int commandLineArgSize, int propertySize, TaskLaunchRequest tlr) {
+	private static void checkConfigurationSize(int commandLineArgSize, int environmentPropertySize, int deploymentPropertySize, TaskLaunchRequest tlr) {
 		assertEquals(String.format("expected %d commandLineArgs", commandLineArgSize), commandLineArgSize, tlr.getCommandlineArguments().size());
-		assertEquals(String.format("expected %d properties", propertySize), propertySize, tlr.getProperties().size());
+		assertEquals(String.format("expected %d environmentProperties", environmentPropertySize), environmentPropertySize, tlr.getEnvironmentProperties().size());
+		assertEquals(String.format("expected %d deploymentProperties", deploymentPropertySize), deploymentPropertySize, tlr.getDeploymentProperties().size());
 	}
 }

@@ -59,7 +59,7 @@ public class TaskLauncherLocalSinkIntegrationTests {
 
 	@Test(expected = MessageHandlingException.class)
 	public void sendBadRequest() throws IOException {
-		TaskLaunchRequest request = new TaskLaunchRequest("maven://foo", null, null);
+		TaskLaunchRequest request = new TaskLaunchRequest("maven://foo", null, null, null);
 		sink.input().send(new GenericMessage<>(request));
 	}
 
@@ -68,7 +68,7 @@ public class TaskLauncherLocalSinkIntegrationTests {
 		TaskSinkConfiguration.TestTaskLauncher testTaskLauncher =
 				(TaskSinkConfiguration.TestTaskLauncher) applicationContext.getBean(TaskSinkConfiguration.TestTaskLauncher.class);
 
-		TaskLaunchRequest request = new TaskLaunchRequest("maven://org.springframework.cloud.task.app:timestamp-task:jar:1.0.0.BUILD-SNAPSHOT", null, null);
+		TaskLaunchRequest request = new TaskLaunchRequest("maven://org.springframework.cloud.task.app:timestamp-task:jar:1.0.0.BUILD-SNAPSHOT", null, null, null);
 		sink.input().send(new GenericMessage<>(request));
 		assertEquals(LaunchState.complete, testTaskLauncher.status("TESTSTATUS").getState());
 	}
