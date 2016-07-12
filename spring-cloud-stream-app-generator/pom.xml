@@ -103,9 +103,16 @@
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.loggregator.LoggregatorSourceTestConfiguration.class</extraTestConfigClass>
 						</loggregator-source>
 						<mail-source />
+						<!--
+							Due to Licensing reasons, the pmml processor executable app is not built (and hence not published)
+							on a regular basis via continuous integration. If you wish to use it, simply uncomment those
+							lines and generate the apps.
+						-->
+						<!--
 						<pmml-processor>
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.pmml.PmmlProcessorTestConfiguration.class</extraTestConfigClass>
 						</pmml-processor>
+						-->
 						<log-sink />
 						<mongodb-source />
 						<rabbit-sink>
