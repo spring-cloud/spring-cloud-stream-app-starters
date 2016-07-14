@@ -55,7 +55,6 @@ public class TaskPayloadProperties {
 	}
 
 	public void setCommandLineArgs(String commandLineArgs) {
-		Assert.notNull("commandLineArgs must not be null");
 		this.commandLineArgs = commandLineArgs;
 	}
 
@@ -73,7 +72,6 @@ public class TaskPayloadProperties {
 	}
 
 	public void setEnvironmentProperties(String environmentProperties) {
-		Assert.notNull(environmentProperties, "environmentProperties must not be null");
 		this.environmentProperties = environmentProperties;
 	}
 
@@ -82,7 +80,6 @@ public class TaskPayloadProperties {
 	}
 
 	public void setDeploymentProperties(String deploymentProperties) {
-		Assert.notNull(deploymentProperties, "deploymentProperties must not be null");
 		this.deploymentProperties = deploymentProperties;
 	}
 
