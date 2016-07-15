@@ -146,6 +146,8 @@
 						<tcp-source>
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.ip.IpSourceTestConfiguration.class</extraTestConfigClass>
 						</tcp-source>
+						<tcp-client-source/>
+						<tcp-client-processor/>
 						<time-source />
 						<transform-processor />
 						<trigger-source />
