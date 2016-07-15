@@ -23,7 +23,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.metrics.CounterService;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.config.SpelExpressionConverterConfiguration;
 import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -41,7 +40,7 @@ import org.springframework.messaging.Message;
 @EnableBinding(Sink.class)
 @EnableConfigurationProperties(CounterProperties.class)
 @Configuration
-@Import({ SpelExpressionConverterConfiguration.class, CounterSinkStoreConfiguration.class })
+@Import(CounterSinkStoreConfiguration.class)
 public class CounterSinkConfiguration {
 
 	private static final Log logger = LogFactory.getLog(CounterSinkConfiguration.class);
