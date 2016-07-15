@@ -19,34 +19,34 @@ The **$$ftp$$** $$source$$ has the following options:
 
 //tag::configuration-properties[]
 $$file.consumer.markers-json$$:: $$When 'fileMarkers == true', specify if they should be produced
- as FileSplitter.FileMarker objects or JSON.$$ *($$Boolean$$, default: `true`)*
+ as FileSplitter.FileMarker objects or JSON.$$ *($$Boolean$$, default: `$$true$$`)*
 $$file.consumer.mode$$:: $$The FileReadingMode to use for file reading sources.
  Values are 'ref' - The File object,
  'lines' - a message per line, or
- 'contents' - the contents as bytes.$$ *($$FileReadingMode$$, default: `<none>`, possible values: `ref`,`lines`,`contents`)*
+ 'contents' - the contents as bytes.$$ *($$FileReadingMode$$, default: `$$<none>$$`, possible values: `ref`,`lines`,`contents`)*
 $$file.consumer.with-markers$$:: $$Set to true to emit start of file/end of file marker messages before/after the data.
- 	Only valid with FileReadingMode 'lines'.$$ *($$Boolean$$, default: `<none>`)*
-$$ftp.auto-create-local-dir$$:: $$<documentation missing>$$ *($$Boolean$$, default: `<none>`)*
-$$ftp.delete-remote-files$$:: $$<documentation missing>$$ *($$Boolean$$, default: `<none>`)*
-$$ftp.factory.cache-sessions$$:: $$<documentation missing>$$ *($$Boolean$$, default: `<none>`)*
-$$ftp.factory.client-mode$$:: $$The client mode to use for the FTP session.$$ *($$ClientMode$$, default: `<none>`, possible values: `ACTIVE`,`PASSIVE`)*
-$$ftp.factory.host$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
-$$ftp.factory.password$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
-$$ftp.factory.port$$:: $$The port of the server.$$ *($$Integer$$, default: `21`)*
-$$ftp.factory.username$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
-$$ftp.filename-pattern$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
-$$ftp.filename-regex$$:: $$<documentation missing>$$ *($$Pattern$$, default: `<none>`)*
-$$ftp.local-dir$$:: $$<documentation missing>$$ *($$File$$, default: `<none>`)*
-$$ftp.preserve-timestamp$$:: $$<documentation missing>$$ *($$Boolean$$, default: `<none>`)*
-$$ftp.remote-dir$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
-$$ftp.remote-file-separator$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
-$$ftp.tmp-file-suffix$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
-$$trigger.cron$$:: $$Cron expression value for the Cron Trigger.$$ *($$String$$, default: `<none>`)*
-$$trigger.date-format$$:: $$Format for the date value.$$ *($$String$$, default: `<none>`)*
-$$trigger.fixed-delay$$:: $$Fixed delay for periodic triggers.$$ *($$Integer$$, default: `1`)*
-$$trigger.initial-delay$$:: $$Initial delay for periodic triggers.$$ *($$Integer$$, default: `0`)*
-$$trigger.max-messages$$:: $$Maximum messages per poll, -1 means infinity.$$ *($$Long$$, default: `-1`)*
-$$trigger.time-unit$$:: $$The TimeUnit to apply to delay values.$$ *($$TimeUnit$$, default: `SECONDS`, possible values: `NANOSECONDS`,`MICROSECONDS`,`MILLISECONDS`,`SECONDS`,`MINUTES`,`HOURS`,`DAYS`)*
+ 	Only valid with FileReadingMode 'lines'.$$ *($$Boolean$$, default: `$$<none>$$`)*
+$$ftp.auto-create-local-dir$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
+$$ftp.delete-remote-files$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
+$$ftp.factory.cache-sessions$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
+$$ftp.factory.client-mode$$:: $$The client mode to use for the FTP session.$$ *($$ClientMode$$, default: `$$<none>$$`, possible values: `ACTIVE`,`PASSIVE`)*
+$$ftp.factory.host$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$ftp.factory.password$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$ftp.factory.port$$:: $$The port of the server.$$ *($$Integer$$, default: `$$21$$`)*
+$$ftp.factory.username$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$ftp.filename-pattern$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$ftp.filename-regex$$:: $$<documentation missing>$$ *($$Pattern$$, default: `$$<none>$$`)*
+$$ftp.local-dir$$:: $$<documentation missing>$$ *($$File$$, default: `$$<none>$$`)*
+$$ftp.preserve-timestamp$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
+$$ftp.remote-dir$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$ftp.remote-file-separator$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$ftp.tmp-file-suffix$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$trigger.cron$$:: $$Cron expression value for the Cron Trigger.$$ *($$String$$, default: `$$<none>$$`)*
+$$trigger.date-format$$:: $$Format for the date value.$$ *($$String$$, default: `$$<none>$$`)*
+$$trigger.fixed-delay$$:: $$Fixed delay for periodic triggers.$$ *($$Integer$$, default: `$$1$$`)*
+$$trigger.initial-delay$$:: $$Initial delay for periodic triggers.$$ *($$Integer$$, default: `$$0$$`)*
+$$trigger.max-messages$$:: $$Maximum messages per poll, -1 means infinity.$$ *($$Long$$, default: `$$-1$$`)*
+$$trigger.time-unit$$:: $$The TimeUnit to apply to delay values.$$ *($$TimeUnit$$, default: `$$SECONDS$$`, possible values: `NANOSECONDS`,`MICROSECONDS`,`MILLISECONDS`,`SECONDS`,`MINUTES`,`HOURS`,`DAYS`)*
 //end::configuration-properties[]
 
 //end::ref-doc[]

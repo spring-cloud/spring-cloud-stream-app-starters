@@ -6,17 +6,17 @@ message into several distinct messages.
 == Options
 //tag::configuration-properties[]
 $$splitter.apply-sequence$$:: $$Add correlation/sequence information in headers to facilitate later
- aggregation.$$ *($$Boolean$$, default: `true`)*
+ aggregation.$$ *($$Boolean$$, default: `$$true$$`)*
 $$splitter.charset$$:: $$The charset to use when converting bytes in text-based files
- to String.$$ *($$String$$, default: `<none>`)*
+ to String.$$ *($$String$$, default: `$$<none>$$`)*
 $$splitter.delimiters$$:: $$When expression is null, delimiters to use when tokenizing
- {@link String} payloads.$$ *($$String$$, default: `<none>`)*
-$$splitter.expression$$:: $$A SpEL expression for splitting payloads.$$ *($$Expression$$, default: `<none>`)*
+ {@link String} payloads.$$ *($$String$$, default: `$$<none>$$`)*
+$$splitter.expression$$:: $$A SpEL expression for splitting payloads.$$ *($$Expression$$, default: `$$<none>$$`)*
 $$splitter.file-markers$$:: $$Set to true or false to use a {@code FileSplitter} (to split
  text-based files by line) that includes
- (or not) beginning/end of file markers.$$ *($$Boolean$$, default: `<none>`)*
+ (or not) beginning/end of file markers.$$ *($$Boolean$$, default: `$$<none>$$`)*
 $$splitter.markers-json$$:: $$When 'fileMarkers == true', specify if they should be produced
- as FileSplitter.FileMarker objects or JSON.$$ *($$Boolean$$, default: `true`)*
+ as FileSplitter.FileMarker objects or JSON.$$ *($$Boolean$$, default: `$$true$$`)*
 //end::configuration-properties[]
 
 When no `expression`, `fileMarkers`, or `charset` is provided, a `DefaultMessageSplitter` is configured with (optional) `delimiters`.

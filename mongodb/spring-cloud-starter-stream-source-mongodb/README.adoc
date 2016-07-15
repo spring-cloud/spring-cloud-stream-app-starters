@@ -11,24 +11,24 @@ for more information.
 The **$$mongodb$$** $$source$$ has the following options:
 
 //tag::configuration-properties[]
-$$mongodb.collection$$:: $$The MongoDB collection to query$$ *($$String$$, default: `<none>`)*
-$$mongodb.query$$:: $$The MongoDB query$$ *($$String$$, default: `{ }`)*
-$$mongodb.split$$:: $$Whether to split the query result as individual messages.$$ *($$Boolean$$, default: `true`)*
-$$spring.data.mongodb.authentication-database$$:: $$Authentication database name.$$ *($$String$$, default: `<none>`)*
-$$spring.data.mongodb.database$$:: $$Database name.$$ *($$String$$, default: `<none>`)*
-$$spring.data.mongodb.field-naming-strategy$$:: $$Fully qualified name of the FieldNamingStrategy to use.$$ *($$Class<?>$$, default: `<none>`)*
-$$spring.data.mongodb.grid-fs-database$$:: $$GridFS database name.$$ *($$String$$, default: `<none>`)*
-$$spring.data.mongodb.host$$:: $$Mongo server host.$$ *($$String$$, default: `<none>`)*
-$$spring.data.mongodb.password$$:: $$Login password of the mongo server.$$ *($$char[]$$, default: `<none>`)*
-$$spring.data.mongodb.port$$:: $$Mongo server port.$$ *($$Integer$$, default: `<none>`)*
-$$spring.data.mongodb.uri$$:: $$Mongo database URI. When set, host and port are ignored.$$ *($$String$$, default: `mongodb://localhost/test`)*
-$$spring.data.mongodb.username$$:: $$Login user of the mongo server.$$ *($$String$$, default: `<none>`)*
-$$trigger.cron$$:: $$Cron expression value for the Cron Trigger.$$ *($$String$$, default: `<none>`)*
-$$trigger.date-format$$:: $$Format for the date value.$$ *($$String$$, default: `<none>`)*
-$$trigger.fixed-delay$$:: $$Fixed delay for periodic triggers.$$ *($$Integer$$, default: `1`)*
-$$trigger.initial-delay$$:: $$Initial delay for periodic triggers.$$ *($$Integer$$, default: `0`)*
-$$trigger.max-messages$$:: $$Maximum messages per poll, -1 means infinity.$$ *($$Long$$, default: `-1`)*
-$$trigger.time-unit$$:: $$The TimeUnit to apply to delay values.$$ *($$TimeUnit$$, default: `SECONDS`, possible values: `NANOSECONDS`,`MICROSECONDS`,`MILLISECONDS`,`SECONDS`,`MINUTES`,`HOURS`,`DAYS`)*
+$$mongodb.collection$$:: $$The MongoDB collection to query$$ *($$String$$, default: `$$<none>$$`)*
+$$mongodb.query$$:: $$The MongoDB query$$ *($$String$$, default: `$${ }$$`)*
+$$mongodb.split$$:: $$Whether to split the query result as individual messages.$$ *($$Boolean$$, default: `$$true$$`)*
+$$spring.data.mongodb.authentication-database$$:: $$Authentication database name.$$ *($$String$$, default: `$$<none>$$`)*
+$$spring.data.mongodb.database$$:: $$Database name.$$ *($$String$$, default: `$$<none>$$`)*
+$$spring.data.mongodb.field-naming-strategy$$:: $$Fully qualified name of the FieldNamingStrategy to use.$$ *($$java.lang.Class<?>$$, default: `$$<none>$$`)*
+$$spring.data.mongodb.grid-fs-database$$:: $$GridFS database name.$$ *($$String$$, default: `$$<none>$$`)*
+$$spring.data.mongodb.host$$:: $$Mongo server host.$$ *($$String$$, default: `$$<none>$$`)*
+$$spring.data.mongodb.password$$:: $$Login password of the mongo server.$$ *($$char[]$$, default: `$$<none>$$`)*
+$$spring.data.mongodb.port$$:: $$Mongo server port.$$ *($$Integer$$, default: `$$<none>$$`)*
+$$spring.data.mongodb.uri$$:: $$Mongo database URI. When set, host and port are ignored.$$ *($$String$$, default: `$$mongodb://localhost/test$$`)*
+$$spring.data.mongodb.username$$:: $$Login user of the mongo server.$$ *($$String$$, default: `$$<none>$$`)*
+$$trigger.cron$$:: $$Cron expression value for the Cron Trigger.$$ *($$String$$, default: `$$<none>$$`)*
+$$trigger.date-format$$:: $$Format for the date value.$$ *($$String$$, default: `$$<none>$$`)*
+$$trigger.fixed-delay$$:: $$Fixed delay for periodic triggers.$$ *($$Integer$$, default: `$$1$$`)*
+$$trigger.initial-delay$$:: $$Initial delay for periodic triggers.$$ *($$Integer$$, default: `$$0$$`)*
+$$trigger.max-messages$$:: $$Maximum messages per poll, -1 means infinity.$$ *($$Long$$, default: `$$-1$$`)*
+$$trigger.time-unit$$:: $$The TimeUnit to apply to delay values.$$ *($$TimeUnit$$, default: `$$SECONDS$$`, possible values: `NANOSECONDS`,`MICROSECONDS`,`MILLISECONDS`,`SECONDS`,`MINUTES`,`HOURS`,`DAYS`)*
 //end::configuration-properties[]
 
 Also see the http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html[Spring Boot Documentation] for additional `MongoProperties` properties.

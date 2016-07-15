@@ -9,13 +9,13 @@ optionally storing counts in a separate store such as redis.
 The **$$counter$$** $$sink$$ has the following options:
 
 //tag::configuration-properties[]
-$$counter.name$$:: $$The name of the counter to increment.$$ *($$String$$, default: `<none>`)*
-$$counter.name-expression$$:: $$A SpEL expression (against the incoming Message) to derive the name of the counter to increment.$$ *($$Expression$$, default: `<none>`)*
-$$spring.redis.database$$:: $$Database index used by the connection factory.$$ *($$Integer$$, default: `0`)*
-$$spring.redis.host$$:: $$Redis server host.$$ *($$String$$, default: `localhost`)*
-$$spring.redis.password$$:: $$Login password of the redis server.$$ *($$String$$, default: `<none>`)*
-$$spring.redis.port$$:: $$Redis server port.$$ *($$Integer$$, default: `6379`)*
-$$spring.redis.timeout$$:: $$Connection timeout in milliseconds.$$ *($$Integer$$, default: `0`)*
+$$counter.name$$:: $$The name of the counter to increment.$$ *($$String$$, default: `$$<none>$$`)*
+$$counter.name-expression$$:: $$A SpEL expression (against the incoming Message) to derive the name of the counter to increment.$$ *($$Expression$$, default: `$$<none>$$`)*
+$$spring.redis.database$$:: $$Database index used by the connection factory.$$ *($$Integer$$, default: `$$0$$`)*
+$$spring.redis.host$$:: $$Redis server host.$$ *($$String$$, default: `$$localhost$$`)*
+$$spring.redis.password$$:: $$Login password of the redis server.$$ *($$String$$, default: `$$<none>$$`)*
+$$spring.redis.port$$:: $$Redis server port.$$ *($$Integer$$, default: `$$6379$$`)*
+$$spring.redis.timeout$$:: $$Connection timeout in milliseconds.$$ *($$Integer$$, default: `$$0$$`)*
 //end::configuration-properties[]
 
 //end::ref-doc[]

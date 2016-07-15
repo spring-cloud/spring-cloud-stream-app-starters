@@ -11,22 +11,22 @@ information.
 The **$$jdbc$$** $$source$$ has the following options:
 
 //tag::configuration-properties[]
-$$jdbc.max-rows-per-poll$$:: $$Max numbers of rows to process for each poll.$$ *($$Integer$$, default: `0`)*
-$$jdbc.query$$:: $$The query to use to select data.$$ *($$String$$, default: `<none>`)*
-$$jdbc.split$$:: $$Whether to split the SQL result as individual messages.$$ *($$Boolean$$, default: `true`)*
-$$jdbc.update$$:: $$An SQL update statement to execute for marking polled messages as 'seen'.$$ *($$String$$, default: `<none>`)*
-$$spring.datasource.driver-class-name$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
-$$spring.datasource.init-sql$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
-$$spring.datasource.initialize$$:: $$Populate the database using 'data.sql'.$$ *($$Boolean$$, default: `true`)*
-$$spring.datasource.password$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
-$$spring.datasource.url$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
-$$spring.datasource.username$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
-$$trigger.cron$$:: $$Cron expression value for the Cron Trigger.$$ *($$String$$, default: `<none>`)*
-$$trigger.date-format$$:: $$Format for the date value.$$ *($$String$$, default: `<none>`)*
-$$trigger.fixed-delay$$:: $$Fixed delay for periodic triggers.$$ *($$Integer$$, default: `1`)*
-$$trigger.initial-delay$$:: $$Initial delay for periodic triggers.$$ *($$Integer$$, default: `0`)*
-$$trigger.max-messages$$:: $$Maximum messages per poll, -1 means infinity.$$ *($$Long$$, default: `1`)*
-$$trigger.time-unit$$:: $$The TimeUnit to apply to delay values.$$ *($$TimeUnit$$, default: `<none>`, possible values: `NANOSECONDS`,`MICROSECONDS`,`MILLISECONDS`,`SECONDS`,`MINUTES`,`HOURS`,`DAYS`)*
+$$jdbc.max-rows-per-poll$$:: $$Max numbers of rows to process for each poll.$$ *($$Integer$$, default: `$$0$$`)*
+$$jdbc.query$$:: $$The query to use to select data.$$ *($$String$$, default: `$$<none>$$`)*
+$$jdbc.split$$:: $$Whether to split the SQL result as individual messages.$$ *($$Boolean$$, default: `$$true$$`)*
+$$jdbc.update$$:: $$An SQL update statement to execute for marking polled messages as 'seen'.$$ *($$String$$, default: `$$<none>$$`)*
+$$spring.datasource.driver-class-name$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$spring.datasource.init-sql$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$spring.datasource.initialize$$:: $$Populate the database using 'data.sql'.$$ *($$Boolean$$, default: `$$true$$`)*
+$$spring.datasource.password$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$spring.datasource.url$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$spring.datasource.username$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$trigger.cron$$:: $$Cron expression value for the Cron Trigger.$$ *($$String$$, default: `$$<none>$$`)*
+$$trigger.date-format$$:: $$Format for the date value.$$ *($$String$$, default: `$$<none>$$`)*
+$$trigger.fixed-delay$$:: $$Fixed delay for periodic triggers.$$ *($$Integer$$, default: `$$1$$`)*
+$$trigger.initial-delay$$:: $$Initial delay for periodic triggers.$$ *($$Integer$$, default: `$$0$$`)*
+$$trigger.max-messages$$:: $$Maximum messages per poll, -1 means infinity.$$ *($$Long$$, default: `$$1$$`)*
+$$trigger.time-unit$$:: $$The TimeUnit to apply to delay values.$$ *($$TimeUnit$$, default: `$$<none>$$`, possible values: `NANOSECONDS`,`MICROSECONDS`,`MILLISECONDS`,`SECONDS`,`MINUTES`,`HOURS`,`DAYS`)*
 //end::configuration-properties[]
 
 Also see the http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html[Spring Boot Documentation]

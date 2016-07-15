@@ -8,22 +8,22 @@ This module writes each message it receives to HDFS.
 The **$$hdfs$$** $$sink$$ has the following options:
 
 //tag::configuration-properties[]
-$$hdfs.close-timeout$$:: $$Timeout in ms, regardless of activity, after which file will be automatically closed.$$ *($$Long$$, default: `0`)*
-$$hdfs.codec$$:: $$Compression codec alias name (gzip, snappy, bzip2, lzo, or slzo).$$ *($$String$$, default: `<none>`)*
-$$hdfs.directory$$:: $$Base path to write files to.$$ *($$String$$, default: `<none>`)*
-$$hdfs.enable-sync$$:: $$Whether writer will sync to datanode when flush is called, setting this to 'true' could impact throughput.$$ *($$Boolean$$, default: `false`)*
-$$hdfs.file-extension$$:: $$The base filename extension to use for the created files.$$ *($$String$$, default: `txt`)*
-$$hdfs.file-name$$:: $$The base filename to use for the created files.$$ *($$String$$, default: `<none>`)*
-$$hdfs.file-open-attempts$$:: $$Maximum number of file open attempts to find a path.$$ *($$Integer$$, default: `10`)*
-$$hdfs.file-uuid$$:: $$Whether file name should contain uuid.$$ *($$Boolean$$, default: `false`)*
-$$hdfs.flush-timeout$$:: $$Timeout in ms, regardless of activity, after which data written to file will be flushed.$$ *($$Long$$, default: `0`)*
-$$hdfs.fs-uri$$:: $$URL for HDFS Namenode.$$ *($$String$$, default: `<none>`)*
-$$hdfs.idle-timeout$$:: $$Inactivity timeout in ms after which file will be automatically closed.$$ *($$Long$$, default: `0`)*
-$$hdfs.in-use-prefix$$:: $$Prefix for files currently being written.$$ *($$String$$, default: `<none>`)*
-$$hdfs.in-use-suffix$$:: $$Suffix for files currently being written.$$ *($$String$$, default: `<none>`)*
-$$hdfs.overwrite$$:: $$Whether writer is allowed to overwrite files in Hadoop FileSystem.$$ *($$Boolean$$, default: `false`)*
-$$hdfs.partition-path$$:: $$A SpEL expression defining the partition path.$$ *($$String$$, default: `<none>`)*
-$$hdfs.rollover$$:: $$Threshold in bytes when file will be automatically rolled over.$$ *($$Integer$$, default: `1000000000`)*
+$$hdfs.close-timeout$$:: $$Timeout in ms, regardless of activity, after which file will be automatically closed.$$ *($$Long$$, default: `$$0$$`)*
+$$hdfs.codec$$:: $$Compression codec alias name (gzip, snappy, bzip2, lzo, or slzo).$$ *($$String$$, default: `$$<none>$$`)*
+$$hdfs.directory$$:: $$Base path to write files to.$$ *($$String$$, default: `$$<none>$$`)*
+$$hdfs.enable-sync$$:: $$Whether writer will sync to datanode when flush is called, setting this to 'true' could impact throughput.$$ *($$Boolean$$, default: `$$false$$`)*
+$$hdfs.file-extension$$:: $$The base filename extension to use for the created files.$$ *($$String$$, default: `$$txt$$`)*
+$$hdfs.file-name$$:: $$The base filename to use for the created files.$$ *($$String$$, default: `$$<none>$$`)*
+$$hdfs.file-open-attempts$$:: $$Maximum number of file open attempts to find a path.$$ *($$Integer$$, default: `$$10$$`)*
+$$hdfs.file-uuid$$:: $$Whether file name should contain uuid.$$ *($$Boolean$$, default: `$$false$$`)*
+$$hdfs.flush-timeout$$:: $$Timeout in ms, regardless of activity, after which data written to file will be flushed.$$ *($$Long$$, default: `$$0$$`)*
+$$hdfs.fs-uri$$:: $$URL for HDFS Namenode.$$ *($$String$$, default: `$$<none>$$`)*
+$$hdfs.idle-timeout$$:: $$Inactivity timeout in ms after which file will be automatically closed.$$ *($$Long$$, default: `$$0$$`)*
+$$hdfs.in-use-prefix$$:: $$Prefix for files currently being written.$$ *($$String$$, default: `$$<none>$$`)*
+$$hdfs.in-use-suffix$$:: $$Suffix for files currently being written.$$ *($$String$$, default: `$$<none>$$`)*
+$$hdfs.overwrite$$:: $$Whether writer is allowed to overwrite files in Hadoop FileSystem.$$ *($$Boolean$$, default: `$$false$$`)*
+$$hdfs.partition-path$$:: $$A SpEL expression defining the partition path.$$ *($$String$$, default: `$$<none>$$`)*
+$$hdfs.rollover$$:: $$Threshold in bytes when file will be automatically rolled over.$$ *($$Integer$$, default: `$$1000000000$$`)*
 //end::configuration-properties[]
 
 NOTE: This module can have it's runtime dependencies provided during startup if you would like to use a Hadoop distribution other than the default one.

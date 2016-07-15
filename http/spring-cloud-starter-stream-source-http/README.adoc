@@ -10,8 +10,8 @@ otherwise the payload will be a byte array.
 The **$$http$$** $$source$$ supports the following configuration properties:
 
 //tag::configuration-properties[]
-$$http.path-pattern$$:: $$An Ant-Style pattern to determine which http requests will be captured.$$ *($$String$$, default: `/`)*
-$$server.port$$:: $$Server HTTP port.$$ *($$Integer$$, default: `<none>`)*
+$$http.path-pattern$$:: $$An Ant-Style pattern to determine which http requests will be captured.$$ *($$String$$, default: `$$/$$`)*
+$$server.port$$:: $$Server HTTP port.$$ *($$Integer$$, default: `$$<none>$$`)*
 //end::configuration-properties[]
 
 //end::ref-doc[]

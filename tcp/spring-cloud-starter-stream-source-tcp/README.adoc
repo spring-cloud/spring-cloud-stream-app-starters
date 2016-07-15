@@ -10,13 +10,13 @@ Messages produced by the TCP source application have a `byte[]` payload.
 == Options
 
 //tag::configuration-properties[]
-$$tcp.buffer-size$$:: $$The buffer size used when decoding messages; larger messages will be rejected.$$ *($$Integer$$, default: `2048`)*
-$$tcp.decoder$$:: $$The decoder to use when receiving messages.$$ *($$Encoding$$, default: `<none>`, possible values: `CRLF`,`LF`,`NULL`,`STXETX`,`RAW`,`L1`,`L2`,`L4`)*
-$$tcp.nio$$:: $$<documentation missing>$$ *($$Boolean$$, default: `<none>`)*
-$$tcp.port$$:: $$<documentation missing>$$ *($$Integer$$, default: `<none>`)*
-$$tcp.reverse-lookup$$:: $$<documentation missing>$$ *($$Boolean$$, default: `<none>`)*
-$$tcp.socket-timeout$$:: $$<documentation missing>$$ *($$Integer$$, default: `<none>`)*
-$$tcp.use-direct-buffers$$:: $$<documentation missing>$$ *($$Boolean$$, default: `<none>`)*
+$$tcp.buffer-size$$:: $$The buffer size used when decoding messages; larger messages will be rejected.$$ *($$Integer$$, default: `$$2048$$`)*
+$$tcp.decoder$$:: $$The decoder to use when receiving messages.$$ *($$Encoding$$, default: `$$<none>$$`, possible values: `CRLF`,`LF`,`NULL`,`STXETX`,`RAW`,`L1`,`L2`,`L4`)*
+$$tcp.nio$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
+$$tcp.port$$:: $$<documentation missing>$$ *($$Integer$$, default: `$$<none>$$`)*
+$$tcp.reverse-lookup$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
+$$tcp.socket-timeout$$:: $$<documentation missing>$$ *($$Integer$$, default: `$$<none>$$`)*
+$$tcp.use-direct-buffers$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
 //end::configuration-properties[]
 
 == Available Decoders

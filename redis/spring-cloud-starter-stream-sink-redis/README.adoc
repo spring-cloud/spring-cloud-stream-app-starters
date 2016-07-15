@@ -8,28 +8,28 @@ This module sends messages to Redis store.
 The **$$redis$$** $$sink$$ has the following options:
 
 //tag::configuration-properties[]
-$$redis.key$$:: $$A literal key name to use when storing to a key.$$ *($$String$$, default: `<none>`)*
-$$redis.key-expression$$:: $$A SpEL expression to use for storing to a key.$$ *($$Expression$$, default: `<none>`)*
-$$redis.queue$$:: $$A literal queue name to use when storing in a queue.$$ *($$String$$, default: `<none>`)*
-$$redis.queue-expression$$:: $$A SpEL expression to use for queue.$$ *($$Expression$$, default: `<none>`)*
-$$redis.topic$$:: $$A literal topic name to use when publishing to a topic.$$ *($$String$$, default: `<none>`)*
-$$redis.topic-expression$$:: $$A SpEL expression to use for topic.$$ *($$Expression$$, default: `<none>`)*
-$$spring.redis.database$$:: $$Database index used by the connection factory.$$ *($$Integer$$, default: `0`)*
-$$spring.redis.host$$:: $$Redis server host.$$ *($$String$$, default: `localhost`)*
-$$spring.redis.password$$:: $$Login password of the redis server.$$ *($$String$$, default: `<none>`)*
+$$redis.key$$:: $$A literal key name to use when storing to a key.$$ *($$String$$, default: `$$<none>$$`)*
+$$redis.key-expression$$:: $$A SpEL expression to use for storing to a key.$$ *($$Expression$$, default: `$$<none>$$`)*
+$$redis.queue$$:: $$A literal queue name to use when storing in a queue.$$ *($$String$$, default: `$$<none>$$`)*
+$$redis.queue-expression$$:: $$A SpEL expression to use for queue.$$ *($$Expression$$, default: `$$<none>$$`)*
+$$redis.topic$$:: $$A literal topic name to use when publishing to a topic.$$ *($$String$$, default: `$$<none>$$`)*
+$$redis.topic-expression$$:: $$A SpEL expression to use for topic.$$ *($$Expression$$, default: `$$<none>$$`)*
+$$spring.redis.database$$:: $$Database index used by the connection factory.$$ *($$Integer$$, default: `$$0$$`)*
+$$spring.redis.host$$:: $$Redis server host.$$ *($$String$$, default: `$$localhost$$`)*
+$$spring.redis.password$$:: $$Login password of the redis server.$$ *($$String$$, default: `$$<none>$$`)*
 $$spring.redis.pool.max-active$$:: $$Max number of connections that can be allocated by the pool at a given time.
- Use a negative value for no limit.$$ *($$Integer$$, default: `8`)*
+ Use a negative value for no limit.$$ *($$Integer$$, default: `$$8$$`)*
 $$spring.redis.pool.max-idle$$:: $$Max number of "idle" connections in the pool. Use a negative value to indicate
- an unlimited number of idle connections.$$ *($$Integer$$, default: `8`)*
+ an unlimited number of idle connections.$$ *($$Integer$$, default: `$$8$$`)*
 $$spring.redis.pool.max-wait$$:: $$Maximum amount of time (in milliseconds) a connection allocation should block
  before throwing an exception when the pool is exhausted. Use a negative value
- to block indefinitely.$$ *($$Integer$$, default: `-1`)*
+ to block indefinitely.$$ *($$Integer$$, default: `$$-1$$`)*
 $$spring.redis.pool.min-idle$$:: $$Target for the minimum number of idle connections to maintain in the pool. This
- setting only has an effect if it is positive.$$ *($$Integer$$, default: `0`)*
-$$spring.redis.port$$:: $$Redis server port.$$ *($$Integer$$, default: `6379`)*
-$$spring.redis.sentinel.master$$:: $$Name of Redis server.$$ *($$String$$, default: `<none>`)*
-$$spring.redis.sentinel.nodes$$:: $$Comma-separated list of host:port pairs.$$ *($$String$$, default: `<none>`)*
-$$spring.redis.timeout$$:: $$Connection timeout in milliseconds.$$ *($$Integer$$, default: `0`)*
+ setting only has an effect if it is positive.$$ *($$Integer$$, default: `$$0$$`)*
+$$spring.redis.port$$:: $$Redis server port.$$ *($$Integer$$, default: `$$6379$$`)*
+$$spring.redis.sentinel.master$$:: $$Name of Redis server.$$ *($$String$$, default: `$$<none>$$`)*
+$$spring.redis.sentinel.nodes$$:: $$Comma-separated list of host:port pairs.$$ *($$String$$, default: `$$<none>$$`)*
+$$spring.redis.timeout$$:: $$Connection timeout in milliseconds.$$ *($$Integer$$, default: `$$0$$`)*
 //end::configuration-properties[]
 
 //end::ref-doc[]
