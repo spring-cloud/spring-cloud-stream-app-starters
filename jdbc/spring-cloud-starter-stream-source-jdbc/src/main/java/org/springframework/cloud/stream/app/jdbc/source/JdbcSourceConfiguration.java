@@ -46,7 +46,7 @@ import org.springframework.integration.scheduling.PollerMetadata;
 @EnableBinding(Source.class)
 @Import(TriggerConfiguration.class)
 @EnableConfigurationProperties({JdbcSourceProperties.class, TriggerPropertiesMaxMessagesDefaultOne.class})
-public class JdbcSourceConfiguration {
+public class xJdbcSourceConfiguration {
 
 	@Autowired
 	@Qualifier("defaultPoller")

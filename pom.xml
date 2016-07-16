@@ -60,6 +60,7 @@
 		<module>triggertask</module>
 		<module>twitter</module>
 		<module>websocket</module>
+		<module>yahoo-quotes</module>
 	</modules>
 
 	<dependencyManagement>
