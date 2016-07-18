@@ -16,6 +16,8 @@
  */
 package org.springframework.cloud.stream.app.yahooquotes.source;
 
+import java.util.TimeZone;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -24,18 +26,37 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("yahoo.quotes")
 public class YahooQuotesSourceProperties {
 
-	private Long interval = 60000L;
 	private String symbols;
 	private String fields;
 	private Integer batchSize = 400;
+	private String cronExpression = "0 * 9-17 * * MON-FRI";
+	private String zone = "EST";
+	private Integer throttle;
 
-	public Long getInterval() {
-		return interval;
+	public Integer getThrottle() {
+		return throttle;
 	}
 
-	public void setInterval(Long interval) {
-		this.interval = interval;
+	public void setThrottle(Integer throttle) {
+		this.throttle = throttle;
 	}
+
+	public String getCronExpression() {
+		return cronExpression;
+	}
+
+	public void setCronExpression(String cronExpression) {
+		this.cronExpression = cronExpression;
+	}
+
+	public String getZone() {
+		return zone;
+	}
+
+	public void setZone(String zone) {
+		this.zone = zone;
+	}
+
 
 	public String getSymbols() {
 		return symbols;
@@ -60,4 +81,6 @@ public class YahooQuotesSourceProperties {
 	public void setBatchSize(Integer batchSize) {
 		this.batchSize = batchSize;
 	}
+
+
 }

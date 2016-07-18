@@ -50,9 +50,7 @@ public class YahooQuotesClient {
 
 	public List<Map<String, Object>> fetchQuotes(List<String> symbols, String filter) {
 		String fields = (StringUtils.isEmpty(filter)) ? "*" : filter;
-		String query = String.format(queryTemplate, fields, symbols.size(),
-				StringUtils.collectionToCommaDelimitedString(symbols.stream()
-						.map(StringUtils::quote).collect(Collectors.toList())));
+		String query = String.format(queryTemplate, fields, symbols.size(),wouldbeSimplerWithLambdas(symbols));
 		Map<String, String> vars = new HashMap<>();
 		vars.put("query", query);
 		vars.put("env", "store://datatables.org/alltableswithkeys");
@@ -78,4 +76,10 @@ public class YahooQuotesClient {
 		return results;
 	}
 
+	private String wouldbeSimplerWithLambdas(List<String> symbols){
+		for(int i=0;i<symbols.size();i++){
+			symbols.set(i,StringUtils.quote(symbols.get(i)));
+		}
+		return StringUtils.collectionToCommaDelimitedString(symbols);
+	}
 }

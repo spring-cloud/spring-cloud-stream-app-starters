@@ -20,17 +20,23 @@ package org.springframework.cloud.stream.app.yahooquotes.source;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import org.isomorphism.util.TokenBucket;
+import org.isomorphism.util.TokenBuckets;
 
 import org.springframework.cloud.stream.app.yahooquotes.source.utils.PartitionedList;
 import org.springframework.context.Lifecycle;
@@ -60,6 +66,8 @@ public class YahooQuotesSourceMessageProducer implements Lifecycle {
 
 	private PartitionedList<String> partitionedSymbols;
 
+	private TokenBucket bucket;
+
 	public YahooQuotesSourceMessageProducer(YahooQuotesClient client) {
 		this.client = client;
 	}
@@ -71,24 +79,33 @@ public class YahooQuotesSourceMessageProducer implements Lifecycle {
 			loadSymbols();
 			this.dispatchQueue = new ArrayBlockingQueue<>(10000);
 			this.pool = Executors.newFixedThreadPool(3);
-			pool.submit(() -> {
-				try {
-					Map<String, Object> payload = null;
-					while ((payload = dispatchQueue.take()) != null) {
-						output.send(MessageBuilder.withPayload(payload).build());
-					}
-				}
-				catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			});
+			if(!StringUtils.isEmpty(properties.getThrottle())){
+				this.bucket = TokenBuckets.builder().withCapacity(properties.getThrottle()).withFixedIntervalRefillStrategy(properties.getThrottle(),1, TimeUnit.SECONDS).build();
+			}
+			pool.submit(
+					new Runnable() {
+						@Override
+						public void run() {
+							try {
+								Map<String, Object> payload = null;
+								while ((payload = dispatchQueue.take()) != null) {
+									if(bucket != null)
+										bucket.consume();
+									output.send(MessageBuilder.withPayload(payload).build());
+								}
+							}
+							catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+						}
+					});
 		}
 		finally {
 			lock.unlock();
 		}
 	}
 
-	@Scheduled(fixedDelayString = "${yahoo.quotes.interval}")
+	@Scheduled(cron = "${yahoo.quotes.cronExpression}", zone = "${yahoo.quotes.zone}")
 	public void poll() {
 		for (List<String> symbols : partitionedSymbols) {
 			pool.submit(new WebWorker(symbols));
@@ -106,8 +123,13 @@ public class YahooQuotesSourceMessageProducer implements Lifecycle {
 	}
 
 	private void loadDefaultSymbols() {
-		Stream<String> lines = new BufferedReader(new InputStreamReader(YahooQuotesSourceMessageProducer.class.getClassLoader().getResourceAsStream("symbols"))).lines();
-		this.partitionedSymbols = new PartitionedList<>(lines.collect(Collectors.toList()), properties.getBatchSize());
+		Scanner scanner = new Scanner(new InputStreamReader(YahooQuotesSourceMessageProducer.class.getClassLoader().getResourceAsStream("symbols")));
+		LinkedList<String> symbols = new LinkedList<>();
+		while(scanner.hasNext()){
+			symbols.add(scanner.nextLine());
+		}
+		scanner.close();
+		this.partitionedSymbols = new PartitionedList<>(symbols, properties.getBatchSize());
 	}
 
 	@Override
@@ -150,14 +172,14 @@ public class YahooQuotesSourceMessageProducer implements Lifecycle {
 		@Override
 		public void run() {
 			List<Map<String, Object>> results = client.fetchQuotes(symbols, properties.getFields());
-			results.forEach(r -> {
+			for(Map<String,Object> r : results){
 				try {
 					dispatchQueue.put(r);
 				}
 				catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-			});
+			}
 		}
 	}
 

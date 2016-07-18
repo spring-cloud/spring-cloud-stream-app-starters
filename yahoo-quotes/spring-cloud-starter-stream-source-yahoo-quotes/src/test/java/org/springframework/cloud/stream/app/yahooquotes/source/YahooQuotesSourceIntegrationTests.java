@@ -51,7 +51,7 @@ public class YahooQuotesSourceIntegrationTests {
 	@Autowired
 	protected MessageCollector messageCollector;
 
-	@IntegrationTest({"yahoo.quotes.interval=1000"})
+	@IntegrationTest({"yahoo.quotes.cronExpression=0/1 * * * * *","yahoo.quotes.zone=EST"})
 	public static class IntegrationTests extends YahooQuotesSourceIntegrationTests {
 
 		@Test
