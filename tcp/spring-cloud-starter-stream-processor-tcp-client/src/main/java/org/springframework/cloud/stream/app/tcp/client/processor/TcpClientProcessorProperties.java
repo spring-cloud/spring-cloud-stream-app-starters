@@ -56,7 +56,7 @@ public class TcpClientProcessorProperties extends AbstractTcpConnectionFactoryPr
 	private String charset = "UTF-8";
 
 	/**
-	 * Retry interval to check the connection and reconnect
+	 * Retry interval (in milliseconds) to check the connection and reconnect.
 	 */
 	private long retryInterval = 60000;
 
