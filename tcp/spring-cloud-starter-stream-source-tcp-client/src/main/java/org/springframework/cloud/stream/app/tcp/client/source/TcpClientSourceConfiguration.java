@@ -55,6 +55,7 @@ public class TcpClientSourceConfiguration {
 		TcpReceivingChannelAdapter adapter = new TcpReceivingChannelAdapter();
 		adapter.setConnectionFactory(connectionFactory);
 		adapter.setClientMode(true);
+		adapter.setRetryInterval(this.properties.getRetryInterval());
 		adapter.setOutputChannel(this.source.output());
 		return adapter;
 	}

@@ -102,7 +102,7 @@ public abstract class TcpClientTests {
 
 	@BeforeClass
 	public static void startup() throws Exception {
-		serverSocket = ServerSocketFactory.getDefault().createServerSocket(SocketUtils.findAvailableTcpPort());
+		serverSocket = ServerSocketFactory.getDefault().createServerSocket(0);
 		System.setProperty("tcp.client.test.port", Integer.toString(serverSocket.getLocalPort()));
 	}
 

@@ -1,5 +1,5 @@
 //tag::ref-doc[]
-= TCP Client
+= TCP Client as a processor which connects to a TCP server, sends/waits for data
 
 == Options
 
@@ -10,9 +10,10 @@ $$tcp.buffer-size$$:: $$The buffer size used when decoding messages; larger mess
 $$tcp.charset$$:: $$The charset used when converting from bytes to String.$$ *($$String$$, default: `$$UTF-8$$`)*
 $$tcp.decoder$$:: $$The decoder to use when receiving messages.$$ *($$Encoding$$, default: `$$<none>$$`, possible values: `CRLF`,`LF`,`NULL`,`STXETX`,`RAW`,`L1`,`L2`,`L4`)*
 $$tcp.encoder$$:: $$The encoder to use when sending messages.$$ *($$Encoding$$, default: `$$<none>$$`, possible values: `CRLF`,`LF`,`NULL`,`STXETX`,`RAW`,`L1`,`L2`,`L4`)*
-$$tcp.host$$:: $$The host to which this sink will connect.$$ *($$String$$, default: `$$<none>$$`)*
+$$tcp.host$$:: $$The host to which this sink will connect.$$ *($$String$$, default: `$$localhost$$`)*
 $$tcp.nio$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
 $$tcp.port$$:: $$<documentation missing>$$ *($$Integer$$, default: `$$<none>$$`)*
+$$tcp.retry-interval$$:: $$Retry interval to check the connection and reconnect$$ *($$Long$$, default: `$$60000$$`)*
 $$tcp.reverse-lookup$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
 $$tcp.socket-timeout$$:: $$<documentation missing>$$ *($$Integer$$, default: `$$<none>$$`)*
 $$tcp.use-direct-buffers$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*

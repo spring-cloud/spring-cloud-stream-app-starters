@@ -43,7 +43,7 @@ public class TcpClientProcessorProperties extends AbstractTcpConnectionFactoryPr
 	/**
 	 * The host to which this sink will connect.
 	 */
-	private String host;
+	private String host = "localhost";
 
 	/**
 	 * The encoder to use when sending messages.
@@ -54,6 +54,11 @@ public class TcpClientProcessorProperties extends AbstractTcpConnectionFactoryPr
 	 * The charset used when converting from bytes to String.
 	 */
 	private String charset = "UTF-8";
+
+	/**
+	 * Retry interval to check the connection and reconnect
+	 */
+	private long retryInterval = 60000;
 
 	@NotNull
 	public Encoding getDecoder() {
@@ -97,6 +102,14 @@ public class TcpClientProcessorProperties extends AbstractTcpConnectionFactoryPr
 
 	public void setCharset(String charset) {
 		this.charset = charset;
+	}
+
+	public long getRetryInterval() {
+		return this.retryInterval;
+	}
+
+	public void setRetryInterval(long retryInterval) {
+		this.retryInterval = retryInterval;
 	}
 
 }

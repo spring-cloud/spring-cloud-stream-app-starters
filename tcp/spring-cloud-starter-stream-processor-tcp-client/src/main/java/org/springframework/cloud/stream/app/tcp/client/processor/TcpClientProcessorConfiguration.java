@@ -53,6 +53,7 @@ public class TcpClientProcessorConfiguration {
 		TcpReceivingChannelAdapter adapter = new TcpReceivingChannelAdapter();
 		adapter.setConnectionFactory(connectionFactory);
 		adapter.setClientMode(true);
+		adapter.setRetryInterval(this.properties.getRetryInterval());
 		adapter.setOutputChannel(this.channels.output());
 		return adapter;
 	}
