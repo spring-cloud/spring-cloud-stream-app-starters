@@ -260,7 +260,7 @@ maven and docker artifacts for it with the necessary middleware bindings using t
 spring cloud stream app starter infrastructure. For explanation purposes, we will assume that we are creating a new
 source application for a technology named foobar.
 
-1. Create a new top level module named spring-cloud-starter-stream-source-foobar
+* Create a new top level module named spring-cloud-starter-stream-source-foobar
 
 Please follow the instructions above for designing a proper Spring Cloud Stream Source. You may also look into the existing
 starters for how to structure a new one. Ensure that you name the main `@Configuration` class of your starter as
@@ -275,13 +275,13 @@ spring-cloud in that here we don't provide a way to auto configure any configura
 Rather, we delegate this responsibility to the maven plugin that is generating the binder based apps. Therefore, you don't
 have to provide a spring.factories file that lists all your configuration classes.
 
-2. Add the new foobar source module to the root pom of the repository
+* Add the new foobar source module to the root pom of the repository
 
-3. At the root of the repository build and install the new module into your local maven cache:
+* At the root of the repository build and install the new module into your local maven cache:
 
 `./mvnw clean install -pl :spring-cloud-starter-stream-source-foobar`
 
-4. You need to add the new starter dependency to the `spring-cloud-stream-app-dependencies` bill of material (BOM) in the
+* You need to add the new starter dependency to the `spring-cloud-stream-app-dependencies` bill of material (BOM) in the
 dependecy management section. For example,
 
 [source,xml]
@@ -298,11 +298,11 @@ dependecy management section. For example,
 ...
 ----
 
-5. Build and install the newly updated bom:
+* Build and install the newly updated bom:
 
 `./mvnw clean install -pl :spring-cloud-stream-app-dependencies`
 
-6. At this point, you are ready to generate the binder based spring boot apps for foobar-source. Go to the
+* At this point, you are ready to generate the binder based spring boot apps for foobar-source. Go to the
 `spring-cloud-stream-app-generator` module and start editing as below.
 
 If you have a very basic source starter, all you have to do is to add the following to the list of apps need to be
@@ -332,7 +332,7 @@ this is how you can tell the plugin to override the default.
 </foobar-source>
 ----
 
-7. Go to the root of the repository and execute the script: `./generateApps.sh`
+* Go to the root of the repository and execute the script: `./generateApps.sh`
 
 This would generate the binder based foobar source apps in a directory named `apps` at the root of the repository.
 If you want to change the location where the apps are generated, for instance /tmp/scs-apps, you can do it in the
@@ -397,7 +397,7 @@ Then you can define this as part of your app tag:
 </foobar-source>
 ----
 
-8. cd into the directory where you generated the apps (`apps` at the root of the repository by default, unless you changed
+* cd into the directory where you generated the apps (`apps` at the root of the repository by default, unless you changed
 it elsewhere as described above).
 
 Here you will see both `foobar-source-kafka` and `foobar-source-rabbit` along with all the other out of the box apps that
@@ -445,14 +445,14 @@ When you do the above, this test configuration will be automatically imported in
 
 Also note that, you need to rerun the script for generating the apps each time you make a configuration change in the plugin.
 
-9. Now that you built the applications, they are available under the `target` directories of the respective apps and also as
+* Now that you built the applications, they are available under the `target` directories of the respective apps and also as
 maven artifacts in your local maven repository. Go to the `target` directory and run the following:
 
 `java -jar foobar-source-kafa.jar` [Ensure that you have kafka running locally when you do this]
 
 It should start the application up.
 
-10. The generated apps also support the creation of docker images. You can cd into one of the foobar-source* app and do the
+* The generated apps also support the creation of docker images. You can cd into one of the foobar-source* app and do the
 following:
 
 `mvn clean package docker:build`
