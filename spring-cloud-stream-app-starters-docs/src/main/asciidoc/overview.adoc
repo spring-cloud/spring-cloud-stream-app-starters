@@ -252,3 +252,229 @@ public class DemoApplication {
 * Build and install the application to desired maven repository
 * The patched copy of `jdbc-sink` application now includes `mysql` driver in it
 * This application can be run as standalone _uberjars_
+
+=== Developing custom applications and generating artifacts using the existing tooling
+
+In this section, we will explain how to develop a custom source/sink/processor application and then generate
+maven and docker artifacts for it with the necessary middleware bindings using the existing tooling provided by the
+spring cloud stream app starter infrastructure. For explanation purposes, we will assume that we are creating a new
+source application for a technology named foobar.
+
+* Create a new top level module named spring-cloud-starter-stream-source-foobar
+
+Please follow the instructions above for designing a proper Spring Cloud Stream Source. You may also look into the existing
+starters for how to structure a new one. Ensure that you name the main `@Configuration` class of your starter as
+`FoobarSourceConfiguration` as this is the default convention used by the app generation later. Please also make sure
+that the package for this `@Configuration` is `org.springfamework.cloud.stream.app.foobar.source`. If you have a different
+class/package name, see below for how to override that in the app generator. The functionality name for which you create
+a starter can be a hyphenated stream of strings such as in `scriptable-transform` which is a processor type in the
+module `spring-cloud-starter-stream-processor-scriptable-transform`.
+
+The starters in `spring-cloud-stream-app-starters` are slightly different from the other starters in spring-boot and
+spring-cloud in that here we don't provide a way to auto configure any configuration through spring factories mechanism.
+Rather, we delegate this responsibility to the maven plugin that is generating the binder based apps. Therefore, you don't
+have to provide a spring.factories file that lists all your configuration classes.
+
+* Add the new foobar source module to the root pom of the repository
+
+* At the root of the repository build and install the new module into your local maven cache:
+
+`./mvnw clean install -pl :spring-cloud-starter-stream-source-foobar`
+
+* You need to add the new starter dependency to the `spring-cloud-stream-app-dependencies` bill of material (BOM) in the
+dependecy management section. For example,
+
+[source,xml]
+----
+<dependencyManagement>
+...
+...
+    <dependency>
+        <groupId>org.springframework.cloud.stream.app</groupId>
+        <artifactId>spring-cloud-starter-stream-source-foobar</artifactId>
+        <version>1.0.0.BUILD-SNAPSHOT</version>
+    </dependency>
+...
+...
+----
+
+* Build and install the newly updated bom:
+
+`./mvnw clean install -pl :spring-cloud-stream-app-dependencies`
+
+* At this point, you are ready to generate the binder based spring boot apps for foobar-source. Go to the
+`spring-cloud-stream-app-generator` module and start editing as below.
+
+If you have a very basic source starter, all you have to do is to add the following to the list of apps need to be
+generated in the `generatedApps` tag of the configuration section of `spring-cloud-stream-app-maven` plugin.
+
+[source,xml]
+----
+<generatedApps>
+....
+    <foobar-source />
+....
+</generatedApps>
+----
+
+More information about the maven plugin used above can be found here:
+https://github.com/spring-cloud/spring-cloud-stream-app-maven-plugin
+
+If you did not follow the default convention expected by the plugin of where it is looking for the main configuration
+class, which is `org.springfamework.cloud.stream.app.foobar.source.FoobarSourceConfiguration`, you can override that in
+the configuration for the plugin. For example, if your main configuration class is `foo.bar.SpecialFooBarConfiguration.class`,
+this is how you can tell the plugin to override the default.
+
+[source,xml]
+----
+<foobar-source>
+    <autoConfigClass>foo.bar.SpecialFooBarConfiguration.class</autoConfigClass>
+</foobar-source>
+----
+
+* Go to the root of the repository and execute the script: `./generateApps.sh`
+
+This would generate the binder based foobar source apps in a directory named `apps` at the root of the repository.
+If you want to change the location where the apps are generated, for instance /tmp/scs-apps, you can do it in the
+configuration section of the plugin.
+
+[source,xml]
+----
+<configuration>
+    ...
+    <generatedProjectHome>/tmp/scs-apps</generatedProjectHome>
+    ...
+</configuration
+----
+
+By default, we generate apps for both Kafka and Rabbitmq binders - `spring-cloud-stream-binder-kafka` and
+`spring-cloud-stream-binder-rabbit`. Say, if you have a custom binder you created for some new middleware (may be JMS),
+which you need to generate apps for foobar source, you can add that binder to the binders list in the configuration
+section as in the following.
+
+[source,xml]
+----
+<binders>
+    <kafka />
+    <rabbit />
+    <jms />
+</binders>
+----
+
+Please note that this would only work, as long as there is a binder with the maven coordinates of
+`org.springframework.cloud.stream` as group id and `spring-cloud-stream-binder-jms` as artifact id.
+This artifact needs to be specified in the BOM above and available through a maven repository as well.
+
+If you have an artifact that is only available through a private internal maven repository (may be an enterprise wide
+Nexus repo that you use globally across teams), and you need that for your app, you can define that as part of the maven
+plugin configuration.
+
+For example,
+
+[source,xml]
+----
+<configuration>
+...
+    <extraRepositories>
+        <repository>
+            <id>private-internal-nexus</id>
+            <url>.../</url>
+            <name>...</name>
+            <snapshotEnabled>...</snapshotEnabled>
+        </repository>
+    </extraRepositories>
+</configuration>
+----
+
+Then you can define this as part of your app tag:
+
+[source,xml]
+----
+<foobar-source>
+    <extraRepositories>
+        <private-internal-nexus />
+    </extraRepositories>
+</foobar-source>
+----
+
+* cd into the directory where you generated the apps (`apps` at the root of the repository by default, unless you changed
+it elsewhere as described above).
+
+Here you will see both `foobar-source-kafka` and `foobar-source-rabbit` along with all the other out of the box apps that
+is generated. If you added more binders as described above, you would see that app as well here - for example foobar-source-jms.
+
+If you only care about the foobar-source apps and nothing else, you can cd into those particular foo-bar-[binder]
+directories and import them directly into your IDE of choice. Each of them is a self contained spring boot application project.
+For all the generated apps, the parent is `spring-boot-starter-parent`. There is no way to change that around as ultimately these
+are spring boot based applications and that parent would bring many necessary spring components into your application.
+
+You can cd into these custom foobar-source directories and do the following to build the apps:
+
+`cd foo-source-kafka`
+
+`mvn clean install`
+
+This would install the foo-source-kafka into your local maven cache (~/.m2 by default).
+
+The app generation phase above would add an integration test to the app project that is making sure that all the spring
+components and contexts are loaded properly. However, these tests are not run by default when you do a `mvn install`.
+You can force the running of these tests by doing the following:
+
+`mvn clean install -DskipTests=false`
+
+One important note about running these tests in generated apps: If your application's spring beans need to interact with
+some real services out there or expect some properties be present in the context, these tests would fail unless you make
+those things available. An example would be a Twitter Source, where the underlying spring beans are trying to create a
+twitter template and would fail if it can't find the credentials available through properties. One way to solve this and
+still run the generated context load tests would be to create a mock class that provides these properties or mock beans
+(for example, a mock twitter template) and tell the maven plugin about its existence. You can use the existing module
+`app-starters-test-support` for this purpose and add the mock class there.
+See the class `org.springframework.cloud.stream.app.test.twitter.TwitterTestConfiguration` for reference.
+You can create a similar class for your foobar source - `FoobarTestConfiguration` and add that to the plugin configuration.
+You only need to do this if you run into this particular issue of spring beans are not created properly in the
+integration test in the generated apps.
+
+[source,xml]
+----
+<foobar-source>
+    <extraTestConfigClass>org.springframework.cloud.stream.app.test.foobar.FoobarTestConfiguration.class</extraTestConfigClass>
+</foobar-source>
+----
+
+When you do the above, this test configuration will be automatically imported into the context of your test class.
+
+Also note that, you need to rerun the script for generating the apps each time you make a configuration change in the plugin.
+
+* Now that you built the applications, they are available under the `target` directories of the respective apps and also as
+maven artifacts in your local maven repository. Go to the `target` directory and run the following:
+
+`java -jar foobar-source-kafa.jar` [Ensure that you have kafka running locally when you do this]
+
+It should start the application up.
+
+* The generated apps also support the creation of docker images. You can cd into one of the foobar-source* app and do the
+following:
+
+`mvn clean package docker:build`
+
+This would create the docker image under the `target/docker/springcloudstream` directory. Please ensure that the Docker
+container is up and running and DOCKER_HOST environment variable is properly set before you try `docker:build`.
+
+All the generated apps from the repository are uploaded to the docker hub at: https://hub.docker.com/u/springcloudstream/
+
+However, for a custom app that you build, this won't be uploaded to docker hub under `springcloudstream` repository.
+If you think that there is a general need for this app, you should try contributing this starter to the main repository
+and upon review, this app then can be uploaded to the above location in docker hub.
+
+If you still need to push this to docker hub under a different repository you can take the following steps.
+
+Go to the pom.xml of the generated app [ example - `foo-source-kafka/pom.xml`]
+Search for `springcloudstream`. Replace with your repository name.
+
+Then do this:
+
+`mvn clean package docker:build docker:push -Ddocker.username=[provide your username] -Ddocker.password=[provide password]`
+
+This would upload the docker image to the docker hub in your custom repository.
+
+
