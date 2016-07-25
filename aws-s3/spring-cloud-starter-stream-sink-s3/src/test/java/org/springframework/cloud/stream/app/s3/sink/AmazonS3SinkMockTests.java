@@ -167,8 +167,8 @@ public abstract class AmazonS3SinkMockTests {
 			PutObjectRequest putObjectRequest = putObjectRequestArgumentCaptor.getValue();
 			assertThat(putObjectRequest.getBucketName(), equalTo(S3_BUCKET));
 			assertThat(putObjectRequest.getKey(), equalTo("foo.mp3"));
-			assertNull(putObjectRequest.getFile());
-			assertNotNull(putObjectRequest.getInputStream());
+			assertNotNull(putObjectRequest.getFile());
+			assertNull(putObjectRequest.getInputStream());
 
 			ObjectMetadata metadata = putObjectRequest.getMetadata();
 			assertThat(metadata.getContentMD5(), equalTo(Md5Utils.md5AsBase64(file)));
