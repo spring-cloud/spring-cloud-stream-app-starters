@@ -20,7 +20,7 @@
 	</scm>
 
 	<properties>
-		<scs-app-maven-plugin.version>1.0.0.RC1</scs-app-maven-plugin.version>
+		<scs-app-maven-plugin.version>1.0.0.RELEASE</scs-app-maven-plugin.version>
 	</properties>
 
 	<modules>
