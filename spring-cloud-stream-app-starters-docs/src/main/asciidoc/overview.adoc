@@ -428,9 +428,9 @@ those things available. An example would be a Twitter Source, where the underlyi
 twitter template and would fail if it can't find the credentials available through properties. One way to solve this and
 still run the generated context load tests would be to create a mock class that provides these properties or mock beans
 (for example, a mock twitter template) and tell the maven plugin about its existence. You can use the existing module
-for this purpose `app-starters-test-support` and add the mock class there.
+`app-starters-test-support` for this purpose and add the mock class there.
 See the class `org.springframework.cloud.stream.app.test.twitter.TwitterTestConfiguration` for reference.
-You can create a similar class for your foobar source - `FoobarTestConfiguration` and add that to the plugin.
+You can create a similar class for your foobar source - `FoobarTestConfiguration` and add that to the plugin configuration.
 You only need to do this if you run into this particular issue of spring beans are not created properly in the
 integration test in the generated apps.
 
