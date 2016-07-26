@@ -27,6 +27,7 @@ import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.Lifecycle;
+import org.springframework.context.SmartLifecycle;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.data.hadoop.store.DataStoreWriter;
 import org.springframework.data.hadoop.store.codec.CodecInfo;
@@ -58,7 +59,7 @@ import java.util.List;
  * @author Gary Russell
  */
 public class DataStoreWriterFactoryBean implements InitializingBean, DisposableBean, FactoryBean<DataStoreWriter<String>>,
-		BeanFactoryAware, Lifecycle {
+		BeanFactoryAware, SmartLifecycle {
 
 	private HdfsSinkProperties properties;
 
@@ -241,5 +242,23 @@ public class DataStoreWriterFactoryBean implements InitializingBean, DisposableB
 		else {
 			return false;
 		}
+	}
+
+	@Override
+	public boolean isAutoStartup() {
+		return false;
+	}
+
+	@Override
+	public void stop(Runnable runnable) {
+		stop();
+		if (runnable != null) {
+			runnable.run();
+		}
+	}
+
+	@Override
+	public int getPhase() {
+		return Integer.MIN_VALUE;
 	}
 }
