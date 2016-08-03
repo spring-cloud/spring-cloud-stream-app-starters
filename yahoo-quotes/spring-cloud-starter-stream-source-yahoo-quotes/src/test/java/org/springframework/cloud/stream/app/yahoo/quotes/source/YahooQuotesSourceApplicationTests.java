@@ -15,10 +15,11 @@
  *
  */
 
-package org.springframework.cloud.stream.app.yahooquotes.source;
+package org.springframework.cloud.stream.app.yahoo.quotes.source;
 
 import java.util.concurrent.TimeUnit;
 
+import junit.framework.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -38,33 +39,47 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author Vinicius Carvalho
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(YahooQuotesSourceIntegrationTests.YahooQuotesSourceApplicationTests.class)
+@SpringApplicationConfiguration(classes = YahooQuotesSourceApplicationTests.YahooQuotesSourceApplication.class)
 @WebIntegrationTest(randomPort = true)
 @DirtiesContext
-public class YahooQuotesSourceIntegrationTests {
+public abstract class YahooQuotesSourceApplicationTests {
 
 
 	@Autowired
 	@Bindings(YahooQuotesSourceConfiguration.class)
 	protected Source yahooSource;
 
+
+
 	@Autowired
 	protected MessageCollector messageCollector;
 
-	@IntegrationTest({"yahoo.quotes.cronExpression=0/1 * * * * *","yahoo.quotes.zone=EST"})
-	public static class IntegrationTests extends YahooQuotesSourceIntegrationTests {
+	@IntegrationTest({"yahoo.quotes.cronExpression=0/1 * * * * *","yahoo.quotes.zone=EST","yahoo.quotes.symbols=GOOGL"})
+	public static class ReceiveOneTests extends YahooQuotesSourceApplicationTests {
 
 		@Test
-		public void receiveOne() throws Exception{
+		public void test() throws Exception{
 			Message<?> received = messageCollector.forChannel(yahooSource.output()).poll(5, TimeUnit.SECONDS);
-
-			System.out.println("############" + received.getPayload());
+			Assert.assertNotNull(received);
 		}
 
 	}
 
-	@SpringBootApplication
-	public static class YahooQuotesSourceApplicationTests{
+	@IntegrationTest({"yahoo.quotes.cronExpression=0/1 * * * * *","yahoo.quotes.zone=EST","yahoo.quotes.symbols=AAPL,GOOGL"})
+	public static class ReceiveMultipleTests extends YahooQuotesSourceApplicationTests {
 
+		@Test
+		public void test() throws Exception{
+			Message<?> received = messageCollector.forChannel(yahooSource.output()).poll(5, TimeUnit.SECONDS);
+			Assert.assertNotNull(received);
+		}
+
+	}
+
+
+	@SpringBootApplication
+	public static class YahooQuotesSourceApplication{
+		public static void main(String[] args) {
+		}
 	}
 }

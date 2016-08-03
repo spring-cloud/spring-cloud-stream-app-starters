@@ -15,7 +15,7 @@
  *
  */
 
-package org.springframework.cloud.stream.app.yahooquotes.source.utils;
+package org.springframework.cloud.stream.app.yahoo.quotes.source.utils;
 
 import java.util.AbstractList;
 import java.util.List;

@@ -15,7 +15,7 @@
  *
  */
 
-package org.springframework.cloud.stream.app.yahooquotes.source.utils;
+package org.springframework.cloud.stream.app.yahoo.quotes.source.utils;
 
 import java.io.IOException;
 
@@ -34,7 +34,9 @@ public class LoggingErrorHandler implements ResponseErrorHandler {
 
 	@Override
 	public boolean hasError(ClientHttpResponse clientHttpResponse) throws IOException {
-		logger.error("Server replied with an error {}",clientHttpResponse.getRawStatusCode());
+		if(!clientHttpResponse.getStatusCode().is2xxSuccessful()){
+			logger.error("Server replied with an error {}",clientHttpResponse.getRawStatusCode());
+		}
 		return false;
 	}
 

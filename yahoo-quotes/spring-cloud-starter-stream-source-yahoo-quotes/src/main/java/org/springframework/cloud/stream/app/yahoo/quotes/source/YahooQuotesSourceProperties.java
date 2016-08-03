@@ -14,7 +14,7 @@
  *  limitations under the License.
  *
  */
-package org.springframework.cloud.stream.app.yahooquotes.source;
+package org.springframework.cloud.stream.app.yahoo.quotes.source;
 
 import java.util.TimeZone;
 

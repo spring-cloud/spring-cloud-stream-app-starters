@@ -15,9 +15,8 @@
  *
  */
 
-package org.springframework.cloud.stream.app.yahooquotes.source;
+package org.springframework.cloud.stream.app.yahoo.quotes.source;
 
-import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -32,13 +31,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.isomorphism.util.TokenBucket;
 import org.isomorphism.util.TokenBuckets;
 
-import org.springframework.cloud.stream.app.yahooquotes.source.utils.PartitionedList;
+import org.springframework.cloud.stream.app.yahoo.quotes.source.utils.PartitionedList;
 import org.springframework.context.Lifecycle;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
@@ -105,7 +102,7 @@ public class YahooQuotesSourceMessageProducer implements Lifecycle {
 		}
 	}
 
-	@Scheduled(cron = "${yahoo.quotes.cronExpression}", zone = "${yahoo.quotes.zone}")
+	@Scheduled(cron = "${yahoo.quotes.cronExpression:0 * 9-17 * * MON-FRI}", zone = "${yahoo.quotes.zone:EST}")
 	public void poll() {
 		for (List<String> symbols : partitionedSymbols) {
 			pool.submit(new WebWorker(symbols));

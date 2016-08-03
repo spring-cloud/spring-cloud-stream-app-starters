@@ -15,13 +15,13 @@
  *
  */
 
-package org.springframework.cloud.stream.app.yahooquotes.source;
+package org.springframework.cloud.stream.app.yahoo.quotes.source;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.app.yahooquotes.source.utils.LoggingErrorHandler;
+import org.springframework.cloud.stream.app.yahoo.quotes.source.utils.LoggingErrorHandler;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.MessageChannel;

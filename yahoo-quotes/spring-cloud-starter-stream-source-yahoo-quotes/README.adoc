@@ -5,7 +5,7 @@ This source ingests data from https://developer.yahoo.com/yql/[Yahoo! YQL financ
 
 YQL has a limit of 2000 calls per hour, so the source does its best on batching calls. It's tuned to fetch up to 400 symbols on one single call. This can be changed by modifying the `yahoo.quotes.batchSize` property.
 
-With it's default configuration, the source makes 20 (7025/400) calls  per minute to the API.
+With it's default configuration, the source makes 20 (7925/400) calls  per minute to the API.
 
 The source splits the batch calls and send one message per symbol. The content is the same as the one received from Yahoo!
 

@@ -15,7 +15,7 @@
  *
  */
 
-package org.springframework.cloud.stream.app.yahooquotes.source;
+package org.springframework.cloud.stream.app.yahoo.quotes.source;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -78,7 +78,8 @@ public class YahooQuotesClient {
 
 	private String wouldbeSimplerWithLambdas(List<String> symbols){
 		for(int i=0;i<symbols.size();i++){
-			symbols.set(i,StringUtils.quote(symbols.get(i)));
+			if(!symbols.get(i).startsWith("'") && ! symbols.get(i).startsWith("\\"))
+				symbols.set(i,StringUtils.quote(symbols.get(i)));
 		}
 		return StringUtils.collectionToCommaDelimitedString(symbols);
 	}
