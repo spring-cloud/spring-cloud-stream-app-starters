@@ -1,5 +1,5 @@
 //tag::ref-doc[]
-= Twitter Stream Source
+= Yahoo Quotes Stream Source
 
 This source ingests data from https://developer.yahoo.com/yql/[Yahoo! YQL finance quotes] . It pulls symbols from the API using a configurable cron expression. You can select which fields are going to be returned, or fetch all the fields (83 at the moment).
 
