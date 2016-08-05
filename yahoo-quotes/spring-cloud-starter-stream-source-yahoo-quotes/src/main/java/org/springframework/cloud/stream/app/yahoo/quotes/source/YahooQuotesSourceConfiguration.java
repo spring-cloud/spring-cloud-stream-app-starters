@@ -17,14 +17,22 @@
 
 package org.springframework.cloud.stream.app.yahoo.quotes.source;
 
+import java.io.IOException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.app.yahoo.quotes.source.utils.LoggingErrorHandler;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.messaging.MessageChannel;
+import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -41,20 +49,30 @@ public class YahooQuotesSourceConfiguration {
 	@Qualifier(Source.OUTPUT)
 	private MessageChannel output;
 
+
+
 	@Bean
-	public YahooQuotesSourceMessageProducer messageProducer() throws Exception {
+	public YahooQuotesSourceMessageProducer messageProducer(YahooQuotesClient client) throws Exception {
 		YahooQuotesSourceMessageProducer producer = new YahooQuotesSourceMessageProducer(
-				quotesClient());
+				client);
 		producer.setProperties(properties);
 		producer.setOutput(output);
 		return producer;
 	}
 
 	@Bean
-	public YahooQuotesClient quotesClient() throws Exception {
+	@ConditionalOnMissingBean
+	public YahooQuotesClientImpl quotesClient() throws Exception {
+		return new YahooQuotesClientImpl(template());
+	}
+
+	@Bean
+	public RestTemplate template(){
 		RestTemplate template = new RestTemplate();
 		template.setErrorHandler(new LoggingErrorHandler());
-		return new YahooQuotesClient(template);
+		return  template;
 	}
+
+
 
 }

@@ -15,5 +15,11 @@
 		<module>spring-cloud-starter-stream-source-yahoo-quotes</module>
 	</modules>
 	<packaging>pom</packaging>
-
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 </project>
