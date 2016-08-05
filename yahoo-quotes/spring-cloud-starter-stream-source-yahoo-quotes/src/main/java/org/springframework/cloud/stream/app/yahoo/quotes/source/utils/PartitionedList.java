@@ -21,8 +21,9 @@ import java.util.AbstractList;
 import java.util.List;
 
 /**
- * @author Vinicius Carvalho
- * Taken from http://svn.apache.org/viewvc/commons/proper/collections/trunk/src/main/java/org/apache/commons/collections4/ListUtils.java
+ * @author Vinicius Carvalho Taken from
+ * http://svn.apache.org/viewvc/commons/proper/collections/trunk/src/main/java/org/apache/
+ * commons/collections4/ListUtils.java
  */
 public class PartitionedList<T> extends AbstractList<List<T>> {
 
@@ -47,10 +48,12 @@ public class PartitionedList<T> extends AbstractList<List<T>> {
 			throw new IllegalArgumentException("negative size: " + listSize);
 		}
 		if (index < 0) {
-			throw new IndexOutOfBoundsException("Index " + index + " must not be negative");
+			throw new IndexOutOfBoundsException(
+					"Index " + index + " must not be negative");
 		}
 		if (index >= listSize) {
-			throw new IndexOutOfBoundsException("Index " + index + " must be less than size " + listSize);
+			throw new IndexOutOfBoundsException(
+					"Index " + index + " must be less than size " + listSize);
 		}
 		final int start = index * size;
 		final int end = Math.min(start + size, list.size());

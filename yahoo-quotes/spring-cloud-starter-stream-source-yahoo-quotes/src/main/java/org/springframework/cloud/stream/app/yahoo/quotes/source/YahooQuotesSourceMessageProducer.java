@@ -76,26 +76,29 @@ public class YahooQuotesSourceMessageProducer implements Lifecycle {
 			loadSymbols();
 			this.dispatchQueue = new ArrayBlockingQueue<>(10000);
 			this.pool = Executors.newFixedThreadPool(3);
-			if(!StringUtils.isEmpty(properties.getThrottle())){
-				this.bucket = TokenBuckets.builder().withCapacity(properties.getThrottle()).withFixedIntervalRefillStrategy(properties.getThrottle(),1, TimeUnit.SECONDS).build();
+			if (!StringUtils.isEmpty(properties.getThrottle())) {
+				this.bucket = TokenBuckets.builder()
+						.withCapacity(properties.getThrottle())
+						.withFixedIntervalRefillStrategy(properties.getThrottle(), 1,
+								TimeUnit.SECONDS)
+						.build();
 			}
-			pool.submit(
-					new Runnable() {
-						@Override
-						public void run() {
-							try {
-								Map<String, Object> payload = null;
-								while ((payload = dispatchQueue.take()) != null) {
-									if(bucket != null)
-										bucket.consume();
-									output.send(MessageBuilder.withPayload(payload).build());
-								}
-							}
-							catch (InterruptedException e) {
-								e.printStackTrace();
-							}
+			pool.submit(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						Map<String, Object> payload = null;
+						while ((payload = dispatchQueue.take()) != null) {
+							if (bucket != null)
+								bucket.consume();
+							output.send(MessageBuilder.withPayload(payload).build());
 						}
-					});
+					}
+					catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			});
 		}
 		finally {
 			lock.unlock();
@@ -114,19 +117,25 @@ public class YahooQuotesSourceMessageProducer implements Lifecycle {
 			loadDefaultSymbols();
 		}
 		else {
-			this.partitionedSymbols = new PartitionedList<>(Arrays.asList(StringUtils.commaDelimitedListToStringArray(properties.getSymbols())), properties.getBatchSize());
+			this.partitionedSymbols = new PartitionedList<>(
+					Arrays.asList(StringUtils
+							.commaDelimitedListToStringArray(properties.getSymbols())),
+					properties.getBatchSize());
 		}
 
 	}
 
 	private void loadDefaultSymbols() {
-		Scanner scanner = new Scanner(new InputStreamReader(YahooQuotesSourceMessageProducer.class.getClassLoader().getResourceAsStream("symbols")));
+		Scanner scanner = new Scanner(
+				new InputStreamReader(YahooQuotesSourceMessageProducer.class
+						.getClassLoader().getResourceAsStream("symbols")));
 		LinkedList<String> symbols = new LinkedList<>();
-		while(scanner.hasNext()){
+		while (scanner.hasNext()) {
 			symbols.add(scanner.nextLine());
 		}
 		scanner.close();
-		this.partitionedSymbols = new PartitionedList<>(symbols, properties.getBatchSize());
+		this.partitionedSymbols = new PartitionedList<>(symbols,
+				properties.getBatchSize());
 	}
 
 	@Override
@@ -168,8 +177,9 @@ public class YahooQuotesSourceMessageProducer implements Lifecycle {
 
 		@Override
 		public void run() {
-			List<Map<String, Object>> results = client.fetchQuotes(symbols, properties.getFields());
-			for(Map<String,Object> r : results){
+			List<Map<String, Object>> results = client.fetchQuotes(symbols,
+					properties.getFields());
+			for (Map<String, Object> r : results) {
 				try {
 					dispatchQueue.put(r);
 				}

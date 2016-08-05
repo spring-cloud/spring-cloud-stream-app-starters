@@ -34,8 +34,9 @@ public class LoggingErrorHandler implements ResponseErrorHandler {
 
 	@Override
 	public boolean hasError(ClientHttpResponse clientHttpResponse) throws IOException {
-		if(!clientHttpResponse.getStatusCode().is2xxSuccessful()){
-			logger.error("Server replied with an error {}",clientHttpResponse.getRawStatusCode());
+		if (!clientHttpResponse.getStatusCode().is2xxSuccessful()) {
+			logger.error("Server replied with an error {}",
+					clientHttpResponse.getRawStatusCode());
 		}
 		return false;
 	}

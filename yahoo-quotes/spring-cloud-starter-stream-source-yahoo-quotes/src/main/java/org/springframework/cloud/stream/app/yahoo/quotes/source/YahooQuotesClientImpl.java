@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
@@ -51,7 +50,8 @@ public class YahooQuotesClientImpl implements YahooQuotesClient {
 	@Override
 	public List<Map<String, Object>> fetchQuotes(List<String> symbols, String filter) {
 		String fields = (StringUtils.isEmpty(filter)) ? "*" : filter;
-		String query = String.format(queryTemplate, fields, symbols.size(),wouldbeSimplerWithLambdas(symbols));
+		String query = String.format(queryTemplate, fields, symbols.size(),
+				wouldbeSimplerWithLambdas(symbols));
 		Map<String, String> vars = new HashMap<>();
 		vars.put("query", query);
 		vars.put("env", "store://datatables.org/alltableswithkeys");
@@ -77,10 +77,10 @@ public class YahooQuotesClientImpl implements YahooQuotesClient {
 		return results;
 	}
 
-	private String wouldbeSimplerWithLambdas(List<String> symbols){
-		for(int i=0;i<symbols.size();i++){
-			if(!symbols.get(i).startsWith("'") && ! symbols.get(i).startsWith("\\"))
-				symbols.set(i,StringUtils.quote(symbols.get(i)));
+	private String wouldbeSimplerWithLambdas(List<String> symbols) {
+		for (int i = 0; i < symbols.size(); i++) {
+			if (!symbols.get(i).startsWith("'") && !symbols.get(i).startsWith("\\"))
+				symbols.set(i, StringUtils.quote(symbols.get(i)));
 		}
 		return StringUtils.collectionToCommaDelimitedString(symbols);
 	}

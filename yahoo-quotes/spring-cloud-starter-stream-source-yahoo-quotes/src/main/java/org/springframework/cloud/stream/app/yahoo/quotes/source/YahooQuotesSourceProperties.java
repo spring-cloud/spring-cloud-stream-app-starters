@@ -16,8 +16,6 @@
  */
 package org.springframework.cloud.stream.app.yahoo.quotes.source;
 
-import java.util.TimeZone;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -57,7 +55,6 @@ public class YahooQuotesSourceProperties {
 		this.zone = zone;
 	}
 
-
 	public String getSymbols() {
 		return symbols;
 	}
@@ -81,6 +78,5 @@ public class YahooQuotesSourceProperties {
 	public void setBatchSize(Integer batchSize) {
 		this.batchSize = batchSize;
 	}
-
 
 }
