@@ -29,6 +29,7 @@
 		<pmml.version>1.2.6</pmml.version>
 		<spring-cloud-deployer-spi.version>1.0.2.RELEASE</spring-cloud-deployer-spi.version>
 		<spring-cloud-deployer-local.version>1.0.2.RELEASE</spring-cloud-deployer-local.version>
+		<spring-cloud-deployer-yarn.version>1.0.1.RELEASE</spring-cloud-deployer-yarn.version>
 		<spring.cloud.task.version>1.0.1.RELEASE</spring.cloud.task.version>
 		<spring.cloud.dependencies.version>Brixton.SR3</spring.cloud.dependencies.version>
 		<spring-analytics.version>1.0.0.RELEASE</spring-analytics.version>
@@ -257,6 +258,11 @@
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.cloud.stream.app</groupId>
+				<artifactId>spring-cloud-starter-stream-sink-task-launcher-yarn</artifactId>
+				<version>1.0.3.BUILD-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud.stream.app</groupId>
 				<artifactId>spring-cloud-starter-stream-sink-tcp</artifactId>
 				<version>1.0.3.BUILD-SNAPSHOT</version>
 			</dependency>
@@ -447,6 +453,11 @@
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-deployer-local</artifactId>
 				<version>${spring-cloud-deployer-spi.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-deployer-yarn</artifactId>
+				<version>${spring-cloud-deployer-yarn.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>

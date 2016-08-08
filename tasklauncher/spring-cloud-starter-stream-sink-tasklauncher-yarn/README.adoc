@@ -1,0 +1,28 @@
+//tag::ref-doc[]
+= TaskLauncher YARN Sink
+
+This application launches the task application specified in the uri attribute of the `TaskLaunchRequest` contained
+in the message that is received.
+
+Any message that does not contain a `TaskLaunchRequest` will log an error.
+
+== Using the TaskLauncher
+A tasklauncher is a sink that consumes a `TaskLaunchRequest` message, deploys and launches a task using a Spring
+Cloud Deployer.  The task will use the --uri from the message to determine what artifact to deploy as well as the
+properties and arguments to execute the task.  An example of this using Spring Cloud Data Flow would look like this:
+
+`stream create foo --definition "triggertask --uri=maven://org.springframework.cloud.task.app:timestamp-task:jar:1.0.0.BUILD-SNAPSHOT --fixed-delay=5 | tasklauncher-yarn"`
+
+Another example would be to use a processor to translate a message from another source into a `TaskLaunchRequest` that
+would be sent to the tasklauncher sink.
+
+== Limitations
+Currently `tasklauncher-yarn` sink only works on Dataflow for Apache Yarn and yarn deployer version in this sink has to match same version used in a dataflow server.
+
+//end::ref-doc[]
+
+== Build
+
+```
+$ mvn clean package
+```
