@@ -112,10 +112,20 @@ $$yahoo.quotes.fields$$:: $$Field selector to filter which fields should be retu
 $$yahoo.quotes.batchSize$$:: $$How many symbols to fetch per call$$ *($$Integer$$, default: `400`)*
 $$yahoo.quotes.cronExpression:: $$Cron expression to determine when to poll for quotes$$ *($$String$$, default: `0 * 9-17 * * MON-FRI` Only polls during exchange hours)*
 $$yahoo.quotes.zone:: $$Timezone used for the cron expression$$ *($$String$$, default: `EST`)*
-$$yahoo.quotes.zone$$:: $$How many messages per second should the source emmit$$ *($$Integer$$, default: `null`, if set the source will throttle message output instead of sending a burst. Be mindful of the number of symbols and frequency when setting this in order to avoid blocking the output queue)*
+$$yahoo.quotes.throttle$$:: $$How many messages per second should the source emmit$$ *($$Integer$$, default: `null`, if set the source will throttle message output instead of sending a burst. Be mindful of the number of symbols and frequency when setting this in order to avoid blocking the output queue)*
 //end::configuration-properties[]
 
+== Example : Query for Google and Apple stocks every 5 seconds fetching only the symbol, bid and ask price:
 
+[source,yaml]
+----
+yahoo:
+  quotes:
+    symbol: GOOG,AAPL
+    fields: Symbol,Ask,Bid
+    cronExpression: 0/5 * * * * *
+
+----
 
 //end::ref-doc[]
 == Build
