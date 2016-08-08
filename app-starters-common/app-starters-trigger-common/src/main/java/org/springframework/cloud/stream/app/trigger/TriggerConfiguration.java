@@ -18,11 +18,9 @@ package org.springframework.cloud.stream.app.trigger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.NoneNestedConditions;
-import org.springframework.cloud.stream.config.SpelExpressionConverterConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.integration.scheduling.PollerMetadata;
 import org.springframework.scheduling.Trigger;
 import org.springframework.scheduling.support.CronTrigger;
@@ -34,7 +32,6 @@ import org.springframework.scheduling.support.PeriodicTrigger;
  * @author Artem Bilan
  */
 @Configuration
-@Import(SpelExpressionConverterConfiguration.class)
 public class TriggerConfiguration {
 
 	@Autowired

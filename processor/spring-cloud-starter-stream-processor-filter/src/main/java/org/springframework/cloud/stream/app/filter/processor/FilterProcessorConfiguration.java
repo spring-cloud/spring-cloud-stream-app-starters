@@ -19,9 +19,7 @@ package org.springframework.cloud.stream.app.filter.processor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.config.SpelExpressionConverterConfiguration;
 import org.springframework.cloud.stream.messaging.Processor;
-import org.springframework.context.annotation.Import;
 import org.springframework.integration.annotation.Filter;
 import org.springframework.messaging.Message;
 
@@ -33,7 +31,6 @@ import org.springframework.messaging.Message;
  * @author Gary Russell
  */
 @EnableBinding(Processor.class)
-@Import(SpelExpressionConverterConfiguration.class)
 @EnableConfigurationProperties(FilterProcessorProperties.class)
 public class FilterProcessorConfiguration {
 

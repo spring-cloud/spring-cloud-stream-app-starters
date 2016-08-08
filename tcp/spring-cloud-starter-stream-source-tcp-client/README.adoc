@@ -1,0 +1,27 @@
+//tag::ref-doc[]
+= TCP Client as a Source which connects to a TCP server and receives data
+
+== Options
+
+The **$$tcp-client$$** $$source$$ has the following options:
+
+//tag::configuration-properties[]
+$$tcp.buffer-size$$:: $$The buffer size used when decoding messages; larger messages will be rejected.$$ *($$Integer$$, default: `$$2048$$`)*
+$$tcp.charset$$:: $$The charset used when converting from bytes to String.$$ *($$String$$, default: `$$UTF-8$$`)*
+$$tcp.decoder$$:: $$The decoder to use when receiving messages.$$ *($$Encoding$$, default: `$$<none>$$`, possible values: `CRLF`,`LF`,`NULL`,`STXETX`,`RAW`,`L1`,`L2`,`L4`)*
+$$tcp.host$$:: $$The host to which this client will connect.$$ *($$String$$, default: `$$localhost$$`)*
+$$tcp.nio$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
+$$tcp.port$$:: $$<documentation missing>$$ *($$Integer$$, default: `$$<none>$$`)*
+$$tcp.retry-interval$$:: $$Retry interval (in milliseconds) to check the connection and reconnect.$$ *($$Long$$, default: `$$60000$$`)*
+$$tcp.reverse-lookup$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
+$$tcp.socket-timeout$$:: $$<documentation missing>$$ *($$Integer$$, default: `$$<none>$$`)*
+$$tcp.use-direct-buffers$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
+//end::configuration-properties[]
+
+//end::ref-doc[]
+
+== Build
+
+```
+$ mvn clean package
+```

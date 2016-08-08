@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>spring-cloud-stream-app-starters</artifactId>
 		<groupId>org.springframework.cloud.stream.app</groupId>
-		<version>1.0.0.BUILD-SNAPSHOT</version>
+		<version>1.0.3.BUILD-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
@@ -103,9 +103,16 @@
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.loggregator.LoggregatorSourceTestConfiguration.class</extraTestConfigClass>
 						</loggregator-source>
 						<mail-source />
+						<!--
+							Due to Licensing reasons, the pmml processor executable app is not built (and hence not published)
+							on a regular basis via continuous integration. If you wish to use it, simply uncomment those
+							lines and generate the apps.
+						-->
+						<!--
 						<pmml-processor>
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.pmml.PmmlProcessorTestConfiguration.class</extraTestConfigClass>
 						</pmml-processor>
+						-->
 						<log-sink />
 						<mongodb-source />
 						<rabbit-sink>
@@ -139,17 +146,19 @@
 						<syslog-source>
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.ip.IpSourceTestConfiguration.class</extraTestConfigClass>
 						</syslog-source>
-						<task-launcher-local-sink/>
+						<task-launcher-local-sink />
 						<tcp-sink>
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.ip.IpSinkTestConfiguration.class</extraTestConfigClass>
 						</tcp-sink>
 						<tcp-source>
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.ip.IpSourceTestConfiguration.class</extraTestConfigClass>
 						</tcp-source>
+						<tcp-client-source />
+						<tcp-client-processor />
 						<time-source />
 						<transform-processor />
 						<trigger-source />
-						<triggertask-source/>
+						<triggertask-source />
 						<twitterstream-source>
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.twitter.TwitterTestConfiguration.class</extraTestConfigClass>
 						</twitterstream-source>

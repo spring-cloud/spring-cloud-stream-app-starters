@@ -22,7 +22,6 @@ import org.springframework.analytics.metrics.AggregateCounterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.config.SpelExpressionConverterConfiguration;
 import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.context.annotation.Import;
 import org.springframework.integration.annotation.ServiceActivator;
@@ -35,7 +34,7 @@ import org.springframework.messaging.Message;
  */
 @EnableBinding(Sink.class)
 @EnableConfigurationProperties(AggregateCounterSinkProperties.class)
-@Import({SpelExpressionConverterConfiguration.class, AggregateCounterSinkStoreConfiguration.class})
+@Import(AggregateCounterSinkStoreConfiguration.class)
 public class AggregateCounterSinkConfiguration {
 
 	@Autowired

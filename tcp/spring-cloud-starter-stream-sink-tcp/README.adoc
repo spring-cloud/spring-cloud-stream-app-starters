@@ -11,15 +11,15 @@ available, the default being 'CRLF'.
 The **$$tcp$$** $$sink$$ has the following options:
 
 //tag::configuration-properties[]
-$$tcp.charset$$:: $$The charset used when converting from bytes to String.$$ *($$String$$, default: `UTF-8`)*
-$$tcp.close$$:: $$Whether to close the socket after each message.$$ *($$Boolean$$, default: `false`)*
-$$tcp.encoder$$:: $$The encoder to use when sending messages.$$ *($$Encoding$$, default: `<none>`, possible values: `CRLF`,`LF`,`NULL`,`STXETX`,`RAW`,`L1`,`L2`,`L4`)*
-$$tcp.host$$:: $$The host to which this sink will connect.$$ *($$String$$, default: `<none>`)*
-$$tcp.nio$$:: $$<documentation missing>$$ *($$Boolean$$, default: `<none>`)*
-$$tcp.port$$:: $$<documentation missing>$$ *($$Integer$$, default: `<none>`)*
-$$tcp.reverse-lookup$$:: $$<documentation missing>$$ *($$Boolean$$, default: `<none>`)*
-$$tcp.socket-timeout$$:: $$<documentation missing>$$ *($$Integer$$, default: `<none>`)*
-$$tcp.use-direct-buffers$$:: $$<documentation missing>$$ *($$Boolean$$, default: `<none>`)*
+$$tcp.charset$$:: $$The charset used when converting from bytes to String.$$ *($$String$$, default: `$$UTF-8$$`)*
+$$tcp.close$$:: $$Whether to close the socket after each message.$$ *($$Boolean$$, default: `$$false$$`)*
+$$tcp.encoder$$:: $$The encoder to use when sending messages.$$ *($$Encoding$$, default: `$$<none>$$`, possible values: `CRLF`,`LF`,`NULL`,`STXETX`,`RAW`,`L1`,`L2`,`L4`)*
+$$tcp.host$$:: $$The host to which this sink will connect.$$ *($$String$$, default: `$$<none>$$`)*
+$$tcp.nio$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
+$$tcp.port$$:: $$<documentation missing>$$ *($$Integer$$, default: `$$<none>$$`)*
+$$tcp.reverse-lookup$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
+$$tcp.socket-timeout$$:: $$<documentation missing>$$ *($$Integer$$, default: `$$<none>$$`)*
+$$tcp.use-direct-buffers$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
 //end::configuration-properties[]
 
 == Available Encoders

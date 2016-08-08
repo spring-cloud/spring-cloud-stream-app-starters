@@ -6,13 +6,15 @@
 
 	<parent>
 		<groupId>org.springframework.cloud.stream.app</groupId>
-		<artifactId>spring-cloud-stream-app-starters</artifactId>
-		<version>1.0.0.BUILD-SNAPSHOT</version>
+		<artifactId>starter-parent</artifactId>
+		<version>1.0.3.BUILD-SNAPSHOT</version>
+		<relativePath>../starter-parent</relativePath>
 	</parent>
 
 	<modules>
 		<module>spring-cloud-starter-stream-source-tcp</module>
 		<module>spring-cloud-starter-stream-sink-tcp</module>
+		<module>spring-cloud-starter-stream-source-tcp-client</module>
+		<module>spring-cloud-starter-stream-processor-tcp-client</module>
 	</modules>
-
 </project>

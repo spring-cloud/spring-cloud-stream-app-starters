@@ -18,11 +18,9 @@ package org.springframework.cloud.stream.app.redis.sink;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.config.SpelExpressionConverterConfiguration;
 import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.redis.outbound.RedisPublishingMessageHandler;
@@ -45,7 +43,6 @@ import org.springframework.messaging.MessageHandler;
 @Configuration
 @EnableConfigurationProperties(RedisSinkProperties.class)
 @EnableBinding(Sink.class)
-@Import(SpelExpressionConverterConfiguration.class)
 public class RedisSinkConfiguration {
 
 	@Autowired

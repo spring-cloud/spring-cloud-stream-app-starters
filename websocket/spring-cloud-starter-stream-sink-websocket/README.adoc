@@ -7,11 +7,11 @@ A simple Websocket Sink implementation.
 The following commmand line arguments are supported:
 
 //tag::configuration-properties[]
-$$websocket.log-level$$:: $$the logLevel for netty channels. Default is <tt>WARN</tt>$$ *($$String$$, default: `<none>`)*
-$$websocket.path$$:: $$the path on which a WebsocketSink consumer needs to connect. Default is <tt>/websocket</tt>$$ *($$String$$, default: `/websocket`)*
-$$websocket.port$$:: $$the port on which the Netty server listens. Default is <tt>9292</tt>$$ *($$Integer$$, default: `9292`)*
-$$websocket.ssl$$:: $$whether or not to create a {@link io.netty.handler.ssl.SslContext}$$ *($$Boolean$$, default: `false`)*
-$$websocket.threads$$:: $$the number of threads for the Netty {@link io.netty.channel.EventLoopGroup}. Default is <tt>1</tt>$$ *($$Integer$$, default: `1`)*
+$$websocket.log-level$$:: $$the logLevel for netty channels. Default is <tt>WARN</tt>$$ *($$String$$, default: `$$<none>$$`)*
+$$websocket.path$$:: $$the path on which a WebsocketSink consumer needs to connect. Default is <tt>/websocket</tt>$$ *($$String$$, default: `$$/websocket$$`)*
+$$websocket.port$$:: $$the port on which the Netty server listens. Default is <tt>9292</tt>$$ *($$Integer$$, default: `$$9292$$`)*
+$$websocket.ssl$$:: $$whether or not to create a {@link io.netty.handler.ssl.SslContext}$$ *($$Boolean$$, default: `$$false$$`)*
+$$websocket.threads$$:: $$the number of threads for the Netty {@link io.netty.channel.EventLoopGroup}. Default is <tt>1</tt>$$ *($$Integer$$, default: `$$1$$`)*
 //end::configuration-properties[]
 
 == Example

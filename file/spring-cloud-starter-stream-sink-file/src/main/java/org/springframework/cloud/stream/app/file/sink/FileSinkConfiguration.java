@@ -16,18 +16,16 @@
 
 package org.springframework.cloud.stream.app.file.sink;
 
+import java.io.File;
+
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.config.SpelExpressionConverterConfiguration;
 import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.file.DefaultFileNameGenerator;
 import org.springframework.integration.file.FileNameGenerator;
 import org.springframework.integration.file.FileWritingMessageHandler;
-
-import java.io.File;
 
 /**
  * Creates a {@link FileWritingMessageHandler} bean and registers it as a
@@ -36,7 +34,6 @@ import java.io.File;
  * @author Mark Fisher
  */
 @EnableBinding(Sink.class)
-@Import(SpelExpressionConverterConfiguration.class)
 @EnableConfigurationProperties(FileSinkProperties.class)
 public class FileSinkConfiguration {
 

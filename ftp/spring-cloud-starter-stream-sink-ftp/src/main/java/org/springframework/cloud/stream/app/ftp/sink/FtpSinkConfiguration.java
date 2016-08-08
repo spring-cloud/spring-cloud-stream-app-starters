@@ -21,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.app.ftp.FtpSessionFactoryConfiguration;
-import org.springframework.cloud.stream.config.SpelExpressionConverterConfiguration;
 import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -40,7 +39,7 @@ import org.springframework.integration.ftp.session.FtpRemoteFileTemplate;
  */
 @EnableBinding(Sink.class)
 @EnableConfigurationProperties(FtpSinkProperties.class)
-@Import({ FtpSessionFactoryConfiguration.class, SpelExpressionConverterConfiguration.class })
+@Import(FtpSessionFactoryConfiguration.class)
 public class FtpSinkConfiguration {
 
 	@Autowired

@@ -43,7 +43,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.config.SpelExpressionConverterConfiguration;
 import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.context.annotation.Import;
 import org.springframework.expression.EvaluationContext;
@@ -67,7 +66,7 @@ import org.springframework.util.Assert;
  */
 @EnableBinding(Processor.class)
 @EnableConfigurationProperties(PmmlProcessorProperties.class)
-@Import({CustomConversionServiceRegistrar.class, SpelExpressionConverterConfiguration.class})
+@Import(CustomConversionServiceRegistrar.class)
 public class PmmlProcessorConfiguration {
 
 	private static final Log logger = LogFactory.getLog(PmmlProcessorConfiguration.class);

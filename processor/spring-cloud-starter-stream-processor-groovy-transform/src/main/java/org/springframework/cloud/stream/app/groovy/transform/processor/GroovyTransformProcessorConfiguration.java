@@ -21,6 +21,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.integration.annotation.Transformer;
 import org.springframework.integration.groovy.GroovyScriptExecutingMessageProcessor;
 import org.springframework.integration.handler.MessageProcessor;
@@ -37,6 +38,7 @@ import org.springframework.scripting.support.ResourceScriptSource;
  */
 @EnableBinding(Processor.class)
 @EnableConfigurationProperties(GroovyTransformProcessorProperties.class)
+@Import(ScriptVariableGeneratorConfiguration.class)
 public class GroovyTransformProcessorConfiguration {
 
 	@Autowired

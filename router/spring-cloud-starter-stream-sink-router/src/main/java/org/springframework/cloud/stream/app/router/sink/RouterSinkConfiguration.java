@@ -21,10 +21,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.binding.BinderAwareChannelResolver;
-import org.springframework.cloud.stream.config.SpelExpressionConverterConfiguration;
 import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.groovy.GroovyScriptExecutingMessageProcessor;
 import org.springframework.integration.router.AbstractMappingMessageRouter;
@@ -39,7 +37,6 @@ import org.springframework.scripting.ScriptSource;
  * @author Gary Russell
  */
 @EnableBinding(Sink.class)
-@Import({SpelExpressionConverterConfiguration.class})
 @EnableConfigurationProperties(RouterSinkProperties.class)
 public class RouterSinkConfiguration {
 

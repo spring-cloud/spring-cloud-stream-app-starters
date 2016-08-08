@@ -41,16 +41,20 @@ public class TaskPayloadProperties {
 	private String uri = "";
 
 	/**
-	 * Comma delimited key=value pairs to be used as properties for the task.
+	 * Comma delimited key=value pairs to be used as environmentProperties for the task.
 	 */
-	private String properties = "";
+	private String environmentProperties = "";
+
+	/**
+	 * Comma delimited key=value pairs to be used as deploymentProperties for the task.
+	 */
+	private String deploymentProperties = "";
 
 	public String getCommandLineArgs() {
 		return commandLineArgs;
 	}
 
 	public void setCommandLineArgs(String commandLineArgs) {
-		Assert.notNull("commandLineArgs must not be null");
 		this.commandLineArgs = commandLineArgs;
 	}
 
@@ -63,12 +67,20 @@ public class TaskPayloadProperties {
 		this.uri = uri;
 	}
 
-	public String getProperties() {
-		return properties;
+	public String getEnvironmentProperties() {
+		return environmentProperties;
 	}
 
-	public void setProperties(String properties) {
-		Assert.notNull("properties must not be null");
-		this.properties = properties;
+	public void setEnvironmentProperties(String environmentProperties) {
+		this.environmentProperties = environmentProperties;
 	}
+
+	public String getDeploymentProperties() {
+		return deploymentProperties;
+	}
+
+	public void setDeploymentProperties(String deploymentProperties) {
+		this.deploymentProperties = deploymentProperties;
+	}
+
 }
