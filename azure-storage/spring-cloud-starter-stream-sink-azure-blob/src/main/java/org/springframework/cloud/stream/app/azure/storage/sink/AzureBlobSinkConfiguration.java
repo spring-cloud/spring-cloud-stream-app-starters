@@ -119,10 +119,10 @@ public class AzureBlobSinkConfiguration {
     public void pushToAzureBlob(Message<?> message) {
         // Upload the payload to the blob
         if (this.properties.getAppendOnly()) {
-            ((CloudAppendBlob) blobService).appendText(message.getPayload());
+            ((CloudAppendBlob) blobService).appendText(message.getPayload().toString());
         }
         else {
-            ((CloudBlockBlob) blobService).uploadText(message.getPayload());
+            ((CloudBlockBlob) blobService).uploadText(message.getPayload().toString());
         }
     }
 
