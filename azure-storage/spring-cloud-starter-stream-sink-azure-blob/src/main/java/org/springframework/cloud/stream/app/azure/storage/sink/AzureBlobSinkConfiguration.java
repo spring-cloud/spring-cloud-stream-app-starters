@@ -17,6 +17,8 @@
 package org.springframework.cloud.stream.app.azure.storage.sink;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.security.InvalidKeyException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -55,61 +57,55 @@ public class AzureBlobSinkConfiguration {
     private CloudBlob blobService;
 
     @Autowired
-    public void setBlobService() {
+    public void setBlobService() throws StorageException, URISyntaxException, InvalidKeyException {
         // Define the connection-string with your values
         final String storageConnectionString =
             "DefaultEndpointsProtocol=" + this.properties.getDefaultEndpointsProtocol() +
             ";AccountName=" + this.properties.getAccountName() +
             ";AccountKey=" + this.properties.getAccountKey();
 
-        try {
-            // Setup the cloud storage account.
-            CloudStorageAccount account = CloudStorageAccount.parse(storageConnectionString);
+        // Setup the cloud storage account.
+        CloudStorageAccount account = CloudStorageAccount.parse(storageConnectionString);
 
-            //LOG.info("getBlobService() : using account {}", this.properties.getAccountName());
+        //LOG.info("getBlobService() : using account {}", this.properties.getAccountName());
 
-            // Create a blob service client
-            CloudBlobClient blobClient = account.createCloudBlobClient();
-            
-            // Get a reference to a container
-            // The container name must be lower case
-            CloudBlobContainer container = blobClient.getContainerReference(this.properties.getContainerName().toLowerCase());
+        // Create a blob service client
+        CloudBlobClient blobClient = account.createCloudBlobClient();
+        
+        // Get a reference to a container
+        // The container name must be lower case
+        CloudBlobContainer container = blobClient.getContainerReference(this.properties.getContainerName().toLowerCase());
 
-            //LOG.info("getBlobService() : using container {}", this.properties.getContainerName());
+        //LOG.info("getBlobService() : using container {}", this.properties.getContainerName());
 
-            if (this.properties.getAutoCreateContainer()) {
-                container.createIfNotExists();
-            }            
+        if (this.properties.getAutoCreateContainer()) {
+            container.createIfNotExists();
+        }            
 
-            // Make the container public
-            if (this.properties.getPublicPermission()) {
-                //LOG.info("getBlobService() : making container publicly accessible");
+        // Make the container public
+        if (this.properties.getPublicPermission()) {
+            //LOG.info("getBlobService() : making container publicly accessible");
 
-                // Create a permissions object
-                BlobContainerPermissions containerPermissions = new BlobContainerPermissions();
+            // Create a permissions object
+            BlobContainerPermissions containerPermissions = new BlobContainerPermissions();
 
-                // Include public access in the permissions object
-                containerPermissions.setPublicAccess(BlobContainerPublicAccessType.CONTAINER);
+            // Include public access in the permissions object
+            containerPermissions.setPublicAccess(BlobContainerPublicAccessType.CONTAINER);
 
-                // Set the permissions on the container
-                container.uploadPermissions(containerPermissions);
+            // Set the permissions on the container
+            container.uploadPermissions(containerPermissions);
+        }
+
+        //LOG.info("getBlobService() : using blob name {}", this.properties.getBlobName());
+        
+        if (this.properties.getAppendOnly()) {
+            this.blobService = container.getAppendBlobReference(this.properties.getBlobName());
+            if (this.properties.getOverwiteExistingAppend()) {
+                ((CloudAppendBlob) blobService).createOrReplace();
             }
-
-            //LOG.info("getBlobService() : using blob name {}", this.properties.getBlobName());
-            
-            if (this.properties.getAppendOnly()) {
-                this.blobService = container.getAppendBlobReference(this.properties.getBlobName());
-                if (this.properties.getOverwiteExistingAppend()) {
-                    ((CloudAppendBlob) blobService).createOrReplace();
-                }
-            }
-            else {
-                this.blobService = container.getBlockBlobReference(this.properties.getBlobName());
-            }
-        } catch (Exception e) {
-            // Log the stack trace.
-            //LOG.error("getBlobService() : {}", e.getMessage());
-            //throw e;
+        }
+        else {
+            this.blobService = container.getBlockBlobReference(this.properties.getBlobName());
         }
     }
 
