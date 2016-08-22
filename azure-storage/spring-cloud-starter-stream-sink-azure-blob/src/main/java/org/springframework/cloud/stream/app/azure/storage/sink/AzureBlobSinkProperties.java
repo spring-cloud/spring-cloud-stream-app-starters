@@ -79,24 +79,6 @@ public class AzureBlobSinkProperties {
      */
     private boolean overwriteExistingAppend = false;
 
-    @NotBlank
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @NotNull
-    public LoggingHandler.Level getLevel() {
-        return level;
-    }
-
-    public void setLevel(LoggingHandler.Level level) {
-        this.level = level;
-    }
-
     public String getDefaultEndpointsProtocol() {
         return defaultEndpointsProtocol;
     }
@@ -106,44 +88,44 @@ public class AzureBlobSinkProperties {
     }
 
     public String getAccountName() {
-        return accountName;
+        return account;
     }
 
     public void setAccountName(String n) {
-        this.accountName = n;
+        this.account = n;
     }
 
     public String getAccountKey() {
-        return accountKey;
+        return key;
     }
 
     public void setAccountKey(String k) {
-        this.accountKey = k;
+        this.key = k;
     }
 
     public String getContainerName() {
-        return containerName;
+        return container;
     }
 
     public void setContainerName(String c) {
-        this.containerName = c;
+        this.container = c;
     }
 
     public String getBlobName() {
-        return blobName;
+        return blob;
     }
 
     public void setBlobName(String b) {
-        this.blobName = b;
+        this.blob = b;
     }
 
     public boolean getAutoCreateContainer() {
-        return autoCreateContainer;
+        return createContainer;
     }
 
     // Automatically create the container
     public void setAutoCreateContainer(Boolean b) {
-        this.autoCreateContainer = b;
+        this.createContainer = b;
     }
 
     public boolean getPublicPermission() {
