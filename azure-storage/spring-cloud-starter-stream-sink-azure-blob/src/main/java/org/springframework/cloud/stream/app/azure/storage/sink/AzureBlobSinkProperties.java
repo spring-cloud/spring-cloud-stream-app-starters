@@ -30,19 +30,8 @@ import org.springframework.integration.handler.LoggingHandler;
  *
  * @author Kyle Dunn
  */
-@ConfigurationProperties("azure-blob-sink")
+@ConfigurationProperties("azure.blob")
 public class AzureBlobSinkProperties {
-
-    /**
-     * The name to use.
-     */
-    @Value("${spring.application.name:azure-blob.sink}")
-    private String name;
-
-    /**
-     * The level at which to log messages.
-     */
-    private LoggingHandler.Level level = INFO;
 
     /**
      * The default Azure endpoint protocol.
@@ -52,30 +41,30 @@ public class AzureBlobSinkProperties {
     /**
      * The Azure Storage Account name.
      */
-    private String accountName;
+    private String account;
 
     /**
      * The Azure Storage Account key.
      */
-    private String accountKey;
+    private String key;
 
     /**
      * The Azure Storage Container name.
      */
-    private String containerName;
+    private String container;
 
     /**
      * The Azure Storage Blob name.
      */
-    private String blobName;
-
-    /**
-     * Set container access policy to public.
-     */
-    private boolean autoCreateContainer = true;
+    private String blob;
 
     /**
      * Create a container if it doesn't already exist.
+     */
+    private boolean createContainer = true;
+
+    /**
+     * Set container access policy to public.
      */
     private boolean publicPermission = true;
     
