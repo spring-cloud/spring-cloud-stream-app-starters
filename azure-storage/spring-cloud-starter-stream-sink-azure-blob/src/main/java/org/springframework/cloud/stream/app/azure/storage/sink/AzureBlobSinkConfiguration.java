@@ -16,8 +16,7 @@
 
 package org.springframework.cloud.stream.app.azure.storage.sink;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -32,6 +31,7 @@ import org.springframework.messaging.MessagingException;
 
 // Include the following imports to use blob APIs.
 import com.microsoft.azure.storage.CloudStorageAccount;
+import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.blob.BlobContainerPermissions;
 import com.microsoft.azure.storage.blob.BlobContainerPublicAccessType;
 import com.microsoft.azure.storage.blob.CloudBlob;
@@ -48,8 +48,6 @@ import com.microsoft.azure.storage.blob.CloudBlockBlob;
 @EnableConfigurationProperties(AzureBlobSinkProperties.class)
 @SpringBootApplication
 public class AzureBlobSinkConfiguration {
-
-    protected static Logger LOG = LoggerFactory.getLogger(AzureBlobSinkConfiguration.class);
 
     @Autowired
     private AzureBlobSinkProperties properties;
@@ -68,7 +66,7 @@ public class AzureBlobSinkConfiguration {
             // Setup the cloud storage account.
             CloudStorageAccount account = CloudStorageAccount.parse(storageConnectionString);
 
-            LOG.info("getBlobService() : using account {}", this.properties.getAccountName());
+            //LOG.info("getBlobService() : using account {}", this.properties.getAccountName());
 
             // Create a blob service client
             CloudBlobClient blobClient = account.createCloudBlobClient();
@@ -77,7 +75,7 @@ public class AzureBlobSinkConfiguration {
             // The container name must be lower case
             CloudBlobContainer container = blobClient.getContainerReference(this.properties.getContainerName().toLowerCase());
 
-            LOG.info("getBlobService() : using container {}", this.properties.getContainerName());
+            //LOG.info("getBlobService() : using container {}", this.properties.getContainerName());
 
             if (this.properties.getAutoCreateContainer()) {
                 container.createIfNotExists();
@@ -85,7 +83,7 @@ public class AzureBlobSinkConfiguration {
 
             // Make the container public
             if (this.properties.getPublicPermission()) {
-                LOG.info("getBlobService() : making container publicly accessible");
+                //LOG.info("getBlobService() : making container publicly accessible");
 
                 // Create a permissions object
                 BlobContainerPermissions containerPermissions = new BlobContainerPermissions();
@@ -97,7 +95,7 @@ public class AzureBlobSinkConfiguration {
                 container.uploadPermissions(containerPermissions);
             }
 
-            LOG.info("getBlobService() : using blob name {}", this.properties.getBlobName());
+            //LOG.info("getBlobService() : using blob name {}", this.properties.getBlobName());
             
             if (this.properties.getAppendOnly()) {
                 this.blobService = container.getAppendBlobReference(this.properties.getBlobName());
@@ -110,13 +108,13 @@ public class AzureBlobSinkConfiguration {
             }
         } catch (Exception e) {
             // Log the stack trace.
-            LOG.error("getBlobService() : {}", e.getMessage());
+            //LOG.error("getBlobService() : {}", e.getMessage());
             //throw e;
         }
     }
 
     @ServiceActivator(inputChannel=Sink.INPUT)
-    public void pushToAzureBlob(Message<?> message) {
+    public void pushToAzureBlob(Message<?> message) throws StorageException, IOException {
         // Upload the payload to the blob
         if (this.properties.getAppendOnly()) {
             ((CloudAppendBlob) blobService).appendText(message.getPayload().toString());
