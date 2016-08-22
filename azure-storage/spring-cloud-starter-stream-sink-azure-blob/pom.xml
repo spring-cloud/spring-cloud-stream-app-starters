@@ -5,7 +5,7 @@
 
     <artifactId>spring-cloud-starter-stream-sink-wasb</artifactId>
     <name>spring-cloud-starter-stream-sink-wasb</name>
-    <description>Spring Cloud Stream Windows Azure Storage Blob (WASB) Sink</description>
+    <description>Spring Cloud Stream Windows Azure Blob Storage Sink</description>
 
     <parent>
         <groupId>org.springframework.cloud.stream.app</groupId>
@@ -16,7 +16,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-        <azure.version>4.3.0</azure.version>
     </properties>
 
     <dependencies>
@@ -44,27 +43,5 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Brixton.SR1</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
 
 </project>
