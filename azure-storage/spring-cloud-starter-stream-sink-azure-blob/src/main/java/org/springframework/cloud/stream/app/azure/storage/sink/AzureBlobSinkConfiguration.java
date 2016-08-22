@@ -85,7 +85,7 @@ public class AzureBlobSinkConfiguration {
 
             // Make the container public
             if (this.properties.getPublicPermission()) {
-                LOG.info("getBlobService() : making container publically accessible");
+                LOG.info("getBlobService() : making container publicly accessible");
 
                 // Create a permissions object
                 BlobContainerPermissions containerPermissions = new BlobContainerPermissions();
@@ -116,21 +116,14 @@ public class AzureBlobSinkConfiguration {
     }
 
     @ServiceActivator(inputChannel=Sink.INPUT)
-    public void pushToAzureBlob(Message<?> message) throws MessagingException {
-        try {
-            // Upload the payload to the blob
-            if (this.properties.getAppendOnly()) {
-                ((CloudAppendBlob) blobService).appendText(message.getPayload().toString() + "\n");
-            }
-            else {
-                ((CloudBlockBlob) blobService).uploadText(message.getPayload().toString());
-            }
-
-        } catch (Exception e) {
-            // Log the stack trace.
-            LOG.error("pushToAzureBlob() : {}", e.getMessage());
+    public void pushToAzureBlob(Message<?> message) {
+        // Upload the payload to the blob
+        if (this.properties.getAppendOnly()) {
+            ((CloudAppendBlob) blobService).appendText(message.getPayload());
         }
-
+        else {
+            ((CloudBlockBlob) blobService).uploadText(message.getPayload());
+        }
     }
 
     public static void main(String[] args) {
