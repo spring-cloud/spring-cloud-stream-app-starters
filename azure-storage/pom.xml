@@ -7,6 +7,10 @@
 	<artifactId>spring-cloud-stream-azure-storage-parent</artifactId>
 	<packaging>pom</packaging>
 
+    <properties>
+        <azure.version>4.3.0</azure.version>
+    </properties>
+
 	<parent>
 		<groupId>org.springframework.cloud.stream.app</groupId>
 		<artifactId>spring-cloud-stream-app-starters</artifactId>
@@ -14,7 +18,15 @@
 	</parent>
 
 	<modules>
-		<module>spring-cloud-starter-stream-sink-wasb</module>
+		<module>spring-cloud-starter-stream-sink-azure-blob</module>
 	</modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>azure-storage</artifactId>
+            <version>${azure.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>
