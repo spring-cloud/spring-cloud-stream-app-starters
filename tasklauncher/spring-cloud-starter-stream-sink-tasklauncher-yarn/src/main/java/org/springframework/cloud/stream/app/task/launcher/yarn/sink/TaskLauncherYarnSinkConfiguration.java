@@ -1,5 +1,6 @@
 /*
  * Copyright 2016 the original author or authors.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,19 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.cloud.stream.app.trigger;
+
+package org.springframework.cloud.stream.app.task.launcher.yarn.sink;
+
+import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.messaging.Sink;
+import org.springframework.cloud.task.launcher.annotation.EnableTaskLauncher;
 
 /**
- * @author Ilayaperumal Gopinathan
+ * Configuration class for the TaskLauncherSink.
+ *
+ * @author Janne Valkealahti
  */
-public class TriggerConstants {
-
-	public static final String TRIGGER_BEAN_NAME = "POLLER_TRIGGER";
-
-	public static final String DATE_FORMAT = "MM/dd/yy HH:mm:ss";
-
-	public static final String CRON_TRIGGER_OPTION = "trigger.cron";
-
-	public static final String DATE_TRIGGER_OPTION = "trigger.date";
-
+@EnableBinding(Sink.class)
+@EnableTaskLauncher
+public class TaskLauncherYarnSinkConfiguration {
 }

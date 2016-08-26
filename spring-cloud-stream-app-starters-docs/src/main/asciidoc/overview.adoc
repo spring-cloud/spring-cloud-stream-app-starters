@@ -57,7 +57,7 @@ Starters are available as Maven artifacts in the https://github.com/spring-proje
 [source,xml]
 ----
 <dependency>
-  <group>org.springframework.cloud.stream.app</group>
+  <groupId>org.springframework.cloud.stream.app</groupId>
   <artifactId>spring-cloud-starter-stream-sink-cassandra</artifactId>
   <version>1.0.0.BUILD-SNAPSHOT</version>
 </dependency>

@@ -15,6 +15,9 @@
 
 package org.springframework.cloud.stream.app.trigger;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.NoneNestedConditions;
@@ -33,12 +36,14 @@ import org.springframework.scheduling.support.PeriodicTrigger;
  */
 @Configuration
 public class TriggerConfiguration {
+	private static final Log logger = LogFactory.getLog(TriggerConfiguration.class);
 
 	@Autowired
 	TriggerProperties triggerProperties;
 
 	@Bean(name = { "defaultPoller", PollerMetadata.DEFAULT_POLLER })
 	public PollerMetadata defaultPoller(Trigger trigger) {
+		logger.info("Trigger type: " + trigger);
 		PollerMetadata pollerMetadata = new PollerMetadata();
 		pollerMetadata.setTrigger(trigger);
 		// the default is 1 since a source might return

@@ -31,8 +31,8 @@ include::{app-starters-root}/testing/spring-cloud-starter-stream-source-mongodb/
 [[spring-cloud-stream-modules-rabbit-source]]
 include::{app-starters-root}/rabbit/spring-cloud-starter-stream-source-rabbit/README.adoc[tags=ref-doc]
 
-[[spring-cloud-stream-modules-s3-source]]
-include::{app-starters-root}/s3/spring-cloud-starter-stream-source-s3/README.adoc[tags=ref-doc]
+[[spring-cloud-stream-modules-aws-s3-source]]
+include::{app-starters-root}/aws-s3/spring-cloud-starter-stream-source-s3/README.adoc[tags=ref-doc]
 
 [[spring-cloud-stream-modules-sftp-source]]
 include::{app-starters-root}/sftp/spring-cloud-starter-stream-source-sftp/README.adoc[tags=ref-doc]
