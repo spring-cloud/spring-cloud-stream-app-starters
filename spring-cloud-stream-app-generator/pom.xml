@@ -11,6 +11,11 @@
 	<packaging>pom</packaging>
 	<name>spring-cloud-stream-app-generator</name>
 
+	<properties>
+		<bomsWithHigherPrecedence/>
+		<bootVersion>1.3.5.RELEASE</bootVersion>
+	</properties>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -19,10 +24,11 @@
 				<version>${scs-app-maven-plugin.version}</version>
 				<configuration>
 					<javaVersion>1.7</javaVersion>
-					<bootVersion>1.3.5.RELEASE</bootVersion>
+					<bootVersion>${bootVersion}</bootVersion>
 					<generatedProjectHome>${session.executionRootDirectory}/apps</generatedProjectHome>
 					<generatedProjectVersion>${project.version}</generatedProjectVersion>
 					<applicationType>stream</applicationType>
+					<bomsWithHigherPrecedence>${bomsWithHigherPrecedence}</bomsWithHigherPrecedence>
 					<bom>
 						<name>scs-bom</name>
 						<groupId>org.springframework.cloud.stream.app</groupId>
