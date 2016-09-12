@@ -17,7 +17,10 @@
 
 package org.springframework.cloud.stream.app.yahoo.quotes.source;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,6 +32,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
  * @author Vinicius Carvalho
@@ -43,9 +47,13 @@ public class YahooQuotesClientImpl implements YahooQuotesClient {
 
 	private ObjectMapper mapper = new ObjectMapper();
 
+	final DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
+
 	public YahooQuotesClientImpl(RestTemplate client) {
 		this.client = client;
 	}
+
+
 
 	@Override
 	public List<Map<String, Object>> fetchQuotes(List<String> symbols, String filter) {
@@ -63,15 +71,18 @@ public class YahooQuotesClientImpl implements YahooQuotesClient {
 	private List<Map<String, Object>> processResponse(ResponseEntity<JsonNode> response) {
 		if (!response.getStatusCode().is2xxSuccessful())
 			return Collections.emptyList();
+		String timestamp = df.format(new Date());
 		JsonNode node = response.getBody();
 		JsonNode resultsNode = node.get("query").get("results").get("quote");
 		List<Map<String, Object>> results = new LinkedList<>();
 		if (resultsNode.isArray()) {
 			for (JsonNode child : resultsNode) {
+				((ObjectNode)child).put("timestamp",timestamp);
 				results.add(mapper.convertValue(child, Map.class));
 			}
 		}
 		else {
+			((ObjectNode)resultsNode).put("timestamp",timestamp);
 			results.add(mapper.convertValue(resultsNode, Map.class));
 		}
 		return results;
