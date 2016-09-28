@@ -155,6 +155,25 @@
 						<task-launcher-local-sink />
 						<task-launcher-yarn-sink />
 						<tasklaunchrequest-transform-processor />
+						<task-launcher-cloudfoundry-sink>
+							<forceDependencies>
+								<dependency>
+									<groupId>io.projectreactor</groupId>
+									<artifactId>reactor-core</artifactId>
+									<version>3.0.2.RELEASE</version>
+								</dependency>
+								<dependency>
+									<groupId>io.projectreactor.ipc</groupId>
+									<artifactId>reactor-netty</artifactId>
+									<version>0.5.1.RELEASE</version>
+								</dependency>
+								<dependency>
+									<groupId>io.netty</groupId>
+									<artifactId>netty-all</artifactId>
+									<version>4.1.0.Final</version>
+								</dependency>
+							</forceDependencies>
+						</task-launcher-cloudfoundry-sink>
 						<tcp-sink>
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.ip.IpSinkTestConfiguration.class</extraTestConfigClass>
 						</tcp-sink>

@@ -1,0 +1,45 @@
+//tag::ref-doc[]
+= TaskLauncher Cloud Foundry Sink
+
+The TaskLauncher-CloudFoundry sink consumes a `TaskLaunchRequest` message, deploys
+and launches a task using the Cloud Foundry Spring Cloud Deployer.
+
+Any message received by the sink, that does not contain a `TaskLaunchRequest`
+will log an error.
+
+== Using the TaskLauncher
+The task launcher will use the --uri from the TaskLaunchRequest to obtain the
+task artifact to deploy, as well as the properties and arguments to execute the
+task.
+An example of this using Spring Cloud Data Flow would look like this:
+
+*Create The Stream*
+
+`stream create w7 --definition "http --port=9000 | taskLaunchRequestTransform
+--uri=<uriToJar>
+--deploymentProperties=spring.cloud.deployer.cloudfoundry.services=mysql
+| cftask"`
+
+*Deploy The Stream*
+
+`stream deploy w7 --properties "app.cftask.spring_cloud_deployer_cloudfoundry_url=https://api.local.pcfdev.io,
+app.cftask.spring_cloud_deployer_cloudfoundry_org=<yourOrg>,
+app.cftask.spring_cloud_deployer_cloudfoundry_space=<yourSpace>,
+app.cftask.spring_cloud_deployer_cloudfoundry_domain=local.pcfdev.io,
+app.cftask.spring_cloud_deployer_cloudfoundry_username=admin,
+app.cftask.spring_cloud_deployer_cloudfoundry_password=admin,
+app.cftask.spring_cloud_deployer_cloudfoundry_skipSslValidation=true,
+app.cftask.spring_cloud_deployer_cloudfoundry_taskTimeout=360"`
+
+This example deploys to pcfdev using a mysql database service with the
+service name of `mysql`.  Also we can see that there is a taskTimeout of 360
+seconds for staging the task.
+
+
+//end::ref-doc[]
+
+== Build
+
+```
+$ mvn clean package
+```
