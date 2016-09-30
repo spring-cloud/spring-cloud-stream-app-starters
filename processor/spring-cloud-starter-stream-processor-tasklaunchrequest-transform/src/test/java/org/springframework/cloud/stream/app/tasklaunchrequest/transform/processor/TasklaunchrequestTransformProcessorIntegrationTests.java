@@ -141,7 +141,7 @@ public abstract class TasklaunchrequestTransformProcessorIntegrationTests {
 	/**
 	 * Verify deploymentProperties are added to the TaskLaunchRequest.
 	 */
-	@IntegrationTest({"deploymentProperties=app.wow.hello=world,app.wow.foo=bar,app.wow.test=a=b,c=d",
+	@IntegrationTest({"deploymentProperties=app.wow.hello=world,app.wow.foo=bar,app.wow.test=a=b,c=d,e=\"baz=bbb,nnn=mmm\"",
 			"uri=" + DEFAULT_URI})
 	public static class UsingDeploymentPropertiesIntegrationTests
 			extends TasklaunchrequestTransformProcessorIntegrationTests {
@@ -154,7 +154,10 @@ public abstract class TasklaunchrequestTransformProcessorIntegrationTests {
 			Map<String, String> deploymentProperties = new HashMap<>(2);
 			deploymentProperties.put("app.wow.hello", "world");
 			deploymentProperties.put("app.wow.foo", "bar");
-			deploymentProperties.put("app.wow.test", "a=b,c=d");
+			deploymentProperties.put("app.wow.test", "a=b");
+			deploymentProperties.put("c", "d");
+			deploymentProperties.put("e", "\"baz=bbb,nnn=mmm\"");
+
 			assertThat(collector.forChannel(channels.output()),
 					receivesPayloadThat(is(getDefaultRequest(
 							environmentVariables, deploymentProperties, null))));

@@ -47,7 +47,7 @@ public class TasklaunchrequestTransformProcessorConfiguration {
 	/**
 	 * Pattern used for parsing a String of comma-delimited key=value pairs.
 	 */
-	private static final Pattern DEPLOYMENT_PROPERTIES_PATTERN = Pattern.compile(",\\s*app\\.[^\\.]+\\.[^=]+=");
+	private static final Pattern DEPLOYMENT_PROPERTIES_PATTERN = Pattern.compile(",(?=([^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)");
 
 	/**
 	 * Pattern used for parsing a String of command-line arguments.
@@ -101,6 +101,7 @@ public class TasklaunchrequestTransformProcessorConfiguration {
 	 */
 	private Map<String, String> parse(String s) {
 		Map<String, String> deploymentProperties = new HashMap<String, String>();
+
 		if (!StringUtils.isEmpty(s)) {
 			Matcher matcher = DEPLOYMENT_PROPERTIES_PATTERN.matcher(s);
 			int start = 0;
