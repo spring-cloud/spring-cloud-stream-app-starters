@@ -12,8 +12,8 @@ The **$$gemfire$$** $$source$$ supports the following configuration properties:
 
 //tag::configuration-properties[]
 $$cacheEventExpression$$:: $$an optional SpEL expression referencing the event.$$ *($$String$$, default: `$$newValue$$`)*
-$$connect-type$$:: $$an optional parameter specifying either to directly connect to a server or use a locator service.$$ *($$String$$, default: `$$locator$$`)*
-$$host-addresses$$:: $$host name of the cache server or locator. May be a comma delimited list$$ *($$String$$, default: `$$localhost$$`)*
+$$connect-type$$:: $$Specifies connection type: 'server' or 'locator'.$$ *($$ConnectType$$, default: `$$<none>$$`, possible values: `locator`,`server`)*
+$$host-addresses$$:: $$Specifies one or more Gemfire locator or server addresses formatted as [host]:[port].$$ *($$InetSocketAddress[]$$, default: `$$<none>$$`)*
 $$region-name$$:: $$the name of the region for which events are to be monitored.$$ *($$String$$, default: `$$<none>$$`, required)*
 $$subscription-enabled$$:: $$Whether to establish a server to client subscription.$$ *($$Boolean$$, default: `$$true$$`)*
 //end::configuration-properties[]
@@ -22,5 +22,5 @@ $$subscription-enabled$$:: $$Whether to establish a server to client subscriptio
 == Build
 
 ```
-$> mvn package
+$> mvn clean package
 ```
