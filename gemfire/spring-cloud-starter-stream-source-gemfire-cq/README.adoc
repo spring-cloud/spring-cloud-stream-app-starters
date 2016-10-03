@@ -1,0 +1,25 @@
+//tag::ref-doc[]
+= Gemfire-CQ Source
+
+Continuous query allows client applications to create a GemFire query using Object Query Language(OQL) and
+register a CQ listener which subscribes to the query and is notified every time the query’s result set changes.
+The gemfire-cq source registers a CQ which will post CQEvent messages to the stream.
+
+== Options
+
+The **$$gemfire-cq$$** $$source$$ supports the following configuration properties:
+
+//tag::configuration-properties[]
+$$cq-event-expression$$:: $$an optional SpEL expression referencing the event.$$ *($$String$$, default: `$$newValue$$`)*
+$$connect-type$$:: $$an optional parameter specifying either to directly connect to a server or use a locator service.$$ *($$String$$, default: `$$locator$$`)*
+$$host-addresses$$:: $$host name of the cache server or locator. May be a comma delimited list$$ *($$String$$, default: `$$localhost$$`)*
+$$query$$:: $$OQL query to register on the server.$$ *($$String$$, default: `$$<none>$$`, required)*
+$$subscription-enabled$$:: $$Whether to establish a server to client subscription.$$ *($$Boolean$$, default: `$$true$$`)*
+//end::configuration-properties[]
+
+//end::ref-doc[]
+== Build
+
+```
+$> mvn package
+```
