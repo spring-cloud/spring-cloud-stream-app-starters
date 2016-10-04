@@ -1,0 +1,45 @@
+//tag::ref-doc[]
+= SFTP Sink
+
+SFTP sink is a simple option to push files to an SFTP server from incoming messages.
+
+It uses an `sftp-outbound-adapter`, therefore incoming messages can be either a `java.io.File` object, a `String` (content of the file)
+or an array of `bytes` (file content as well).
+
+To use this sink, you need a username and a password to login.
+
+NOTE: By default Spring Integration will use `o.s.i.file.DefaultFileNameGenerator` if none is specified. `DefaultFileNameGenerator` will determine the file name
+based on the value of the `file_name` header (if it exists) in the `MessageHeaders`, or if the payload of the `Message` is already a `java.io.File`, then it will
+use the original name of that file.
+
+== Options
+
+The **$$sftp$$** $$sink$$ has the following options:
+
+//tag::configuration-properties[]
+$$sftp.auto-create-dir$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
+$$sftp.factory.allow-unknown-keys$$:: $$True to allow an unknown or changed key.$$ *($$Boolean$$, default: `$$false$$`)*
+$$sftp.factory.cache-sessions$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
+$$sftp.factory.host$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$sftp.factory.known-hosts-expression$$:: $$A SpEL expression resolving to the location of the known hosts file.$$ *($$String$$, default: `$$<none>$$`)*
+$$sftp.factory.pass-phrase$$:: $$Passphrase for user's private key.$$ *($$String$$, default: `$$<empty string>$$`)*
+$$sftp.factory.password$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$sftp.factory.port$$:: $$The port of the server.$$ *($$Integer$$, default: `$$22$$`)*
+$$sftp.factory.private-key$$:: $$Resource location of user's private key.$$ *($$String$$, default: `$$<empty string>$$`)*
+$$sftp.factory.username$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$sftp.filename-expression$$:: $$<documentation missing>$$ *($$Expression$$, default: `$$<none>$$`)*
+$$sftp.mode$$:: $$<documentation missing>$$ *($$FileExistsMode$$, default: `$$<none>$$`, possible values: `APPEND`,`FAIL`,`IGNORE`,`REPLACE`)*
+$$sftp.remote-dir$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$sftp.remote-file-separator$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$sftp.temporary-remote-dir$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$sftp.tmp-file-suffix$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$sftp.use-temporary-filename$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
+//end::configuration-properties[]
+
+//end::ref-doc[]
+
+== Build
+
+```
+$ mvn clean package
+```
