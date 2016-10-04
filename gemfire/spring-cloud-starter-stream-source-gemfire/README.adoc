@@ -1,0 +1,26 @@
+//tag::ref-doc[]
+= Gemfire Source
+
+This source allows you to subscribe to any creates or updates to a Gemfire region.  The application configures a client cache and client region, along with the necessary
+subscriptions enabled. By default the payload contains the updated entry value,
+but may be controlled by passing in a SpEL expression that uses the EntryEvent as the
+evaluation context.
+
+== Options
+
+The **$$gemfire$$** $$source$$ supports the following configuration properties:
+
+//tag::configuration-properties[]
+$$cacheEventExpression$$:: $$an optional SpEL expression referencing the event.$$ *($$String$$, default: `$$newValue$$`)*
+$$connect-type$$:: $$Specifies connection type: 'server' or 'locator'.$$ *($$ConnectType$$, default: `$$<none>$$`, possible values: `locator`,`server`)*
+$$host-addresses$$:: $$Specifies one or more Gemfire locator or server addresses formatted as [host]:[port].$$ *($$InetSocketAddress[]$$, default: `$$<none>$$`)*
+$$region-name$$:: $$the name of the region for which events are to be monitored.$$ *($$String$$, default: `$$<none>$$`, required)*
+$$subscription-enabled$$:: $$Whether to establish a server to client subscription.$$ *($$Boolean$$, default: `$$true$$`)*
+//end::configuration-properties[]
+
+//end::ref-doc[]
+== Build
+
+```
+$> mvn clean package
+```
