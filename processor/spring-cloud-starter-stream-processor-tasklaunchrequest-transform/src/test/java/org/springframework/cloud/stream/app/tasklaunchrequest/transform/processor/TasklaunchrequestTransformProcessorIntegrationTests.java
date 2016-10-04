@@ -76,9 +76,9 @@ public abstract class TasklaunchrequestTransformProcessorIntegrationTests {
 			channels.input().send(new GenericMessage<Object>("hello"));
 			channels.input().send(new GenericMessage<Object>("hello world"));
 			channels.input().send(new GenericMessage<Object>("hi!"));
-			assertThat(collector.forChannel(channels.output()), receivesPayloadThat(is(getDefaultRequest("hello"))));
-			assertThat(collector.forChannel(channels.output()), receivesPayloadThat(is(getDefaultRequest("hello world"))));
-			assertThat(collector.forChannel(channels.output()), receivesPayloadThat(is(getDefaultRequest("hi!"))));
+			assertThat(collector.forChannel(channels.output()), receivesPayloadThat(is(getDefaultRequest())));
+			assertThat(collector.forChannel(channels.output()), receivesPayloadThat(is(getDefaultRequest())));
+			assertThat(collector.forChannel(channels.output()), receivesPayloadThat(is(getDefaultRequest())));
 		}
 	}
 
@@ -104,11 +104,8 @@ public abstract class TasklaunchrequestTransformProcessorIntegrationTests {
 		@Test()
 		public void test() throws InterruptedException{
 			channels.input().send(new GenericMessage<Object>(""));
-			Map<String, String> environmentVariables = new HashMap<>(3);
-			environmentVariables.put("payload", "");
 			assertThat(collector.forChannel(channels.output()),
-					receivesPayloadThat(is(getDefaultRequest(
-							environmentVariables, null, null))));
+					receivesPayloadThat(is(getDefaultRequest())));
 		}
 	}
 
@@ -126,8 +123,7 @@ public abstract class TasklaunchrequestTransformProcessorIntegrationTests {
 		@Test
 		public void test() throws InterruptedException {
 			channels.input().send(new GenericMessage<Object>("hello"));
-			Map<String, String> environmentVariables = new HashMap<>(3);
-			environmentVariables.put("payload", "hello");
+			Map<String, String> environmentVariables = new HashMap<>(4);
 			environmentVariables.put("spring_datasource_url", "myUrl");
 			environmentVariables.put("spring_datasource_driverClassName", "myClassName");
 			environmentVariables.put("spring_datasource_username", "myUserName");
@@ -150,7 +146,6 @@ public abstract class TasklaunchrequestTransformProcessorIntegrationTests {
 		public void test() throws InterruptedException {
 			channels.input().send(new GenericMessage<Object>("hello"));
 			Map<String, String> environmentVariables = new HashMap<>(3);
-			environmentVariables.put("payload", "hello");
 			Map<String, String> deploymentProperties = new HashMap<>(2);
 			deploymentProperties.put("app.wow.hello", "world");
 			deploymentProperties.put("app.wow.foo", "bar");
@@ -176,7 +171,6 @@ public abstract class TasklaunchrequestTransformProcessorIntegrationTests {
 		public void test() throws InterruptedException {
 			channels.input().send(new GenericMessage<Object>("hello"));
 			Map<String, String> environmentVariables = new HashMap<>(1);
-			environmentVariables.put("payload", "hello");
 			List<String> commandLineArgs = new ArrayList<>(2);
 			commandLineArgs.add("--hello=world");
 			commandLineArgs.add("--foo=bar");
@@ -186,9 +180,8 @@ public abstract class TasklaunchrequestTransformProcessorIntegrationTests {
 		}
 	}
 
-	protected TaskLaunchRequest getDefaultRequest(String payload) {
+	protected TaskLaunchRequest getDefaultRequest() {
 		Map<String, String> environmentVariables = new HashMap<>(1);
-		environmentVariables.put("payload", payload);
 		return getDefaultRequest(environmentVariables, null, null);
 	}
 

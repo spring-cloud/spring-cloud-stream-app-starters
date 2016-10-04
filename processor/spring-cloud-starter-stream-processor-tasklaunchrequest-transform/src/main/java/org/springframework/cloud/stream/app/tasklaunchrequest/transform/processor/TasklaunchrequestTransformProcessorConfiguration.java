@@ -82,8 +82,6 @@ public class TasklaunchrequestTransformProcessorConfiguration {
 			commandLineArgs = parseParams(processorProperties.getCommandLineArguments());
 		}
 
-		properties.put("payload", message);
-
 		TaskLaunchRequest request = new TaskLaunchRequest(
 				processorProperties.getUri(), commandLineArgs, properties,
 				deploymentProperties);

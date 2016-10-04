@@ -1,12 +1,13 @@
 //tag::ref-doc[]
-= Task Processor
+= Task Launch Request Transform
+
 Use the task launch request transform in a stream to create a TaskLaunchRequest
 to be passed to the output channel.  The TaskLaunchRequest is used by a
 TaskLauncher to launch tasks on the platform.
 
 == Options
 
-The **$$filter$$** $$processor$$ has the following options:
+The **$$tasklaunchrequest$$** $$processor$$ has the following options:
 
 //tag::configuration-properties[]
 $$command-line-arguments$$:: $$Space delimited list of commandLineArguments to be applied to the
