@@ -8,12 +8,18 @@ Any message received by the sink, that does not contain a `TaskLaunchRequest`
 will log an error.
 
 == Using the TaskLauncher
-The task launcher will use the --uri from the TaskLaunchRequest to obtain the
+The task launcher will use the `--uri` from the TaskLaunchRequest to obtain the
 task artifact to deploy, as well as the properties and arguments to execute the
 task.
-An example of this using Spring Cloud Data Flow would look like this:
+An example of this using Spring Cloud Data Flow would be to create a
+stream where a
+link:https://github.com/spring-cloud/spring-cloud-stream-app-starters/tree/master/http[http]
+source would send its messages to the
+link:https://github.com/spring-cloud/spring-cloud-stream-app-starters/tree/master/processor/spring-cloud-starter-stream-processor-tasklaunchrequest-transform[taskLaunchRequestTransform]
+processor. These messages are then translated to a TaskLaunchRequest and
+sent to the cftask (sink which is a TaskLauncher .  For example:
 
-*Create The Stream*
+*Create A Stream*
 
 `stream create w7 --definition "http --port=9000 | taskLaunchRequestTransform
 --uri=<uriToJar>
