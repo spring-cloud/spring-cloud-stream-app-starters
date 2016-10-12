@@ -20,6 +20,9 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -54,7 +57,7 @@ public class AzureBlobSinkConfiguration {
     @Autowired
     private AzureBlobSinkProperties properties;
 
-    private static Logger logger = LoggerFactory.getLogger(AzureBlobSinkConfiguration.class);
+    private static Log logger = LogFactory.getLog(AzureBlobSinkConfiguration.class);
 
     private CloudBlob blobService;
 
