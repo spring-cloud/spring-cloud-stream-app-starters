@@ -54,6 +54,8 @@ public class AzureBlobSinkConfiguration {
     @Autowired
     private AzureBlobSinkProperties properties;
 
+    private static Logger logger = LoggerFactory.getLogger(AzureBlobSinkConfiguration.class);
+
     private CloudBlob blobService;
 
     @Autowired
@@ -67,7 +69,7 @@ public class AzureBlobSinkConfiguration {
         // Setup the cloud storage account.
         CloudStorageAccount account = CloudStorageAccount.parse(storageConnectionString);
 
-        //LOG.info("getBlobService() : using account {}", this.properties.getAccountName());
+        logger.info("getBlobService() : using account {}", this.properties.getAccountName());
 
         // Create a blob service client
         CloudBlobClient blobClient = account.createCloudBlobClient();
@@ -76,7 +78,7 @@ public class AzureBlobSinkConfiguration {
         // The container name must be lower case
         CloudBlobContainer container = blobClient.getContainerReference(this.properties.getContainerName().toLowerCase());
 
-        //LOG.info("getBlobService() : using container {}", this.properties.getContainerName());
+        logger.info("getBlobService() : using container {}", this.properties.getContainerName());
 
         if (this.properties.getAutoCreateContainer()) {
             container.createIfNotExists();
@@ -84,7 +86,7 @@ public class AzureBlobSinkConfiguration {
 
         // Make the container public
         if (this.properties.getPublicPermission()) {
-            //LOG.info("getBlobService() : making container publicly accessible");
+            logger.info("getBlobService() : making container publicly accessible");
 
             // Create a permissions object
             BlobContainerPermissions containerPermissions = new BlobContainerPermissions();
@@ -96,7 +98,7 @@ public class AzureBlobSinkConfiguration {
             container.uploadPermissions(containerPermissions);
         }
 
-        //LOG.info("getBlobService() : using blob name {}", this.properties.getBlobName());
+        logger.info("getBlobService() : using blob name {}", this.properties.getBlobName());
         
         if (this.properties.getAppendOnly()) {
             this.blobService = container.getAppendBlobReference(this.properties.getBlobName());
