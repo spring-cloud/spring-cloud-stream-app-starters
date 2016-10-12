@@ -72,7 +72,7 @@ public class AzureBlobSinkConfiguration {
         // Setup the cloud storage account.
         CloudStorageAccount account = CloudStorageAccount.parse(storageConnectionString);
 
-        logger.info("getBlobService() : using account {}", this.properties.getAccountName());
+        logger.info("getBlobService() : using account " + this.properties.getAccountName());
 
         // Create a blob service client
         CloudBlobClient blobClient = account.createCloudBlobClient();
@@ -81,7 +81,7 @@ public class AzureBlobSinkConfiguration {
         // The container name must be lower case
         CloudBlobContainer container = blobClient.getContainerReference(this.properties.getContainerName().toLowerCase());
 
-        logger.info("getBlobService() : using container {}", this.properties.getContainerName());
+        logger.info("getBlobService() : using container " + this.properties.getContainerName());
 
         if (this.properties.getAutoCreateContainer()) {
             container.createIfNotExists();
@@ -101,7 +101,7 @@ public class AzureBlobSinkConfiguration {
             container.uploadPermissions(containerPermissions);
         }
 
-        logger.info("getBlobService() : using blob name {}", this.properties.getBlobName());
+        logger.info("getBlobService() : using blob name " + this.properties.getBlobName());
         
         if (this.properties.getAppendOnly()) {
             this.blobService = container.getAppendBlobReference(this.properties.getBlobName());
