@@ -17,25 +17,16 @@ link:https://github.com/spring-cloud/spring-cloud-stream-app-starters/tree/maste
 source would send its messages to the
 link:https://github.com/spring-cloud/spring-cloud-stream-app-starters/tree/master/processor/spring-cloud-starter-stream-processor-tasklaunchrequest-transform[taskLaunchRequestTransform]
 processor. These messages are then translated to a TaskLaunchRequest and
-sent to the cftask (sink which is a TaskLauncher .  For example:
+sent to the cftask (sink which is a TaskLauncher.  For example:
 
 *Create A Stream*
 
 `stream create w7 --definition "http --port=9000 | taskLaunchRequestTransform
---uri=<uriToJar>
---deploymentProperties=spring.cloud.deployer.cloudfoundry.services=mysql
-| cftask"`
+--uri=<uriToJar> | cftask"`
 
 *Deploy The Stream*
 
-`stream deploy w7 --properties "app.cftask.spring_cloud_deployer_cloudfoundry_url=https://api.local.pcfdev.io,
-app.cftask.spring_cloud_deployer_cloudfoundry_org=<yourOrg>,
-app.cftask.spring_cloud_deployer_cloudfoundry_space=<yourSpace>,
-app.cftask.spring_cloud_deployer_cloudfoundry_domain=local.pcfdev.io,
-app.cftask.spring_cloud_deployer_cloudfoundry_username=admin,
-app.cftask.spring_cloud_deployer_cloudfoundry_password=admin,
-app.cftask.spring_cloud_deployer_cloudfoundry_skipSslValidation=true,
-app.cftask.spring_cloud_deployer_cloudfoundry_taskTimeout=360"`
+`stream deploy w7 --properties "app.cftask.deployer.url=https://api.local.pcfdev.io, app.cftask.deployer.org=user-dataflow, app.cftask.deployer.space=development, app.cftask.deployer.domain=local.pcfdev.io, app.cftask.deployer.username=admin, app.cftask.deployer.password=admin, app.cftask.deployer.skipSslValidation=true, app.cftask.deployer.services=mysql, app.cftask.deployer.taskTimeout=300"`
 
 This example deploys to pcfdev using a mysql database service with the
 service name of `mysql`.  Also we can see that there is a taskTimeout of 360

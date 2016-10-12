@@ -16,9 +16,13 @@
 
 package org.springframework.cloud.stream.app.task.launcher.cloudfoundry.sink;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.deployer.spi.cloudfoundry.CloudFoundryConnectionProperties;
+import org.springframework.cloud.deployer.spi.cloudfoundry.CloudFoundryDeploymentProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.cloud.task.launcher.annotation.EnableTaskLauncher;
+import org.springframework.context.annotation.Bean;
 
 /**
  * Configuration class for the TaskLauncherSink.
@@ -28,4 +32,16 @@ import org.springframework.cloud.task.launcher.annotation.EnableTaskLauncher;
 @EnableBinding(Sink.class)
 @EnableTaskLauncher
 public class TaskLauncherCloudfoundrySinkConfiguration {
+
+	@Bean(name = "taskDeploymentProperties")
+	@ConfigurationProperties(prefix = "deployer")
+	public CloudFoundryDeploymentProperties taskDeploymentProperties() {
+		return new CloudFoundryDeploymentProperties();
+	}
+
+	@Bean
+	@ConfigurationProperties(prefix = "deployer")
+	public CloudFoundryConnectionProperties cloudFoundryConnectionProperties() {
+		return new CloudFoundryConnectionProperties();
+	}
 }
