@@ -33,12 +33,28 @@ import org.springframework.context.annotation.Bean;
 @EnableTaskLauncher
 public class TaskLauncherCloudfoundrySinkConfiguration {
 
+	/**
+	 * Sets the prefix for the taskDeploymentProperties to "deployer"
+	 * instead of the full "spring.cloud.deployer.cloudfoundry" prefix.  This
+	 * was added to reduce the size of the prefix as well as shield users from
+	 * downstream changes to the prefixes in the CF Deployer.
+	 *
+	 * @return Instance of the CloudFoundryDeploymentProperties.
+	 */
 	@Bean(name = "taskDeploymentProperties")
 	@ConfigurationProperties(prefix = "deployer")
 	public CloudFoundryDeploymentProperties taskDeploymentProperties() {
 		return new CloudFoundryDeploymentProperties();
 	}
 
+	/**
+	 * Sets the prefix for the CloudFoundryConnectionProperties to "deployer"
+	 * instead of the full "spring.cloud.deployer.cloudfoundry" prefix.  This
+	 * was added to reduce the size of the prefix as well as shield users from
+	 * downstream changes to the prefixes in the CF Deployer.
+	 *
+	 * @return Instance of the CloudFoundryConnectionProperties.
+	 */
 	@Bean
 	@ConfigurationProperties(prefix = "deployer")
 	public CloudFoundryConnectionProperties cloudFoundryConnectionProperties() {
