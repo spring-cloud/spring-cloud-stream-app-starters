@@ -36,8 +36,8 @@ public class TaskLauncherCloudfoundrySinkConfiguration {
 	/**
 	 * Sets the prefix for the taskDeploymentProperties to "deployer"
 	 * instead of the full "spring.cloud.deployer.cloudfoundry" prefix.  This
-	 * was added to reduce the size of the prefix as well as shield users from
-	 * downstream changes to the prefixes in the CF Deployer.
+	 * also prevents a conflict with Spring Cloud Data Flow's usage of
+	 * the deployer prefix.
 	 *
 	 * @return Instance of the CloudFoundryDeploymentProperties.
 	 */
@@ -50,8 +50,8 @@ public class TaskLauncherCloudfoundrySinkConfiguration {
 	/**
 	 * Sets the prefix for the CloudFoundryConnectionProperties to "deployer"
 	 * instead of the full "spring.cloud.deployer.cloudfoundry" prefix.  This
-	 * was added to reduce the size of the prefix as well as shield users from
-	 * downstream changes to the prefixes in the CF Deployer.
+	 * also prevents a conflict with Spring Cloud Data Flow's usage of
+	 * the deployer prefix.
 	 *
 	 * @return Instance of the CloudFoundryConnectionProperties.
 	 */

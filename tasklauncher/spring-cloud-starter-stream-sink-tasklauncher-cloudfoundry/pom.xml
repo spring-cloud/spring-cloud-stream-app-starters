@@ -5,7 +5,8 @@
 	<parent>
 		<groupId>org.springframework.cloud.stream.app</groupId>
 		<artifactId>spring-cloud-stream-tasklauncher-parent</artifactId>
-		<version>1.0.3.BUILD-SNAPSHOT</version>
+		<version>1.1.0.BUILD-SNAPSHOT</version>
+		<relativePath>../starter-parent</relativePath>
 	</parent>
 
 	<artifactId>spring-cloud-starter-stream-sink-task-launcher-cloudfoundry</artifactId>

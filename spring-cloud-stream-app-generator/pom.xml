@@ -16,7 +16,7 @@
 		<bootVersion>1.3.5.RELEASE</bootVersion>
 		<io-projectreactor-core.version>3.0.2.RELEASE</io-projectreactor-core.version>
 		<io-projectreactor-ipc.version>0.5.1.RELEASE</io-projectreactor-ipc.version>
-		<io-netty-all.version>4.1.0.FINAL</io-netty-all.version>
+		<io-netty-all.version>4.1.5.Final</io-netty-all.version>
 	</properties>
 
 	<build>

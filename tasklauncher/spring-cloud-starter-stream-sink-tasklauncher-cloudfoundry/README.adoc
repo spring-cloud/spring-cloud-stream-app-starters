@@ -3,15 +3,35 @@
 
 The TaskLauncher-CloudFoundry sink consumes a `TaskLaunchRequest` message, then
 deploys and launches a task using the Cloud Foundry Spring Cloud Deployer.
+With that being said a single TaskLauncher-CloudFoundry can launch different
+tasks based on the artifact that is specified in the `TaskLaunchRequest`.
+For example: using Spring Cloud Data Flow you could have a
+TaskLauncher-CloudFoundry sink on a stream that will receive messages from a
+destination i.e.:
+
+```
+:myDestination > cftask
+```
+
+And thus multiple streams can send `TaskLaunchRequest`s to the `myDestination`
+each request having its own artifact specified.
 
 Any message received by the sink, that does not contain a `TaskLaunchRequest`
 will log an error.
 
 == Using the TaskLauncher
-The task launcher will use the `--uri` from the TaskLaunchRequest to obtain the
-task artifact to deploy.  It also obtains commandLineArguments,
-deploymentProperties and environmentProperties from the TaskLaunchRequest that
-will be used to deploy and execute the task.
+The task launcher deploys and launches a
+link:https://cloud.spring.io/spring-cloud-task[Spring Cloud Task] Boot
+application as a task on the Cloud Foundry Platform based on contents from the
+`TaskLaunchRequest` message that it receives. The `TaskLaunchRequest` contains
+attributes that are used by the task launcher to execute the task:
+
+* uri - contains the uri to the Spring Cloud Task Boot application artifact
+that the task launcher will deploy to the Cloud Foundry Platform.
+* commandLineArguments - list of commandlineArguments to be used by the
+Spring Cloud Task Boot application.
+* deploymentProperties - properties to be used by the task launcher to deploy
+the task to the platform.
 
 An example of this using Spring Cloud Data Flow would be to create a
 stream where a
@@ -19,7 +39,7 @@ link:https://github.com/spring-cloud/spring-cloud-stream-app-starters/tree/maste
 source would send its messages to the
 link:https://github.com/spring-cloud/spring-cloud-stream-app-starters/tree/master/processor/spring-cloud-starter-stream-processor-tasklaunchrequest-transform[taskLaunchRequestTransform]
 processor. These messages are then translated to a TaskLaunchRequest and
-sent to the cftask sink (which is a Cloud Foundry TaskLauncher).  For example:
+sent to the `cftask` sink (which is a Cloud Foundry TaskLauncher).  For example:
 
 *Create A Stream*
 
