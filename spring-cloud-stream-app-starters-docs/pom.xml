@@ -247,6 +247,10 @@
 			<groupId>org.springframework.cloud.stream.app</groupId>
 			<artifactId>spring-cloud-starter-stream-sink-websocket</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud.stream.app</groupId>
+			<artifactId>spring-cloud-starter-stream-sink-task-launcher-cloudfoundry</artifactId>
+		</dependency>
 	</dependencies>
 	<profiles>
 		<profile>
