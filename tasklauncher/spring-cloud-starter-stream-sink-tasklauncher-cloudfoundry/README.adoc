@@ -55,6 +55,26 @@ service name of `mysql`.  Also we can see that there is a taskTimeout of 300
 seconds for staging the task.
 
 //tag::configuration-properties[]
+$$deployer.app-name-prefix$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$deployer.buildpack$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$deployer.disk$$:: $$<documentation missing>$$ *($$Integer$$, default: `$$<none>$$`)*
+$$deployer.domain$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$deployer.enable-random-app-name-prefix$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
+$$deployer.health-check$$:: $$<documentation missing>$$ *($$ApplicationHealthCheck$$, default: `$$<none>$$`, possible values: `none`,`port`)*
+$$deployer.host$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$deployer.instances$$:: $$<documentation missing>$$ *($$Integer$$, default: `$$<none>$$`)*
+$$deployer.memory$$:: $$<documentation missing>$$ *($$Integer$$, default: `$$<none>$$`)*
+$$deployer.org$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$deployer.password$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$deployer.services$$:: $$<documentation missing>$$ *($$java.util.Set<java.lang.String>$$, default: `$$<none>$$`)*
+$$deployer.skip-ssl-validation$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
+$$deployer.space$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
+$$deployer.staging-timeout$$:: $$<documentation missing>$$ *($$Duration$$, default: `$$<none>$$`)*
+$$deployer.startup-timeout$$:: $$<documentation missing>$$ *($$Duration$$, default: `$$<none>$$`)*
+$$deployer.task-timeout$$:: $$<documentation missing>$$ *($$Long$$, default: `$$<none>$$`)*
+$$deployer.url$$:: $$<documentation missing>$$ *($$URL$$, default: `$$<none>$$`)*
+$$deployer.use-spring-application-json$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
+$$deployer.username$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
 //end::configuration-properties[]
 
 //end::ref-doc[]
