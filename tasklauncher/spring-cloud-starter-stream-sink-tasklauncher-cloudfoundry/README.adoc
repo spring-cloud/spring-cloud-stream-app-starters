@@ -43,37 +43,30 @@ sent to the `cftask` sink (which is a Cloud Foundry TaskLauncher).  For example:
 
 *Create A Stream*
 
-`stream create w7 --definition "http --port=9000 | taskLaunchRequestTransform
+`stream create task-stream --definition "http --port=9000 | tasklaunchrequest-transform
 --uri=<uriToJar> | cftask"`
 
 *Deploy The Stream*
 
-`stream deploy w7 --properties "app.cftask.deployer.url=https://api.local.pcfdev.io, app.cftask.deployer.org=user-dataflow, app.cftask.deployer.space=development, app.cftask.deployer.domain=local.pcfdev.io, app.cftask.deployer.username=admin, app.cftask.deployer.password=admin, app.cftask.deployer.skipSslValidation=true, app.cftask.deployer.services=mysql, app.cftask.deployer.taskTimeout=300"`
+`stream deploy task-stream --properties "app.cftask.deployer.url=https://api.local.pcfdev.io, app.cftask.deployer.org=pcfdev-org, app.cftask.deployer.space=pcfdev-space, app.cftask.deployer.domain=local.pcfdev.io, app.cftask.deployer.username=admin, app.cftask.deployer.password=admin, app.cftask.deployer.skipSslValidation=true, app.cftask.deployer.services=mysql, app.cftask.deployer.taskTimeout=300"`
+
+*Test The Stream*
+
+`http post --target http://localhost:9000 --data hello`
 
 This example deploys to pcfdev using a mysql database service with the
 service name of `mysql`.  Also we can see that there is a taskTimeout of 300
 seconds for staging the task.
 
 //tag::configuration-properties[]
-$$deployer.app-name-prefix$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
-$$deployer.buildpack$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
-$$deployer.disk$$:: $$<documentation missing>$$ *($$Integer$$, default: `$$<none>$$`)*
 $$deployer.domain$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
-$$deployer.enable-random-app-name-prefix$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
-$$deployer.health-check$$:: $$<documentation missing>$$ *($$ApplicationHealthCheck$$, default: `$$<none>$$`, possible values: `none`,`port`)*
-$$deployer.host$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
-$$deployer.instances$$:: $$<documentation missing>$$ *($$Integer$$, default: `$$<none>$$`)*
-$$deployer.memory$$:: $$<documentation missing>$$ *($$Integer$$, default: `$$<none>$$`)*
 $$deployer.org$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
 $$deployer.password$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
 $$deployer.services$$:: $$<documentation missing>$$ *($$java.util.Set<java.lang.String>$$, default: `$$<none>$$`)*
 $$deployer.skip-ssl-validation$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
 $$deployer.space$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
-$$deployer.staging-timeout$$:: $$<documentation missing>$$ *($$Duration$$, default: `$$<none>$$`)*
-$$deployer.startup-timeout$$:: $$<documentation missing>$$ *($$Duration$$, default: `$$<none>$$`)*
 $$deployer.task-timeout$$:: $$<documentation missing>$$ *($$Long$$, default: `$$<none>$$`)*
 $$deployer.url$$:: $$<documentation missing>$$ *($$URL$$, default: `$$<none>$$`)*
-$$deployer.use-spring-application-json$$:: $$<documentation missing>$$ *($$Boolean$$, default: `$$<none>$$`)*
 $$deployer.username$$:: $$<documentation missing>$$ *($$String$$, default: `$$<none>$$`)*
 //end::configuration-properties[]
 

@@ -54,6 +54,15 @@ include::{app-starters-root}/aws-s3/spring-cloud-starter-stream-sink-s3/README.a
 [[spring-cloud-stream-modules-sftp-sink]]
 include::{app-starters-root}/sftp/spring-cloud-starter-stream-sink-sftp/README.adoc[tags=ref-doc]
 
+[[spring-cloud-stream-modules-tasklauncher-cloudfoundry-sink]]
+include::{app-starters-root}/tasklauncher/spring-cloud-starter-stream-sink-tasklauncher-cloudfoundry/README.adoc[tags=ref-doc]
+
+[[spring-cloud-stream-modules-tasklauncher-local-sink]]
+include::{app-starters-root}/tasklauncher/spring-cloud-starter-stream-sink-tasklauncher-local/README.adoc[tags=ref-doc]
+
+[[spring-cloud-stream-modules-tasklauncher-yarn-sink]]
+include::{app-starters-root}/tasklauncher/spring-cloud-starter-stream-sink-tasklauncher-yarn/README.adoc[tags=ref-doc]
+
 [[spring-cloud-stream-modules-tcp-sink]]
 include::{app-starters-root}/tcp/spring-cloud-starter-stream-sink-tcp/README.adoc[tags=ref-doc]
 

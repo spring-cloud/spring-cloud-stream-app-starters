@@ -8,6 +8,14 @@
 		<version>1.1.0.BUILD-SNAPSHOT</version>
 	</parent>
 
+	<!--Can remove these specific version when the main project updates netty
+	and reactor dependencies-->
+	<properties>
+		<reactor.version>3.0.2.RELEASE</reactor.version>
+		<reactor-netty.version>0.5.1.RELEASE</reactor-netty.version>
+		<netty.version>4.1.5.Final</netty.version>
+	</properties>
+
 	<artifactId>spring-cloud-starter-stream-sink-task-launcher-cloudfoundry</artifactId>
 	<dependencies>
 		<dependency>
@@ -17,6 +25,24 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-deployer-cloudfoundry</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+			<version>${netty.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-core</artifactId>
+			<version>${reactor.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.projectreactor.ipc</groupId>
+			<artifactId>reactor-netty</artifactId>
+			<version>${reactor-netty.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>
