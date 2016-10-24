@@ -16,8 +16,10 @@
 
 package org.springframework.cloud.stream.app.task.launcher.cloudfoundry.sink;
 
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.deployer.spi.cloudfoundry.CloudFoundryConnectionProperties;
+import org.springframework.cloud.deployer.spi.cloudfoundry.CloudFoundryDeployerAutoConfiguration;
 import org.springframework.cloud.deployer.spi.cloudfoundry.CloudFoundryDeploymentProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Sink;
@@ -30,6 +32,7 @@ import org.springframework.context.annotation.Bean;
  * @author Glenn Renfro
  */
 @EnableBinding(Sink.class)
+@AutoConfigureBefore({CloudFoundryDeployerAutoConfiguration.class})
 @EnableTaskLauncher
 public class TaskLauncherCloudfoundrySinkConfiguration {
 
