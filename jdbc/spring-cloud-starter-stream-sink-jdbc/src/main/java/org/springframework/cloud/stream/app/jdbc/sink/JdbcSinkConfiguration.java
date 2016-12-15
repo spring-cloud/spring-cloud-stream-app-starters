@@ -80,7 +80,7 @@ public class JdbcSinkConfiguration {
 
 
 	@Bean
-	@ServiceActivator(autoStartup = "false", inputChannel = Sink.INPUT)
+	@ServiceActivator(inputChannel = Sink.INPUT)
 	public JdbcMessageHandler jdbcMessageHandler(DataSource dataSource) {
 		final MultiValueMap<String, Expression> columnExpressionVariations = new LinkedMultiValueMap<>();
 		for (Map.Entry<String, String> entry : properties.getColumns().entrySet()) {
