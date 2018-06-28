@@ -116,24 +116,52 @@ Step 6 - Verify *ticktock* Logs in Console
 
 ## Stream App Starters and Spring Cloud Data Flow _(**)_
 
+With Spring Boot 1.5.x:
+
+
 | __Artifact Type__ | __Stable Release__ | __Snapshot/Milestone Release__ |
 | ------------------ | ------------------ | ------------------ |
-| RabbitMQ + Maven | http://bit.ly/Celsius-SR3-stream-applications-rabbit-maven | http://bit.ly/Darwin-RC1-stream-applications-rabbit-maven |
-| RabbitMQ + Docker | http://bit.ly/Celsius-SR3-stream-applications-rabbit-docker | http://bit.ly/Darwin-RC1-stream-applications-rabbit-docker |
-| Apache Kafka 0.10 + Maven | http://bit.ly/Celsius-SR3-stream-applications-kafka-10-maven | http://bit.ly/Darwin-RC1-stream-applications-kafka-10-maven |
-| Apache Kafka 0.10 + Docker | http://bit.ly/Celsius-SR3-stream-applications-kafka-10-docker | http://bit.ly/Darwin-RC1-stream-applications-kafka-10-docker |
+| RabbitMQ + Maven | http://bit.ly/Celsius-SR3-stream-applications-rabbit-maven | http://bit.ly/Celsius-BUILD-SNAPSHOT-stream-applications-rabbit-maven |
+| RabbitMQ + Docker | http://bit.ly/Celsius-SR3-stream-applications-rabbit-docker | http://bit.ly/Celsius-BUILD-SNAPSHOT-stream-applications-rabbit-docker |
+| Apache Kafka 0.10 + Maven | http://bit.ly/Celsius-SR3-stream-applications-kafka-10-maven | http://bit.ly/Celsius-BUILD-SNAPSHOT-stream-applications-kafka-10-maven |
+| Apache Kafka 0.10 + Docker | http://bit.ly/Celsius-SR3-stream-applications-kafka-10-docker | http://bit.ly/Celsius-BUILD-SNAPSHOT-stream-applications-kafka-10-docker |
+
+With Spring Boot 2.0.x:
+
+| __Artifact Type__ | __Stable Release__ | __Snapshot/Milestone Release__ |
+| ------------------ | ------------------ | ------------------ |
+| RabbitMQ + Maven | http://bit.ly/Darwin-GA-stream-applications-rabbit-maven | http://bit.ly/Darwin-BUILD-SNAPSHOT-stream-applications-rabbit-maven |
+| RabbitMQ + Docker | http://bit.ly/Darwin-GA-stream-applications-rabbit-docker | http://bit.ly/Darwin-BUILD-SNAPSHOT-stream-applications-rabbit-docker |
+| Apache Kafka 0.10 + Maven | http://bit.ly/Darwin-GA-stream-applications-kafka-10-maven | http://bit.ly/Darwin-BUILD-SNAPSHOT-stream-applications-kafka-10-maven |
+| Apache Kafka 0.10 + Docker | http://bit.ly/Darwin-GA-stream-applications-kafka-10-docker | http://bit.ly/Darwin-BUILD-SNAPSHOT-stream-applications-kafka-10-docker |
 
 _(**) find out how to use the app-starters in Spring Cloud Data Flow by reviewing the [app-registration](https://docs.spring.io/spring-cloud-dataflow/docs/current-SNAPSHOT/reference/htmlsingle/#supported-apps-and-tasks) section in the reference guide_
   
 ## HTTP Repository Location for Apps
   
-### RabbitMQ based Apps
+### RabbitMQ Apps
+
+With Spring Boot 1.5.x:
+
 * [Stable Release](http://repo.spring.io/libs-release/org/springframework/cloud/stream/app/spring-cloud-stream-app-descriptor/Celsius.SR3/spring-cloud-stream-app-descriptor-Celsius.SR3.rabbit-apps-maven-repo-url.properties)
 * [Latest Snapshot](http://repo.spring.io/libs-snapshot/org/springframework/cloud/stream/app/spring-cloud-stream-app-descriptor/Celsius.BUILD-SNAPSHOT/spring-cloud-stream-app-descriptor-Celsius.BUILD-SNAPSHOT.rabbit-apps-maven-repo-url.properties)
+
+With Spring Boot 2.0.x:
+
+* [Stable Release](http://repo.spring.io/libs-release/org/springframework/cloud/stream/app/spring-cloud-stream-app-descriptor/Darwin.RELEASE/spring-cloud-stream-app-descriptor-Darwin.RELEASE.rabbit-apps-maven-repo-url.properties)
+* [Latest Snapshot](http://repo.spring.io/libs-snapshot/org/springframework/cloud/stream/app/spring-cloud-stream-app-descriptor/Darwin.BUILD-SNAPSHOT/spring-cloud-stream-app-descriptor-Darwin.BUILD-SNAPSHOT.rabbit-apps-maven-repo-url.properties)
   
-### Apache Kafka 0.10 based Apps
+### Apache Kafka Apps
+
+With Spring Boot 1.5.x:
+
 * [Stable Release](http://repo.spring.io/libs-release/org/springframework/cloud/stream/app/spring-cloud-stream-app-descriptor/Celsius.SR3/spring-cloud-stream-app-descriptor-Celsius.SR3.kafka-10-apps-maven-repo-url.properties)
 * [Latest Snapshot](http://repo.spring.io/libs-snapshot/org/springframework/cloud/stream/app/spring-cloud-stream-app-descriptor/Celsius.BUILD-SNAPSHOT/spring-cloud-stream-app-descriptor-Celsius.BUILD-SNAPSHOT.kafka-10-apps-maven-repo-url.properties)
+
+With Spring Boot 2.0.x:
+
+* [Stable Release](http://repo.spring.io/libs-release/org/springframework/cloud/stream/app/spring-cloud-stream-app-descriptor/Darwin.RELEASE/spring-cloud-stream-app-descriptor-Darwin.RELEASE.kafka-apps-maven-repo-url.properties)
+* [Latest Snapshot](http://repo.spring.io/libs-snapshot/org/springframework/cloud/stream/app/spring-cloud-stream-app-descriptor/Darwin.BUILD-SNAPSHOT/spring-cloud-stream-app-descriptor-Darwin.BUILD-SNAPSHOT.kafka-10-apps-maven-repo-url.properties)
 
 {% endcapture %}
 
