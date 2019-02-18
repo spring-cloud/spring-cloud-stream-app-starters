@@ -97,11 +97,11 @@ or even on your laptop.
 
 ## Quick Start
 
-Step 1 - Download the latest Kafka 10 based _time-source_ application from [here](http://repo.spring.io/libs-release/org/springframework/cloud/stream/app/time-source-kafka-10) [eg: /1.3.0.RELEASE/time-source-kafka-10-1.3.0.RELEASE.jar]
+Step 1 - Download the latest _time-source_ application from [here](http://repo.spring.io/libs-release/org/springframework/cloud/stream/app/time-source-kafka/) [eg: /2.1.0.RELEASE/time-source-kafka-2.1.0.RELEASE.jar]
 
-Step 2 - Download the latest Kafka 10 based _log-sink_ application from [here](http://repo.spring.io/libs-release/org/springframework/cloud/stream/app/log-sink-kafka-10) [eg: /1.3.0.RELEASE/log-sink-kafka-10-1.3.0.RELEASE.jar]
+Step 2 - Download the latest _log-sink_ application from [here](http://repo.spring.io/libs-release/org/springframework/cloud/stream/app/log-sink-kafka) [eg: /2.1.0.RELEASE/log-sink-kafka-2.1.0.RELEASE.jar]
 
-Step 3 - Start Kafka 0.10.1.1
+Step 3 - Start Kafka
 
 Step 4 - Run **Time Source** and Bind to *ticktock* Topic
 ```
@@ -113,7 +113,7 @@ Step 5 - Run **Log Sink** and Bind to *ticktock* Topic
 java -jar log-sink-kafka-***.jar --spring.cloud.stream.bindings.input.destination=ticktock
 ```
 
-Step 6 - Verify *ticktock* Logs in Console
+Step 6 - Verify *ticktock* ouput in `log-sink` console
 
 ## Stream App Starters and Spring Cloud Data Flow _(**)_
 
