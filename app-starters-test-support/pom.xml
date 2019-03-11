@@ -98,7 +98,7 @@
 				<repository>
 					<id>spring-libs-release</id>
 					<name>Spring Libs Release</name>
-					<url>http://repo.spring.io/libs-release</url>
+					<url>https://repo.spring.io/libs-release</url>
 				</repository>
 			</repositories>
 		</profile>
