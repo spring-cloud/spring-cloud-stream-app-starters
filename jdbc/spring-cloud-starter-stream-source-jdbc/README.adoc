@@ -3,7 +3,7 @@
 
 This source polls data from an RDBMS.
 This source is fully based on the `DataSourceAutoConfiguration`, so refer to the
-http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-sql.html[Spring Boot JDBC Support] for more
+https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-sql.html[Spring Boot JDBC Support] for more
 information.
 
 == Options
@@ -29,7 +29,7 @@ $$trigger.max-messages$$:: $$Maximum messages per poll, -1 means infinity.$$ *($
 $$trigger.time-unit$$:: $$The TimeUnit to apply to delay values.$$ *($$TimeUnit$$, default: `$$<none>$$`, possible values: `NANOSECONDS`,`MICROSECONDS`,`MILLISECONDS`,`SECONDS`,`MINUTES`,`HOURS`,`DAYS`)*
 //end::configuration-properties[]
 
-Also see the http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html[Spring Boot Documentation]
+Also see the https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html[Spring Boot Documentation]
 for addition `DataSource` properties and `TriggerProperties` and `MaxMessagesProperties` for polling options.
 
 //end::ref-doc[]

@@ -44,7 +44,7 @@ Handling message: GenericMessage [payload=2015-10-21 12:52:55, headers={id=18b88
 == Actuators
 There is an `Endpoint` that you can use to access the last `n` messages sent and received. You have to
  enable it by providing `--endpoints.websocketsinktrace.enabled=true`. By default it shows the last 100 messages via the
-`http://host:port/websocketsinktrace`. Here is a sample output:
+`https://host:port/websocketsinktrace`. Here is a sample output:
 
 ```
  [
@@ -71,7 +71,7 @@ There is an `Endpoint` that you can use to access the last `n` messages sent and
 ```
 
 There is also a simple HTML page where you see forwarded messages in a text area. You can access
-it directly via  `http://host:port` in your browser
+it directly via  `https://host:port` in your browser
 
 
 NOTE: For SSL mode (`--ssl=true`) a self signed certificate is used that might cause troubles with some
