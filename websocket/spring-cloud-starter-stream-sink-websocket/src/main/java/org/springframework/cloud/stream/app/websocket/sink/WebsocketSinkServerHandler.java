@@ -51,7 +51,7 @@ import io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory;
 import io.netty.util.CharsetUtil;
 
 /**
- * Handles handshakes and messages. Based on the Netty <a href="http://bit.ly/1jVBj5T">websocket examples</a>.
+ * Handles handshakes and messages. Based on the Netty <a href="https://bit.ly/1jVBj5T">websocket examples</a>.
  *
  * @author Netty Project
  * @author Oliver Moser

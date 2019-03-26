@@ -1,4 +1,4 @@
-== Spring Cloud Stream App Starters Stream image:https://build.spring.io/plugins/servlet/buildStatusImage/SCS-SMJLE[Build Status, link=https://build.spring.io/browse/SCS-APPS] image:https://badge.waffle.io/spring-cloud/spring-cloud-stream-app-starters.svg?label=ready&title=Ready[Stories Ready, link=http://waffle.io/spring-cloud/spring-cloud-stream] image:https://badge.waffle.io/spring-cloud/spring-cloud-stream-app-starters.svg?label=In%20Progress&title=In%20Progress[Stores In Progress, link=http://waffle.io/spring-cloud/spring-cloud-stream-app-starters]
+== Spring Cloud Stream App Starters Stream image:https://build.spring.io/plugins/servlet/buildStatusImage/SCS-SMJLE[Build Status, link=https://build.spring.io/browse/SCS-APPS] image:https://badge.waffle.io/spring-cloud/spring-cloud-stream-app-starters.svg?label=ready&title=Ready[Stories Ready, link=https://waffle.io/spring-cloud/spring-cloud-stream] image:https://badge.waffle.io/spring-cloud/spring-cloud-stream-app-starters.svg?label=In%20Progress&title=In%20Progress[Stores In Progress, link=https://waffle.io/spring-cloud/spring-cloud-stream-app-starters]
 
 *Build*
 
