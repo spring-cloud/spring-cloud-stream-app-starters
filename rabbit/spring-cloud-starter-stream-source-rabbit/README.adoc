@@ -29,7 +29,7 @@ $$spring.rabbitmq.username$$:: $$Login user to authenticate to the broker.$$ *($
 $$spring.rabbitmq.virtual-host$$:: $$Virtual host to use when connecting to the broker.$$ *($$String$$, default: `$$<none>$$`)*
 //end::configuration-properties[]
 
-Also see the http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html[Spring Boot Documentation]
+Also see the https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html[Spring Boot Documentation]
 for addition properties for the broker connections and listener properties.
 
 [[rabbitSourceRetry]]
