@@ -37,7 +37,7 @@ The expression evaluates against the message and returns either a channel name, 
 
 For more information, please see the "Routers and the Spring Expression Language (SpEL)" subsection in the Spring
 Integration Reference manual
-http://docs.spring.io/spring-integration/reference/html/messaging-routing-chapter.html#router-namespace[Configuring (Generic) Router section].
+https://docs.spring.io/spring-integration/reference/html/messaging-routing-chapter.html#router-namespace[Configuring (Generic) Router section].
 
 == Groovy-based Routing
 
@@ -63,7 +63,7 @@ _propertiesLocation_.
 Note that _payload_ and _headers_ are implicitly bound to give you access to the data contained in a message.
 
 For more information, see the Spring Integration Reference manual
-http://docs.spring.io/spring-integration/reference/html/messaging-endpoints-chapter.html#groovy[Groovy Support].
+https://docs.spring.io/spring-integration/reference/html/messaging-endpoints-chapter.html#groovy[Groovy Support].
 
 //end::ref-doc[]
 
