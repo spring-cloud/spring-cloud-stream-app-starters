@@ -3,7 +3,7 @@
 
 The TriggerTask app sends a `TaskLaunchRequest` based on a fixed delay, date or cron expression.  The user is allowed
 to set the command line arguments as well as the
-http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html[Spring Boot properties]
+https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html[Spring Boot properties]
 that are used by the task.
 
 == Options
