@@ -20,7 +20,7 @@ $$spring.datasource.url$$:: $$<documentation missing>$$ *($$String$$, default: `
 $$spring.datasource.username$$:: $$<documentation missing>$$ *($$String$$, default: `<none>`)*
 //end::configuration-properties[]
 
-NOTE: The module also uses Spring Boot's http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-sql.html#boot-features-configure-datasource[DataSource support] for configuring the database connection, so properties like `spring.datasource.url` _etc._ apply.
+NOTE: The module also uses Spring Boot's https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-sql.html#boot-features-configure-datasource[DataSource support] for configuring the database connection, so properties like `spring.datasource.url` _etc._ apply.
 
 //end::ref-doc[]
 
