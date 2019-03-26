@@ -1,7 +1,7 @@
 [[overview]]
 
 This section will provide you with a detailed overview of Spring Cloud Stream Application Starters, their purpose, and how to use them.
-It assumes familiarity with general Spring Cloud Stream concepts, which can be found in the Spring Cloud Stream http://docs.spring.io/spring-cloud-stream/docs/{scst-core-version}/reference/htmlsingle/[reference documentation].
+It assumes familiarity with general Spring Cloud Stream concepts, which can be found in the Spring Cloud Stream https://docs.spring.io/spring-cloud-stream/docs/{scst-core-version}/reference/htmlsingle/[reference documentation].
 
 == Introduction
 
@@ -11,7 +11,7 @@ They include:
 
 * connectors (sources and sinks) for middleware including message brokers, storage (relational, non-relational, filesystem);
 * adapters for various network protocols;
-* generic processors that can be customized via http://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/expressions.html[Spring Expression Language (SpEL)] or scripting.
+* generic processors that can be customized via https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/expressions.html[Spring Expression Language (SpEL)] or scripting.
 
 You can find a detailed listing of all the starters and as their options in the <<starters,corresponding>> section of this guide.
 
@@ -23,7 +23,7 @@ _Starters_ are libraries that contain the complete configuration of a Spring Clo
 Starters are not executable applications, and are intended to be included in other Spring Boot applications, along with a Binder implementation.
 
 _Prebuilt applications_ are Spring Boot applications that include the starters and a Binder implementation.
-Prebuilt applications are http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#getting-started-first-application-executable-jar[uberjars] and include minimal code required to execute standalone.
+Prebuilt applications are https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#getting-started-first-application-executable-jar[uberjars] and include minimal code required to execute standalone.
 For each starter, the project provides a prebuilt version including the Kafka Binder and a  prebuilt version including the Rabbit MQ Binder.
 
 [NOTE]
@@ -178,7 +178,7 @@ You have the following options:
 ===== Using generic Spring Cloud Stream applications
 
 If you want to add your own custom applications to your solution, you can simply create a new Spring Cloud Stream project with the binder of your choice and run it the same way as the applications provided by Spring Cloud Stream Application Starters, independently or via Spring Cloud Data Flow.
-The process is described in the http://docs.spring.io/spring-cloud-stream/docs/current-SNAPSHOT/reference/htmlsingle/#_getting_started[Getting Started Guide] of Spring Cloud Stream.
+The process is described in the https://docs.spring.io/spring-cloud-stream/docs/current-SNAPSHOT/reference/htmlsingle/#_getting_started[Getting Started Guide] of Spring Cloud Stream.
 One restriction is that the applications must have:
 
 * a single inbound channel named `input` for sources - the simplest way to do so is by using the predefined interface `org.spring.cloud.stream.messaging.Source`;
@@ -206,7 +206,7 @@ After doing so, you can simply add the additional configuration for the extra fe
 
 If you're looking to patch the pre-built applications to accommodate addition of new dependencies, you can use the following example as the reference. Let's review the steps to add `mysql` driver to `jdbc-sink` application.  
 
-* Go to: http://start-scs.cfapps.io/
+* Go to: https://start-scs.cfapps.io/
 * Select the appliation and binder dependencies [_`JDBC sink` and `Rabbit binder starter`_]
 * Generate and load the project in an IDE
 * Add `mysql` java-driver dependency
