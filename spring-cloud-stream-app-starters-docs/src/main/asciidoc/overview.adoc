@@ -23,7 +23,7 @@ _Starters_ are libraries that contain the complete configuration of a Spring Clo
 Starters are not executable applications, and are intended to be included in other Spring Boot applications, along with a Binder implementation.
 
 _Prebuilt applications_ are Spring Boot applications that include the starters and a Binder implementation.
-Prebuilt applications are https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#getting-started-first-application-executable-jar[uberjars] and include minimal code required to execute standalone.
+Prebuilt applications are https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#getting-started-first-application-executable-jar[uberjars] and include minimal code required to run standalone.
 For each starter, the project provides a prebuilt version including the Kafka Binder and a  prebuilt version including the Rabbit MQ Binder.
 
 [NOTE]
@@ -204,7 +204,7 @@ After doing so, you can simply add the additional configuration for the extra fe
 
 === Patching pre-built applications
 
-If you're looking to patch the pre-built applications to accommodate addition of new dependencies, you can use the following example as the reference. Let's review the steps to add `mysql` driver to `jdbc-sink` application.  
+If you're looking to patch the pre-built applications to accommodate addition of new dependencies, you can use the following example as the reference. Let's review the steps to add `mysql` driver to `jdbc-sink` application.
 
 * Go to: https://start-scs.cfapps.io/
 * Select the appliation and binder dependencies [_`JDBC sink` and `Rabbit binder starter`_]
@@ -334,7 +334,7 @@ this is how you can tell the plugin to override the default.
 </foobar-source>
 ----
 
-* Go to the root of the repository and execute the script: `./generateApps.sh`
+* Go to the root of the repository and run the following script: `./generateApps.sh`
 
 This will generate the binder based foobar source apps in a directory named `apps` at the root of the repository.
 If you want to change the location where the apps are generated, for instance /tmp/scs-apps, you can do it in the
@@ -477,5 +477,3 @@ Then do this:
 `mvn clean package docker:build docker:push -Ddocker.username=[provide your username] -Ddocker.password=[provide password]`
 
 This would upload the docker image to the docker hub in your custom repository.
-
-

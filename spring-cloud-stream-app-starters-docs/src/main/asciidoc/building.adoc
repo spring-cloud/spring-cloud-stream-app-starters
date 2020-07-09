@@ -42,7 +42,8 @@ rabbit and redis.
 
 === Documentation
 
-There is a "full" profile that will generate documentation. You can build just the documentation by executing 
+There is a `full` profile that will generate documentation. 
+You can build just the documentation by running the following command:
 
 [listing, subs=attributes]
 ----
