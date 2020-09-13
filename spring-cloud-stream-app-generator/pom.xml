@@ -193,6 +193,7 @@
 							<extraTestConfigClass>org.springframework.cloud.stream.app.test.twitter.TwitterTestConfiguration.class</extraTestConfigClass>
 						</twitterstream-source>
 						<websocket-sink />
+						<yahoo-quotes-source/>
 						<!-- Test Modules -->
 						<integration-test-processor>
 						</integration-test-processor>

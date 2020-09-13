@@ -322,6 +322,11 @@
 				<artifactId>spring-cloud-starter-stream-source-mail</artifactId>
 				<version>1.1.0.BUILD-SNAPSHOT</version>
 			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud.stream.app</groupId>
+				<artifactId>spring-cloud-starter-stream-source-yahoo-quotes</artifactId>
+				<version>1.0.3.BUILD-SNAPSHOT</version>
+			</dependency>
 
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
@@ -360,6 +365,7 @@
 				<version>1.1.0.BUILD-SNAPSHOT</version>
 				<scope>test</scope>
 			</dependency>
+
 
 			<!-- Core dependencies needed for the starter libs -->
 
