@@ -13,7 +13,7 @@
 	<properties>
 		<reactor.version>3.0.2.RELEASE</reactor.version>
 		<reactor-netty.version>0.5.1.RELEASE</reactor-netty.version>
-		<netty.version>4.1.5.Final</netty.version>
+		<netty.version>4.1.42.Final</netty.version>
 	</properties>
 
 	<artifactId>spring-cloud-starter-stream-sink-task-launcher-cloudfoundry</artifactId>
